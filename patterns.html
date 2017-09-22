@@ -28,6 +28,8 @@
   
 
   
+    <link rel="stylesheet" href="_static/banner.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
@@ -188,6 +190,12 @@
            <div itemprop="articleBody">
             
   
+
+
+
+
+
+
 <style>
 /* CSS overrides for sphinx_rtd_theme */
 
@@ -230,7 +238,7 @@ them with Rasa Core.</p>
 </div>
 <p>Rasa Core uses ML models to predict actions, and <code class="docutils literal"><span class="pre">slots</span></code> provide important
 information these models rely on to keep track of context and handle multi-turn dialogue.
-Slots are for storing information that’s relevant over multiple turns. For example, in
+Slots are for storing information that&#8217;s relevant over multiple turns. For example, in
 our restaurant example, we would want to keep track of things like the cuisine and number of
 people for the duration of the conversation.</p>
 <div class="section" id="collecting-information-to-complete-a-request">
@@ -245,25 +253,25 @@ people for the duration of the conversation.</p>
 </pre></div>
 </div>
 <p>When Rasa sees an entity with the same name as one of the slots, this value is automatically saved.
-For example, if your NLU module detects the entity <code class="docutils literal"><span class="pre">people=8</span></code> in the sentence <em>“I’d like a table for 8”</em>,
+For example, if your NLU module detects the entity <code class="docutils literal"><span class="pre">people=8</span></code> in the sentence <em>&#8220;I&#8217;d like a table for 8&#8221;</em>,
 this will be saved as a slot,</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">tracker</span><span class="o">.</span><span class="n">slots</span><span class="p">()</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="p">{</span><span class="s2">&quot;people&quot;</span><span class="p">:</span> <span class="s2">&quot;8&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>When Rasa Core predicts the next action to take, the only information it has about the <code class="docutils literal"><span class="pre">TextSlot</span></code> s is
-<strong>whether or not they are defined</strong>. So you have enough information to know that you don’t have to ask for this
+<strong>whether or not they are defined</strong>. So you have enough information to know that you don&#8217;t have to ask for this
 information again, but the <em>value</em> has no impact on which actions Rasa Core predicts.
 The full set of slot types and their behaviour is described here: <a class="reference internal" href="slot_types.html#slot-types"><span class="std std-ref">Slot Types Reference</span></a>.</p>
 </div>
 <div class="section" id="using-slot-values-to-influence-which-actions-are-predicted">
 <h2>Using Slot Values to Influence Which Actions are Predicted<a class="headerlink" href="#using-slot-values-to-influence-which-actions-are-predicted" title="Permalink to this headline">¶</a></h2>
 <p>Maybe your restaurant booking system can only handle bookings for up to 6 people, so the
-request above isn’t valid. In this case you want the <em>value</em> of the slot to influence the
-next selected action (not just whether it’s been specified). You can achieve this using a custom
+request above isn&#8217;t valid. In this case you want the <em>value</em> of the slot to influence the
+next selected action (not just whether it&#8217;s been specified). You can achieve this using a custom
 slot class.</p>
 <p>The way we defined it below, if the number of people is less than or equal to 6, we return <code class="docutils literal"><span class="pre">(1,0)</span></code>,
-if it’s more we return <code class="docutils literal"><span class="pre">(0,1)</span></code>, and if it’s not set <code class="docutils literal"><span class="pre">(0,0)</span></code>.</p>
+if it&#8217;s more we return <code class="docutils literal"><span class="pre">(0,1)</span></code>, and if it&#8217;s not set <code class="docutils literal"><span class="pre">(0,0)</span></code>.</p>
 <p>Rasa Core can use that information to distinguish between different situations - so long as
 you have some training stories where the appropriate responses take place, e.g.:</p>
 <div class="highlight-markdown"><div class="highlight"><pre><span></span># story1
@@ -307,7 +315,7 @@ a <code class="docutils literal"><span class="pre">CategoricalSlot</span></code>
 <div class="section" id="storing-api-responses-in-the-tracker">
 <h2>Storing API responses in the tracker<a class="headerlink" href="#storing-api-responses-in-the-tracker" title="Permalink to this headline">¶</a></h2>
 <p>You often want to save some information in the tracker, like the results from
-a database query, or from an API call. If you don’t want the value to influence the
+a database query, or from an API call. If you don&#8217;t want the value to influence the
 dialogue, you can use a <code class="docutils literal"><span class="pre">UnfeaturizedSlot</span></code>. You can explicitly set this value in a custom action:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasa_core.actions</span> <span class="kn">import</span> <span class="n">Action</span>
 <span class="kn">import</span> <span class="nn">requests</span>
@@ -355,6 +363,19 @@ dialogue, you can use a <code class="docutils literal"><span class="pre">Unfeatu
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="master/patterns.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -372,7 +393,7 @@ dialogue, you can use a <code class="docutils literal"><span class="pre">Unfeatu
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

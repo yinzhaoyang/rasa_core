@@ -28,6 +28,8 @@
   
 
   
+    <link rel="stylesheet" href="_static/banner.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
@@ -183,6 +185,12 @@
            <div itemprop="articleBody">
             
   
+
+
+
+
+
+
 <style>
 /* CSS overrides for sphinx_rtd_theme */
 
@@ -220,12 +228,12 @@
 <span id="id1"></span><h1>Message Handling<a class="headerlink" href="#message-handling" title="Permalink to this headline">¶</a></h1>
 <p>In most cases, your bot receives messages over a network.
 This means you have an outward facing web server which accepts requests.
-Responding to these requests synchronously isn’t a very scalable solution.</p>
+Responding to these requests synchronously isn&#8217;t a very scalable solution.</p>
 <p>The way Rasa Core handles messages is slightly different.
 The <code class="docutils literal"><span class="pre">Controller</span></code> appends messages to a queue, and creates a <code class="docutils literal"><span class="pre">MessageHandler</span></code>
 which works through the messages in the queue.</p>
 <p>This makes it possible to safely scale to multiple Rasa DM instances.
-By default Rasa uses the <code class="docutils literal"><span class="pre">InMemoryMessageQueue</span></code>, which can’t be shared among processes,
+By default Rasa uses the <code class="docutils literal"><span class="pre">InMemoryMessageQueue</span></code>, which can&#8217;t be shared among processes,
 but this can easily be swapped to an external message broker.</p>
 <img alt="_images/message_handling.png" src="_images/message_handling.png" />
 </div>
@@ -264,6 +272,19 @@ but this can easily be swapped to an external message broker.</p>
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="master/message_handling.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -281,7 +302,7 @@ but this can easily be swapped to an external message broker.</p>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

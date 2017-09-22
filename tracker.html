@@ -28,6 +28,8 @@
   
 
   
+    <link rel="stylesheet" href="_static/banner.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
@@ -197,6 +199,12 @@
            <div itemprop="articleBody">
             
   
+
+
+
+
+
+
 <style>
 /* CSS overrides for sphinx_rtd_theme */
 
@@ -233,90 +241,6 @@
 <div class="section" id="trackers">
 <h1>Trackers<a class="headerlink" href="#trackers" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="docutils literal"><span class="pre">DialogueTracker</span></code> is the stateful object which keeps track of a conversation.</p>
-<span class="target" id="module-rasa_core.trackers"></span><dl class="class">
-<dt id="rasa_core.trackers.DialogueStateTracker">
-<em class="property">class </em><code class="descclassname">rasa_core.trackers.</code><code class="descname">DialogueStateTracker</code><span class="sig-paren">(</span><em>sender_id</em>, <em>slots</em>, <em>topics=None</em>, <em>default_topic=None</em>, <em>max_event_history=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker" title="Permalink to this definition">¶</a></dt>
-<dd><p>Maintains the state of a conversation.</p>
-<dl class="method">
-<dt id="rasa_core.trackers.DialogueStateTracker.as_dialogue">
-<code class="descname">as_dialogue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.as_dialogue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.as_dialogue" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a <code class="docutils literal"><span class="pre">Dialogue</span></code> object containing all of the turns.</p>
-<p>This can be serialised and later used to recover the state
-of this tracker exactly.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="rasa_core.trackers.DialogueStateTracker.clear_follow_up_action">
-<code class="descname">clear_follow_up_action</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.clear_follow_up_action"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.clear_follow_up_action" title="Permalink to this definition">¶</a></dt>
-<dd><p>Clears follow up action when it was executed</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="rasa_core.trackers.DialogueStateTracker.current_state">
-<code class="descname">current_state</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.current_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.current_state" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the current tracker state as an object.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="rasa_core.trackers.DialogueStateTracker.generate_all_prior_states">
-<code class="descname">generate_all_prior_states</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.generate_all_prior_states"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.generate_all_prior_states" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a generator of the previous states of this tracker.</p>
-<p>The resulting array is representing the state before each action.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="rasa_core.trackers.DialogueStateTracker.get_slot">
-<code class="descname">get_slot</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.get_slot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.get_slot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieves the value of a slot.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="rasa_core.trackers.DialogueStateTracker.is_paused">
-<code class="descname">is_paused</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.is_paused"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.is_paused" title="Permalink to this definition">¶</a></dt>
-<dd><p>States whether the tracker is currently paused.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="rasa_core.trackers.DialogueStateTracker.previous_topic">
-<code class="descname">previous_topic</code><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.previous_topic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieves the topic that was set before the current one.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="rasa_core.trackers.DialogueStateTracker.topic">
-<code class="descname">topic</code><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.topic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieves current topic, or default if no topic has been set yet.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="rasa_core.trackers.DialogueStateTracker.trigger_follow_up_action">
-<code class="descname">trigger_follow_up_action</code><span class="sig-paren">(</span><em>action</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.trigger_follow_up_action"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.trigger_follow_up_action" title="Permalink to this definition">¶</a></dt>
-<dd><p>Triggers another action following the execution of the current.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="rasa_core.trackers.DialogueStateTracker.update">
-<code class="descname">update</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.update" title="Permalink to this definition">¶</a></dt>
-<dd><p>Modify the state of the tracker according to an <code class="docutils literal"><span class="pre">Event</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="rasa_core.trackers.DialogueStateTracker.update_from_dialogue">
-<code class="descname">update_from_dialogue</code><span class="sig-paren">(</span><em>dialogue</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.update_from_dialogue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.update_from_dialogue" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use a serialised <cite>Dialogue</cite> to update the trackers state.</p>
-<p>This uses the state as is persisted in a <code class="docutils literal"><span class="pre">TrackerStore</span></code>. If the
-tracker is blank before calling this method, the final state will be
-identical to the tracker from which the dialogue was created.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="rasa_core.trackers.DialogueStateTracker.update_from_events">
-<code class="descname">update_from_events</code><span class="sig-paren">(</span><em>events</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.update_from_events"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.update_from_events" title="Permalink to this definition">¶</a></dt>
-<dd><p>Update the tracker based on a list of events.</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 
 
@@ -353,6 +277,19 @@ identical to the tracker from which the dialogue was created.</p>
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="master/tracker.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -370,7 +307,7 @@ identical to the tracker from which the dialogue was created.</p>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

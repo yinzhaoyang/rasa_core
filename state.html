@@ -28,6 +28,8 @@
   
 
   
+    <link rel="stylesheet" href="_static/banner.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
@@ -187,6 +189,12 @@
            <div itemprop="articleBody">
             
   
+
+
+
+
+
+
 <style>
 /* CSS overrides for sphinx_rtd_theme */
 
@@ -240,14 +248,14 @@ For example:</p>
 <p>The full set of events is documented here: <a class="reference internal" href="events.html#events"><span class="std std-ref">Events</span></a></p>
 <div class="section" id="persisting-trackers">
 <h2>Persisting Trackers:<a class="headerlink" href="#persisting-trackers" title="Permalink to this headline">¶</a></h2>
-<p>When you’re running your bot in production,
+<p>When you&#8217;re running your bot in production,
 you want your application to be stateless.
-For example, you wouldn’t want to lose track of every conversation
+For example, you wouldn&#8217;t want to lose track of every conversation
 each time you restart a running process.
-That’s why Rasa persists trackers in a key-value store.
+That&#8217;s why Rasa persists trackers in a key-value store.
 For testing, the <code class="docutils literal"><span class="pre">InMemoryTrackerStore</span></code> is sufficient,
 but in production you would want to use the <code class="docutils literal"><span class="pre">RedisTrackerStore</span></code> to restore
-after restarting the application. It’s straightforward to define a
+after restarting the application. It&#8217;s straightforward to define a
 custom <code class="docutils literal"><span class="pre">TrackerStore</span></code> subclass for the persistence tool of your choice.
 See <a class="reference internal" href="tracker_store.html#tracker-store"><span class="std std-ref">Tracker Stores</span></a> for details.</p>
 </div>
@@ -259,7 +267,7 @@ A dialogue is a full record of the previous <code class="docutils literal"><span
 To return to the current state of the conversation,
 we iterate over the turns and log the events in each.</p>
 <p>We use the <code class="docutils literal"><span class="pre">jsonpickle</span></code> library to serialise these Dialogues.
-Here’s a simple example of a dialogue as it would be stored in the TrackerStore:</p>
+Here&#8217;s a simple example of a dialogue as it would be stored in the TrackerStore:</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>  
   <span class="nt">&quot;py/object&quot;</span><span class="p">:</span><span class="s2">&quot;rasa_core.conversation.Dialogue&quot;</span><span class="p">,</span>
   <span class="nt">&quot;events&quot;</span><span class="p">:[</span>
@@ -319,6 +327,19 @@ Here’s a simple example of a dialogue as it would be stored in the TrackerStor
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="master/state.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -336,7 +357,7 @@ Here’s a simple example of a dialogue as it would be stored in the TrackerStor
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

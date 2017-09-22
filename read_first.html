@@ -28,6 +28,8 @@
   
 
   
+    <link rel="stylesheet" href="_static/banner.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
@@ -190,6 +192,12 @@
            <div itemprop="articleBody">
             
   
+
+
+
+
+
+
 <style>
 /* CSS overrides for sphinx_rtd_theme */
 
@@ -234,17 +242,17 @@ use Rasa NLU or another NLU tool.</p>
 </div>
 <div class="section" id="guiding-principles">
 <h2>Guiding Principles<a class="headerlink" href="#guiding-principles" title="Permalink to this headline">¶</a></h2>
-<p>The main idea behind Rasa Core is that thinking of conversations as a flowchart doesn’t scale.
-It’s very hard to reason about <em>all possible conversations</em> explicitly, but it’s
+<p>The main idea behind Rasa Core is that thinking of conversations as a flowchart doesn&#8217;t scale.
+It&#8217;s very hard to reason about <em>all possible conversations</em> explicitly, but it&#8217;s
 very easy to tell, mid-conversation, if a response is right or wrong.</p>
 <p>The typical way to implement conversation flows is to use a state machine.
 For example, you might need to collect some data from a user to fulfill their order, and manually
 take them through the states <code class="docutils literal"><span class="pre">BROWSING</span></code>, <code class="docutils literal"><span class="pre">CHECKING_OUT</span></code>, <code class="docutils literal"><span class="pre">ADDING_PAYMENT</span></code>, <code class="docutils literal"><span class="pre">ORDER_COMPLETE</span></code>, etc.
-The complexity comes in when users stray from the “happy path” and you need to add code for handling
+The complexity comes in when users stray from the &#8220;happy path&#8221; and you need to add code for handling
 questions, clarifications, comparisons, rejections, etc. Manually inserting these edge cases into your
 state machine is a big pain.</p>
-<p>A typical ‘simple’ bot might have 5-10 states and a couple of hundred rules governing its behavior.
-When your bot doesn’t behave as you want it to, it can be very tricky to figure out what went wrong.</p>
+<p>A typical &#8216;simple&#8217; bot might have 5-10 states and a couple of hundred rules governing its behavior.
+When your bot doesn&#8217;t behave as you want it to, it can be very tricky to figure out what went wrong.</p>
 <p>Similarly, when you want to add some new functionality, you end up clashing with rules you wrote earlier,
 and it gets harder and harder to make progress.</p>
 <p>Our view is that taking flowcharts literally and implementing them as a state machine is not a good idea,
@@ -269,7 +277,7 @@ supervised, reinforcement, or interactive learning.</p>
 <div class="section" id="where-to-start">
 <h2>Where to Start<a class="headerlink" href="#where-to-start" title="Permalink to this headline">¶</a></h2>
 <p>Most users should start with <a class="reference internal" href="tutorial_scratch.html#tutorial-scratch"><span class="std std-ref">A Bot From Scratch</span></a> . However,
-if you already have a bunch of conversations you’d like to use as
+if you already have a bunch of conversations you&#8217;d like to use as
 a training set, check the <a class="reference internal" href="tutorial_babi.html#tutorial-babi"><span class="std std-ref">Supervised Learning Tutorial</span></a>.</p>
 </div>
 <div class="section" id="questions">
@@ -282,7 +290,7 @@ whichever algorithm in whichever ML framework you like: an SVM from sklearn,
 an LSTM implemented with Keras, some funky thing you implemented with autograd, whatever.</div></blockquote>
 <p><em>is this only for ML experts?</em></p>
 <blockquote>
-<div>You can use Rasa if you don’t know anything about machine learning, but if you do it’s easy to experiment.</div></blockquote>
+<div>You can use Rasa if you don&#8217;t know anything about machine learning, but if you do it&#8217;s easy to experiment.</div></blockquote>
 <p><em>how much training data do I need?</em></p>
 <blockquote>
 <div>You can bootstrap from zero training data by using interactive learning. Try the tutorials!</div></blockquote>
@@ -323,6 +331,19 @@ an LSTM implemented with Keras, some funky thing you implemented with autograd, 
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="master/read_first.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -340,7 +361,7 @@ an LSTM implemented with Keras, some funky thing you implemented with autograd, 
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

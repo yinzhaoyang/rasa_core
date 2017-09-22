@@ -28,6 +28,8 @@
   
 
   
+    <link rel="stylesheet" href="_static/banner.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
@@ -189,6 +191,12 @@
            <div itemprop="articleBody">
             
   
+
+
+
+
+
+
 <style>
 /* CSS overrides for sphinx_rtd_theme */
 
@@ -357,7 +365,7 @@ For more actions which do more than just sent a message, you define them as pyth
 </div>
 <div class="section" id="define-an-interpreter">
 <h2>Define an interpreter<a class="headerlink" href="#define-an-interpreter" title="Permalink to this headline">¶</a></h2>
-<p>Instead of using Rasa NLU, we will use a dummy interpreter which is helpful for testing. The <cite>RegexInterpreter</cite>’s <cite>parse</cite> method takes string of the format <cite>“_intent[entity1=value1,entity2=value2]”</cite> and returns this same information in the canonical dict format we would get from Rasa NLU.</p>
+<p>Instead of using Rasa NLU, we will use a dummy interpreter which is helpful for testing. The <cite>RegexInterpreter</cite>&#8216;s <cite>parse</cite> method takes string of the format <cite>&#8220;_intent[entity1=value1,entity2=value2]&#8221;</cite> and returns this same information in the canonical dict format we would get from Rasa NLU.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rasa_core.interpreter</span> <span class="k">import</span> <span class="n">RegexInterpreter</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">interpreter</span> <span class="o">=</span> <span class="n">RegexInterpreter</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">interpreter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;_greet[name=rasa]&quot;</span><span class="p">)</span>
@@ -374,7 +382,7 @@ For more actions which do more than just sent a message, you define them as pyth
 </div>
 <div class="section" id="define-a-policy">
 <h2>Define a Policy<a class="headerlink" href="#define-a-policy" title="Permalink to this headline">¶</a></h2>
-<p>We’ll create a really simple, deterministic policy. Again, this tutorial is just to show how the pieces fit together. To create ML-based policies see the other tutorials.</p>
+<p>We&#8217;ll create a really simple, deterministic policy. Again, this tutorial is just to show how the pieces fit together. To create ML-based policies see the other tutorials.</p>
 <p>If the user greets the bot, we respond with a greeting, and then listen (i.e. wait for them to say something again). For goodbye we respond with a good bye message and then listen, for any other intent we respond with the default message and then listen.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SimplePolicy</span><span class="p">(</span><span class="n">Policy</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">predict_action_probabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
@@ -395,7 +403,7 @@ For more actions which do more than just sent a message, you define them as pyth
 </div>
 <div class="section" id="put-the-pieces-together">
 <h2>Put the pieces together<a class="headerlink" href="#put-the-pieces-together" title="Permalink to this headline">¶</a></h2>
-<p>Now we’re going to glue some pieces together to create an actual bot.
+<p>Now we&#8217;re going to glue some pieces together to create an actual bot.
 We instantiate the policy, and an <code class="docutils literal"><span class="pre">Agent</span></code> instance, which owns an <code class="docutils literal"><span class="pre">interpreter</span></code>, a <code class="docutils literal"><span class="pre">policy</span></code>, and a <code class="docutils literal"><span class="pre">domain</span></code>.</p>
 <p>We will pass messages directly to the bot, but this is just for
 this is just for demonstration purposes. You can look at how to
@@ -465,6 +473,19 @@ command line in the following python example: <code class="docutils literal"><sp
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="master/tour.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -482,7 +503,7 @@ command line in the following python example: <code class="docutils literal"><sp
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

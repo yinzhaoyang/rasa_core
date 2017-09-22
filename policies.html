@@ -28,6 +28,8 @@
   
 
   
+    <link rel="stylesheet" href="_static/banner.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
@@ -187,6 +189,12 @@
            <div itemprop="articleBody">
             
   
+
+
+
+
+
+
 <style>
 /* CSS overrides for sphinx_rtd_theme */
 
@@ -232,7 +240,7 @@
 <p>This uses the current state of the conversation (provided by the tracker) to choose the next action to take.
 The domain is there if you need it, but only some policy types make use of it. The returned array contains
 the probabilities for each action to be executed next. The action that is most likely will be executed.</p>
-<p>Let’s look at the simplest possible example, taken from our hello world bot:</p>
+<p>Let&#8217;s look at the simplest possible example, taken from our hello world bot:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SimplePolicy</span><span class="p">(</span><span class="n">Policy</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">predict_action_probabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
         <span class="c1"># type: (DialogueStateTracker, Domain) -&gt; List[float]</span>
@@ -266,9 +274,9 @@ else:
 <div class="section" id="creating-policies-from-stories">
 <h2>Creating Policies from Stories<a class="headerlink" href="#creating-policies-from-stories" title="Permalink to this headline">¶</a></h2>
 <p>Writing rules like in the SimplePolicy above is not a great way to build a bot, it gets messy fast &amp; is hard to debug.
-If you’ve found Rasa Core, it’s likely you’ve already tried this approach and were looking for something better.
+If you&#8217;ve found Rasa Core, it&#8217;s likely you&#8217;ve already tried this approach and were looking for something better.
 A good next step is to use our story framework to build a policy by giving it some example conversations.
-We won’t use machine learning yet, we will just create a policy which memorises these stories.</p>
+We won&#8217;t use machine learning yet, we will just create a policy which memorises these stories.</p>
 <p>We can use the <code class="docutils literal"><span class="pre">MemoizationPolicy</span></code> and the <code class="docutils literal"><span class="pre">PolicyTrainer</span></code> classes to do this.</p>
 <p>Here is the <code class="docutils literal"><span class="pre">PolicyTrainer</span></code> class:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PolicyTrainer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -345,8 +353,8 @@ We won’t use machine learning yet, we will just create a policy which memorise
 <li><code class="docutils literal"><span class="pre">X</span></code> - a 2D array where each row represents the state of the tracker when an action was taken</li>
 </ol>
 </div></blockquote>
-<p>4. calls the policy’s <code class="docutils literal"><span class="pre">train()</span></code> method to create a policy from these <code class="docutils literal"><span class="pre">X,</span> <span class="pre">y</span></code> state-action pairs (
-don’t mind the <code class="docutils literal"><span class="pre">ensamble</span></code> it is just a collection of policies - e.g. you can combine multiple policies and train them all at once using the ensemble)</p>
+<p>4. calls the policy&#8217;s <code class="docutils literal"><span class="pre">train()</span></code> method to create a policy from these <code class="docutils literal"><span class="pre">X,</span> <span class="pre">y</span></code> state-action pairs (
+don&#8217;t mind the <code class="docutils literal"><span class="pre">ensamble</span></code> it is just a collection of policies - e.g. you can combine multiple policies and train them all at once using the ensemble)</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">In fact, the rows in <code class="docutils literal"><span class="pre">X</span></code> describe the state of the tracker when the previous <code class="docutils literal"><span class="pre">max_history</span></code> actions were taken. See <a class="reference internal" href="featurisation.html#featurization"><span class="std std-ref">Featurization</span></a> for more details.</p>
@@ -358,8 +366,8 @@ so that when your bot encounters an identical situation it will make the decisio
 <h2>Generalising to new Dialogues<a class="headerlink" href="#generalising-to-new-dialogues" title="Permalink to this headline">¶</a></h2>
 <p>The stories data format gives you a compact way to describe a large number of possible dialogues without much effort.
 But humans are infinitely creative, and you could never hope to describe <em>every</em> possible dialogue programatically.
-Even if you could, it probably wouldn’t fit in memory :)</p>
-<p>So how do we create a policy which behaves well even in scenarios you haven’t thought of?
+Even if you could, it probably wouldn&#8217;t fit in memory :)</p>
+<p>So how do we create a policy which behaves well even in scenarios you haven&#8217;t thought of?
 We will try to achieve this generalisation by creating a policy based on Machine Learning.</p>
 <p>You can use whichever machine learning library you like to train your policy.
 One implementation that ships with Rasa is the <code class="docutils literal"><span class="pre">KerasPolicy</span></code>,
@@ -453,6 +461,19 @@ These base classes have already implemented the logic of persisting and reloadin
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="master/policies.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -470,7 +491,7 @@ These base classes have already implemented the logic of persisting and reloadin
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

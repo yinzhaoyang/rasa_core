@@ -28,6 +28,8 @@
   
 
   
+    <link rel="stylesheet" href="_static/banner.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
@@ -187,6 +189,12 @@
            <div itemprop="articleBody">
             
   
+
+
+
+
+
+
 <style>
 /* CSS overrides for sphinx_rtd_theme */
 
@@ -254,10 +262,10 @@
 <p><strong>What does this mean?</strong></p>
 <p>An <code class="docutils literal"><span class="pre">intent</span></code> is a string like <code class="docutils literal"><span class="pre">&quot;greet&quot;</span></code> or <code class="docutils literal"><span class="pre">&quot;restaurant_search&quot;</span></code>.
 It describes what your user <em>probably meant to say</em>.
-For example, “show me Mexican restaurants”, and “I want to have lunch”
+For example, &#8220;show me Mexican restaurants&#8221;, and &#8220;I want to have lunch&#8221;
 could both be described as a <code class="docutils literal"><span class="pre">restaurant_search</span></code> intent.</p>
 <p><code class="docutils literal"><span class="pre">slots</span></code> are the things you want to keep track of during a conversation.
-For example, in the messages above you would want to store “Mexican” as a cuisine type.
+For example, in the messages above you would want to store &#8220;Mexican&#8221; as a cuisine type.
 The tracker has an attribute like <code class="docutils literal"><span class="pre">tracker.get_slot(&quot;cuisine&quot;)</span></code> which will return <code class="docutils literal"><span class="pre">&quot;Mexican&quot;</span></code></p>
 <p><code class="docutils literal"><span class="pre">actions</span></code> are the things your bot can actually do.
 They are invoked by calling the <code class="docutils literal"><span class="pre">action.run()</span></code> method.
@@ -275,7 +283,7 @@ action list that is named after the utterance. E.g. if there should be an action
 all three of the defined actions are just named after utter templates and hence just respond with a message to
 the user.</p>
 <p><strong>What about more complicated actions?</strong>
-To continue with the restaurant example, if the user says “show me a Mexican restaurant”,
+To continue with the restaurant example, if the user says &#8220;show me a Mexican restaurant&#8221;,
 your bot would execute the action <code class="docutils literal"><span class="pre">ActionCheckRestaurants</span></code>, which might look like this:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasa_core.actions</span> <span class="k">import</span> <span class="n">Action</span>
 <span class="kn">from</span> <span class="nn">rasa_core.events</span> <span class="k">import</span> <span class="n">SetSlot</span>
@@ -298,7 +306,7 @@ own state.</p>
 </div>
 <div class="section" id="putting-it-all-together">
 <h2>Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Permalink to this headline">¶</a></h2>
-<p>Let’s add just this one new action to a custom domain (assuming we stored the
+<p>Let&#8217;s add just this one new action to a custom domain (assuming we stored the
 action in a module called <code class="docutils literal"><span class="pre">restaurant.actions</span></code>):</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">intents</span><span class="p p-Indicator">:</span>
    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">greet</span>
@@ -364,6 +372,19 @@ actions using their module path.</p>
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="master/domains_actions.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -381,7 +402,7 @@ actions using their module path.</p>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

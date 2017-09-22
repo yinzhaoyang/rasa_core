@@ -28,6 +28,8 @@
   
 
   
+    <link rel="stylesheet" href="_static/banner.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
@@ -198,6 +200,12 @@
            <div itemprop="articleBody">
             
   
+
+
+
+
+
+
 <style>
 /* CSS overrides for sphinx_rtd_theme */
 
@@ -237,10 +245,10 @@
 <h2>Meta<a class="headerlink" href="#meta" title="Permalink to this headline">¶</a></h2>
 <p>In this example we will create a restaurant search bot, by training
 a neural net on example conversations.</p>
-<p>A user can contact the bot with something close to “I want a mexican restaurant!”
+<p>A user can contact the bot with something close to &#8220;I want a mexican restaurant!&#8221;
 and the bot will ask more details until it is ready to suggest a restaurant.</p>
 <p>This assumes you already know what the <code class="docutils literal"><span class="pre">Domain</span></code>, <code class="docutils literal"><span class="pre">Policy</span></code>, and <code class="docutils literal"><span class="pre">Action</span></code> classes do.
-If you don’t, it’s a good idea to read the basic tutorial first.</p>
+If you don&#8217;t, it&#8217;s a good idea to read the basic tutorial first.</p>
 </div>
 <div class="section" id="the-dataset">
 <h2>The Dataset<a class="headerlink" href="#the-dataset" title="Permalink to this headline">¶</a></h2>
@@ -251,11 +259,11 @@ Lucky for us, this dataset is also in the restaurant domain.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">the babi dataset is machine-generated, and there are a LOT of dialogues in there.
-There are 1000 stories in the training set, but you don’t need that many to build
+There are 1000 stories in the training set, but you don&#8217;t need that many to build
 a useful bot. How much data you need depends on the number of actions you define, and the
 number of edge cases you want to support. But a few dozen stories is a good place to start.</p>
 </div>
-<p>Here’s an example conversation snippet:</p>
+<p>Here&#8217;s an example conversation snippet:</p>
 <div class="highlight-markdown"><div class="highlight"><pre><span></span>## story_07715946
 * _greet[]
  - action_ask_howcanhelp
@@ -328,11 +336,11 @@ We do this by training the Rasa Core model. From <code class="docutils literal">
 </div>
 <p>This creates a <code class="docutils literal"><span class="pre">policy</span></code> object. What you need to know is that <code class="docutils literal"><span class="pre">policy.next_action</span></code> chooses
 which action the bot should take next.</p>
-<p>Here we’ll quickly explain the Domain and Policy objects,
-feel free to skip this if you don’t care, or read <a class="reference internal" href="plumbing.html#plumbing"><span class="std std-ref">Plumbing - How it all fits together</span></a> for more info.</p>
+<p>Here we&#8217;ll quickly explain the Domain and Policy objects,
+feel free to skip this if you don&#8217;t care, or read <a class="reference internal" href="plumbing.html#plumbing"><span class="std std-ref">Plumbing - How it all fits together</span></a> for more info.</p>
 <div class="section" id="domain">
 <h4>Domain<a class="headerlink" href="#domain" title="Permalink to this headline">¶</a></h4>
-<p>Let’s start with <code class="docutils literal"><span class="pre">Domain</span></code>. From <code class="docutils literal"><span class="pre">restaurant_domain.yml</span></code>:</p>
+<p>Let&#8217;s start with <code class="docutils literal"><span class="pre">Domain</span></code>. From <code class="docutils literal"><span class="pre">restaurant_domain.yml</span></code>:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">slots</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">cuisine</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">text</span>
@@ -482,7 +490,7 @@ object. From <code class="docutils literal"><span class="pre">run.py</span></cod
 </pre></div>
 </div>
 <p>We put the NLU model into an <code class="docutils literal"><span class="pre">Interpreter</span></code> and then put that into an <code class="docutils literal"><span class="pre">Agent</span></code>.</p>
-<p>You now have a working bot! It will recommend you the same place (papi’s pizza place) no matter what preferences you
+<p>You now have a working bot! It will recommend you the same place (papi&#8217;s pizza place) no matter what preferences you
 give, but at least its trying!</p>
 </div>
 </div>
@@ -521,6 +529,19 @@ give, but at least its trying!</p>
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="master/tutorial_babi.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -538,7 +559,7 @@ give, but at least its trying!</p>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
