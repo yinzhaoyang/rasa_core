@@ -319,7 +319,6 @@ We won&#8217;t use machine learning yet, we will just create a policy which memo
 
     <span class="k">def</span> <span class="nf">_prepare_training_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">max_history</span><span class="p">,</span> <span class="n">augmentation_factor</span><span class="p">,</span>
                                <span class="n">max_training_samples</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                               <span class="n">should_remove_duplicates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                <span class="n">max_number_of_trackers</span><span class="o">=</span><span class="mi">2000</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reads training data from file and prepares it for the training.&quot;&quot;&quot;</span>
 
@@ -330,7 +329,7 @@ We won&#8217;t use machine learning yet, we will just create a policy which memo
                     <span class="n">filename</span><span class="p">,</span>
                     <span class="n">augmentation_factor</span><span class="o">=</span><span class="n">augmentation_factor</span><span class="p">,</span>
                     <span class="n">max_history</span><span class="o">=</span><span class="n">max_history</span><span class="p">,</span>
-                    <span class="n">remove_duplicates</span><span class="o">=</span><span class="n">should_remove_duplicates</span><span class="p">,</span>
+                    <span class="n">remove_duplicates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                     <span class="n">domain</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span>
                     <span class="n">featurizer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">featurizer</span><span class="p">,</span>
                     <span class="n">interpreter</span><span class="o">=</span><span class="n">RegexInterpreter</span><span class="p">(),</span>
