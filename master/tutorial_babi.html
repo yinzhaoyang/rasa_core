@@ -117,6 +117,7 @@
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">Using Rasa Core as a HTTP server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="slot_types.html">Slot Types Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
@@ -131,7 +132,8 @@
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="library.html">Library Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/agent.html">Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/events.html">Events</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer Documentation</span></p>
 <ul>
@@ -267,16 +269,16 @@ a useful bot. How much data you need depends on the number of actions you define
 number of edge cases you want to support. But a few dozen stories is a good place to start.</p>
 </div>
 <p>Here&#8217;s an example conversation snippet:</p>
-<div class="highlight-markdown"><div class="highlight"><pre><span></span>## story_07715946
-* _greet[]
- - action_ask_howcanhelp
-* _inform[location=rome,price=cheap]
- - action_on_it
- - action_ask_cuisine
-* _inform[cuisine=spanish]
- - action_ask_numpeople
-* _inform[people=six]
- - action_ack_dosearch
+<div class="highlight-md"><div class="highlight"><pre><span></span><span class="gu">##</span> story_07715946
+<span class="k">*</span> _greet[]
+ <span class="k">-</span> action_ask_howcanhelp
+<span class="k">*</span> _inform[location=rome,price=cheap]
+ <span class="k">-</span> action_on_it
+ <span class="k">-</span> action_ask_cuisine
+<span class="k">*</span> _inform[cuisine=spanish]
+ <span class="k">-</span> action_ask_numpeople
+<span class="k">*</span> _inform[people=six]
+ <span class="k">-</span> action_ack_dosearch
  ...
 </pre></div>
 </div>
@@ -292,7 +294,7 @@ can be a helpful tool in debugging a bot. More information can be found in <a cl
 <h2>Training your bot<a class="headerlink" href="#training-your-bot" title="Permalink to this headline">¶</a></h2>
 <p>We can go directly from data to bot with only a few steps:</p>
 <ol class="arabic simple">
-<li>train a Rasa NLU model to extract intents and entities. Read more about that <a class="reference external" href="http://rasa-nlu.readthedocs.io/">here</a></li>
+<li>train a Rasa NLU model to extract intents and entities. Read more about that in the <a class="reference external" href="http://rasa-nlu.readthedocs.io/">NLU docs</a>.</li>
 <li>train a dialogue policy which will learn to choose the correct actions</li>
 <li>set up an agent which has both model 1 and model 2 working together to go directly from <strong>user input</strong> to <strong>action</strong></li>
 </ol>
@@ -309,9 +311,10 @@ can be a helpful tool in debugging a bot. More information can be found in <a cl
     <span class="k">return</span> <span class="n">model_directory</span>
 </pre></div>
 </div>
-<p>You can learn all about Rasa NLU <a class="reference external" href="https://github.com/RasaHQ/rasa_nlu">here</a>,
-What you need to know is that <code class="docutils literal"><span class="pre">interpreter.parse(user_message)</span></code> returns a dictionary
-with the intent and entities from a user message.</p>
+<p>You can learn all about Rasa NLU starting from the
+<a class="reference external" href="https://github.com/RasaHQ/rasa_nlu">github repository</a>.
+What you need to know though is that <code class="docutils literal"><span class="pre">interpreter.parse(user_message)</span></code> returns
+a dictionary with the intent and entities from a user message.</p>
 <p><em>This step takes approximately 18 seconds on a 2014 MacBook Pro.</em></p>
 </div>
 <div class="section" id="train-dialogue-policy">
@@ -442,21 +445,22 @@ may involve api calls or internal bot dynamics.</p>
 </div>
 <div class="section" id="policy">
 <h4>Policy<a class="headerlink" href="#policy" title="Permalink to this headline">¶</a></h4>
-<p>From <code class="docutils literal"><span class="pre">restaurant_domain.py</span></code> again:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasa_core.policies.keras_policy</span> <span class="k">import</span> <span class="n">KerasPolicy</span>
-
-<span class="k">class</span> <span class="nc">RestaurantPolicy</span><span class="p">(</span><span class="n">KerasPolicy</span><span class="p">):</span>
+<p>From <code class="docutils literal"><span class="pre">examples/restaurant_example.py</span></code> again:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RestaurantPolicy</span><span class="p">(</span><span class="n">KerasPolicy</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">_build_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_features</span><span class="p">,</span> <span class="n">num_actions</span><span class="p">,</span> <span class="n">max_history_len</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Build a keras model and return a compiled model.</span>
-<span class="sd">        :param max_history_len: The maximum number of historical turns used to decide on next action&quot;&quot;&quot;</span>
+<span class="sd">        :param max_history_len: The maximum number of historical turns used to</span>
+<span class="sd">                                decide on next action&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">LSTM</span><span class="p">,</span> <span class="n">Activation</span><span class="p">,</span> <span class="n">Masking</span><span class="p">,</span> <span class="n">Dense</span>
         <span class="kn">from</span> <span class="nn">keras.models</span> <span class="k">import</span> <span class="n">Sequential</span>
 
         <span class="n">n_hidden</span> <span class="o">=</span> <span class="mi">32</span>  <span class="c1"># size of hidden layer in LSTM</span>
         <span class="c1"># Build Model</span>
+        <span class="n">batch_shape</span> <span class="o">=</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_history_len</span><span class="p">,</span> <span class="n">num_features</span><span class="p">)</span>
+
         <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
-        <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Masking</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_input_shape</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_history_len</span><span class="p">,</span> <span class="n">num_features</span><span class="p">)))</span>
-        <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">,</span> <span class="n">batch_input_shape</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_history_len</span><span class="p">,</span> <span class="n">num_features</span><span class="p">)))</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Masking</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_input_shape</span><span class="o">=</span><span class="n">batch_shape</span><span class="p">))</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">,</span> <span class="n">batch_input_shape</span><span class="o">=</span><span class="n">batch_shape</span><span class="p">))</span>
         <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">n_hidden</span><span class="p">,</span> <span class="n">output_dim</span><span class="o">=</span><span class="n">num_actions</span><span class="p">))</span>
         <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
 
@@ -468,7 +472,7 @@ may involve api calls or internal bot dynamics.</p>
         <span class="k">return</span> <span class="n">model</span>
 </pre></div>
 </div>
-<p>This policy builds an LSTM in Keras  which will then be taken by the trainer and trained. The parameters <code class="docutils literal"><span class="pre">max_history_len</span></code>
+<p>This policy builds an  LSTM in Keras  which will then be taken by the trainer and trained. The parameters <code class="docutils literal"><span class="pre">max_history_len</span></code>
 and <code class="docutils literal"><span class="pre">n_hidden</span></code> may be altered dependent on the task complexity and the amount of data one has. <code class="docutils literal"><span class="pre">max_history_len</span></code> is
 important as it is the amount of story steps the network has access to to make a classification.</p>
 </div>

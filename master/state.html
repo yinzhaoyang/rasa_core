@@ -102,6 +102,7 @@
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">Using Rasa Core as a HTTP server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="slot_types.html">Slot Types Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
@@ -120,7 +121,8 @@
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="library.html">Library Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/agent.html">Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/events.html">Events</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer Documentation</span></p>
 <ul>
@@ -248,7 +250,7 @@ For example:</p>
 <span class="go">{u&#39;cuisine&#39;: &lt;TextSlot(cuisine: Mexican)&gt;}</span>
 </pre></div>
 </div>
-<p>The full set of events is documented here: <a class="reference internal" href="events.html#events"><span class="std std-ref">Events</span></a></p>
+<p>The full set of events is documented in the <a class="reference internal" href="api/events.html"><span class="doc">Events API documentation</span></a>.</p>
 <div class="section" id="persisting-trackers">
 <h2>Persisting Trackers:<a class="headerlink" href="#persisting-trackers" title="Permalink to this headline">¶</a></h2>
 <p>When you&#8217;re running your bot in production,
@@ -259,8 +261,7 @@ That&#8217;s why Rasa persists trackers in a key-value store.
 For testing, the <code class="docutils literal"><span class="pre">InMemoryTrackerStore</span></code> is sufficient,
 but in production you would want to use the <code class="docutils literal"><span class="pre">RedisTrackerStore</span></code> to restore
 after restarting the application. It&#8217;s straightforward to define a
-custom <code class="docutils literal"><span class="pre">TrackerStore</span></code> subclass for the persistence tool of your choice.
-See <a class="reference internal" href="tracker_store.html#tracker-store"><span class="std std-ref">Tracker Stores</span></a> for details.</p>
+custom <code class="docutils literal"><span class="pre">TrackerStore</span></code> subclass for the persistence tool of your choice.</p>
 </div>
 <div class="section" id="serialisation">
 <h2>Serialisation<a class="headerlink" href="#serialisation" title="Permalink to this headline">¶</a></h2>

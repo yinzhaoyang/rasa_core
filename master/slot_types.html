@@ -37,7 +37,7 @@
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Rasa Core 0.7.0a3 documentation" href="index.html"/>
         <link rel="next" title="Plumbing - How it all fits together" href="plumbing.html"/>
-        <link rel="prev" title="Common Patterns" href="patterns.html"/> 
+        <link rel="prev" title="Using Rasa Core as a HTTP server" href="http.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -102,6 +102,7 @@
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">Using Rasa Core as a HTTP server</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Slot Types Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#type-boolean"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">boolean</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#type-categorical"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">categorical</span></code></a></li>
@@ -125,7 +126,8 @@
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="library.html">Library Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/agent.html">Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/events.html">Events</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer Documentation</span></p>
 <ul>
@@ -238,6 +240,13 @@
 </style>
 <div class="section" id="slot-types-reference">
 <span id="slot-types"></span><h1>Slot Types Reference<a class="headerlink" href="#slot-types-reference" title="Permalink to this headline">¶</a></h1>
+<p>Slots influence the prediction of the next action the bot should run. For the
+prediction, the slots value is not used directly, but rather it is featurized.
+E.g. for a slot of type <code class="docutils literal"><span class="pre">text</span></code>, the value is irrelevant, for the featurization
+the only thing that matters is if a text is set or not.</p>
+<p>The choice of slot should be done with care. If a slots value should influence
+the dialogue flow (e.g. the users age influences which question follows next)
+you should choose a slot where the value influences the dialogue model.</p>
 <p>These are all of the predefined slot classes and what they&#8217;re useful for.</p>
 <div class="section" id="type-boolean">
 <h2><code class="docutils literal"><span class="pre">type:</span> <span class="pre">boolean</span></code><a class="headerlink" href="#type-boolean" title="Permalink to this headline">¶</a></h2>
@@ -247,9 +256,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Use For:</th><td class="field-body">True or False</td>
 </tr>
-<tr class="field-even field"><th class="field-name">params:</th><td class="field-body">None</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Checks if slot is set and if True</td>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Checks if slot is set and if True</td>
 </tr>
 </tbody>
 </table>
@@ -277,7 +284,8 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Use For:</th><td class="field-body">Base class for creating own slots</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">User has to subclass this and define the <code class="docutils literal"><span class="pre">as_feature</span></code> method containing any custom logic.</td>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">User has to subclass this and define the <code class="docutils literal"><span class="pre">as_feature</span></code> method containing
+any custom logic.</td>
 </tr>
 </tbody>
 </table>
@@ -305,7 +313,9 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Use For:</th><td class="field-body">Lists of values</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">None</td>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The feature of this slot is set to <code class="docutils literal"><span class="pre">1</span></code> if a value with a list is set,
+where the list is not empty. If no value is set, or the empty list is the
+set value, the feature will be <code class="docutils literal"><span class="pre">0</span></code>.</td>
 </tr>
 </tbody>
 </table>
@@ -316,11 +326,11 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Use For:</th><td class="field-body">User preferences where you only care whether or not they&#8217;ve been specified.</td>
+<tr class="field-odd field"><th class="field-name">Use For:</th><td class="field-body">User preferences where you only care whether or not they&#8217;ve
+been specified.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">params:</th><td class="field-body">None</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Checks if float is within the range of min and max values.</td>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Results in the feature of the slot being set to <code class="docutils literal"><span class="pre">1</span></code> if any value is set.
+Otherwise the feature will be set to <code class="docutils literal"><span class="pre">0</span></code> (no value is set).</td>
 </tr>
 </tbody>
 </table>
@@ -333,7 +343,9 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Use For:</th><td class="field-body">Data you want to store which shouldn&#8217;t influence the dialogue flow</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body"></td>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">There will not be any featurization of this slot, hence its value does
+not influence the dialogue flow and is ignored when predicting the next
+action the bot should run.</td>
 </tr>
 </tbody>
 </table>
@@ -350,7 +362,7 @@
         <a href="plumbing.html" class="btn btn-neutral float-right" title="Plumbing - How it all fits together" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="patterns.html" class="btn btn-neutral" title="Common Patterns" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="http.html" class="btn btn-neutral" title="Using Rasa Core as a HTTP server" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

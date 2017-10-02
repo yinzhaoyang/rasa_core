@@ -102,6 +102,7 @@
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">Using Rasa Core as a HTTP server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="slot_types.html">Slot Types Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
@@ -119,7 +120,8 @@
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="library.html">Library Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/agent.html">Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/events.html">Events</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer Documentation</span></p>
 <ul>
@@ -233,16 +235,16 @@
 <div class="section" id="stories-data-format">
 <span id="stories"></span><h1>Stories Data Format<a class="headerlink" href="#stories-data-format" title="Permalink to this headline">¶</a></h1>
 <p>Here&#8217;s an example from the bAbi data:</p>
-<div class="highlight-markdown"><div class="highlight"><pre><span></span>## story_07715946
-* _greet
-   - action_ask_howcanhelp
-* _inform[location=rome,price=cheap]
-   - action_on_it
-   - action_ask_cuisine
-* _inform[cuisine=spanish]
-   - action_ask_numpeople
-* _inform[people=six]
-   - action_ack_dosearch
+<div class="highlight-md"><div class="highlight"><pre><span></span><span class="gu">##</span> story_07715946
+<span class="k">*</span> _greet
+   <span class="k">-</span> action_ask_howcanhelp
+<span class="k">*</span> _inform[location=rome,price=cheap]
+   <span class="k">-</span> action_on_it
+   <span class="k">-</span> action_ask_cuisine
+<span class="k">*</span> _inform[cuisine=spanish]
+   <span class="k">-</span> action_ask_numpeople
+<span class="k">*</span> _inform[people=six]
+   <span class="k">-</span> action_ack_dosearch
 </pre></div>
 </div>
 <p>A story starts with a name preceeded by two hashes <code class="docutils literal"><span class="pre">##</span> <span class="pre">story_03248462</span></code>, this is arbitrary but can be used for debugging.

@@ -109,6 +109,7 @@
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">Using Rasa Core as a HTTP server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="slot_types.html">Slot Types Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
@@ -123,7 +124,8 @@
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="library.html">Library Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/agent.html">Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/events.html">Events</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer Documentation</span></p>
 <ul>
@@ -266,22 +268,22 @@ and the correct response to &#8220;thank you&#8221; is pretty much always &#8220
 <code class="docutils literal"><span class="pre">action_show_venue_reviews</span></code> and <code class="docutils literal"><span class="pre">action_show_concert_reviews</span></code>
 are both possible responses to the <code class="docutils literal"><span class="pre">compare_reviews</span></code> intent, but neither references
 any context. That comes later.</p>
-<div class="highlight-markdown"><div class="highlight"><pre><span></span>## greet
-* _greet
-    - action_greet
+<div class="highlight-md"><div class="highlight"><pre><span></span><span class="gu">##</span> greet
+<span class="k">*</span> _greet
+    <span class="k">-</span> action_greet
 
-## happy
-* _thankyou
-    - action_youarewelcome
+<span class="gu">##</span> happy
+<span class="k">*</span> _thankyou
+    <span class="k">-</span> action_youarewelcome
 ...
 
-## compare_reviews_venues
-* _compare_reviews
-    - action_show_venue_reviews
+<span class="gu">##</span> compare_reviews_venues
+<span class="k">*</span> _compare_reviews
+    <span class="k">-</span> action_show_venue_reviews
 
-## compare_reviews_concerts
-* _compare_reviews
-    - action_show_concert_reviews
+<span class="gu">##</span> compare_reviews_concerts
+<span class="k">*</span> _compare_reviews
+    <span class="k">-</span> action_show_concert_reviews
 </pre></div>
 </div>
 </div>
@@ -302,7 +304,7 @@ type the intent starting with a <cite>_</cite>.
 If you want to use Rasa NLU / wit.ai / Lex you
 can just swap the <cite>Interpreter</cite> class in <cite>run.py</cite>.</p>
 </div>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>Bot loaded. Type hello and press enter :
+<div class="highlight-text"><div class="highlight"><pre><span></span>Bot loaded. Type hello and press enter :
 _greet
 hey there!
 _search_concerts
@@ -324,7 +326,7 @@ a stateless policy.</p>
 <p><strong>Happy paths</strong></p>
 <p>We can start talking to the bot as before,
 directly entering the intents. For example, if we type <code class="docutils literal"><span class="pre">_greet</span></code>, we get the following prompt:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>_greet
+<div class="highlight-text"><div class="highlight"><pre><span></span>_greet
 ------
 Chat history:
 
@@ -334,14 +336,14 @@ Chat history:
 
                 whose intent is:     greet
 
-we currently have slots: <span class="o">{</span><span class="s1">&#39;location&#39;</span>: None<span class="o">}</span>
+we currently have slots: {&#39;location&#39;: None}
 
 ------
-The bot wants to <span class="o">[</span>greet<span class="o">]</span> due to the intent. Is this correct?
+The bot wants to [greet] due to the intent. Is this correct?
 
-    <span class="m">1</span>.       Yes
-    <span class="m">2</span>.       No, intent is right but the action is wrong
-    <span class="m">3</span>.       The intent is wrong
+    1.       Yes
+    2.       No, intent is right but the action is wrong
+    3.       The intent is wrong
 </pre></div>
 </div>
 <p>This gives you all the info you should hopefully need to decide
@@ -350,7 +352,7 @@ In this case, the bot chose the right action (&#8216;greet&#8217;), so we type <
 We continue this loop until the bot chooses the wrong action.</p>
 <p><strong>Providing feedback on errors</strong></p>
 <p>We&#8217;ve just asked the bot to search for concerts, and now we&#8217;re asking it to compare reviews. The bot happens to choose the wrong one out of the two possibilities we wrote in the stories:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>_compare_reviews
+<div class="highlight-text"><div class="highlight"><pre><span></span>_compare_reviews
 ------
 Chat history:
 
@@ -364,34 +366,34 @@ Chat history:
 
                 whose intent is:     compare_reviews
 
-we currently have slots: <span class="o">{</span><span class="s1">&#39;location&#39;</span>: None<span class="o">}</span>
+we currently have slots: {&#39;location&#39;: None}
 
 ------
-The bot wants to <span class="o">[</span>show_venue_reviews<span class="o">]</span> due to the intent. Is this correct?
+The bot wants to [show_venue_reviews] due to the intent. Is this correct?
 
-    <span class="m">1</span>.       Yes
-    <span class="m">2</span>.       No, intent is right but the action is wrong
-    <span class="m">3</span>.       The intent is wrong
+    1.       Yes
+    2.       No, intent is right but the action is wrong
+    3.       The intent is wrong
 </pre></div>
 </div>
 <p>Now we type <code class="docutils literal"><span class="pre">2</span></code>, because it chose the wrong action,
 and we get a new prompt asking for the correct one.
 This also shows the probabilities the model has assigned to each of the actions.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>------
-what is the next action <span class="k">for</span> the bot?
+<div class="highlight-text"><div class="highlight"><pre><span></span>------
+what is the next action for the bot?
 
-     <span class="m">0</span>       default  <span class="m">0</span>.00148131744936
-     <span class="m">1</span>       greet    <span class="m">0</span>.0970264300704
-     <span class="m">2</span>       goodbye  <span class="m">0</span>.0288009047508
-     <span class="m">3</span>       listen   <span class="m">0</span>.00123148341663
-     <span class="m">6</span>       search_cinemas  <span class="m">0</span>.000627864559647
-     <span class="m">8</span>       search_films    <span class="m">0</span>.0367559418082
-     <span class="m">9</span>       suggest         <span class="m">0</span>.0261212754995
-     <span class="m">11</span>      youarewelcome   <span class="m">0</span>.594935178757
-     <span class="m">13</span>      explain_options <span class="m">0</span>.0516758263111
-     <span class="m">14</span>      store_slot      <span class="m">0</span>.00145904591773
-     <span class="m">15</span>      show_cinema_reviews     <span class="m">0</span>.00887114647776
-     <span class="m">16</span>      show_film_reviews       <span class="m">0</span>.0870243906975
+     0       default  0.00148131744936
+     1       greet    0.0970264300704
+     2       goodbye  0.0288009047508
+     3       listen   0.00123148341663
+     6       search_cinemas  0.000627864559647
+     8       search_films    0.0367559418082
+     9       suggest         0.0261212754995
+     11      youarewelcome   0.594935178757
+     13      explain_options 0.0516758263111
+     14      store_slot      0.00145904591773
+     15      show_cinema_reviews     0.00887114647776
+     16      show_film_reviews       0.0870243906975
 </pre></div>
 </div>
 <p>In this case, the bot should <code class="docutils literal"><span class="pre">show_film_reviews</span></code> (rather than cinema reviews!) so we type <code class="docutils literal"><span class="pre">16</span></code> and hit enter.</p>

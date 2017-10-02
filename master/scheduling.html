@@ -102,6 +102,7 @@
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">Using Rasa Core as a HTTP server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="slot_types.html">Slot Types Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
@@ -120,7 +121,8 @@
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="library.html">Library Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/agent.html">Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/events.html">Events</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer Documentation</span></p>
 <ul>
@@ -239,11 +241,11 @@ Don&#8217;t worry! Rasa has you covered.</p>
 <p>To schedule an action for later execution, there is a special event called <code class="docutils literal"><span class="pre">Reminder</span></code>.
 Let&#8217;s make our example a bit more specific:
 We want a confirmation to book a restaurant table - without it the reservation won&#8217;t be made.</p>
-<div class="highlight-markdown"><div class="highlight"><pre><span></span>## book a restaurant
-* _start_booking
-    - action_suggest_restaurant
-* _select_restaurant[name=Papi&#39;s Pizza Place]
-    - action_confirm_booking
+<div class="highlight-md"><div class="highlight"><pre><span></span><span class="gu">##</span> book a restaurant
+<span class="k">*</span> _start_booking
+    <span class="k">-</span> action_suggest_restaurant
+<span class="k">*</span> _select_restaurant[name=Papi&#39;s Pizza Place]
+    <span class="k">-</span> action_confirm_booking
 </pre></div>
 </div>
 <p>The last action in this story, <code class="docutils literal"><span class="pre">action_confirm_booking</span></code>, will ask the user for a confirmation and usually
@@ -299,21 +301,21 @@ If you do not want that to happen you need so set the <code class="docutils lite
 <p>After the action is triggered, the action execution continues as though the user had sent the bot an
 empty message.
 So in our stories we need to define what happens after the reminder was executed:</p>
-<div class="highlight-markdown"><div class="highlight"><pre><span></span>## book a restaurant
-* _start_booking
-    - action_suggest_restaurant
-* _select_restaurant[name=Papi&#39;s Pizza Place]
-    - action_confirm_booking
+<div class="highlight-md"><div class="highlight"><pre><span></span><span class="gu">##</span> book a restaurant
+<span class="k">*</span> _start_booking
+    <span class="k">-</span> action_suggest_restaurant
+<span class="k">*</span> _select_restaurant[name=Papi&#39;s Pizza Place]
+    <span class="k">-</span> action_confirm_booking
 
-## reminder_confirm
-    - action_booking_reminder
-* _agree
-    - action_book_restaurant
+<span class="gu">##</span> reminder_confirm
+    <span class="k">-</span> action_booking_reminder
+<span class="k">*</span> _agree
+    <span class="k">-</span> action_book_restaurant
 
-## reminder_cancel
-    - action_booking_reminder
-* _deny
-    - action_cancel_booking
+<span class="gu">##</span> reminder_cancel
+    <span class="k">-</span> action_booking_reminder
+<span class="k">*</span> _deny
+    <span class="k">-</span> action_cancel_booking
 </pre></div>
 </div>
 <p>We have added two stories: One where the user agrees to the message we sent in the reminder and one where they

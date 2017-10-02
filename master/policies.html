@@ -102,6 +102,7 @@
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">Using Rasa Core as a HTTP server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="slot_types.html">Slot Types Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
@@ -120,7 +121,8 @@
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="library.html">Library Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/agent.html">Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/events.html">Events</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer Documentation</span></p>
 <ul>
@@ -265,7 +267,7 @@ When the controller processes a message from a user, it will keep asking for the
 The bot then executes that action, until it receives an <code class="docutils literal"><span class="pre">ActionListen</span></code> instruction.
 This breaks the loop and makes the bot await further instructions.</p>
 <p>In pseudocode, what the <code class="docutils literal"><span class="pre">SimplePolicy</span></code> above does is:</p>
-<div class="highlight-markdown"><div class="highlight"><pre><span></span>-&gt; a new message has come in
+<div class="highlight-md"><div class="highlight"><pre><span></span>-&gt; a new message has come in
 
 if we were previously listening:
     return a canned response
@@ -347,16 +349,16 @@ We won&#8217;t use machine learning yet, we will just create a policy which memo
 <ol class="arabic simple">
 <li>reads the stories from a file</li>
 <li>creates all possible dialogues from these stories</li>
-<li>creates the following variables:</li>
-</ol>
-<blockquote>
-<div><ol class="loweralpha simple">
+<li>creates the following variables:<ol class="loweralpha">
 <li><code class="docutils literal"><span class="pre">y</span></code> - a 1D array representing all of the actions taken in the dialogues</li>
 <li><code class="docutils literal"><span class="pre">X</span></code> - a 2D array where each row represents the state of the tracker when an action was taken</li>
 </ol>
-</div></blockquote>
-<p>4. calls the policy&#8217;s <code class="docutils literal"><span class="pre">train()</span></code> method to create a policy from these <code class="docutils literal"><span class="pre">X,</span> <span class="pre">y</span></code> state-action pairs (
-don&#8217;t mind the <code class="docutils literal"><span class="pre">ensamble</span></code> it is just a collection of policies - e.g. you can combine multiple policies and train them all at once using the ensemble)</p>
+</li>
+<li>calls the policy&#8217;s <code class="docutils literal"><span class="pre">train()</span></code> method to create a policy from these <code class="docutils literal"><span class="pre">X,</span> <span class="pre">y</span></code>
+state-action pairs (don&#8217;t mind the <code class="docutils literal"><span class="pre">ensamble</span></code> it is just a collection of
+policies - e.g. you can combine multiple policies and train them all at
+once using the ensemble)</li>
+</ol>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">In fact, the rows in <code class="docutils literal"><span class="pre">X</span></code> describe the state of the tracker when the previous <code class="docutils literal"><span class="pre">max_history</span></code> actions were taken. See <a class="reference internal" href="featurisation.html#featurization"><span class="std std-ref">Featurization</span></a> for more details.</p>
