@@ -227,17 +227,286 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="rasa-core-training-utils-dsl-module">
-<h2>rasa_core.training_utils.dsl module<a class="headerlink" href="#rasa-core-training-utils-dsl-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-rasa_core.training_utils.dsl">
+<span id="rasa-core-training-utils-dsl-module"></span><h2>rasa_core.training_utils.dsl module<a class="headerlink" href="#module-rasa_core.training_utils.dsl" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rasa_core.training_utils.dsl.FeaturizedTracker">
+<em class="property">class </em><code class="descclassname">rasa_core.training_utils.dsl.</code><code class="descname">FeaturizedTracker</code><span class="sig-paren">(</span><em>tracker</em>, <em>max_history</em>, <em>featurization=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#FeaturizedTracker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.FeaturizedTracker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>A tracker wrapper that caches the featurization of the tracker.</p>
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.FeaturizedTracker.create_copy">
+<code class="descname">create_copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#FeaturizedTracker.create_copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.FeaturizedTracker.create_copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a deep copy of this featurized tracker.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.FeaturizedTracker.feauturize_current_state">
+<code class="descname">feauturize_current_state</code><span class="sig-paren">(</span><em>domain</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#FeaturizedTracker.feauturize_current_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.FeaturizedTracker.feauturize_current_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Featurizes the tracker and caches the featurization.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rasa_core.training_utils.dsl.FeaturizedTracker.from_domain">
+<em class="property">classmethod </em><code class="descname">from_domain</code><span class="sig-paren">(</span><em>domain</em>, <em>max_history</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#FeaturizedTracker.from_domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.FeaturizedTracker.from_domain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a featurized tracker from a domain.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.FeaturizedTracker.undo_last_action">
+<code class="descname">undo_last_action</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#FeaturizedTracker.undo_last_action"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.FeaturizedTracker.undo_last_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reverts the last action of the tracker (usually action listen).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.FeaturizedTracker.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#FeaturizedTracker.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.FeaturizedTracker.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logs an event on the tracker</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rasa_core.training_utils.dsl.Story">
+<em class="property">class </em><code class="descclassname">rasa_core.training_utils.dsl.</code><code class="descname">Story</code><span class="sig-paren">(</span><em>story_steps=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#Story"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.Story" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.Story.as_dialogue">
+<code class="descname">as_dialogue</code><span class="sig-paren">(</span><em>sender</em>, <em>domain</em>, <em>interpreter=&lt;rasa_core.interpreter.RegexInterpreter object&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#Story.as_dialogue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.Story.as_dialogue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.Story.as_story_string">
+<code class="descname">as_story_string</code><span class="sig-paren">(</span><em>flat=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#Story.as_story_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.Story.as_story_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.Story.dump_to_file">
+<code class="descname">dump_to_file</code><span class="sig-paren">(</span><em>file_name</em>, <em>flat=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#Story.dump_to_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.Story.dump_to_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.Story.num_actions">
+<code class="descname">num_actions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#Story.num_actions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.Story.num_actions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.Story.used_actions">
+<code class="descname">used_actions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#Story.used_actions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.Story.used_actions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rasa_core.training_utils.dsl.StoryFileReader">
+<em class="property">class </em><code class="descclassname">rasa_core.training_utils.dsl.</code><code class="descname">StoryFileReader</code><span class="sig-paren">(</span><em>domain</em>, <em>template_vars=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryFileReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryFileReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Helper class to read a story file.</p>
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.StoryFileReader.add_checkpoint">
+<code class="descname">add_checkpoint</code><span class="sig-paren">(</span><em>checkpoint</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryFileReader.add_checkpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryFileReader.add_checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.StoryFileReader.add_event">
+<code class="descname">add_event</code><span class="sig-paren">(</span><em>event_name</em>, <em>parameters</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryFileReader.add_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryFileReader.add_event" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.StoryFileReader.add_user_messages">
+<code class="descname">add_user_messages</code><span class="sig-paren">(</span><em>messages</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryFileReader.add_user_messages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryFileReader.add_user_messages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.StoryFileReader.new_story_part">
+<code class="descname">new_story_part</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryFileReader.new_story_part"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryFileReader.new_story_part" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.StoryFileReader.process_lines">
+<code class="descname">process_lines</code><span class="sig-paren">(</span><em>lines</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryFileReader.process_lines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryFileReader.process_lines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="rasa_core.training_utils.dsl.StoryFileReader.read_from_file">
+<em class="property">static </em><code class="descname">read_from_file</code><span class="sig-paren">(</span><em>file_name</em>, <em>domain</em>, <em>template_variables=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryFileReader.read_from_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryFileReader.read_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a json file reads the contained stories.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="rasa_core.training_utils.dsl.StoryParseError">
+<em class="property">exception </em><code class="descclassname">rasa_core.training_utils.dsl.</code><code class="descname">StoryParseError</code><span class="sig-paren">(</span><em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryParseError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryParseError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></p>
+<p>Raised if there is an error while parsing the story file.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="rasa_core.training_utils.dsl.StoryStep">
+<em class="property">class </em><code class="descclassname">rasa_core.training_utils.dsl.</code><code class="descname">StoryStep</code><span class="sig-paren">(</span><em>block_name=None</em>, <em>start_checkpoint=None</em>, <em>end_checkpoint=None</em>, <em>events=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryStep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.StoryStep.add_event">
+<code class="descname">add_event</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryStep.add_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryStep.add_event" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.StoryStep.add_user_message">
+<code class="descname">add_user_message</code><span class="sig-paren">(</span><em>user_message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryStep.add_user_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryStep.add_user_message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.StoryStep.as_story_string">
+<code class="descname">as_story_string</code><span class="sig-paren">(</span><em>flat=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryStep.as_story_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryStep.as_story_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.StoryStep.create_copy">
+<code class="descname">create_copy</code><span class="sig-paren">(</span><em>use_new_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryStep.create_copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryStep.create_copy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.StoryStep.explicit_events">
+<code class="descname">explicit_events</code><span class="sig-paren">(</span><em>domain</em>, <em>interpreter</em>, <em>should_append_final_listen=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryStep.explicit_events"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryStep.explicit_events" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns events contained in the story step including implicit events.</p>
+<p>Not all events are always listed in the story dsl. This
+includes listen actions as well as implicitly
+set slots. This functions makes these events explicit and
+returns them with the rest of the steps events.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.StoryStep.num_actions">
+<code class="descname">num_actions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryStep.num_actions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryStep.num_actions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rasa_core.training_utils.dsl.StoryStepBuilder">
+<em class="property">class </em><code class="descclassname">rasa_core.training_utils.dsl.</code><code class="descname">StoryStepBuilder</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryStepBuilder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryStepBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.StoryStepBuilder.add_checkpoint">
+<code class="descname">add_checkpoint</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryStepBuilder.add_checkpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryStepBuilder.add_checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.StoryStepBuilder.add_event">
+<code class="descname">add_event</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryStepBuilder.add_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryStepBuilder.add_event" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.StoryStepBuilder.add_user_messages">
+<code class="descname">add_user_messages</code><span class="sig-paren">(</span><em>messages</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryStepBuilder.add_user_messages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryStepBuilder.add_user_messages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.StoryStepBuilder.ensure_current_steps">
+<code class="descname">ensure_current_steps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryStepBuilder.ensure_current_steps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryStepBuilder.ensure_current_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.StoryStepBuilder.flush">
+<code class="descname">flush</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryStepBuilder.flush"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryStepBuilder.flush" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rasa_core.training_utils.dsl.TrainingsDataExtractor">
+<em class="property">class </em><code class="descclassname">rasa_core.training_utils.dsl.</code><code class="descname">TrainingsDataExtractor</code><span class="sig-paren">(</span><em>story_graph</em>, <em>domain</em>, <em>featurizer</em>, <em>interpreter=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#TrainingsDataExtractor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.TrainingsDataExtractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.TrainingsDataExtractor.extract_trainings_data">
+<code class="descname">extract_trainings_data</code><span class="sig-paren">(</span><em>remove_duplicates=True</em>, <em>augmentation_factor=20</em>, <em>max_history=1</em>, <em>max_number_of_trackers=2000</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#TrainingsDataExtractor.extract_trainings_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.TrainingsDataExtractor.extract_trainings_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a set of story parts, generates all stories that are possible.</p>
+<p>The different story parts can end and start with checkpoints
+and this generator will match start and end checkpoints to
+connect complete stories. Afterwards, duplicate stories will be
+removed and the data is augmented (if augmentation is enabled).</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="rasa-core-training-utils-story-graph-module">
-<h2>rasa_core.training_utils.story_graph module<a class="headerlink" href="#rasa-core-training-utils-story-graph-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-rasa_core.training_utils.story_graph">
+<span id="rasa-core-training-utils-story-graph-module"></span><h2>rasa_core.training_utils.story_graph module<a class="headerlink" href="#module-rasa_core.training_utils.story_graph" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rasa_core.training_utils.story_graph.StoryGraph">
+<em class="property">class </em><code class="descclassname">rasa_core.training_utils.story_graph.</code><code class="descname">StoryGraph</code><span class="sig-paren">(</span><em>story_steps</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/story_graph.html#StoryGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.story_graph.StoryGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rasa_core.training_utils.story_graph.StoryGraph.as_story_string">
+<code class="descname">as_story_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/story_graph.html#StoryGraph.as_story_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.story_graph.StoryGraph.as_story_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.story_graph.StoryGraph.build_stories">
+<code class="descname">build_stories</code><span class="sig-paren">(</span><em>domain</em>, <em>interpreter=&lt;rasa_core.interpreter.RegexInterpreter object&gt;</em>, <em>remove_duplicates=True</em>, <em>max_number_of_trackers=2000</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/story_graph.html#StoryGraph.build_stories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.story_graph.StoryGraph.build_stories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the stories of a graph.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.story_graph.StoryGraph.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>step_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/story_graph.html#StoryGraph.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.story_graph.StoryGraph.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Looks a story step up by its id.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rasa_core.training_utils.story_graph.StoryGraph.order_steps">
+<em class="property">static </em><code class="descname">order_steps</code><span class="sig-paren">(</span><em>story_steps</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/story_graph.html#StoryGraph.order_steps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.story_graph.StoryGraph.order_steps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Topological sort of the steps returning the ids of the steps.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.story_graph.StoryGraph.ordered_steps">
+<code class="descname">ordered_steps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/story_graph.html#StoryGraph.ordered_steps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.story_graph.StoryGraph.ordered_steps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the story steps ordered by topological order of the DAG.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rasa_core.training_utils.story_graph.StoryGraph.topological_sort">
+<em class="property">static </em><code class="descname">topological_sort</code><span class="sig-paren">(</span><em>graph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/story_graph.html#StoryGraph.topological_sort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.story_graph.StoryGraph.topological_sort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a topsort of a directed graph. This is an unstable sorting!</p>
+<p>The graph should be represented as a dictionary, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">example_graph</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">[],</span>
+<span class="gp">... </span>        <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="p">[],</span>
+<span class="gp">... </span>        <span class="s2">&quot;e&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;f&quot;</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="s2">&quot;f&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">StoryGraph</span><span class="o">.</span><span class="n">topological_sort</span><span class="p">(</span><span class="n">example_graph</span><span class="p">)</span>
+<span class="go">deque([u&#39;e&#39;, u&#39;f&#39;, u&#39;a&#39;, u&#39;c&#39;, u&#39;d&#39;, u&#39;b&#39;])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="rasa-core-training-utils-visualization-module">
 <h2>rasa_core.training_utils.visualization module<a class="headerlink" href="#rasa-core-training-utils-visualization-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-rasa_core.training_utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-rasa_core.training_utils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="rasa_core.training_utils.extract_stories_from_file">
+<code class="descclassname">rasa_core.training_utils.</code><code class="descname">extract_stories_from_file</code><span class="sig-paren">(</span><em>filename</em>, <em>domain</em>, <em>remove_duplicates=True</em>, <em>interpreter=&lt;rasa_core.interpreter.RegexInterpreter object&gt;</em>, <em>max_number_of_trackers=2000</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils.html#extract_stories_from_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.extract_stories_from_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rasa_core.training_utils.extract_story_graph_from_file">
+<code class="descclassname">rasa_core.training_utils.</code><code class="descname">extract_story_graph_from_file</code><span class="sig-paren">(</span><em>filename</em>, <em>domain</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils.html#extract_story_graph_from_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.extract_story_graph_from_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rasa_core.training_utils.extract_training_data_from_file">
+<code class="descclassname">rasa_core.training_utils.</code><code class="descname">extract_training_data_from_file</code><span class="sig-paren">(</span><em>filename</em>, <em>augmentation_factor=20</em>, <em>max_history=1</em>, <em>remove_duplicates=True</em>, <em>domain=None</em>, <em>featurizer=None</em>, <em>interpreter=&lt;rasa_core.interpreter.RegexInterpreter object&gt;</em>, <em>max_number_of_trackers=2000</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils.html#extract_training_data_from_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.extract_training_data_from_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 </div>
 

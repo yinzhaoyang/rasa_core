@@ -242,6 +242,95 @@
 <h1>Domains<a class="headerlink" href="#domains" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="docutils literal"><span class="pre">Domain</span></code> is one object you will absolutely have to subclass to build
 an app with rasa DM.</p>
+<span class="target" id="module-rasa_core.domain"></span><dl class="class">
+<dt id="rasa_core.domain.Domain">
+<em class="property">class </em><code class="descclassname">rasa_core.domain.</code><code class="descname">Domain</code><span class="sig-paren">(</span><em>topics=None</em>, <em>store_entities_as_slots=True</em>, <em>restart_intent=u'restart'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#Domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.Domain" title="Permalink to this definition">¶</a></dt>
+<dd><p>The domain specifies the universe in which the bot&#8217;s policy acts.</p>
+<p>A Domain subclass provides the actions the bot can take, the intents
+and entities it can recognise, and the topics it knows about.</p>
+<dl class="method">
+<dt id="rasa_core.domain.Domain.action_for_index">
+<code class="descname">action_for_index</code><span class="sig-paren">(</span><em>index</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#Domain.action_for_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.Domain.action_for_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer index corresponding to an actions index in the action list.</p>
+<p>This method resolves the index to the actions name.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.domain.Domain.action_for_name">
+<code class="descname">action_for_name</code><span class="sig-paren">(</span><em>action_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#Domain.action_for_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.Domain.action_for_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Looks up which action corresponds to this action name.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.domain.Domain.compare_with_specification">
+<code class="descname">compare_with_specification</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#Domain.compare_with_specification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.Domain.compare_with_specification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compares the domain spec of the current and the loaded domain.</p>
+<p>Throws exception if the loaded domain specification is different
+to the current domain are different.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.domain.Domain.feature_vector_for_tracker">
+<code class="descname">feature_vector_for_tracker</code><span class="sig-paren">(</span><em>featurizer</em>, <em>tracker</em>, <em>max_history</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#Domain.feature_vector_for_tracker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.Domain.feature_vector_for_tracker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a 2D array of shape (max_history,num_features)</p>
+<p>max_history specifies the number of previous steps to be included
+in the input. Each row in the array corresponds to the binarised
+features of each state. Result is padded with default values if
+there are fewer than <cite>max_history</cite> states present.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.domain.Domain.features_for_tracker_history">
+<code class="descname">features_for_tracker_history</code><span class="sig-paren">(</span><em>tracker</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#Domain.features_for_tracker_history"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.Domain.features_for_tracker_history" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of features for each state of the trackers history.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.domain.Domain.get_active_features">
+<code class="descname">get_active_features</code><span class="sig-paren">(</span><em>tracker</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#Domain.get_active_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.Domain.get_active_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a bag of active features from the tracker state</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.domain.Domain.get_prev_action_features">
+<code class="descname">get_prev_action_features</code><span class="sig-paren">(</span><em>tracker</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#Domain.get_prev_action_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.Domain.get_prev_action_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turns the previous taken action into a feature name.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.domain.Domain.index_for_action">
+<code class="descname">index_for_action</code><span class="sig-paren">(</span><em>action_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#Domain.index_for_action"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.Domain.index_for_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>Looks up which action index corresponds to this action name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.domain.Domain.index_of_feature">
+<code class="descname">index_of_feature</code><span class="sig-paren">(</span><em>feature_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#Domain.index_of_feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.Domain.index_of_feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides the index of a feature.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.domain.Domain.persist_specification">
+<code class="descname">persist_specification</code><span class="sig-paren">(</span><em>model_path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#Domain.persist_specification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.Domain.persist_specification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Persists the domain specification to storage.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.domain.Domain.slice_feature_history">
+<code class="descname">slice_feature_history</code><span class="sig-paren">(</span><em>featurizer</em>, <em>tracker_history</em>, <em>slice_length</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#Domain.slice_feature_history"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.Domain.slice_feature_history" title="Permalink to this definition">¶</a></dt>
+<dd><p>Slices a featurization from the trackers history.</p>
+<p>If the slice is at the array borders, padding will be added to ensure
+he slice length.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="rasa_core.domain.Domain.slots">
+<code class="descname">slots</code><a class="headerlink" href="#rasa_core.domain.Domain.slots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Domain subclass must provide a list of slots</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
