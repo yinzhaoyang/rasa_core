@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>The Rasa dialogue engine &mdash; Rasa Core 0.7.0a5 documentation</title>
+  <title>The Rasa dialogue engine &mdash; Rasa Core 0.7.0a10 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.0a5 documentation" href="#"/>
+    <link rel="top" title="Rasa Core 0.7.0a10 documentation" href="#"/>
         <link rel="next" title="Read this first" href="read_first.html"/> 
 
   
@@ -101,26 +101,24 @@
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http.html">Using Rasa Core as a HTTP server</a></li>
-<li class="toctree-l1"><a class="reference internal" href="slot_types.html">Slot Types Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">Rasa Core as a HTTP server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains_actions.html">Domains and Actions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
-<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stories.html">Stories Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stories.html">Training Data Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling Reminders</a></li>
-<li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="message_handling.html">Message Handling</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p class="caption"><span class="caption-text">Python API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api/agent.html">Agent</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/events.html">Events</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer Documentation</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Change Log</a></li>
 </ul>
 
@@ -229,17 +227,21 @@
 <h1>The Rasa dialogue engine<a class="headerlink" href="#the-rasa-dialogue-engine" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This is the documentation for version 0.7.0a5 of Rasa Core. Make sure you select
+<p class="last">This is the documentation for version 0.7.0a10 of Rasa Core. Make sure you select
 the appropriate version of the documentation for your local installation!</p>
 </div>
 <div class="section" id="welcome-to-the-rasa-documentation">
 <h2>Welcome to the Rasa Documentation!<a class="headerlink" href="#welcome-to-the-rasa-documentation" title="Permalink to this headline">¶</a></h2>
 <p><em>what am I looking at?</em></p>
 <blockquote>
-<div>Rasa is a framework for building conversational software:
+<div><p>Rasa is a framework for building conversational software:
 Messenger/Slack bots, Alexa skills, etc. We&#8217;ll abbreviate this as a &#8216;bot&#8217;
-in this documentation. You can either write your code in python or use
-Rasa Core as a webservice (see <a class="reference internal" href="http.html#section-http"><span class="std std-ref">Using Rasa Core as a HTTP server</span></a>).</div></blockquote>
+in this documentation. You can</p>
+<ul class="simple">
+<li>write your bots logic in python code (recommended),</li>
+<li>or use Rasa Core as a webservice (experimental, see <a class="reference internal" href="http.html#section-http"><span class="std std-ref">Rasa Core as a HTTP server</span></a>).</li>
+</ul>
+</div></blockquote>
 <p><em>what&#8217;s cool about it?</em></p>
 <blockquote>
 <div>Rather than a bunch of <code class="docutils literal"><span class="pre">if/else</span></code> statements, the logic of your bot is
@@ -271,22 +273,16 @@ Rasa helps you when you want to go past that and create a bot that can handle mo
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http.html">Using Rasa Core as a HTTP server</a></li>
-<li class="toctree-l1"><a class="reference internal" href="slot_types.html">Slot Types Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">Rasa Core as a HTTP server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains_actions.html">Domains and Actions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
-<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stories.html">Stories Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stories.html">Training Data Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling Reminders</a></li>
-<li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="message_handling.html">Message Handling</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">API</span></p>
+<p class="caption"><span class="caption-text">Python API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api/agent.html">Agent</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/events.html">Events</a></li>
@@ -295,6 +291,10 @@ Rasa helps you when you want to go past that and create a bot that can handle mo
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Developer Documentation</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Change Log</a></li>
 </ul>
 </div>
@@ -336,12 +336,13 @@ Rasa helps you when you want to go past that and create a bot that can handle mo
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.0a5
+        v: 0.7.0a10
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
+            <dd><a href="0.7.0a10/index.html">0.7.0a10</a></dd>
             <dd><a href="0.7.0a5/index.html">0.7.0a5</a></dd>
             <dd><a href="0.7.0a6/index.html">0.7.0a6</a></dd>
             <dd><a href="0.7.0a7/index.html">0.7.0a7</a></dd>
@@ -363,7 +364,7 @@ Rasa helps you when you want to go past that and create a bot that can handle mo
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.0a5',
+            VERSION:'0.7.0a10',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

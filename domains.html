@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Domains and Actions &mdash; Rasa Core 0.7.0a5 documentation</title>
+  <title>Domain, Slots, and Actions &mdash; Rasa Core 0.7.0a10 documentation</title>
   
 
   
@@ -35,9 +35,9 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.0a5 documentation" href="index.html"/>
-        <link rel="next" title="Tracking Conversation State" href="state.html"/>
-        <link rel="prev" title="Connecting to messaging &amp; voice platforms" href="connectors.html"/> 
+    <link rel="top" title="Rasa Core 0.7.0a10 documentation" href="index.html"/>
+        <link rel="next" title="Connecting to messaging &amp; voice platforms" href="connectors.html"/>
+        <link rel="prev" title="Rasa Core as a HTTP server" href="http.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -102,30 +102,41 @@
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http.html">Using Rasa Core as a HTTP server</a></li>
-<li class="toctree-l1"><a class="reference internal" href="slot_types.html">Slot Types Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
-<li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Domains and Actions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#defining-custom-actions">Defining Custom Actions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#putting-it-all-together">Putting it all together</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">Rasa Core as a HTTP server</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Domain, Slots, and Actions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#domain">Domain</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#defining-custom-actions">Defining Custom Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#putting-it-all-together">Putting it all together</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
-<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stories.html">Stories Data Format</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling Reminders</a></li>
-<li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="message_handling.html">Message Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#slot-types">Slot Types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#type-boolean"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">boolean</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#type-categorical"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">categorical</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#type-data"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">data</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#type-float"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">float</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#type-list"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">list</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#type-text"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">text</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#type-unfeaturized"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">unfeaturized</span></code></a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stories.html">Training Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling Reminders</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api/agent.html">Agent</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/events.html">Events</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer Documentation</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Change Log</a></li>
 </ul>
 
@@ -171,13 +182,13 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Domains and Actions</li>
+      <li>Domain, Slots, and Actions</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/domains_actions.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/domains.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -230,8 +241,10 @@
     margin-right: 4px;  /* make room for the exclamation icon */
 }
 </style>
-<div class="section" id="domains-and-actions">
-<h1>Domains and Actions<a class="headerlink" href="#domains-and-actions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="domain-slots-and-actions">
+<h1>Domain, Slots, and Actions<a class="headerlink" href="#domain-slots-and-actions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="domain">
+<h2>Domain<a class="headerlink" href="#domain" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">Domain</span></code> defines the universe in which your bot operates. It specifies exactly:</p>
 <ul class="simple">
 <li>which <code class="docutils literal"><span class="pre">intents</span></code> you are expecting to respond to</li>
@@ -278,7 +291,7 @@ For example, an <code class="docutils literal"><span class="pre">action</span></
 <li>query a database</li>
 </ul>
 <div class="section" id="defining-custom-actions">
-<h2>Defining Custom Actions<a class="headerlink" href="#defining-custom-actions" title="Permalink to this headline">¶</a></h2>
+<h3>Defining Custom Actions<a class="headerlink" href="#defining-custom-actions" title="Permalink to this headline">¶</a></h3>
 <p>The easiest are <code class="docutils literal"><span class="pre">UtterActions</span></code>, which just send a message to the user. You define them by adding an entry to the
 action list that is named after the utterance. E.g. if there should be an action that utters the template called
 <code class="docutils literal"><span class="pre">utter_greet</span></code> you need to add <code class="docutils literal"><span class="pre">greet</span></code> to the list of defined actions. In the above example yaml you can see that
@@ -307,7 +320,7 @@ Instead, an action can return <code class="docutils literal"><span class="pre">e
 own state.</p>
 </div>
 <div class="section" id="putting-it-all-together">
-<h2>Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Permalink to this headline">¶</a></h2>
+<h3>Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Permalink to this headline">¶</a></h3>
 <p>Let&#8217;s add just this one new action to a custom domain (assuming we stored the
 action in a module called <code class="docutils literal"><span class="pre">restaurant.actions</span></code>):</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">intents</span><span class="p p-Indicator">:</span>
@@ -339,6 +352,120 @@ actions using their module path.</p>
 <p>For an example you can run, check the <a class="reference internal" href="tutorial_scratch.html"><span class="doc">A Bot From Scratch</span></a>.</p>
 </div>
 </div>
+<div class="section" id="slot-types">
+<span id="id1"></span><h2>Slot Types<a class="headerlink" href="#slot-types" title="Permalink to this headline">¶</a></h2>
+<p>Slots influence the prediction of the next action the bot should run. For the
+prediction, the slots value is not used directly, but rather it is featurized.
+E.g. for a slot of type <code class="docutils literal"><span class="pre">text</span></code>, the value is irrelevant, for the featurization
+the only thing that matters is if a text is set or not.</p>
+<p>The choice of slot should be done with care. If a slots value should influence
+the dialogue flow (e.g. the users age influences which question follows next)
+you should choose a slot where the value influences the dialogue model.</p>
+<p>These are all of the predefined slot classes and what they&#8217;re useful for.</p>
+<div class="section" id="type-boolean">
+<h3><code class="docutils literal"><span class="pre">type:</span> <span class="pre">boolean</span></code><a class="headerlink" href="#type-boolean" title="Permalink to this headline">¶</a></h3>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Use For:</th><td class="field-body">True or False</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Checks if slot is set and if True</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="type-categorical">
+<h3><code class="docutils literal"><span class="pre">type:</span> <span class="pre">categorical</span></code><a class="headerlink" href="#type-categorical" title="Permalink to this headline">¶</a></h3>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Use For:</th><td class="field-body">Slots which can take one of N values</td>
+</tr>
+<tr class="field-even field"><th class="field-name">params:</th><td class="field-body"><code class="docutils literal"><span class="pre">values</span></code></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Creates a one-hot encoding describing which of the <code class="docutils literal"><span class="pre">values</span></code> matched.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="type-data">
+<h3><code class="docutils literal"><span class="pre">type:</span> <span class="pre">data</span></code><a class="headerlink" href="#type-data" title="Permalink to this headline">¶</a></h3>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Use For:</th><td class="field-body">Base class for creating own slots</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">User has to subclass this and define the <code class="docutils literal"><span class="pre">as_feature</span></code> method containing
+any custom logic.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="type-float">
+<h3><code class="docutils literal"><span class="pre">type:</span> <span class="pre">float</span></code><a class="headerlink" href="#type-float" title="Permalink to this headline">¶</a></h3>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Use For:</th><td class="field-body">Continuous values</td>
+</tr>
+<tr class="field-even field"><th class="field-name">params:</th><td class="field-body"><code class="docutils literal"><span class="pre">max_value</span></code>, <code class="docutils literal"><span class="pre">min_value</span></code></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Checks if float is within the range of min and max values.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="type-list">
+<h3><code class="docutils literal"><span class="pre">type:</span> <span class="pre">list</span></code><a class="headerlink" href="#type-list" title="Permalink to this headline">¶</a></h3>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Use For:</th><td class="field-body">Lists of values</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The feature of this slot is set to <code class="docutils literal"><span class="pre">1</span></code> if a value with a list is set,
+where the list is not empty. If no value is set, or the empty list is the
+set value, the feature will be <code class="docutils literal"><span class="pre">0</span></code>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="type-text">
+<h3><code class="docutils literal"><span class="pre">type:</span> <span class="pre">text</span></code><a class="headerlink" href="#type-text" title="Permalink to this headline">¶</a></h3>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Use For:</th><td class="field-body">User preferences where you only care whether or not they&#8217;ve
+been specified.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Results in the feature of the slot being set to <code class="docutils literal"><span class="pre">1</span></code> if any value is set.
+Otherwise the feature will be set to <code class="docutils literal"><span class="pre">0</span></code> (no value is set).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="type-unfeaturized">
+<h3><code class="docutils literal"><span class="pre">type:</span> <span class="pre">unfeaturized</span></code><a class="headerlink" href="#type-unfeaturized" title="Permalink to this headline">¶</a></h3>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Use For:</th><td class="field-body">Data you want to store which shouldn&#8217;t influence the dialogue flow</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">There will not be any featurization of this slot, hence its value does
+not influence the dialogue flow and is ignored when predicting the next
+action the bot should run.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 
 
            </div>
@@ -347,10 +474,10 @@ actions using their module path.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="state.html" class="btn btn-neutral float-right" title="Tracking Conversation State" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="connectors.html" class="btn btn-neutral float-right" title="Connecting to messaging &amp; voice platforms" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="connectors.html" class="btn btn-neutral" title="Connecting to messaging &amp; voice platforms" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="http.html" class="btn btn-neutral" title="Rasa Core as a HTTP server" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -377,23 +504,24 @@ actions using their module path.</p>
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.0a5
+        v: 0.7.0a10
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="0.7.0a5/domains_actions.html">0.7.0a5</a></dd>
-            <dd><a href="0.7.0a6/domains_actions.html">0.7.0a6</a></dd>
-            <dd><a href="0.7.0a7/domains_actions.html">0.7.0a7</a></dd>
-            <dd><a href="0.7.0a8/domains_actions.html">0.7.0a8</a></dd>
-            <dd><a href="0.7.0a9/index.html">0.7.0a9</a></dd>
-            <dd><a href="0.6.9/index.html">0.6.9</a></dd>
-            <dd><a href="0.6.5/domains_actions.html">0.6.5</a></dd>
+            <dd><a href="0.7.0a10/domains.html">0.7.0a10</a></dd>
+            <dd><a href="0.7.0a5/index.html">0.7.0a5</a></dd>
+            <dd><a href="0.7.0a6/index.html">0.7.0a6</a></dd>
+            <dd><a href="0.7.0a7/index.html">0.7.0a7</a></dd>
+            <dd><a href="0.7.0a8/index.html">0.7.0a8</a></dd>
+            <dd><a href="0.7.0a9/domains.html">0.7.0a9</a></dd>
+            <dd><a href="0.6.9/domains.html">0.6.9</a></dd>
+            <dd><a href="0.6.5/index.html">0.6.5</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
-            <dd><a href="master/index.html">master</a></dd>
+            <dd><a href="master/domains.html">master</a></dd>
         </dl>
     </div>
 </div>
@@ -404,7 +532,7 @@ actions using their module path.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.0a5',
+            VERSION:'0.7.0a10',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Slot Types Reference &mdash; Rasa Core 0.7.0a5 documentation</title>
+  <title>&lt;no title&gt; &mdash; Rasa Core 0.7.0a10 documentation</title>
   
 
   
@@ -35,9 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.0a5 documentation" href="index.html"/>
-        <link rel="next" title="Plumbing - How it all fits together" href="plumbing.html"/>
-        <link rel="prev" title="Using Rasa Core as a HTTP server" href="http.html"/> 
+    <link rel="top" title="Rasa Core 0.7.0a10 documentation" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -100,37 +98,26 @@
 <li class="toctree-l1"><a class="reference internal" href="tutorial_fake_user.html">Interactive Learning with a Fake User</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http.html">Using Rasa Core as a HTTP server</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Slot Types Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#type-boolean"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">boolean</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#type-categorical"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">categorical</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#type-data"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">data</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#type-float"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">float</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#type-list"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">list</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#type-text"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">text</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#type-unfeaturized"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">unfeaturized</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">Rasa Core as a HTTP server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains_actions.html">Domains and Actions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
-<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stories.html">Stories Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stories.html">Training Data Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling Reminders</a></li>
-<li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="message_handling.html">Message Handling</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p class="caption"><span class="caption-text">Python API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api/agent.html">Agent</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/events.html">Events</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer Documentation</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Change Log</a></li>
 </ul>
 
@@ -176,7 +163,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Slot Types Reference</li>
+      <li>&lt;no title&gt;</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -235,133 +222,11 @@
     margin-right: 4px;  /* make room for the exclamation icon */
 }
 </style>
-<div class="section" id="slot-types-reference">
-<span id="slot-types"></span><h1>Slot Types Reference<a class="headerlink" href="#slot-types-reference" title="Permalink to this headline">¶</a></h1>
-<p>Slots influence the prediction of the next action the bot should run. For the
-prediction, the slots value is not used directly, but rather it is featurized.
-E.g. for a slot of type <code class="docutils literal"><span class="pre">text</span></code>, the value is irrelevant, for the featurization
-the only thing that matters is if a text is set or not.</p>
-<p>The choice of slot should be done with care. If a slots value should influence
-the dialogue flow (e.g. the users age influences which question follows next)
-you should choose a slot where the value influences the dialogue model.</p>
-<p>These are all of the predefined slot classes and what they&#8217;re useful for.</p>
-<div class="section" id="type-boolean">
-<h2><code class="docutils literal"><span class="pre">type:</span> <span class="pre">boolean</span></code><a class="headerlink" href="#type-boolean" title="Permalink to this headline">¶</a></h2>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Use For:</th><td class="field-body">True or False</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Checks if slot is set and if True</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="type-categorical">
-<h2><code class="docutils literal"><span class="pre">type:</span> <span class="pre">categorical</span></code><a class="headerlink" href="#type-categorical" title="Permalink to this headline">¶</a></h2>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Use For:</th><td class="field-body">Slots which can take one of N values</td>
-</tr>
-<tr class="field-even field"><th class="field-name">params:</th><td class="field-body"><code class="docutils literal"><span class="pre">values</span></code></td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Creates a one-hot encoding describing which of the <code class="docutils literal"><span class="pre">values</span></code> matched.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="type-data">
-<h2><code class="docutils literal"><span class="pre">type:</span> <span class="pre">data</span></code><a class="headerlink" href="#type-data" title="Permalink to this headline">¶</a></h2>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Use For:</th><td class="field-body">Base class for creating own slots</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">User has to subclass this and define the <code class="docutils literal"><span class="pre">as_feature</span></code> method containing
-any custom logic.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="type-float">
-<h2><code class="docutils literal"><span class="pre">type:</span> <span class="pre">float</span></code><a class="headerlink" href="#type-float" title="Permalink to this headline">¶</a></h2>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Use For:</th><td class="field-body">Continuous values</td>
-</tr>
-<tr class="field-even field"><th class="field-name">params:</th><td class="field-body"><code class="docutils literal"><span class="pre">max_value</span></code>, <code class="docutils literal"><span class="pre">min_value</span></code></td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body">Checks if float is within the range of min and max values.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="type-list">
-<h2><code class="docutils literal"><span class="pre">type:</span> <span class="pre">list</span></code><a class="headerlink" href="#type-list" title="Permalink to this headline">¶</a></h2>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Use For:</th><td class="field-body">Lists of values</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">The feature of this slot is set to <code class="docutils literal"><span class="pre">1</span></code> if a value with a list is set,
-where the list is not empty. If no value is set, or the empty list is the
-set value, the feature will be <code class="docutils literal"><span class="pre">0</span></code>.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="type-text">
-<h2><code class="docutils literal"><span class="pre">type:</span> <span class="pre">text</span></code><a class="headerlink" href="#type-text" title="Permalink to this headline">¶</a></h2>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Use For:</th><td class="field-body">User preferences where you only care whether or not they&#8217;ve
-been specified.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">Results in the feature of the slot being set to <code class="docutils literal"><span class="pre">1</span></code> if any value is set.
-Otherwise the feature will be set to <code class="docutils literal"><span class="pre">0</span></code> (no value is set).</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="type-unfeaturized">
-<h2><code class="docutils literal"><span class="pre">type:</span> <span class="pre">unfeaturized</span></code><a class="headerlink" href="#type-unfeaturized" title="Permalink to this headline">¶</a></h2>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Use For:</th><td class="field-body">Data you want to store which shouldn&#8217;t influence the dialogue flow</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Description:</th><td class="field-body">There will not be any featurization of this slot, hence its value does
-not influence the dialogue flow and is ignored when predicting the next
-action the bot should run.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 
 
            </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="plumbing.html" class="btn btn-neutral float-right" title="Plumbing - How it all fits together" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="http.html" class="btn btn-neutral" title="Using Rasa Core as a HTTP server" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
@@ -386,12 +251,13 @@ action the bot should run.</td>
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.0a5
+        v: 0.7.0a10
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
+            <dd><a href="0.7.0a10/slot_types.html">0.7.0a10</a></dd>
             <dd><a href="0.7.0a5/slot_types.html">0.7.0a5</a></dd>
             <dd><a href="0.7.0a6/slot_types.html">0.7.0a6</a></dd>
             <dd><a href="0.7.0a7/slot_types.html">0.7.0a7</a></dd>
@@ -413,7 +279,7 @@ action the bot should run.</td>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.0a5',
+            VERSION:'0.7.0a10',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

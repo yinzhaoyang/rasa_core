@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Message Handling &mdash; Rasa Core 0.7.0a5 documentation</title>
+  <title>Python Module Index &mdash; Rasa Core 0.7.0a10 documentation</title>
   
 
   
@@ -35,9 +35,10 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.0a5 documentation" href="index.html"/>
-        <link rel="next" title="Agent" href="api/agent.html"/>
-        <link rel="prev" title="Interpreters" href="interpreters.html"/> 
+    <link rel="top" title="Rasa Core 0.7.0a10 documentation" href="index.html"/>
+ 
+
+
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -100,28 +101,26 @@
 <li class="toctree-l1"><a class="reference internal" href="tutorial_fake_user.html">Interactive Learning with a Fake User</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http.html">Using Rasa Core as a HTTP server</a></li>
-<li class="toctree-l1"><a class="reference internal" href="slot_types.html">Slot Types Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">Rasa Core as a HTTP server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains_actions.html">Domains and Actions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
-<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stories.html">Stories Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stories.html">Training Data Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling Reminders</a></li>
-<li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Message Handling</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p class="caption"><span class="caption-text">Python API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api/agent.html">Agent</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/events.html">Events</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer Documentation</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Change Log</a></li>
 </ul>
 
@@ -167,14 +166,12 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Message Handling</li>
+      <li>Python Module Index</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/message_handling.rst.txt" rel="nofollow"> View page source</a>
-          
         
       </li>
     
@@ -186,73 +183,39 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
 
+   <h1>Python Module Index</h1>
 
+   <div class="modindex-jumpbox">
+   <a href="#cap-r"><strong>r</strong></a>
+   </div>
 
-
-
-
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast,
-.nboutput.nblast {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast + .nbinput {
-    margin-top: -19px;
-}
-
-/* nice headers on first paragraph of info/warning boxes */
-.admonition .first {
-    margin: -12px;
-    padding: 6px 12px;
-    margin-bottom: 12px;
-    color: #fff;
-    line-height: 1;
-    display: block;
-}
-.admonition.warning .first {
-    background: #f0b37e;
-}
-.admonition.note .first {
-    background: #6ab0de;
-}
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-</style>
-<div class="section" id="message-handling">
-<span id="id1"></span><h1>Message Handling<a class="headerlink" href="#message-handling" title="Permalink to this headline">¶</a></h1>
-<p>In most cases, your bot receives messages over a network.
-This means you have an outward facing web server which accepts requests.
-Responding to these requests synchronously isn&#8217;t a very scalable solution.</p>
-<p>The way Rasa Core handles messages is slightly different.
-The <code class="docutils literal"><span class="pre">Controller</span></code> appends messages to a queue, and creates a <code class="docutils literal"><span class="pre">MessageHandler</span></code>
-which works through the messages in the queue.</p>
-<p>This makes it possible to safely scale to multiple Rasa DM instances.
-By default Rasa uses the <code class="docutils literal"><span class="pre">InMemoryMessageQueue</span></code>, which can&#8217;t be shared among processes,
-but this can easily be swapped to an external message broker.</p>
-<img alt="_images/message_handling.png" src="_images/message_handling.png" />
-</div>
+   <table class="indextable modindextable">
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-r"><td></td><td>
+       <strong>r</strong></td><td></td></tr>
+     <tr>
+       <td><img src="_static/minus.png" class="toggler"
+              id="toggle-1" style="display: none" alt="-" /></td>
+       <td>
+       <code class="xref">rasa_core</code></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="api/agent.html#module-rasa_core.agent"><code class="xref">rasa_core.agent</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="api/events.html#module-rasa_core.events"><code class="xref">rasa_core.events</code></a></td><td>
+       <em></em></td></tr>
+   </table>
 
 
            </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="api/agent.html" class="btn btn-neutral float-right" title="Agent" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="interpreters.html" class="btn btn-neutral" title="Interpreters" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
@@ -277,23 +240,24 @@ but this can easily be swapped to an external message broker.</p>
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.0a5
+        v: 0.7.0a10
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="0.7.0a5/message_handling.html">0.7.0a5</a></dd>
-            <dd><a href="0.7.0a6/message_handling.html">0.7.0a6</a></dd>
-            <dd><a href="0.7.0a7/message_handling.html">0.7.0a7</a></dd>
-            <dd><a href="0.7.0a8/message_handling.html">0.7.0a8</a></dd>
-            <dd><a href="0.7.0a9/index.html">0.7.0a9</a></dd>
-            <dd><a href="0.6.9/index.html">0.6.9</a></dd>
-            <dd><a href="0.6.5/message_handling.html">0.6.5</a></dd>
+            <dd><a href="py-modindex.html">0.7.0a10</a></dd>
+            <dd><a href="../0.7.0a5/index.html">0.7.0a5</a></dd>
+            <dd><a href="../0.7.0a6/index.html">0.7.0a6</a></dd>
+            <dd><a href="../0.7.0a7/index.html">0.7.0a7</a></dd>
+            <dd><a href="../0.7.0a8/index.html">0.7.0a8</a></dd>
+            <dd><a href="../0.7.0a9/index.html">0.7.0a9</a></dd>
+            <dd><a href="../0.6.9/index.html">0.6.9</a></dd>
+            <dd><a href="../0.6.5/index.html">0.6.5</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
-            <dd><a href="master/index.html">master</a></dd>
+            <dd><a href="../master/index.html">master</a></dd>
         </dl>
     </div>
 </div>
@@ -304,7 +268,7 @@ but this can easily be swapped to an external message broker.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.0a5',
+            VERSION:'0.7.0a10',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

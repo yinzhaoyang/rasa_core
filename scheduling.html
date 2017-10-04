@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Scheduling Reminders &mdash; Rasa Core 0.7.0a5 documentation</title>
+  <title>Scheduling Reminders &mdash; Rasa Core 0.7.0a10 documentation</title>
   
 
   
@@ -35,9 +35,9 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.0a5 documentation" href="index.html"/>
-        <link rel="next" title="Featurization" href="featurisation.html"/>
-        <link rel="prev" title="Stories Data Format" href="stories.html"/> 
+    <link rel="top" title="Rasa Core 0.7.0a10 documentation" href="index.html"/>
+        <link rel="next" title="Agent" href="api/agent.html"/>
+        <link rel="prev" title="Training Data Format" href="stories.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -102,30 +102,28 @@
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http.html">Using Rasa Core as a HTTP server</a></li>
-<li class="toctree-l1"><a class="reference internal" href="slot_types.html">Slot Types Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">Rasa Core as a HTTP server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains_actions.html">Domains and Actions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
-<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stories.html">Stories Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stories.html">Training Data Format</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Scheduling Reminders</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#scheduling-the-reminder">Scheduling the reminder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#what-happens-when-the-reminder-is-triggered">What happens when the reminder is triggered</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="message_handling.html">Message Handling</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p class="caption"><span class="caption-text">Python API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api/agent.html">Agent</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/events.html">Events</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer Documentation</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Change Log</a></li>
 </ul>
 
@@ -339,10 +337,10 @@ So make sure to add a story into your training data that starts with the action 
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="featurisation.html" class="btn btn-neutral float-right" title="Featurization" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="api/agent.html" class="btn btn-neutral float-right" title="Agent" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="stories.html" class="btn btn-neutral" title="Stories Data Format" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="stories.html" class="btn btn-neutral" title="Training Data Format" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -369,12 +367,13 @@ So make sure to add a story into your training data that starts with the action 
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.0a5
+        v: 0.7.0a10
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
+            <dd><a href="0.7.0a10/scheduling.html">0.7.0a10</a></dd>
             <dd><a href="0.7.0a5/scheduling.html">0.7.0a5</a></dd>
             <dd><a href="0.7.0a6/scheduling.html">0.7.0a6</a></dd>
             <dd><a href="0.7.0a7/scheduling.html">0.7.0a7</a></dd>
@@ -396,7 +395,7 @@ So make sure to add a story into your training data that starts with the action 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.0a5',
+            VERSION:'0.7.0a10',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
