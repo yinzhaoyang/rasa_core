@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation and Hello World &mdash; Rasa Core 0.7.0a4 documentation</title>
+  <title>Installation and Hello World &mdash; Rasa Core 0.7.0a5 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.0a4 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.7.0a5 documentation" href="index.html"/>
         <link rel="next" title="A Quick Tour (no ML)" href="tour.html"/>
         <link rel="prev" title="Read this first" href="read_first.html"/> 
 
@@ -238,12 +238,24 @@
 <span id="installation"></span><h1>Installation and Hello World<a class="headerlink" href="#installation-and-hello-world" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
 <h2>Installation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<p>To install, run:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/rasahq/rasa_core.git
+<p>The recommended way to install Rasa Core is using pip:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>pip install rasa_core
+</pre></div>
+</div>
+<p>If you want to use the bleeding edge version use github + setup.py:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/RasaHQ/rasa_core.git
 <span class="nb">cd</span> rasa_core
 pip install -r requirements.txt
-pip install -e .
+python setup.py install
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you want to change the Rasa Core code and want to run the tests or
+build the documentation, you need to install the development dependencies:</p>
+<div class="last highlight-bash"><div class="highlight"><pre><span></span>pip install -r dev-requirements.txt
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="additional-dependencies">
@@ -311,6 +323,7 @@ hey there!
         <dl>
             <dt>Tags</dt>
             <dd><a href="../0.7.1/installation.html">0.7.1</a></dd>
+            <dd><a href="../0.7.0a5/installation.html">0.7.0a5</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
@@ -325,7 +338,7 @@ hey there!
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.0a4',
+            VERSION:'0.7.0a5',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

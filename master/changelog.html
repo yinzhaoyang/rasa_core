@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Change Log &mdash; Rasa Core 0.7.0a4 documentation</title>
+  <title>Change Log &mdash; Rasa Core 0.7.0a5 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.0a4 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.7.0a5 documentation" href="index.html"/>
         <link rel="prev" title="Events" href="api/events.html"/> 
 
   
@@ -129,19 +129,24 @@
 <li class="toctree-l3"><a class="reference internal" href="#fixed">Fixed</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#a3-2017-09-20">[0.7.0a3] - 2017-09-20</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">Changed</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#a1-2017-08-27">[0.6.0a1] - 2017-08-27</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">[0.7.0] - 2017-10-04</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id2">Added</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id3">Changed</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#a3-2017-09-20">[0.7.0a3] - 2017-09-20</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Changed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#a1-2017-08-27">[0.6.0a1] - 2017-08-27</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Changed</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#a1-2017-06-18">[0.5.0a1] - 2017-06-18</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id4">Added</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">Changed</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">Fixed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Changed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Fixed</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#a1-2017-05-18">[0.2.0a1] - 2017-05-18</a></li>
@@ -265,19 +270,9 @@ This project adheres to <a class="reference external" href="http://semver.org/">
 </div>
 <div class="section" id="added">
 <h3>Added<a class="headerlink" href="#added" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>support for Rasa Core usage as a server with remote action execution</li>
-</ul>
 </div>
 <div class="section" id="changed">
 <h3>Changed<a class="headerlink" href="#changed" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>switched to max code line length 80</li>
-<li>removed action id - use <code class="docutils literal"><span class="pre">action.name()</span></code> instead. if an action implementation overrides the name, it should include the <code class="docutils literal"><span class="pre">action_</span></code> prefix (as it is not automatically added anymore)</li>
-<li>renamed <code class="docutils literal"><span class="pre">rasa_dm.util</span></code> to <code class="docutils literal"><span class="pre">rasa_dm.utils</span></code></li>
-<li>renamed the whole package to <code class="docutils literal"><span class="pre">rasa_core</span></code> (so <code class="docutils literal"><span class="pre">rasa_dm</span></code> is gone!)</li>
-<li>renamed <code class="docutils literal"><span class="pre">Reminder</span></code> attribute <code class="docutils literal"><span class="pre">id</span></code> to <code class="docutils literal"><span class="pre">name</span></code></li>
-</ul>
 </div>
 <div class="section" id="removed">
 <h3>Removed<a class="headerlink" href="#removed" title="Permalink to this headline">¶</a></h3>
@@ -286,10 +281,30 @@ This project adheres to <a class="reference external" href="http://semver.org/">
 <h3>Fixed<a class="headerlink" href="#fixed" title="Permalink to this headline">¶</a></h3>
 </div>
 </div>
+<div class="section" id="id1">
+<h2>[0.7.0] - 2017-10-04<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>Added<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>support for Rasa Core usage as a server with remote action execution</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h3>Changed<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>switched to max code line length 80</li>
+<li>removed action id - use <code class="docutils literal"><span class="pre">action.name()</span></code> instead. if an action implementation overrides the name, it should include the <code class="docutils literal"><span class="pre">action_</span></code> prefix (as it is not automatically added anymore)</li>
+<li>renamed <code class="docutils literal"><span class="pre">rasa_dm.util</span></code> to <code class="docutils literal"><span class="pre">rasa_dm.utils</span></code></li>
+<li>renamed the whole package to <code class="docutils literal"><span class="pre">rasa_core</span></code> (so <code class="docutils literal"><span class="pre">rasa_dm</span></code> is gone!)</li>
+<li>renamed <code class="docutils literal"><span class="pre">Reminder</span></code> attribute <code class="docutils literal"><span class="pre">id</span></code> to <code class="docutils literal"><span class="pre">name</span></code></li>
+<li>a lot of documentation improvements. docs are now at <a class="reference external" href="https://core.rasa.ai">https://core.rasa.ai</a></li>
+</ul>
+</div>
+</div>
 <div class="section" id="a3-2017-09-20">
 <h2>[0.7.0a3] - 2017-09-20<a class="headerlink" href="#a3-2017-09-20" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id1">
-<h3>Changed<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Changed<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>use hashing when writing memorized turns into persistence - requires retraining of all models that are trained with a version prior to this</li>
 <li>changed <code class="docutils literal"><span class="pre">agent.handle_message(...)</span></code> interface for easier usage</li>
@@ -298,8 +313,8 @@ This project adheres to <a class="reference external" href="http://semver.org/">
 </div>
 <div class="section" id="a1-2017-08-27">
 <h2>[0.6.0a1] - 2017-08-27<a class="headerlink" href="#a1-2017-08-27" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id2">
-<h3>Added<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>Added<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>support for multiple policies (e.g. one memoization and a Keras policy at the same time)</li>
 <li>loading domains from yaml files instead of defining them with python code</li>
@@ -307,8 +322,8 @@ This project adheres to <a class="reference external" href="http://semver.org/">
 <li>support for reminders</li>
 </ul>
 </div>
-<div class="section" id="id3">
-<h3>Changed<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id6">
+<h3>Changed<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>large refactoring of code base</li>
 </ul>
@@ -316,16 +331,16 @@ This project adheres to <a class="reference external" href="http://semver.org/">
 </div>
 <div class="section" id="a1-2017-06-18">
 <h2>[0.5.0a1] - 2017-06-18<a class="headerlink" href="#a1-2017-06-18" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id4">
-<h3>Added<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id7">
+<h3>Added<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">ScoringPolicy</span></code> added to policy implementations (less strict than standard default policy)</li>
 <li><code class="docutils literal"><span class="pre">RasaNLUInterpreter</span></code> to run a nlu instance within dm (instead of using the http interface)</li>
 <li>more tests</li>
 </ul>
 </div>
-<div class="section" id="id5">
-<h3>Changed<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id8">
+<h3>Changed<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">UserUtterance</span></code> now holds the complete parse data from nlu (e.g. to access attributes other than entities or intent)</li>
 <li><code class="docutils literal"><span class="pre">Turn</span></code> has a reference to a <code class="docutils literal"><span class="pre">UserUtterance</span></code> instead of directly storing intent &amp; entities (allows access to other data)</li>
@@ -333,8 +348,8 @@ This project adheres to <a class="reference external" href="http://semver.org/">
 <li>order of actions in the DefaultPolicy in <code class="docutils literal"><span class="pre">possible_actions</span></code> (<code class="docutils literal"><span class="pre">ActionListen</span></code> now always has index 0)</li>
 </ul>
 </div>
-<div class="section" id="id6">
-<h3>Fixed<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id9">
+<h3>Fixed<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">RedisTrackerStore</span></code> checks if tracker is stored before accessing it (otherwise a <code class="docutils literal"><span class="pre">None</span></code> access exception is thrown)</li>
 <li><code class="docutils literal"><span class="pre">RegexInterpreter</span></code> checks if the regex actually matches the message instead of assuming it always does</li>
@@ -391,6 +406,7 @@ This project adheres to <a class="reference external" href="http://semver.org/">
         <dl>
             <dt>Tags</dt>
             <dd><a href="../0.7.1/changelog.html">0.7.1</a></dd>
+            <dd><a href="../0.7.0a5/changelog.html">0.7.0a5</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
@@ -405,7 +421,7 @@ This project adheres to <a class="reference external" href="http://semver.org/">
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.0a4',
+            VERSION:'0.7.0a5',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
