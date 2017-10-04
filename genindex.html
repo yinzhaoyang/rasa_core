@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; Rasa Core 0.7.0a3 documentation</title>
+  <title>Index &mdash; Rasa Core 0.7.0a5 documentation</title>
   
 
   
@@ -36,7 +36,7 @@
         <link rel="index" title="Index"
               href="#"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.0a3 documentation" href="index.html"/> 
+    <link rel="top" title="Rasa Core 0.7.0a5 documentation" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -101,6 +101,7 @@
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">Using Rasa Core as a HTTP server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="slot_types.html">Slot Types Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
@@ -115,7 +116,8 @@
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="library.html">Library Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/agent.html">Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/events.html">Events</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer Documentation</span></p>
 <ul>
@@ -186,292 +188,84 @@
 
 <div class="genindex-jumpbox">
  <a href="#A"><strong>A</strong></a>
- | <a href="#B"><strong>B</strong></a>
  | <a href="#C"><strong>C</strong></a>
- | <a href="#D"><strong>D</strong></a>
  | <a href="#E"><strong>E</strong></a>
  | <a href="#F"><strong>F</strong></a>
- | <a href="#G"><strong>G</strong></a>
  | <a href="#H"><strong>H</strong></a>
- | <a href="#I"><strong>I</strong></a>
- | <a href="#K"><strong>K</strong></a>
  | <a href="#L"><strong>L</strong></a>
- | <a href="#M"><strong>M</strong></a>
- | <a href="#N"><strong>N</strong></a>
- | <a href="#O"><strong>O</strong></a>
  | <a href="#P"><strong>P</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
  | <a href="#U"><strong>U</strong></a>
- | <a href="#V"><strong>V</strong></a>
- | <a href="#W"><strong>W</strong></a>
  
 </div>
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="action.html#rasa_core.actions.action.Action">Action (class in rasa_core.actions.action)</a>, <a href="rasa_core.actions.html#rasa_core.actions.action.Action">[1]</a>, <a href="rasa_dm.actions.html#rasa_core.actions.action.Action">[2]</a>
+      <li><a href="api/events.html#rasa_core.events.ActionExecuted">ActionExecuted (class in rasa_core.events)</a>
 </li>
-      <li><a href="rasa_core.actions.html#rasa_core.actions.factories.action_factory_by_name">action_factory_by_name() (in module rasa_core.actions.factories)</a>
+      <li><a href="api/events.html#rasa_core.events.ActionReverted">ActionReverted (class in rasa_core.events)</a>
 </li>
-      <li><a href="domain.html#rasa_core.domain.Domain.action_for_index">action_for_index() (rasa_core.domain.Domain method)</a>, <a href="rasa_core.html#rasa_core.domain.Domain.action_for_index">[1]</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.action_for_index">[2]</a>
+      <li><a href="api/agent.html#rasa_core.agent.Agent">Agent (class in rasa_core.agent)</a>
 </li>
-      <li><a href="domain.html#rasa_core.domain.Domain.action_for_name">action_for_name() (rasa_core.domain.Domain method)</a>, <a href="rasa_core.html#rasa_core.domain.Domain.action_for_name">[1]</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.action_for_name">[2]</a>
+      <li><a href="api/events.html#rasa_core.events.AllSlotsReset">AllSlotsReset (class in rasa_core.events)</a>
 </li>
-      <li><a href="rasa_core.html#rasa_core.domain.Domain.action_map">action_map (rasa_core.domain.Domain attribute)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.action_map">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.domain.Domain.action_names">action_names (rasa_core.domain.Domain attribute)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.action_names">[1]</a>
-</li>
-      <li><a href="rasa_core.events.html#rasa_core.events.ActionExecuted">ActionExecuted (class in rasa_core.events)</a>, <a href="rasa_dm.events.html#rasa_core.events.ActionExecuted">[1]</a>
-</li>
-      <li><a href="action.html#rasa_core.actions.action.ActionListen">ActionListen (class in rasa_core.actions.action)</a>, <a href="rasa_core.actions.html#rasa_core.actions.action.ActionListen">[1]</a>, <a href="rasa_dm.actions.html#rasa_core.actions.action.ActionListen">[2]</a>
-</li>
-      <li><a href="action.html#rasa_core.actions.action.ActionRestart">ActionRestart (class in rasa_core.actions.action)</a>, <a href="rasa_core.actions.html#rasa_core.actions.action.ActionRestart">[1]</a>, <a href="rasa_dm.actions.html#rasa_core.actions.action.ActionRestart">[2]</a>
-</li>
-      <li><a href="rasa_core.events.html#rasa_core.events.ActionReverted">ActionReverted (class in rasa_core.events)</a>, <a href="rasa_dm.events.html#rasa_core.events.ActionReverted">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.domain.Domain.actions">actions (rasa_core.domain.Domain attribute)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.actions">[1]</a>
+      <li><a href="api/events.html#rasa_core.events.ActionExecuted.apply_to">apply_to() (rasa_core.events.ActionExecuted method)</a>
 
       <ul>
-        <li><a href="rasa_core.html#rasa_core.domain.TemplateDomain.actions">(rasa_core.domain.TemplateDomain attribute)</a>, <a href="rasa_dm.html#rasa_core.domain.TemplateDomain.actions">[1]</a>
+        <li><a href="api/events.html#rasa_core.events.ActionReverted.apply_to">(rasa_core.events.ActionReverted method)</a>
 </li>
-      </ul></li>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.memoization.MemoizationPolicy.add">add() (rasa_core.policies.memoization.MemoizationPolicy method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.memoization.MemoizationPolicy.add">[1]</a>
+        <li><a href="api/events.html#rasa_core.events.AllSlotsReset.apply_to">(rasa_core.events.AllSlotsReset method)</a>
 </li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryFileReader.add_checkpoint">add_checkpoint() (rasa_core.training_utils.dsl.StoryFileReader method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryFileReader.add_checkpoint">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryStepBuilder.add_checkpoint">(rasa_core.training_utils.dsl.StoryStepBuilder method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryStepBuilder.add_checkpoint">[1]</a>
+        <li><a href="api/events.html#rasa_core.events.Event.apply_to">(rasa_core.events.Event method)</a>
 </li>
-      </ul></li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryFileReader.add_event">add_event() (rasa_core.training_utils.dsl.StoryFileReader method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryFileReader.add_event">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryStep.add_event">(rasa_core.training_utils.dsl.StoryStep method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryStep.add_event">[1]</a>
+        <li><a href="api/events.html#rasa_core.events.Restarted.apply_to">(rasa_core.events.Restarted method)</a>
 </li>
-        <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryStepBuilder.add_event">(rasa_core.training_utils.dsl.StoryStepBuilder method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryStepBuilder.add_event">[1]</a>
+        <li><a href="api/events.html#rasa_core.events.SlotSet.apply_to">(rasa_core.events.SlotSet method)</a>
 </li>
-      </ul></li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryStep.add_user_message">add_user_message() (rasa_core.training_utils.dsl.StoryStep method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryStep.add_user_message">[1]</a>
+        <li><a href="api/events.html#rasa_core.events.StoryExported.apply_to">(rasa_core.events.StoryExported method)</a>
 </li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryFileReader.add_user_messages">add_user_messages() (rasa_core.training_utils.dsl.StoryFileReader method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryFileReader.add_user_messages">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryStepBuilder.add_user_messages">(rasa_core.training_utils.dsl.StoryStepBuilder method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryStepBuilder.add_user_messages">[1]</a>
+        <li><a href="api/events.html#rasa_core.events.TopicSet.apply_to">(rasa_core.events.TopicSet method)</a>
 </li>
-      </ul></li>
-      <li><a href="rasa_core.html#rasa_core.slots.CategoricalSlot.additional_persistence_info">additional_persistence_info() (rasa_core.slots.CategoricalSlot method)</a>, <a href="rasa_dm.html#rasa_core.slots.CategoricalSlot.additional_persistence_info">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.html#rasa_core.slots.Slot.additional_persistence_info">(rasa_core.slots.Slot method)</a>, <a href="rasa_dm.html#rasa_core.slots.Slot.additional_persistence_info">[1]</a>
+        <li><a href="api/events.html#rasa_core.events.UserUtteranceReverted.apply_to">(rasa_core.events.UserUtteranceReverted method)</a>
 </li>
-      </ul></li>
-      <li><a href="rasa_core.html#rasa_core.agent.Agent">Agent (class in rasa_core.agent)</a>, <a href="rasa_dm.html#rasa_core.agent.Agent">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.utils.all_subclasses">all_subclasses() (in module rasa_core.utils)</a>, <a href="rasa_dm.html#rasa_core.utils.all_subclasses">[1]</a>
-</li>
-      <li><a href="rasa_core.events.html#rasa_core.events.AllSlotsReset">AllSlotsReset (class in rasa_core.events)</a>, <a href="rasa_dm.events.html#rasa_core.events.AllSlotsReset">[1]</a>
-</li>
-      <li><a href="rasa_core.events.html#rasa_core.events.ActionExecuted.apply_to">apply_to() (rasa_core.events.ActionExecuted method)</a>, <a href="rasa_dm.events.html#rasa_core.events.ActionExecuted.apply_to">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.events.html#rasa_core.events.ActionReverted.apply_to">(rasa_core.events.ActionReverted method)</a>, <a href="rasa_dm.events.html#rasa_core.events.ActionReverted.apply_to">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.AllSlotsReset.apply_to">(rasa_core.events.AllSlotsReset method)</a>, <a href="rasa_dm.events.html#rasa_core.events.AllSlotsReset.apply_to">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.Event.apply_to">(rasa_core.events.Event method)</a>, <a href="rasa_dm.events.html#rasa_core.events.Event.apply_to">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.Restarted.apply_to">(rasa_core.events.Restarted method)</a>, <a href="rasa_dm.events.html#rasa_core.events.Restarted.apply_to">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.SlotSet.apply_to">(rasa_core.events.SlotSet method)</a>, <a href="rasa_dm.events.html#rasa_core.events.SlotSet.apply_to">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.StoryExported.apply_to">(rasa_core.events.StoryExported method)</a>, <a href="rasa_dm.events.html#rasa_core.events.StoryExported.apply_to">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.TopicSet.apply_to">(rasa_core.events.TopicSet method)</a>, <a href="rasa_dm.events.html#rasa_core.events.TopicSet.apply_to">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.UserUtteranceReverted.apply_to">(rasa_core.events.UserUtteranceReverted method)</a>, <a href="rasa_dm.events.html#rasa_core.events.UserUtteranceReverted.apply_to">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.UserUttered.apply_to">(rasa_core.events.UserUttered method)</a>, <a href="rasa_dm.events.html#rasa_core.events.UserUttered.apply_to">[1]</a>
+        <li><a href="api/events.html#rasa_core.events.UserUttered.apply_to">(rasa_core.events.UserUttered method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.trackers.DialogueStateTracker.as_dialogue">as_dialogue() (rasa_core.trackers.DialogueStateTracker method)</a>, <a href="rasa_dm.html#rasa_core.trackers.DialogueStateTracker.as_dialogue">[1]</a>, <a href="tracker.html#rasa_core.trackers.DialogueStateTracker.as_dialogue">[2]</a>
+      <li><a href="api/events.html#rasa_core.events.ActionExecuted.as_story_string">as_story_string() (rasa_core.events.ActionExecuted method)</a>
 
       <ul>
-        <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.Story.as_dialogue">(rasa_core.training_utils.dsl.Story method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.Story.as_dialogue">[1]</a>
+        <li><a href="api/events.html#rasa_core.events.ActionReverted.as_story_string">(rasa_core.events.ActionReverted method)</a>
+</li>
+        <li><a href="api/events.html#rasa_core.events.AllSlotsReset.as_story_string">(rasa_core.events.AllSlotsReset method)</a>
+</li>
+        <li><a href="api/events.html#rasa_core.events.Event.as_story_string">(rasa_core.events.Event method)</a>
+</li>
+        <li><a href="api/events.html#rasa_core.events.ReminderScheduled.as_story_string">(rasa_core.events.ReminderScheduled method)</a>
+</li>
+        <li><a href="api/events.html#rasa_core.events.Restarted.as_story_string">(rasa_core.events.Restarted method)</a>
+</li>
+        <li><a href="api/events.html#rasa_core.events.SlotSet.as_story_string">(rasa_core.events.SlotSet method)</a>
+</li>
+        <li><a href="api/events.html#rasa_core.events.StoryExported.as_story_string">(rasa_core.events.StoryExported method)</a>
+</li>
+        <li><a href="api/events.html#rasa_core.events.TopicSet.as_story_string">(rasa_core.events.TopicSet method)</a>
+</li>
+        <li><a href="api/events.html#rasa_core.events.UserUtteranceReverted.as_story_string">(rasa_core.events.UserUtteranceReverted method)</a>
+</li>
+        <li><a href="api/events.html#rasa_core.events.UserUttered.as_story_string">(rasa_core.events.UserUttered method)</a>
 </li>
       </ul></li>
-      <li><a href="rasa_core.html#rasa_core.slots.BooleanSlot.as_feature">as_feature() (rasa_core.slots.BooleanSlot method)</a>, <a href="rasa_dm.html#rasa_core.slots.BooleanSlot.as_feature">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.html#rasa_core.slots.CategoricalSlot.as_feature">(rasa_core.slots.CategoricalSlot method)</a>, <a href="rasa_dm.html#rasa_core.slots.CategoricalSlot.as_feature">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.slots.DataSlot.as_feature">(rasa_core.slots.DataSlot method)</a>, <a href="rasa_dm.html#rasa_core.slots.DataSlot.as_feature">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.slots.FloatSlot.as_feature">(rasa_core.slots.FloatSlot method)</a>, <a href="rasa_dm.html#rasa_core.slots.FloatSlot.as_feature">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.slots.ListSlot.as_feature">(rasa_core.slots.ListSlot method)</a>, <a href="rasa_dm.html#rasa_core.slots.ListSlot.as_feature">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.slots.Slot.as_feature">(rasa_core.slots.Slot method)</a>, <a href="rasa_dm.html#rasa_core.slots.Slot.as_feature">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.slots.TextSlot.as_feature">(rasa_core.slots.TextSlot method)</a>, <a href="rasa_dm.html#rasa_core.slots.TextSlot.as_feature">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.slots.UnfeaturizedSlot.as_feature">(rasa_core.slots.UnfeaturizedSlot method)</a>, <a href="rasa_dm.html#rasa_core.slots.UnfeaturizedSlot.as_feature">[1]</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.events.html#rasa_core.events.ActionExecuted.as_story_string">as_story_string() (rasa_core.events.ActionExecuted method)</a>, <a href="rasa_dm.events.html#rasa_core.events.ActionExecuted.as_story_string">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.events.html#rasa_core.events.ActionReverted.as_story_string">(rasa_core.events.ActionReverted method)</a>, <a href="rasa_dm.events.html#rasa_core.events.ActionReverted.as_story_string">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.AllSlotsReset.as_story_string">(rasa_core.events.AllSlotsReset method)</a>, <a href="rasa_dm.events.html#rasa_core.events.AllSlotsReset.as_story_string">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.Event.as_story_string">(rasa_core.events.Event method)</a>, <a href="rasa_dm.events.html#rasa_core.events.Event.as_story_string">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.ReminderScheduled.as_story_string">(rasa_core.events.ReminderScheduled method)</a>, <a href="rasa_dm.events.html#rasa_core.events.ReminderScheduled.as_story_string">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.Restarted.as_story_string">(rasa_core.events.Restarted method)</a>, <a href="rasa_dm.events.html#rasa_core.events.Restarted.as_story_string">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.SlotSet.as_story_string">(rasa_core.events.SlotSet method)</a>, <a href="rasa_dm.events.html#rasa_core.events.SlotSet.as_story_string">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.StoryExported.as_story_string">(rasa_core.events.StoryExported method)</a>, <a href="rasa_dm.events.html#rasa_core.events.StoryExported.as_story_string">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.TopicSet.as_story_string">(rasa_core.events.TopicSet method)</a>, <a href="rasa_dm.events.html#rasa_core.events.TopicSet.as_story_string">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.UserUtteranceReverted.as_story_string">(rasa_core.events.UserUtteranceReverted method)</a>, <a href="rasa_dm.events.html#rasa_core.events.UserUtteranceReverted.as_story_string">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.UserUttered.as_story_string">(rasa_core.events.UserUttered method)</a>, <a href="rasa_dm.events.html#rasa_core.events.UserUttered.as_story_string">[1]</a>
-</li>
-        <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.Story.as_story_string">(rasa_core.training_utils.dsl.Story method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.Story.as_story_string">[1]</a>
-</li>
-        <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryStep.as_story_string">(rasa_core.training_utils.dsl.StoryStep method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryStep.as_story_string">[1]</a>
-</li>
-        <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.story_graph.StoryGraph.as_story_string">(rasa_core.training_utils.story_graph.StoryGraph method)</a>
-</li>
-      </ul></li>
-  </ul></td>
-</tr></table>
-
-<h2 id="B">B</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.utils.bcolors">bcolors (class in rasa_core.utils)</a>, <a href="rasa_dm.html#rasa_core.utils.bcolors">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.featurizers.BinaryFeaturizer">BinaryFeaturizer (class in rasa_core.featurizers)</a>, <a href="rasa_dm.html#rasa_core.featurizers.BinaryFeaturizer">[1]</a>
-</li>
-      <li><a href="rasa_core.channels.html#rasa_core.channels.rest.HttpInputComponent.blueprint">blueprint() (rasa_core.channels.rest.HttpInputComponent method)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.rest.HttpInputComponent.blueprint">[1]</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.utils.bcolors.BOLD">BOLD (rasa_core.utils.bcolors attribute)</a>, <a href="rasa_dm.html#rasa_core.utils.bcolors.BOLD">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.slots.BooleanSlot">BooleanSlot (class in rasa_core.slots)</a>, <a href="rasa_dm.html#rasa_core.slots.BooleanSlot">[1]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.story_graph.StoryGraph.build_stories">build_stories() (rasa_core.training_utils.story_graph.StoryGraph method)</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.dispatcher.Button">Button (class in rasa_core.dispatcher)</a>, <a href="rasa_dm.html#rasa_core.dispatcher.Button">[1]</a>
-</li>
   </ul></td>
 </tr></table>
 
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.slots.CategoricalSlot">CategoricalSlot (class in rasa_core.slots)</a>, <a href="rasa_dm.html#rasa_core.slots.CategoricalSlot">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.domain.check_domain_sanity">check_domain_sanity() (in module rasa_core.domain)</a>, <a href="rasa_dm.html#rasa_core.domain.check_domain_sanity">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.utils.class_from_module_path">class_from_module_path() (in module rasa_core.utils)</a>, <a href="rasa_dm.html#rasa_core.utils.class_from_module_path">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.trackers.DialogueStateTracker.clear_follow_up_action">clear_follow_up_action() (rasa_core.trackers.DialogueStateTracker method)</a>, <a href="rasa_dm.html#rasa_core.trackers.DialogueStateTracker.clear_follow_up_action">[1]</a>, <a href="tracker.html#rasa_core.trackers.DialogueStateTracker.clear_follow_up_action">[2]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.domain.TemplateDomain.collect_slots">collect_slots() (rasa_core.domain.TemplateDomain static method)</a>, <a href="rasa_dm.html#rasa_core.domain.TemplateDomain.collect_slots">[1]</a>
-</li>
-      <li><a href="rasa_core.channels.html#rasa_core.channels.direct.CollectingOutputChannel">CollectingOutputChannel (class in rasa_core.channels.direct)</a>
-</li>
-      <li><a href="domain.html#rasa_core.domain.Domain.compare_with_specification">compare_with_specification() (rasa_core.domain.Domain method)</a>, <a href="rasa_core.html#rasa_core.domain.Domain.compare_with_specification">[1]</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.compare_with_specification">[2]</a>
-</li>
-      <li><a href="rasa_core.channels.html#rasa_core.channels.console.ConsoleInputChannel">ConsoleInputChannel (class in rasa_core.channels.console)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.console.ConsoleInputChannel">[1]</a>
-</li>
-      <li><a href="rasa_core.channels.html#rasa_core.channels.console.ConsoleOutputChannel">ConsoleOutputChannel (class in rasa_core.channels.console)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.console.ConsoleOutputChannel">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.agent.Agent.continue_message_handling">continue_message_handling() (rasa_core.agent.Agent method)</a>, <a href="rasa_dm.html#rasa_core.agent.Agent.continue_message_handling">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.html#rasa_core.processor.MessageProcessor.continue_message_handling">(rasa_core.processor.MessageProcessor method)</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.keras_policy.KerasPolicy.continue_training">continue_training() (rasa_core.policies.keras_policy.KerasPolicy method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.keras_policy.KerasPolicy.continue_training">[1]</a>
-
-      <ul>
-        <li><a href="policy.html#rasa_core.policies.Policy.continue_training">(rasa_core.policies.Policy method)</a>
-</li>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.memoization.MemoizationPolicy.continue_training">(rasa_core.policies.memoization.MemoizationPolicy method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.memoization.MemoizationPolicy.continue_training">[1]</a>
-</li>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.policy.Policy.continue_training">(rasa_core.policies.policy.Policy method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.policy.Policy.continue_training">[1]</a>
-</li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.interpreter.NaturalLanguageInterpreter.create">create() (rasa_core.interpreter.NaturalLanguageInterpreter static method)</a>, <a href="rasa_dm.html#rasa_core.interpreter.NaturalLanguageInterpreter.create">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.train.create_argument_parser">create_argument_parser() (in module rasa_core.train)</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.FeaturizedTracker.create_copy">create_copy() (rasa_core.training_utils.dsl.FeaturizedTracker method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.FeaturizedTracker.create_copy">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryStep.create_copy">(rasa_core.training_utils.dsl.StoryStep method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryStep.create_copy">[1]</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.html#rasa_core.utils.create_dir_for_file">create_dir_for_file() (in module rasa_core.utils)</a>, <a href="rasa_dm.html#rasa_core.utils.create_dir_for_file">[1]</a>
-</li>
-      <li><a href="tracker_store.html#rasa_core.tracker_store.InMemoryTrackerStore.create_tracker">create_tracker() (rasa_core.tracker_store.InMemoryTrackerStore method)</a>
-
-      <ul>
-        <li><a href="tracker_store.html#rasa_core.tracker_store.RedisTrackerStore.create_tracker">(rasa_core.tracker_store.RedisTrackerStore method)</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.tracker_store.TrackerStore.create_tracker">(rasa_core.tracker_store.TrackerStore method)</a>, <a href="rasa_dm.html#rasa_core.tracker_store.TrackerStore.create_tracker">[1]</a>, <a href="tracker_store.html#rasa_core.tracker_store.TrackerStore.create_tracker">[2]</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.html#rasa_core.trackers.DialogueStateTracker.current_state">current_state() (rasa_core.trackers.DialogueStateTracker method)</a>, <a href="rasa_dm.html#rasa_core.trackers.DialogueStateTracker.current_state">[1]</a>, <a href="tracker.html#rasa_core.trackers.DialogueStateTracker.current_state">[2]</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="D">D</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.slots.DataSlot">DataSlot (class in rasa_core.slots)</a>, <a href="rasa_dm.html#rasa_core.slots.DataSlot">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.featurizers.BinaryFeaturizer.decode">decode() (rasa_core.featurizers.BinaryFeaturizer method)</a>, <a href="rasa_dm.html#rasa_core.featurizers.BinaryFeaturizer.decode">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.html#rasa_core.featurizers.Featurizer.decode">(rasa_core.featurizers.Featurizer method)</a>, <a href="rasa_dm.html#rasa_core.featurizers.Featurizer.decode">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.featurizers.ProbabilisticFeaturizer.decode">(rasa_core.featurizers.ProbabilisticFeaturizer method)</a>, <a href="rasa_dm.html#rasa_core.featurizers.ProbabilisticFeaturizer.decode">[1]</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.html#rasa_core.domain.Domain.DEFAULT_ACTIONS">DEFAULT_ACTIONS (rasa_core.domain.Domain attribute)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.DEFAULT_ACTIONS">[1]</a>
-</li>
-      <li><a href="rasa_core.channels.html#rasa_core.channels.console.ConsoleOutputChannel.default_output_color">default_output_color (rasa_core.channels.console.ConsoleOutputChannel attribute)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.console.ConsoleOutputChannel.default_output_color">[1]</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.channels.html#rasa_core.channels.channel.UserMessage.DEFAULT_SENDER">DEFAULT_SENDER (rasa_core.channels.channel.UserMessage attribute)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.channel.UserMessage.DEFAULT_SENDER">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.tracker_store.TrackerStore.deserialise_tracker">deserialise_tracker() (rasa_core.tracker_store.TrackerStore method)</a>, <a href="rasa_dm.html#rasa_core.tracker_store.TrackerStore.deserialise_tracker">[1]</a>
-</li>
-      <li><a href="rasa_core.conversation.html#rasa_core.conversation.Dialogue">Dialogue (class in rasa_core.conversation)</a>, <a href="rasa_dm.conversation.html#rasa_core.conversation.Dialogue">[1]</a>, <a href="turn.html#rasa_core.conversation.Dialogue">[2]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.trackers.DialogueStateTracker">DialogueStateTracker (class in rasa_core.trackers)</a>, <a href="rasa_dm.html#rasa_core.trackers.DialogueStateTracker">[1]</a>, <a href="tracker.html#rasa_core.trackers.DialogueStateTracker">[2]</a>
-</li>
-      <li><a href="dispatcher.html#rasa_core.dispatcher.Dispatcher">Dispatcher (class in rasa_core.dispatcher)</a>, <a href="rasa_core.html#rasa_core.dispatcher.Dispatcher">[1]</a>, <a href="rasa_dm.html#rasa_core.dispatcher.Dispatcher">[2]</a>
-</li>
-      <li><a href="domain.html#rasa_core.domain.Domain">Domain (class in rasa_core.domain)</a>, <a href="rasa_core.html#rasa_core.domain.Domain">[1]</a>, <a href="rasa_dm.html#rasa_core.domain.Domain">[2]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.Story.dump_to_file">dump_to_file() (rasa_core.training_utils.dsl.Story method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.Story.dump_to_file">[1]</a>
+      <li><a href="api/agent.html#rasa_core.agent.Agent.continue_message_handling">continue_message_handling() (rasa_core.agent.Agent method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -479,49 +273,11 @@
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.dispatcher.Element">Element (class in rasa_core.dispatcher)</a>, <a href="rasa_dm.html#rasa_core.dispatcher.Element">[1]</a>
+      <li><a href="api/events.html#rasa_core.events.UserUttered.empty">empty() (rasa_core.events.UserUttered static method)</a>
 </li>
-      <li><a href="rasa_core.events.html#rasa_core.events.UserUttered.empty">empty() (rasa_core.events.UserUttered static method)</a>, <a href="rasa_dm.events.html#rasa_core.events.UserUttered.empty">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.featurizers.BinaryFeaturizer.encode">encode() (rasa_core.featurizers.BinaryFeaturizer method)</a>, <a href="rasa_dm.html#rasa_core.featurizers.BinaryFeaturizer.encode">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.html#rasa_core.featurizers.Featurizer.encode">(rasa_core.featurizers.Featurizer method)</a>, <a href="rasa_dm.html#rasa_core.featurizers.Featurizer.encode">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.featurizers.ProbabilisticFeaturizer.encode">(rasa_core.featurizers.ProbabilisticFeaturizer method)</a>, <a href="rasa_dm.html#rasa_core.featurizers.ProbabilisticFeaturizer.encode">[1]</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.html#rasa_core.utils.bcolors.ENDC">ENDC (rasa_core.utils.bcolors attribute)</a>, <a href="rasa_dm.html#rasa_core.utils.bcolors.ENDC">[1]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryStepBuilder.ensure_current_steps">ensure_current_steps() (rasa_core.training_utils.dsl.StoryStepBuilder method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryStepBuilder.ensure_current_steps">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.domain.Domain.entities">entities (rasa_core.domain.Domain attribute)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.entities">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.html#rasa_core.domain.TemplateDomain.entities">(rasa_core.domain.TemplateDomain attribute)</a>, <a href="rasa_dm.html#rasa_core.domain.TemplateDomain.entities">[1]</a>
-</li>
-      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.domain.Domain.entity_features">entity_features (rasa_core.domain.Domain attribute)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.entity_features">[1]</a>
-</li>
-      <li><a href="rasa_core.events.html#rasa_core.events.Event">Event (class in rasa_core.events)</a>, <a href="rasa_dm.events.html#rasa_core.events.Event">[1]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryStep.explicit_events">explicit_events() (rasa_core.training_utils.dsl.StoryStep method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryStep.explicit_events">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.trackers.DialogueStateTracker.export_stories">export_stories() (rasa_core.trackers.DialogueStateTracker method)</a>, <a href="rasa_dm.html#rasa_core.trackers.DialogueStateTracker.export_stories">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.trackers.DialogueStateTracker.export_stories_to_file">export_stories_to_file() (rasa_core.trackers.DialogueStateTracker method)</a>, <a href="rasa_dm.html#rasa_core.trackers.DialogueStateTracker.export_stories_to_file">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.interpreter.RegexInterpreter.extract_intent_and_entities">extract_intent_and_entities() (rasa_core.interpreter.RegexInterpreter static method)</a>, <a href="rasa_dm.html#rasa_core.interpreter.RegexInterpreter.extract_intent_and_entities">[1]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.extract_stories_from_file">extract_stories_from_file() (in module rasa_core.training_utils)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.extract_stories_from_file">[1]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.extract_story_graph_from_file">extract_story_graph_from_file() (in module rasa_core.training_utils)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.extract_story_graph_from_file">[1]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.extract_training_data_from_file">extract_training_data_from_file() (in module rasa_core.training_utils)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.extract_training_data_from_file">[1]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.TrainingsDataExtractor.extract_trainings_data">extract_trainings_data() (rasa_core.training_utils.dsl.TrainingsDataExtractor method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.TrainingsDataExtractor.extract_trainings_data">[1]</a>
+      <li><a href="api/events.html#rasa_core.events.Event">Event (class in rasa_core.events)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -529,67 +285,11 @@
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.utils.bcolors.FAIL">FAIL (rasa_core.utils.bcolors attribute)</a>, <a href="rasa_dm.html#rasa_core.utils.bcolors.FAIL">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.slots.CategoricalSlot.feature_dimensionality">feature_dimensionality() (rasa_core.slots.CategoricalSlot method)</a>, <a href="rasa_dm.html#rasa_core.slots.CategoricalSlot.feature_dimensionality">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.html#rasa_core.slots.Slot.feature_dimensionality">(rasa_core.slots.Slot method)</a>, <a href="rasa_dm.html#rasa_core.slots.Slot.feature_dimensionality">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.slots.UnfeaturizedSlot.feature_dimensionality">(rasa_core.slots.UnfeaturizedSlot method)</a>, <a href="rasa_dm.html#rasa_core.slots.UnfeaturizedSlot.feature_dimensionality">[1]</a>
-</li>
-      </ul></li>
-      <li><a href="domain.html#rasa_core.domain.Domain.feature_vector_for_tracker">feature_vector_for_tracker() (rasa_core.domain.Domain method)</a>, <a href="rasa_core.html#rasa_core.domain.Domain.feature_vector_for_tracker">[1]</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.feature_vector_for_tracker">[2]</a>
-</li>
-      <li><a href="domain.html#rasa_core.domain.Domain.features_for_tracker_history">features_for_tracker_history() (rasa_core.domain.Domain method)</a>, <a href="rasa_core.html#rasa_core.domain.Domain.features_for_tracker_history">[1]</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.features_for_tracker_history">[2]</a>
-</li>
-      <li><a href="policy.html#rasa_core.policies.Policy.featurize">featurize() (rasa_core.policies.Policy method)</a>
-
-      <ul>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.policy.Policy.featurize">(rasa_core.policies.policy.Policy method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.policy.Policy.featurize">[1]</a>
-</li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.FeaturizedTracker">FeaturizedTracker (class in rasa_core.training_utils.dsl)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.FeaturizedTracker">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.featurizers.Featurizer">Featurizer (class in rasa_core.featurizers)</a>, <a href="rasa_dm.html#rasa_core.featurizers.Featurizer">[1]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.FeaturizedTracker.feauturize_current_state">feauturize_current_state() (rasa_core.training_utils.dsl.FeaturizedTracker method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.FeaturizedTracker.feauturize_current_state">[1]</a>
-</li>
-      <li><a href="rasa_core.channels.html#rasa_core.channels.file.FileInputChannel">FileInputChannel (class in rasa_core.channels.file)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.file.FileInputChannel">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.slots.FloatSlot">FloatSlot (class in rasa_core.slots)</a>, <a href="rasa_dm.html#rasa_core.slots.FloatSlot">[1]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryStepBuilder.flush">flush() (rasa_core.training_utils.dsl.StoryStepBuilder method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryStepBuilder.flush">[1]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.FeaturizedTracker.from_domain">from_domain() (rasa_core.training_utils.dsl.FeaturizedTracker class method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.FeaturizedTracker.from_domain">[1]</a>
-</li>
-      <li><a href="rasa_core.events.html#rasa_core.events.Event.from_parameters">from_parameters() (rasa_core.events.Event static method)</a>, <a href="rasa_dm.events.html#rasa_core.events.Event.from_parameters">[1]</a>
-</li>
-      <li><a href="rasa_core.events.html#rasa_core.events.Event.from_story_string">from_story_string() (rasa_core.events.Event static method)</a>, <a href="rasa_dm.events.html#rasa_core.events.Event.from_story_string">[1]</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="G">G</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.trackers.DialogueStateTracker.generate_all_prior_states">generate_all_prior_states() (rasa_core.trackers.DialogueStateTracker method)</a>, <a href="rasa_dm.html#rasa_core.trackers.DialogueStateTracker.generate_all_prior_states">[1]</a>, <a href="tracker.html#rasa_core.trackers.DialogueStateTracker.generate_all_prior_states">[2]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.story_graph.StoryGraph.get">get() (rasa_core.training_utils.story_graph.StoryGraph method)</a>
-</li>
-      <li><a href="domain.html#rasa_core.domain.Domain.get_active_features">get_active_features() (rasa_core.domain.Domain method)</a>, <a href="rasa_core.html#rasa_core.domain.Domain.get_active_features">[1]</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.get_active_features">[2]</a>
+      <li><a href="api/events.html#rasa_core.events.Event.from_parameters">from_parameters() (rasa_core.events.Event static method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.tracker_store.TrackerStore.get_or_create_tracker">get_or_create_tracker() (rasa_core.tracker_store.TrackerStore method)</a>, <a href="rasa_dm.html#rasa_core.tracker_store.TrackerStore.get_or_create_tracker">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.domain.Domain.get_parsing_features">get_parsing_features() (rasa_core.domain.Domain method)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.get_parsing_features">[1]</a>
-</li>
-      <li><a href="domain.html#rasa_core.domain.Domain.get_prev_action_features">get_prev_action_features() (rasa_core.domain.Domain method)</a>, <a href="rasa_core.html#rasa_core.domain.Domain.get_prev_action_features">[1]</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.get_prev_action_features">[2]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.trackers.DialogueStateTracker.get_slot">get_slot() (rasa_core.trackers.DialogueStateTracker method)</a>, <a href="rasa_dm.html#rasa_core.trackers.DialogueStateTracker.get_slot">[1]</a>, <a href="tracker.html#rasa_core.trackers.DialogueStateTracker.get_slot">[2]</a>
+      <li><a href="api/events.html#rasa_core.events.Event.from_story_string">from_story_string() (rasa_core.events.Event static method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -597,75 +297,11 @@
 <h2 id="H">H</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.agent.Agent.handle_channel">handle_channel() (rasa_core.agent.Agent method)</a>, <a href="rasa_dm.html#rasa_core.agent.Agent.handle_channel">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.html#rasa_core.processor.MessageProcessor.handle_channel">(rasa_core.processor.MessageProcessor method)</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.html#rasa_core.processor.MessageProcessor.handle_channel_asynchronous">handle_channel_asynchronous() (rasa_core.processor.MessageProcessor method)</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.agent.Agent.handle_message">handle_message() (rasa_core.agent.Agent method)</a>, <a href="rasa_dm.html#rasa_core.agent.Agent.handle_message">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.html#rasa_core.processor.MessageProcessor.handle_message">(rasa_core.processor.MessageProcessor method)</a>
-</li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.processor.MessageProcessor.handle_reminder">handle_reminder() (rasa_core.processor.MessageProcessor method)</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.utils.HashableNDArray">HashableNDArray (class in rasa_core.utils)</a>, <a href="rasa_dm.html#rasa_core.utils.HashableNDArray">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.utils.bcolors.HEADER">HEADER (rasa_core.utils.bcolors attribute)</a>, <a href="rasa_dm.html#rasa_core.utils.bcolors.HEADER">[1]</a>
-</li>
-      <li><a href="rasa_core.channels.html#rasa_core.channels.rest.HttpInputChannel">HttpInputChannel (class in rasa_core.channels.rest)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.rest.HttpInputChannel">[1]</a>
-</li>
-      <li><a href="rasa_core.channels.html#rasa_core.channels.rest.HttpInputComponent">HttpInputComponent (class in rasa_core.channels.rest)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.rest.HttpInputComponent">[1]</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="I">I</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="domain.html#rasa_core.domain.Domain.index_for_action">index_for_action() (rasa_core.domain.Domain method)</a>, <a href="rasa_core.html#rasa_core.domain.Domain.index_for_action">[1]</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.index_for_action">[2]</a>
-</li>
-      <li><a href="domain.html#rasa_core.domain.Domain.index_of_feature">index_of_feature() (rasa_core.domain.Domain method)</a>, <a href="rasa_core.html#rasa_core.domain.Domain.index_of_feature">[1]</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.index_of_feature">[2]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.tracker_store.InMemoryTrackerStore">InMemoryTrackerStore (class in rasa_core.tracker_store)</a>, <a href="rasa_dm.html#rasa_core.tracker_store.InMemoryTrackerStore">[1]</a>, <a href="tracker_store.html#rasa_core.tracker_store.InMemoryTrackerStore">[2]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.domain.Domain.input_feature_map">input_feature_map (rasa_core.domain.Domain attribute)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.input_feature_map">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.domain.Domain.input_features">input_features (rasa_core.domain.Domain attribute)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.input_features">[1]</a>
-</li>
-      <li><a href="rasa_core.channels.html#rasa_core.channels.channel.InputChannel">InputChannel (class in rasa_core.channels.channel)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.channel.InputChannel">[1]</a>
+      <li><a href="api/agent.html#rasa_core.agent.Agent.handle_channel">handle_channel() (rasa_core.agent.Agent method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.domain.TemplateDomain.instantiate_actions">instantiate_actions() (rasa_core.domain.TemplateDomain static method)</a>, <a href="rasa_dm.html#rasa_core.domain.TemplateDomain.instantiate_actions">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.domain.Domain.intent_features">intent_features (rasa_core.domain.Domain attribute)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.intent_features">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.domain.Domain.intents">intents (rasa_core.domain.Domain attribute)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.intents">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.html#rasa_core.domain.TemplateDomain.intents">(rasa_core.domain.TemplateDomain attribute)</a>, <a href="rasa_dm.html#rasa_core.domain.TemplateDomain.intents">[1]</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.html#rasa_core.utils.is_int">is_int() (in module rasa_core.utils)</a>, <a href="rasa_dm.html#rasa_core.utils.is_int">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.trackers.DialogueStateTracker.is_paused">is_paused() (rasa_core.trackers.DialogueStateTracker method)</a>, <a href="rasa_dm.html#rasa_core.trackers.DialogueStateTracker.is_paused">[1]</a>, <a href="tracker.html#rasa_core.trackers.DialogueStateTracker.is_paused">[2]</a>
-</li>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.keras_policy.KerasPolicy.is_using_tensorflow">is_using_tensorflow() (rasa_core.policies.keras_policy.KerasPolicy static method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.keras_policy.KerasPolicy.is_using_tensorflow">[1]</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="K">K</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="policy.html#rasa_core.policies.keras_policy.KerasPolicy">KerasPolicy (class in rasa_core.policies.keras_policy)</a>, <a href="rasa_core.policies.html#rasa_core.policies.keras_policy.KerasPolicy">[1]</a>, <a href="rasa_dm.policies.html#rasa_core.policies.keras_policy.KerasPolicy">[2]</a>
+      <li><a href="api/agent.html#rasa_core.agent.Agent.handle_message">handle_message() (rasa_core.agent.Agent method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -673,115 +309,7 @@
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.channels.html#rasa_core.channels.direct.CollectingOutputChannel.latest_output">latest_output() (rasa_core.channels.direct.CollectingOutputChannel method)</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.utils.lazyproperty">lazyproperty() (in module rasa_core.utils)</a>, <a href="rasa_dm.html#rasa_core.utils.lazyproperty">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.slots.ListSlot">ListSlot (class in rasa_core.slots)</a>, <a href="rasa_dm.html#rasa_core.slots.ListSlot">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.agent.Agent.load">load() (rasa_core.agent.Agent class method)</a>, <a href="rasa_dm.html#rasa_core.agent.Agent.load">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.html#rasa_core.domain.Domain.load">(rasa_core.domain.Domain class method)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.load">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.domain.TemplateDomain.load">(rasa_core.domain.TemplateDomain class method)</a>, <a href="rasa_dm.html#rasa_core.domain.TemplateDomain.load">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.featurizers.Featurizer.load">(rasa_core.featurizers.Featurizer static method)</a>, <a href="rasa_dm.html#rasa_core.featurizers.Featurizer.load">[1]</a>
-</li>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.ensemble.PolicyEnsemble.load">(rasa_core.policies.ensemble.PolicyEnsemble class method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.ensemble.PolicyEnsemble.load">[1]</a>
-</li>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.keras_policy.KerasPolicy.load">(rasa_core.policies.keras_policy.KerasPolicy class method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.keras_policy.KerasPolicy.load">[1]</a>
-</li>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.memoization.MemoizationPolicy.load">(rasa_core.policies.memoization.MemoizationPolicy class method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.memoization.MemoizationPolicy.load">[1]</a>
-</li>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.policy.Policy.load">(rasa_core.policies.policy.Policy class method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.policy.Policy.load">[1]</a>
-</li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.ensemble.PolicyEnsemble.load_metadata">load_metadata() (rasa_core.policies.ensemble.PolicyEnsemble class method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.ensemble.PolicyEnsemble.load_metadata">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.domain.Domain.load_specification">load_specification() (rasa_core.domain.Domain class method)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.load_specification">[1]</a>
-</li>
-      <li><a href="rasa_core.actions.html#rasa_core.actions.factories.local_action_factory">local_action_factory() (in module rasa_core.actions.factories)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="M">M</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.policy.Policy.MAX_HISTORY_DEFAULT">MAX_HISTORY_DEFAULT (rasa_core.policies.policy.Policy attribute)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.policy.Policy.MAX_HISTORY_DEFAULT">[1]</a>
-</li>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.keras_policy.KerasPolicy.max_len">max_len (rasa_core.policies.keras_policy.KerasPolicy attribute)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.keras_policy.KerasPolicy.max_len">[1]</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="policy.html#rasa_core.policies.memoization.MemoizationPolicy">MemoizationPolicy (class in rasa_core.policies.memoization)</a>, <a href="rasa_core.policies.html#rasa_core.policies.memoization.MemoizationPolicy">[1]</a>, <a href="rasa_dm.policies.html#rasa_core.policies.memoization.MemoizationPolicy">[2]</a>
-</li>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.memoization.MemoizationPolicy.memorise">memorise() (rasa_core.policies.memoization.MemoizationPolicy method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.memoization.MemoizationPolicy.memorise">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.processor.MessageProcessor">MessageProcessor (class in rasa_core.processor)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="N">N</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="action.html#rasa_core.actions.action.Action.name">name() (rasa_core.actions.action.Action method)</a>, <a href="rasa_core.actions.html#rasa_core.actions.action.Action.name">[1]</a>, <a href="rasa_dm.actions.html#rasa_core.actions.action.Action.name">[2]</a>
-
-      <ul>
-        <li><a href="rasa_core.actions.html#rasa_core.actions.action.ActionListen.name">(rasa_core.actions.action.ActionListen method)</a>, <a href="rasa_dm.actions.html#rasa_core.actions.action.ActionListen.name">[1]</a>
-</li>
-        <li><a href="rasa_core.actions.html#rasa_core.actions.action.ActionRestart.name">(rasa_core.actions.action.ActionRestart method)</a>, <a href="rasa_dm.actions.html#rasa_core.actions.action.ActionRestart.name">[1]</a>
-</li>
-        <li><a href="rasa_core.actions.html#rasa_core.actions.action.UtterAction.name">(rasa_core.actions.action.UtterAction method)</a>, <a href="rasa_dm.actions.html#rasa_core.actions.action.UtterAction.name">[1]</a>
-</li>
-        <li><a href="rasa_core.actions.html#rasa_core.actions.factories.RemoteAction.name">(rasa_core.actions.factories.RemoteAction method)</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.html#rasa_core.interpreter.NaturalLanguageInterpreter">NaturalLanguageInterpreter (class in rasa_core.interpreter)</a>, <a href="rasa_dm.html#rasa_core.interpreter.NaturalLanguageInterpreter">[1]</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryFileReader.new_story_part">new_story_part() (rasa_core.training_utils.dsl.StoryFileReader method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryFileReader.new_story_part">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.utils.TopicStack.next">next() (rasa_core.utils.TopicStack method)</a>, <a href="rasa_dm.html#rasa_core.utils.TopicStack.next">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.domain.Domain.num_actions">num_actions (rasa_core.domain.Domain attribute)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.num_actions">[1]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.Story.num_actions">num_actions() (rasa_core.training_utils.dsl.Story method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.Story.num_actions">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryStep.num_actions">(rasa_core.training_utils.dsl.StoryStep method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryStep.num_actions">[1]</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.html#rasa_core.domain.Domain.num_features">num_features (rasa_core.domain.Domain attribute)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.num_features">[1]</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="O">O</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.utils.bcolors.OKBLUE">OKBLUE (rasa_core.utils.bcolors attribute)</a>, <a href="rasa_dm.html#rasa_core.utils.bcolors.OKBLUE">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.utils.bcolors.OKGREEN">OKGREEN (rasa_core.utils.bcolors attribute)</a>, <a href="rasa_dm.html#rasa_core.utils.bcolors.OKGREEN">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.utils.one_hot">one_hot() (in module rasa_core.utils)</a>, <a href="rasa_dm.html#rasa_core.utils.one_hot">[1]</a>
-</li>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.online_policy_trainer.OnlinePolicyEnsemble">OnlinePolicyEnsemble (class in rasa_core.policies.online_policy_trainer)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.online_policy_trainer.OnlinePolicyEnsemble">[1]</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.online_policy_trainer.OnlinePolicyTrainer">OnlinePolicyTrainer (class in rasa_core.policies.online_policy_trainer)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.online_policy_trainer.OnlinePolicyTrainer">[1]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.story_graph.StoryGraph.order_steps">order_steps() (rasa_core.training_utils.story_graph.StoryGraph static method)</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.story_graph.StoryGraph.ordered_steps">ordered_steps() (rasa_core.training_utils.story_graph.StoryGraph method)</a>
-</li>
-      <li><a href="rasa_core.channels.html#rasa_core.channels.channel.OutputChannel">OutputChannel (class in rasa_core.channels.channel)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.channel.OutputChannel">[1]</a>
+      <li><a href="api/agent.html#rasa_core.agent.Agent.load">load() (rasa_core.agent.Agent class method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -789,85 +317,7 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.interpreter.NaturalLanguageInterpreter.parse">parse() (rasa_core.interpreter.NaturalLanguageInterpreter method)</a>, <a href="rasa_dm.html#rasa_core.interpreter.NaturalLanguageInterpreter.parse">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.html#rasa_core.interpreter.RasaNLUHttpInterpreter.parse">(rasa_core.interpreter.RasaNLUHttpInterpreter method)</a>, <a href="rasa_dm.html#rasa_core.interpreter.RasaNLUHttpInterpreter.parse">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.interpreter.RasaNLUInterpreter.parse">(rasa_core.interpreter.RasaNLUInterpreter method)</a>, <a href="rasa_dm.html#rasa_core.interpreter.RasaNLUInterpreter.parse">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.interpreter.RegexInterpreter.parse">(rasa_core.interpreter.RegexInterpreter method)</a>, <a href="rasa_dm.html#rasa_core.interpreter.RegexInterpreter.parse">[1]</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.html#rasa_core.agent.Agent.persist">persist() (rasa_core.agent.Agent method)</a>, <a href="rasa_dm.html#rasa_core.agent.Agent.persist">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.html#rasa_core.domain.Domain.persist">(rasa_core.domain.Domain method)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.persist">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.domain.TemplateDomain.persist">(rasa_core.domain.TemplateDomain method)</a>, <a href="rasa_dm.html#rasa_core.domain.TemplateDomain.persist">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.featurizers.Featurizer.persist">(rasa_core.featurizers.Featurizer method)</a>, <a href="rasa_dm.html#rasa_core.featurizers.Featurizer.persist">[1]</a>
-</li>
-        <li><a href="policy.html#rasa_core.policies.Policy.persist">(rasa_core.policies.Policy method)</a>
-</li>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.ensemble.PolicyEnsemble.persist">(rasa_core.policies.ensemble.PolicyEnsemble method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.ensemble.PolicyEnsemble.persist">[1]</a>
-</li>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.keras_policy.KerasPolicy.persist">(rasa_core.policies.keras_policy.KerasPolicy method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.keras_policy.KerasPolicy.persist">[1]</a>
-</li>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.memoization.MemoizationPolicy.persist">(rasa_core.policies.memoization.MemoizationPolicy method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.memoization.MemoizationPolicy.persist">[1]</a>
-</li>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.policy.Policy.persist">(rasa_core.policies.policy.Policy method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.policy.Policy.persist">[1]</a>
-</li>
-      </ul></li>
-      <li><a href="domain.html#rasa_core.domain.Domain.persist_specification">persist_specification() (rasa_core.domain.Domain method)</a>, <a href="rasa_core.html#rasa_core.domain.Domain.persist_specification">[1]</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.persist_specification">[2]</a>
-</li>
-      <li><a href="policy.html#rasa_core.policies.Policy">Policy (class in rasa_core.policies)</a>
-
-      <ul>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.policy.Policy">(class in rasa_core.policies.policy)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.policy.Policy">[1]</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.ensemble.PolicyEnsemble">PolicyEnsemble (class in rasa_core.policies.ensemble)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.ensemble.PolicyEnsemble">[1]</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.trainer.PolicyTrainer">PolicyTrainer (class in rasa_core.policies.trainer)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.trainer.PolicyTrainer">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.utils.TopicStack.pop">pop() (rasa_core.utils.TopicStack method)</a>, <a href="rasa_dm.html#rasa_core.utils.TopicStack.pop">[1]</a>
-</li>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.keras_policy.KerasPolicy.predict_action_probabilities">predict_action_probabilities() (rasa_core.policies.keras_policy.KerasPolicy method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.keras_policy.KerasPolicy.predict_action_probabilities">[1]</a>
-
-      <ul>
-        <li><a href="policy.html#rasa_core.policies.memoization.MemoizationPolicy.predict_action_probabilities">(rasa_core.policies.memoization.MemoizationPolicy method)</a>, <a href="rasa_core.policies.html#rasa_core.policies.memoization.MemoizationPolicy.predict_action_probabilities">[1]</a>, <a href="rasa_dm.policies.html#rasa_core.policies.memoization.MemoizationPolicy.predict_action_probabilities">[2]</a>
-</li>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.policy.Policy.predict_action_probabilities">(rasa_core.policies.policy.Policy method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.policy.Policy.predict_action_probabilities">[1]</a>
-</li>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.scoring_policy.ScoringPolicy.predict_action_probabilities">(rasa_core.policies.scoring_policy.ScoringPolicy method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.scoring_policy.ScoringPolicy.predict_action_probabilities">[1]</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.ensemble.PolicyEnsemble.predict_next_action">predict_next_action() (rasa_core.policies.ensemble.PolicyEnsemble method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.ensemble.PolicyEnsemble.predict_next_action">[1]</a>
-</li>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.policy.Policy.prepare">prepare() (rasa_core.policies.policy.Policy method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.policy.Policy.prepare">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.domain.Domain.prev_action_features">prev_action_features (rasa_core.domain.Domain attribute)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.prev_action_features">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.trackers.DialogueStateTracker.previous_topic">previous_topic (rasa_core.trackers.DialogueStateTracker attribute)</a>, <a href="rasa_dm.html#rasa_core.trackers.DialogueStateTracker.previous_topic">[1]</a>, <a href="tracker.html#rasa_core.trackers.DialogueStateTracker.previous_topic">[2]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.utils.print_color">print_color() (in module rasa_core.utils)</a>, <a href="rasa_dm.html#rasa_core.utils.print_color">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.featurizers.ProbabilisticFeaturizer">ProbabilisticFeaturizer (class in rasa_core.featurizers)</a>, <a href="rasa_dm.html#rasa_core.featurizers.ProbabilisticFeaturizer">[1]</a>
-</li>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.ensemble.PolicyEnsemble.probabilities_using_best_policy">probabilities_using_best_policy() (rasa_core.policies.ensemble.PolicyEnsemble method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.ensemble.PolicyEnsemble.probabilities_using_best_policy">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.ensemble.SimplePolicyEnsemble.probabilities_using_best_policy">(rasa_core.policies.ensemble.SimplePolicyEnsemble method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.ensemble.SimplePolicyEnsemble.probabilities_using_best_policy">[1]</a>
-</li>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.online_policy_trainer.OnlinePolicyEnsemble.probabilities_using_best_policy">(rasa_core.policies.online_policy_trainer.OnlinePolicyEnsemble method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.online_policy_trainer.OnlinePolicyEnsemble.probabilities_using_best_policy">[1]</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryFileReader.process_lines">process_lines() (rasa_core.training_utils.dsl.StoryFileReader method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryFileReader.process_lines">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.utils.TopicStack.push">push() (rasa_core.utils.TopicStack method)</a>, <a href="rasa_dm.html#rasa_core.utils.TopicStack.push">[1]</a>
+      <li><a href="api/agent.html#rasa_core.agent.Agent.persist">persist() (rasa_core.agent.Agent method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -875,147 +325,17 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.domain.Domain.random_template_for">random_template_for() (rasa_core.domain.Domain method)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.random_template_for">[1]</a>
+      <li><a href="api/agent.html#module-rasa_core.agent">rasa_core.agent (module)</a>
 </li>
-      <li><a href="rasa_core.html#module-rasa_core">rasa_core (module)</a>, <a href="rasa_dm.html#module-rasa_core">[1]</a>
-</li>
-      <li><a href="rasa_core.actions.html#module-rasa_core.actions">rasa_core.actions (module)</a>, <a href="rasa_dm.actions.html#module-rasa_core.actions">[1]</a>
-</li>
-      <li><a href="action.html#module-rasa_core.actions.action">rasa_core.actions.action (module)</a>, <a href="rasa_core.actions.html#module-rasa_core.actions.action">[1]</a>, <a href="rasa_dm.actions.html#module-rasa_core.actions.action">[2]</a>
-</li>
-      <li><a href="rasa_core.actions.html#module-rasa_core.actions.factories">rasa_core.actions.factories (module)</a>
-</li>
-      <li><a href="rasa_core.html#module-rasa_core.agent">rasa_core.agent (module)</a>, <a href="rasa_dm.html#module-rasa_core.agent">[1]</a>
-</li>
-      <li><a href="rasa_core.channels.html#module-rasa_core.channels">rasa_core.channels (module)</a>, <a href="rasa_dm.channels.html#module-rasa_core.channels">[1]</a>
-</li>
-      <li><a href="rasa_core.channels.html#module-rasa_core.channels.channel">rasa_core.channels.channel (module)</a>, <a href="rasa_dm.channels.html#module-rasa_core.channels.channel">[1]</a>
-</li>
-      <li><a href="rasa_core.channels.html#module-rasa_core.channels.console">rasa_core.channels.console (module)</a>, <a href="rasa_dm.channels.html#module-rasa_core.channels.console">[1]</a>
-</li>
-      <li><a href="rasa_core.channels.html#module-rasa_core.channels.direct">rasa_core.channels.direct (module)</a>
-</li>
-      <li><a href="rasa_core.channels.html#module-rasa_core.channels.file">rasa_core.channels.file (module)</a>, <a href="rasa_dm.channels.html#module-rasa_core.channels.file">[1]</a>
-</li>
-      <li><a href="rasa_core.channels.html#module-rasa_core.channels.rest">rasa_core.channels.rest (module)</a>, <a href="rasa_dm.channels.html#module-rasa_core.channels.rest">[1]</a>
-</li>
-      <li><a href="rasa_core.html#module-rasa_core.config">rasa_core.config (module)</a>
-</li>
-      <li><a href="rasa_core.conversation.html#module-rasa_core.conversation">rasa_core.conversation (module)</a>, <a href="rasa_dm.conversation.html#module-rasa_core.conversation">[1]</a>, <a href="topic.html#module-rasa_core.conversation">[2]</a>, <a href="turn.html#module-rasa_core.conversation">[3]</a>
-</li>
-      <li><a href="dispatcher.html#module-rasa_core.dispatcher">rasa_core.dispatcher (module)</a>, <a href="rasa_core.html#module-rasa_core.dispatcher">[1]</a>, <a href="rasa_dm.html#module-rasa_core.dispatcher">[2]</a>
-</li>
-      <li><a href="domain.html#module-rasa_core.domain">rasa_core.domain (module)</a>, <a href="rasa_core.html#module-rasa_core.domain">[1]</a>, <a href="rasa_dm.html#module-rasa_core.domain">[2]</a>
-</li>
-      <li><a href="events.html#module-rasa_core.events">rasa_core.events (module)</a>, <a href="rasa_core.events.html#module-rasa_core.events">[1]</a>, <a href="rasa_dm.events.html#module-rasa_core.events">[2]</a>
-</li>
-      <li><a href="rasa_core.html#module-rasa_core.featurizers">rasa_core.featurizers (module)</a>, <a href="rasa_dm.html#module-rasa_core.featurizers">[1]</a>
-</li>
-      <li><a href="rasa_core.html#module-rasa_core.interpreter">rasa_core.interpreter (module)</a>, <a href="rasa_dm.html#module-rasa_core.interpreter">[1]</a>
-</li>
-      <li><a href="policy.html#module-rasa_core.policies">rasa_core.policies (module)</a>, <a href="rasa_core.policies.html#module-rasa_core.policies">[1]</a>, <a href="rasa_dm.policies.html#module-rasa_core.policies">[2]</a>
-</li>
-      <li><a href="rasa_core.policies.html#module-rasa_core.policies.ensemble">rasa_core.policies.ensemble (module)</a>, <a href="rasa_dm.policies.html#module-rasa_core.policies.ensemble">[1]</a>
-</li>
-      <li><a href="policy.html#module-rasa_core.policies.keras_policy">rasa_core.policies.keras_policy (module)</a>, <a href="rasa_core.policies.html#module-rasa_core.policies.keras_policy">[1]</a>, <a href="rasa_dm.policies.html#module-rasa_core.policies.keras_policy">[2]</a>
-</li>
-      <li><a href="policy.html#module-rasa_core.policies.memoization">rasa_core.policies.memoization (module)</a>, <a href="rasa_core.policies.html#module-rasa_core.policies.memoization">[1]</a>, <a href="rasa_dm.policies.html#module-rasa_core.policies.memoization">[2]</a>
-</li>
-      <li><a href="rasa_core.policies.html#module-rasa_core.policies.online_policy_trainer">rasa_core.policies.online_policy_trainer (module)</a>, <a href="rasa_dm.policies.html#module-rasa_core.policies.online_policy_trainer">[1]</a>
-</li>
-      <li><a href="rasa_core.policies.html#module-rasa_core.policies.policy">rasa_core.policies.policy (module)</a>, <a href="rasa_dm.policies.html#module-rasa_core.policies.policy">[1]</a>
-</li>
-      <li><a href="rasa_core.policies.html#module-rasa_core.policies.scoring_policy">rasa_core.policies.scoring_policy (module)</a>, <a href="rasa_dm.policies.html#module-rasa_core.policies.scoring_policy">[1]</a>
-</li>
-      <li><a href="rasa_core.policies.html#module-rasa_core.policies.trainer">rasa_core.policies.trainer (module)</a>, <a href="rasa_dm.policies.html#module-rasa_core.policies.trainer">[1]</a>
-</li>
-      <li><a href="rasa_core.html#module-rasa_core.processor">rasa_core.processor (module)</a>
-</li>
-      <li><a href="rasa_core.html#module-rasa_core.slots">rasa_core.slots (module)</a>, <a href="rasa_dm.html#module-rasa_core.slots">[1]</a>
-</li>
-      <li><a href="rasa_core.html#module-rasa_core.tracker_store">rasa_core.tracker_store (module)</a>, <a href="rasa_dm.html#module-rasa_core.tracker_store">[1]</a>, <a href="tracker_store.html#module-rasa_core.tracker_store">[2]</a>
-</li>
-      <li><a href="rasa_core.html#module-rasa_core.trackers">rasa_core.trackers (module)</a>, <a href="rasa_dm.html#module-rasa_core.trackers">[1]</a>, <a href="tracker.html#module-rasa_core.trackers">[2]</a>
-</li>
-      <li><a href="rasa_core.html#module-rasa_core.train">rasa_core.train (module)</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#module-rasa_core.training_utils">rasa_core.training_utils (module)</a>, <a href="rasa_dm.training_utils.html#module-rasa_core.training_utils">[1]</a>
+      <li><a href="api/events.html#module-rasa_core.events">rasa_core.events (module)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.training_utils.html#module-rasa_core.training_utils.dsl">rasa_core.training_utils.dsl (module)</a>, <a href="rasa_dm.training_utils.html#module-rasa_core.training_utils.dsl">[1]</a>
+      <li><a href="api/events.html#rasa_core.events.ReminderScheduled">ReminderScheduled (class in rasa_core.events)</a>
 </li>
-      <li><a href="rasa_core.training_utils.html#module-rasa_core.training_utils.story_graph">rasa_core.training_utils.story_graph (module)</a>
+      <li><a href="api/events.html#rasa_core.events.Event.resolve_by_type">resolve_by_type() (rasa_core.events.Event static method)</a>
 </li>
-      <li><a href="rasa_core.html#module-rasa_core.utils">rasa_core.utils (module)</a>, <a href="rasa_dm.html#module-rasa_core.utils">[1]</a>
-</li>
-      <li><a href="rasa_core.html#module-rasa_core.version">rasa_core.version (module)</a>, <a href="rasa_dm.html#module-rasa_core.version">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.interpreter.RasaNLUHttpInterpreter">RasaNLUHttpInterpreter (class in rasa_core.interpreter)</a>, <a href="rasa_dm.html#rasa_core.interpreter.RasaNLUHttpInterpreter">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.interpreter.RasaNLUInterpreter">RasaNLUInterpreter (class in rasa_core.interpreter)</a>, <a href="rasa_dm.html#rasa_core.interpreter.RasaNLUInterpreter">[1]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryFileReader.read_from_file">read_from_file() (rasa_core.training_utils.dsl.StoryFileReader static method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryFileReader.read_from_file">[1]</a>
-</li>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.memoization.MemoizationPolicy.recall">recall() (rasa_core.policies.memoization.MemoizationPolicy method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.memoization.MemoizationPolicy.recall">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.tracker_store.RedisTrackerStore">RedisTrackerStore (class in rasa_core.tracker_store)</a>, <a href="rasa_dm.html#rasa_core.tracker_store.RedisTrackerStore">[1]</a>, <a href="tracker_store.html#rasa_core.tracker_store.RedisTrackerStore">[2]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.interpreter.RegexInterpreter">RegexInterpreter (class in rasa_core.interpreter)</a>, <a href="rasa_dm.html#rasa_core.interpreter.RegexInterpreter">[1]</a>
-</li>
-      <li><a href="rasa_core.events.html#rasa_core.events.ReminderScheduled">ReminderScheduled (class in rasa_core.events)</a>, <a href="rasa_dm.events.html#rasa_core.events.ReminderScheduled">[1]</a>
-</li>
-      <li><a href="rasa_core.actions.html#rasa_core.actions.factories.remote_action_factory">remote_action_factory() (in module rasa_core.actions.factories)</a>
-</li>
-      <li><a href="rasa_core.actions.html#rasa_core.actions.factories.RemoteAction">RemoteAction (class in rasa_core.actions.factories)</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.trackers.DialogueStateTracker.replay_events">replay_events() (rasa_core.trackers.DialogueStateTracker method)</a>, <a href="rasa_dm.html#rasa_core.trackers.DialogueStateTracker.replay_events">[1]</a>, <a href="tracker.html#rasa_core.trackers.DialogueStateTracker.replay_events">[2]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.utils.request_input">request_input() (in module rasa_core.utils)</a>, <a href="rasa_dm.html#rasa_core.utils.request_input">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.slots.Slot.reset">reset() (rasa_core.slots.Slot method)</a>, <a href="rasa_dm.html#rasa_core.slots.Slot.reset">[1]</a>
-</li>
-      <li><a href="action.html#rasa_core.actions.action.Action.resets_topic">resets_topic() (rasa_core.actions.action.Action method)</a>, <a href="rasa_core.actions.html#rasa_core.actions.action.Action.resets_topic">[1]</a>, <a href="rasa_dm.actions.html#rasa_core.actions.action.Action.resets_topic">[2]</a>
-
-      <ul>
-        <li><a href="action.html#rasa_core.actions.action.ActionListen.resets_topic">(rasa_core.actions.action.ActionListen method)</a>
-</li>
-        <li><a href="action.html#rasa_core.actions.action.ActionRestart.resets_topic">(rasa_core.actions.action.ActionRestart method)</a>
-</li>
-        <li><a href="action.html#rasa_core.actions.action.UtterAction.resets_topic">(rasa_core.actions.action.UtterAction method)</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.events.html#rasa_core.events.Event.resolve_by_type">resolve_by_type() (rasa_core.events.Event static method)</a>, <a href="rasa_dm.events.html#rasa_core.events.Event.resolve_by_type">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.html#rasa_core.slots.Slot.resolve_by_type">(rasa_core.slots.Slot static method)</a>, <a href="rasa_dm.html#rasa_core.slots.Slot.resolve_by_type">[1]</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.events.html#rasa_core.events.Restarted">Restarted (class in rasa_core.events)</a>, <a href="rasa_dm.events.html#rasa_core.events.Restarted">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.tracker_store.InMemoryTrackerStore.retrieve">retrieve() (rasa_core.tracker_store.InMemoryTrackerStore method)</a>, <a href="rasa_dm.html#rasa_core.tracker_store.InMemoryTrackerStore.retrieve">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.html#rasa_core.tracker_store.RedisTrackerStore.retrieve">(rasa_core.tracker_store.RedisTrackerStore method)</a>, <a href="rasa_dm.html#rasa_core.tracker_store.RedisTrackerStore.retrieve">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.tracker_store.TrackerStore.retrieve">(rasa_core.tracker_store.TrackerStore method)</a>, <a href="rasa_dm.html#rasa_core.tracker_store.TrackerStore.retrieve">[1]</a>
-</li>
-      </ul></li>
-      <li><a href="dispatcher.html#rasa_core.dispatcher.Dispatcher.retrieve_template">retrieve_template() (rasa_core.dispatcher.Dispatcher method)</a>, <a href="rasa_core.html#rasa_core.dispatcher.Dispatcher.retrieve_template">[1]</a>, <a href="rasa_dm.html#rasa_core.dispatcher.Dispatcher.retrieve_template">[2]</a>
-</li>
-      <li><a href="action.html#rasa_core.actions.action.Action.run">run() (rasa_core.actions.action.Action method)</a>, <a href="rasa_core.actions.html#rasa_core.actions.action.Action.run">[1]</a>, <a href="rasa_dm.actions.html#rasa_core.actions.action.Action.run">[2]</a>
-
-      <ul>
-        <li><a href="rasa_core.actions.html#rasa_core.actions.action.ActionListen.run">(rasa_core.actions.action.ActionListen method)</a>, <a href="rasa_dm.actions.html#rasa_core.actions.action.ActionListen.run">[1]</a>
-</li>
-        <li><a href="rasa_core.actions.html#rasa_core.actions.action.ActionRestart.run">(rasa_core.actions.action.ActionRestart method)</a>, <a href="rasa_dm.actions.html#rasa_core.actions.action.ActionRestart.run">[1]</a>
-</li>
-        <li><a href="action.html#rasa_core.actions.action.UtterAction.run">(rasa_core.actions.action.UtterAction method)</a>, <a href="rasa_core.actions.html#rasa_core.actions.action.UtterAction.run">[1]</a>, <a href="rasa_dm.actions.html#rasa_core.actions.action.UtterAction.run">[2]</a>
-</li>
-        <li><a href="rasa_core.actions.html#rasa_core.actions.factories.RemoteAction.run">(rasa_core.actions.factories.RemoteAction method)</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.online_policy_trainer.OnlinePolicyTrainer.run_online_training">run_online_training() (rasa_core.policies.online_policy_trainer.OnlinePolicyTrainer method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.online_policy_trainer.OnlinePolicyTrainer.run_online_training">[1]</a>
+      <li><a href="api/events.html#rasa_core.events.Restarted">Restarted (class in rasa_core.events)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1023,206 +343,48 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.tracker_store.InMemoryTrackerStore.save">save() (rasa_core.tracker_store.InMemoryTrackerStore method)</a>, <a href="rasa_dm.html#rasa_core.tracker_store.InMemoryTrackerStore.save">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.html#rasa_core.tracker_store.RedisTrackerStore.save">(rasa_core.tracker_store.RedisTrackerStore method)</a>, <a href="rasa_dm.html#rasa_core.tracker_store.RedisTrackerStore.save">[1]</a>
+      <li><a href="api/events.html#rasa_core.events.SlotSet">SlotSet (class in rasa_core.events)</a>
 </li>
-        <li><a href="rasa_core.html#rasa_core.tracker_store.TrackerStore.save">(rasa_core.tracker_store.TrackerStore method)</a>, <a href="rasa_dm.html#rasa_core.tracker_store.TrackerStore.save">[1]</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.online_policy_trainer.OnlinePolicyEnsemble.score">score() (rasa_core.policies.online_policy_trainer.OnlinePolicyEnsemble method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.online_policy_trainer.OnlinePolicyEnsemble.score">[1]</a>
-</li>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.scoring_policy.ScoringPolicy">ScoringPolicy (class in rasa_core.policies.scoring_policy)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.scoring_policy.ScoringPolicy">[1]</a>
-</li>
-      <li><a href="rasa_core.channels.html#rasa_core.channels.channel.OutputChannel.send_custom_message">send_custom_message() (rasa_core.channels.channel.OutputChannel method)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.channel.OutputChannel.send_custom_message">[1]</a>
-</li>
-      <li><a href="rasa_core.channels.html#rasa_core.channels.channel.OutputChannel.send_image_url">send_image_url() (rasa_core.channels.channel.OutputChannel method)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.channel.OutputChannel.send_image_url">[1]</a>
-</li>
-      <li><a href="rasa_core.channels.html#rasa_core.channels.channel.OutputChannel.send_text_message">send_text_message() (rasa_core.channels.channel.OutputChannel method)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.channel.OutputChannel.send_text_message">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.channels.html#rasa_core.channels.console.ConsoleOutputChannel.send_text_message">(rasa_core.channels.console.ConsoleOutputChannel method)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.console.ConsoleOutputChannel.send_text_message">[1]</a>
-</li>
-        <li><a href="rasa_core.channels.html#rasa_core.channels.direct.CollectingOutputChannel.send_text_message">(rasa_core.channels.direct.CollectingOutputChannel method)</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.channels.html#rasa_core.channels.channel.OutputChannel.send_text_with_buttons">send_text_with_buttons() (rasa_core.channels.channel.OutputChannel method)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.channel.OutputChannel.send_text_with_buttons">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.tracker_store.TrackerStore.serialise_tracker">serialise_tracker() (rasa_core.tracker_store.TrackerStore static method)</a>, <a href="rasa_dm.html#rasa_core.tracker_store.TrackerStore.serialise_tracker">[1]</a>
-</li>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.ensemble.SimplePolicyEnsemble">SimplePolicyEnsemble (class in rasa_core.policies.ensemble)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.ensemble.SimplePolicyEnsemble">[1]</a>
-</li>
-      <li><a href="domain.html#rasa_core.domain.Domain.slice_feature_history">slice_feature_history() (rasa_core.domain.Domain method)</a>, <a href="rasa_core.html#rasa_core.domain.Domain.slice_feature_history">[1]</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.slice_feature_history">[2]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.slots.Slot">Slot (class in rasa_core.slots)</a>, <a href="rasa_dm.html#rasa_core.slots.Slot">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.domain.Domain.slot_features">slot_features (rasa_core.domain.Domain attribute)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.slot_features">[1]</a>
-</li>
-      <li><a href="domain.html#rasa_core.domain.Domain.slots">slots (rasa_core.domain.Domain attribute)</a>, <a href="rasa_core.html#rasa_core.domain.Domain.slots">[1]</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.slots">[2]</a>
-
-      <ul>
-        <li><a href="rasa_core.html#rasa_core.domain.TemplateDomain.slots">(rasa_core.domain.TemplateDomain attribute)</a>, <a href="rasa_dm.html#rasa_core.domain.TemplateDomain.slots">[1]</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.html#rasa_core.domain.Domain.slots_for_entities">slots_for_entities() (rasa_core.domain.Domain method)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.slots_for_entities">[1]</a>
-</li>
-      <li><a href="rasa_core.events.html#rasa_core.events.SlotSet">SlotSet (class in rasa_core.events)</a>, <a href="rasa_dm.events.html#rasa_core.events.SlotSet">[1]</a>
-</li>
-      <li><a href="rasa_core.channels.html#rasa_core.channels.channel.InputChannel.start_async_listening">start_async_listening() (rasa_core.channels.channel.InputChannel method)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.channel.InputChannel.start_async_listening">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.channels.html#rasa_core.channels.console.ConsoleInputChannel.start_async_listening">(rasa_core.channels.console.ConsoleInputChannel method)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.console.ConsoleInputChannel.start_async_listening">[1]</a>
-</li>
-        <li><a href="rasa_core.channels.html#rasa_core.channels.file.FileInputChannel.start_async_listening">(rasa_core.channels.file.FileInputChannel method)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.file.FileInputChannel.start_async_listening">[1]</a>
-</li>
-        <li><a href="rasa_core.channels.html#rasa_core.channels.rest.HttpInputChannel.start_async_listening">(rasa_core.channels.rest.HttpInputChannel method)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.rest.HttpInputChannel.start_async_listening">[1]</a>
-</li>
-      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.agent.Agent.start_message_handling">start_message_handling() (rasa_core.agent.Agent method)</a>, <a href="rasa_dm.html#rasa_core.agent.Agent.start_message_handling">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.html#rasa_core.processor.MessageProcessor.start_message_handling">(rasa_core.processor.MessageProcessor method)</a>
+      <li><a href="api/agent.html#rasa_core.agent.Agent.start_message_handling">start_message_handling() (rasa_core.agent.Agent method)</a>
 </li>
-      </ul></li>
-      <li><a href="rasa_core.channels.html#rasa_core.channels.channel.InputChannel.start_sync_listening">start_sync_listening() (rasa_core.channels.channel.InputChannel method)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.channel.InputChannel.start_sync_listening">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.channels.html#rasa_core.channels.console.ConsoleInputChannel.start_sync_listening">(rasa_core.channels.console.ConsoleInputChannel method)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.console.ConsoleInputChannel.start_sync_listening">[1]</a>
+      <li><a href="api/events.html#rasa_core.events.StoryExported">StoryExported (class in rasa_core.events)</a>
 </li>
-        <li><a href="rasa_core.channels.html#rasa_core.channels.file.FileInputChannel.start_sync_listening">(rasa_core.channels.file.FileInputChannel method)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.file.FileInputChannel.start_sync_listening">[1]</a>
-</li>
-        <li><a href="rasa_core.channels.html#rasa_core.channels.rest.HttpInputChannel.start_sync_listening">(rasa_core.channels.rest.HttpInputChannel method)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.rest.HttpInputChannel.start_sync_listening">[1]</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.Story">Story (class in rasa_core.training_utils.dsl)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.Story">[1]</a>
-</li>
-      <li><a href="rasa_core.events.html#rasa_core.events.StoryExported">StoryExported (class in rasa_core.events)</a>, <a href="rasa_dm.events.html#rasa_core.events.StoryExported">[1]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryFileReader">StoryFileReader (class in rasa_core.training_utils.dsl)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryFileReader">[1]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.story_graph.StoryGraph">StoryGraph (class in rasa_core.training_utils.story_graph)</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryParseError">StoryParseError</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryParseError">[1]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryStep">StoryStep (class in rasa_core.training_utils.dsl)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryStep">[1]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.StoryStepBuilder">StoryStepBuilder (class in rasa_core.training_utils.dsl)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryStepBuilder">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.utils.str_range_list">str_range_list() (in module rasa_core.utils)</a>, <a href="rasa_dm.html#rasa_core.utils.str_range_list">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.utils.subsample_array">subsample_array() (in module rasa_core.utils)</a>, <a href="rasa_dm.html#rasa_core.utils.subsample_array">[1]</a>
-</li>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.keras_policy.KerasPolicy.SUPPORTS_ONLINE_TRAINING">SUPPORTS_ONLINE_TRAINING (rasa_core.policies.keras_policy.KerasPolicy attribute)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.keras_policy.KerasPolicy.SUPPORTS_ONLINE_TRAINING">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.memoization.MemoizationPolicy.SUPPORTS_ONLINE_TRAINING">(rasa_core.policies.memoization.MemoizationPolicy attribute)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.memoization.MemoizationPolicy.SUPPORTS_ONLINE_TRAINING">[1]</a>
-</li>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.policy.Policy.SUPPORTS_ONLINE_TRAINING">(rasa_core.policies.policy.Policy attribute)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.policy.Policy.SUPPORTS_ONLINE_TRAINING">[1]</a>
-</li>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.scoring_policy.ScoringPolicy.SUPPORTS_ONLINE_TRAINING">(rasa_core.policies.scoring_policy.ScoringPolicy attribute)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.scoring_policy.ScoringPolicy.SUPPORTS_ONLINE_TRAINING">[1]</a>
-</li>
-      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.domain.TemplateDomain">TemplateDomain (class in rasa_core.domain)</a>, <a href="rasa_dm.html#rasa_core.domain.TemplateDomain">[1]</a>
+      <li><a href="api/agent.html#rasa_core.agent.Agent.toggle_memoization">toggle_memoization() (rasa_core.agent.Agent method)</a>
 </li>
-      <li><a href="rasa_core.html#rasa_core.domain.Domain.templates">templates (rasa_core.domain.Domain attribute)</a>, <a href="rasa_dm.html#rasa_core.domain.Domain.templates">[1]</a>
+      <li><a href="api/events.html#rasa_core.events.TopicSet">TopicSet (class in rasa_core.events)</a>
+</li>
+      <li><a href="api/agent.html#rasa_core.agent.Agent.train">train() (rasa_core.agent.Agent method)</a>
+</li>
+      <li><a href="api/agent.html#rasa_core.agent.Agent.train_online">train_online() (rasa_core.agent.Agent method)</a>
+</li>
+      <li><a href="api/events.html#rasa_core.events.ActionReverted.type_name">type_name (rasa_core.events.ActionReverted attribute)</a>
 
       <ul>
-        <li><a href="rasa_core.html#rasa_core.domain.TemplateDomain.templates">(rasa_core.domain.TemplateDomain attribute)</a>, <a href="rasa_dm.html#rasa_core.domain.TemplateDomain.templates">[1]</a>
+        <li><a href="api/events.html#rasa_core.events.AllSlotsReset.type_name">(rasa_core.events.AllSlotsReset attribute)</a>
 </li>
-      </ul></li>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.online_policy_trainer.OnlinePolicyEnsemble.test">test() (rasa_core.policies.online_policy_trainer.OnlinePolicyEnsemble method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.online_policy_trainer.OnlinePolicyEnsemble.test">[1]</a>
+        <li><a href="api/events.html#rasa_core.events.Event.type_name">(rasa_core.events.Event attribute)</a>
 </li>
-      <li><a href="rasa_core.html#rasa_core.slots.TextSlot">TextSlot (class in rasa_core.slots)</a>, <a href="rasa_dm.html#rasa_core.slots.TextSlot">[1]</a>
+        <li><a href="api/events.html#rasa_core.events.ReminderScheduled.type_name">(rasa_core.events.ReminderScheduled attribute)</a>
 </li>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.memoization.MemoizationPolicy.toggle">toggle() (rasa_core.policies.memoization.MemoizationPolicy method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.memoization.MemoizationPolicy.toggle">[1]</a>
+        <li><a href="api/events.html#rasa_core.events.Restarted.type_name">(rasa_core.events.Restarted attribute)</a>
 </li>
-      <li><a href="rasa_core.html#rasa_core.agent.Agent.toggle_memoization">toggle_memoization() (rasa_core.agent.Agent method)</a>, <a href="rasa_dm.html#rasa_core.agent.Agent.toggle_memoization">[1]</a>
+        <li><a href="api/events.html#rasa_core.events.SlotSet.type_name">(rasa_core.events.SlotSet attribute)</a>
 </li>
-      <li><a href="rasa_core.html#rasa_core.utils.TopicStack.top">top (rasa_core.utils.TopicStack attribute)</a>, <a href="rasa_dm.html#rasa_core.utils.TopicStack.top">[1]</a>
+        <li><a href="api/events.html#rasa_core.events.StoryExported.type_name">(rasa_core.events.StoryExported attribute)</a>
 </li>
-      <li><a href="rasa_core.conversation.html#rasa_core.conversation.Topic">Topic (class in rasa_core.conversation)</a>, <a href="rasa_dm.conversation.html#rasa_core.conversation.Topic">[1]</a>, <a href="topic.html#rasa_core.conversation.Topic">[2]</a>
+        <li><a href="api/events.html#rasa_core.events.TopicSet.type_name">(rasa_core.events.TopicSet attribute)</a>
 </li>
-      <li><a href="rasa_core.html#rasa_core.trackers.DialogueStateTracker.topic">topic (rasa_core.trackers.DialogueStateTracker attribute)</a>, <a href="rasa_dm.html#rasa_core.trackers.DialogueStateTracker.topic">[1]</a>, <a href="tracker.html#rasa_core.trackers.DialogueStateTracker.topic">[2]</a>
+        <li><a href="api/events.html#rasa_core.events.UserUtteranceReverted.type_name">(rasa_core.events.UserUtteranceReverted attribute)</a>
 </li>
-      <li><a href="rasa_core.events.html#rasa_core.events.TopicSet">TopicSet (class in rasa_core.events)</a>, <a href="rasa_dm.events.html#rasa_core.events.TopicSet">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.utils.TopicStack">TopicStack (class in rasa_core.utils)</a>, <a href="rasa_dm.html#rasa_core.utils.TopicStack">[1]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.story_graph.StoryGraph.topological_sort">topological_sort() (rasa_core.training_utils.story_graph.StoryGraph static method)</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.tracker_store.TrackerStore">TrackerStore (class in rasa_core.tracker_store)</a>, <a href="rasa_dm.html#rasa_core.tracker_store.TrackerStore">[1]</a>, <a href="tracker_store.html#rasa_core.tracker_store.TrackerStore">[2]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.agent.Agent.train">train() (rasa_core.agent.Agent method)</a>, <a href="rasa_dm.html#rasa_core.agent.Agent.train">[1]</a>
-
-      <ul>
-        <li><a href="policy.html#rasa_core.policies.Policy.train">(rasa_core.policies.Policy method)</a>
-</li>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.ensemble.PolicyEnsemble.train">(rasa_core.policies.ensemble.PolicyEnsemble method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.ensemble.PolicyEnsemble.train">[1]</a>
-</li>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.keras_policy.KerasPolicy.train">(rasa_core.policies.keras_policy.KerasPolicy method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.keras_policy.KerasPolicy.train">[1]</a>
-</li>
-        <li><a href="policy.html#rasa_core.policies.memoization.MemoizationPolicy.train">(rasa_core.policies.memoization.MemoizationPolicy method)</a>, <a href="rasa_core.policies.html#rasa_core.policies.memoization.MemoizationPolicy.train">[1]</a>, <a href="rasa_dm.policies.html#rasa_core.policies.memoization.MemoizationPolicy.train">[2]</a>
-</li>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.online_policy_trainer.OnlinePolicyTrainer.train">(rasa_core.policies.online_policy_trainer.OnlinePolicyTrainer method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.online_policy_trainer.OnlinePolicyTrainer.train">[1]</a>
-</li>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.policy.Policy.train">(rasa_core.policies.policy.Policy method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.policy.Policy.train">[1]</a>
-</li>
-        <li><a href="rasa_core.policies.html#rasa_core.policies.trainer.PolicyTrainer.train">(rasa_core.policies.trainer.PolicyTrainer method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.trainer.PolicyTrainer.train">[1]</a>
-</li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.train.train_dialogue_model">train_dialogue_model() (in module rasa_core.train)</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.agent.Agent.train_online">train_online() (rasa_core.agent.Agent method)</a>, <a href="rasa_dm.html#rasa_core.agent.Agent.train_online">[1]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.TrainingsDataExtractor">TrainingsDataExtractor (class in rasa_core.training_utils.dsl)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.TrainingsDataExtractor">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.trackers.DialogueStateTracker.trigger_follow_up_action">trigger_follow_up_action() (rasa_core.trackers.DialogueStateTracker method)</a>, <a href="rasa_dm.html#rasa_core.trackers.DialogueStateTracker.trigger_follow_up_action">[1]</a>, <a href="tracker.html#rasa_core.trackers.DialogueStateTracker.trigger_follow_up_action">[2]</a>
-</li>
-      <li><a href="rasa_core.events.html#rasa_core.events.ActionReverted.type_name">type_name (rasa_core.events.ActionReverted attribute)</a>, <a href="rasa_dm.events.html#rasa_core.events.ActionReverted.type_name">[1]</a>
-
-      <ul>
-        <li><a href="rasa_core.events.html#rasa_core.events.AllSlotsReset.type_name">(rasa_core.events.AllSlotsReset attribute)</a>, <a href="rasa_dm.events.html#rasa_core.events.AllSlotsReset.type_name">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.Event.type_name">(rasa_core.events.Event attribute)</a>, <a href="rasa_dm.events.html#rasa_core.events.Event.type_name">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.ReminderScheduled.type_name">(rasa_core.events.ReminderScheduled attribute)</a>, <a href="rasa_dm.events.html#rasa_core.events.ReminderScheduled.type_name">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.Restarted.type_name">(rasa_core.events.Restarted attribute)</a>, <a href="rasa_dm.events.html#rasa_core.events.Restarted.type_name">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.SlotSet.type_name">(rasa_core.events.SlotSet attribute)</a>, <a href="rasa_dm.events.html#rasa_core.events.SlotSet.type_name">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.StoryExported.type_name">(rasa_core.events.StoryExported attribute)</a>, <a href="rasa_dm.events.html#rasa_core.events.StoryExported.type_name">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.TopicSet.type_name">(rasa_core.events.TopicSet attribute)</a>, <a href="rasa_dm.events.html#rasa_core.events.TopicSet.type_name">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.UserUtteranceReverted.type_name">(rasa_core.events.UserUtteranceReverted attribute)</a>, <a href="rasa_dm.events.html#rasa_core.events.UserUtteranceReverted.type_name">[1]</a>
-</li>
-        <li><a href="rasa_core.events.html#rasa_core.events.UserUttered.type_name">(rasa_core.events.UserUttered attribute)</a>, <a href="rasa_dm.events.html#rasa_core.events.UserUttered.type_name">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.slots.BooleanSlot.type_name">(rasa_core.slots.BooleanSlot attribute)</a>, <a href="rasa_dm.html#rasa_core.slots.BooleanSlot.type_name">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.slots.CategoricalSlot.type_name">(rasa_core.slots.CategoricalSlot attribute)</a>, <a href="rasa_dm.html#rasa_core.slots.CategoricalSlot.type_name">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.slots.FloatSlot.type_name">(rasa_core.slots.FloatSlot attribute)</a>, <a href="rasa_dm.html#rasa_core.slots.FloatSlot.type_name">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.slots.ListSlot.type_name">(rasa_core.slots.ListSlot attribute)</a>, <a href="rasa_dm.html#rasa_core.slots.ListSlot.type_name">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.slots.Slot.type_name">(rasa_core.slots.Slot attribute)</a>, <a href="rasa_dm.html#rasa_core.slots.Slot.type_name">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.slots.TextSlot.type_name">(rasa_core.slots.TextSlot attribute)</a>, <a href="rasa_dm.html#rasa_core.slots.TextSlot.type_name">[1]</a>
-</li>
-        <li><a href="rasa_core.html#rasa_core.slots.UnfeaturizedSlot.type_name">(rasa_core.slots.UnfeaturizedSlot attribute)</a>, <a href="rasa_dm.html#rasa_core.slots.UnfeaturizedSlot.type_name">[1]</a>
+        <li><a href="api/events.html#rasa_core.events.UserUttered.type_name">(rasa_core.events.UserUttered attribute)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -1231,69 +393,11 @@
 <h2 id="U">U</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.utils.bcolors.UNDERLINE">UNDERLINE (rasa_core.utils.bcolors attribute)</a>, <a href="rasa_dm.html#rasa_core.utils.bcolors.UNDERLINE">[1]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.FeaturizedTracker.undo_last_action">undo_last_action() (rasa_core.training_utils.dsl.FeaturizedTracker method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.FeaturizedTracker.undo_last_action">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.slots.UnfeaturizedSlot">UnfeaturizedSlot (class in rasa_core.slots)</a>, <a href="rasa_dm.html#rasa_core.slots.UnfeaturizedSlot">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.utils.HashableNDArray.unwrap">unwrap() (rasa_core.utils.HashableNDArray method)</a>, <a href="rasa_dm.html#rasa_core.utils.HashableNDArray.unwrap">[1]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.trackers.DialogueStateTracker.update">update() (rasa_core.trackers.DialogueStateTracker method)</a>, <a href="rasa_dm.html#rasa_core.trackers.DialogueStateTracker.update">[1]</a>, <a href="tracker.html#rasa_core.trackers.DialogueStateTracker.update">[2]</a>
-
-      <ul>
-        <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.FeaturizedTracker.update">(rasa_core.training_utils.dsl.FeaturizedTracker method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.FeaturizedTracker.update">[1]</a>
-</li>
-      </ul></li>
-      <li><a href="rasa_core.html#rasa_core.trackers.DialogueStateTracker.update_from_dialogue">update_from_dialogue() (rasa_core.trackers.DialogueStateTracker method)</a>, <a href="rasa_dm.html#rasa_core.trackers.DialogueStateTracker.update_from_dialogue">[1]</a>, <a href="tracker.html#rasa_core.trackers.DialogueStateTracker.update_from_dialogue">[2]</a>
-</li>
-      <li><a href="rasa_core.html#rasa_core.trackers.DialogueStateTracker.update_from_events">update_from_events() (rasa_core.trackers.DialogueStateTracker method)</a>, <a href="rasa_dm.html#rasa_core.trackers.DialogueStateTracker.update_from_events">[1]</a>, <a href="tracker.html#rasa_core.trackers.DialogueStateTracker.update_from_events">[2]</a>
-</li>
-      <li><a href="rasa_core.training_utils.html#rasa_core.training_utils.dsl.Story.used_actions">used_actions() (rasa_core.training_utils.dsl.Story method)</a>, <a href="rasa_dm.training_utils.html#rasa_core.training_utils.dsl.Story.used_actions">[1]</a>
+      <li><a href="api/events.html#rasa_core.events.UserUtteranceReverted">UserUtteranceReverted (class in rasa_core.events)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.channels.html#rasa_core.channels.channel.UserMessage">UserMessage (class in rasa_core.channels.channel)</a>, <a href="rasa_dm.channels.html#rasa_core.channels.channel.UserMessage">[1]</a>
-</li>
-      <li><a href="rasa_core.events.html#rasa_core.events.UserUtteranceReverted">UserUtteranceReverted (class in rasa_core.events)</a>, <a href="rasa_dm.events.html#rasa_core.events.UserUtteranceReverted">[1]</a>
-</li>
-      <li><a href="rasa_core.events.html#rasa_core.events.UserUttered">UserUttered (class in rasa_core.events)</a>, <a href="rasa_dm.events.html#rasa_core.events.UserUttered">[1]</a>
-</li>
-      <li><a href="dispatcher.html#rasa_core.dispatcher.Dispatcher.utter_attachment">utter_attachment() (rasa_core.dispatcher.Dispatcher method)</a>, <a href="rasa_core.html#rasa_core.dispatcher.Dispatcher.utter_attachment">[1]</a>, <a href="rasa_dm.html#rasa_core.dispatcher.Dispatcher.utter_attachment">[2]</a>
-</li>
-      <li><a href="dispatcher.html#rasa_core.dispatcher.Dispatcher.utter_button_message">utter_button_message() (rasa_core.dispatcher.Dispatcher method)</a>, <a href="rasa_core.html#rasa_core.dispatcher.Dispatcher.utter_button_message">[1]</a>, <a href="rasa_dm.html#rasa_core.dispatcher.Dispatcher.utter_button_message">[2]</a>
-</li>
-      <li><a href="dispatcher.html#rasa_core.dispatcher.Dispatcher.utter_button_template">utter_button_template() (rasa_core.dispatcher.Dispatcher method)</a>, <a href="rasa_core.html#rasa_core.dispatcher.Dispatcher.utter_button_template">[1]</a>, <a href="rasa_dm.html#rasa_core.dispatcher.Dispatcher.utter_button_template">[2]</a>
-</li>
-      <li><a href="dispatcher.html#rasa_core.dispatcher.Dispatcher.utter_custom_message">utter_custom_message() (rasa_core.dispatcher.Dispatcher method)</a>, <a href="rasa_core.html#rasa_core.dispatcher.Dispatcher.utter_custom_message">[1]</a>, <a href="rasa_dm.html#rasa_core.dispatcher.Dispatcher.utter_custom_message">[2]</a>
-</li>
-      <li><a href="dispatcher.html#rasa_core.dispatcher.Dispatcher.utter_message">utter_message() (rasa_core.dispatcher.Dispatcher method)</a>, <a href="rasa_core.html#rasa_core.dispatcher.Dispatcher.utter_message">[1]</a>, <a href="rasa_dm.html#rasa_core.dispatcher.Dispatcher.utter_message">[2]</a>
-</li>
-      <li><a href="dispatcher.html#rasa_core.dispatcher.Dispatcher.utter_template">utter_template() (rasa_core.dispatcher.Dispatcher method)</a>, <a href="rasa_core.html#rasa_core.dispatcher.Dispatcher.utter_template">[1]</a>, <a href="rasa_dm.html#rasa_core.dispatcher.Dispatcher.utter_template">[2]</a>
-</li>
-      <li><a href="action.html#rasa_core.actions.action.UtterAction">UtterAction (class in rasa_core.actions.action)</a>, <a href="rasa_core.actions.html#rasa_core.actions.action.UtterAction">[1]</a>, <a href="rasa_dm.actions.html#rasa_core.actions.action.UtterAction">[2]</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="V">V</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.slots.Slot.value_reset_delay">value_reset_delay() (rasa_core.slots.Slot method)</a>, <a href="rasa_dm.html#rasa_core.slots.Slot.value_reset_delay">[1]</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="W">W</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.utils.bcolors.WARNING">WARNING (rasa_core.utils.bcolors attribute)</a>, <a href="rasa_dm.html#rasa_core.utils.bcolors.WARNING">[1]</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rasa_core.html#rasa_core.utils.wrap_with_color">wrap_with_color() (in module rasa_core.utils)</a>, <a href="rasa_dm.html#rasa_core.utils.wrap_with_color">[1]</a>
-</li>
-      <li><a href="rasa_core.policies.html#rasa_core.policies.online_policy_trainer.OnlinePolicyEnsemble.write_out_story">write_out_story() (rasa_core.policies.online_policy_trainer.OnlinePolicyEnsemble method)</a>, <a href="rasa_dm.policies.html#rasa_core.policies.online_policy_trainer.OnlinePolicyEnsemble.write_out_story">[1]</a>
+      <li><a href="api/events.html#rasa_core.events.UserUttered">UserUttered (class in rasa_core.events)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1327,17 +431,19 @@
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.1
+        v: 0.7.0a5
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="0.7.1/genindex.html">0.7.1</a></dd>
-            <dd><a href="0.7.0a5/index.html">0.7.0a5</a></dd>
+            <dd><a href="0.7.0a5/genindex.html">0.7.0a5</a></dd>
             <dd><a href="0.7.0a6/index.html">0.7.0a6</a></dd>
             <dd><a href="0.7.0a7/index.html">0.7.0a7</a></dd>
             <dd><a href="0.7.0a8/index.html">0.7.0a8</a></dd>
+            <dd><a href="0.7.0a9/index.html">0.7.0a9</a></dd>
+            <dd><a href="0.6.9/index.html">0.6.9</a></dd>
+            <dd><a href="0.6.5/index.html">0.6.5</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
@@ -1352,7 +458,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.0a3',
+            VERSION:'0.7.0a5',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

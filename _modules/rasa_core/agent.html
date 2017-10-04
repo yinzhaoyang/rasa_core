@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>rasa_core.agent &mdash; Rasa Core 0.7.0a3 documentation</title>
+  <title>rasa_core.agent &mdash; Rasa Core 0.7.0a5 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Rasa Core 0.7.0a3 documentation" href="../../index.html"/>
+    <link rel="top" title="Rasa Core 0.7.0a5 documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -101,6 +101,7 @@
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../patterns.html">Common Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http.html">Using Rasa Core as a HTTP server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../slot_types.html">Slot Types Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../plumbing.html">Plumbing - How it all fits together</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../connectors.html">Connecting to messaging &amp; voice platforms</a></li>
@@ -115,7 +116,8 @@
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../library.html">Library Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/agent.html">Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/events.html">Events</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer Documentation</span></p>
 <ul>
@@ -213,7 +215,7 @@
 <span class="kn">from</span> <span class="nn">rasa_core.tracker_store</span> <span class="k">import</span> <span class="n">InMemoryTrackerStore</span><span class="p">,</span> <span class="n">TrackerStore</span>
 
 
-<div class="viewcode-block" id="Agent"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.agent.Agent">[docs]</a><span class="k">class</span> <span class="nc">Agent</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Agent"><a class="viewcode-back" href="../../api/agent.html#rasa_core.agent.Agent">[docs]</a><span class="k">class</span> <span class="nc">Agent</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Public interface for common things to do.</span>
 
 <span class="sd">     This includes e.g. train an assistant, or handle messages</span>
@@ -233,7 +235,7 @@
                 <span class="n">tracker_store</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="Agent.load"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.agent.Agent.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">interpreter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tracker_store</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Agent.load"><a class="viewcode-back" href="../../api/agent.html#rasa_core.agent.Agent.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">interpreter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tracker_store</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="c1"># type: (Text, Any, Optional[TrackerStore]) -&gt; Agent</span>
         <span class="n">domain</span> <span class="o">=</span> <span class="n">TemplateDomain</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;domain.yml&quot;</span><span class="p">))</span>
         <span class="c1"># ensures the domain hasn&#39;t changed between test and train</span>
@@ -244,7 +246,7 @@
         <span class="n">_tracker_store</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_create_tracker_store</span><span class="p">(</span><span class="n">tracker_store</span><span class="p">,</span> <span class="n">domain</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Agent</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="n">ensemble</span><span class="p">,</span> <span class="n">featurizer</span><span class="p">,</span> <span class="n">_interpreter</span><span class="p">,</span> <span class="n">_tracker_store</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Agent.handle_message"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.agent.Agent.handle_message">[docs]</a>    <span class="k">def</span> <span class="nf">handle_message</span><span class="p">(</span>
+<div class="viewcode-block" id="Agent.handle_message"><a class="viewcode-back" href="../../api/agent.html#rasa_core.agent.Agent.handle_message">[docs]</a>    <span class="k">def</span> <span class="nf">handle_message</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">text_message</span><span class="p">,</span>  <span class="c1"># type: Text</span>
             <span class="n">message_preprocessor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Callable[[Text], Text]]</span>
@@ -281,7 +283,7 @@
         <span class="k">return</span> <span class="n">processor</span><span class="o">.</span><span class="n">handle_message</span><span class="p">(</span>
                 <span class="n">UserMessage</span><span class="p">(</span><span class="n">text_message</span><span class="p">,</span> <span class="n">output_channel</span><span class="p">,</span> <span class="n">sender</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Agent.start_message_handling"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.agent.Agent.start_message_handling">[docs]</a>    <span class="k">def</span> <span class="nf">start_message_handling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="Agent.start_message_handling"><a class="viewcode-back" href="../../api/agent.html#rasa_core.agent.Agent.start_message_handling">[docs]</a>    <span class="k">def</span> <span class="nf">start_message_handling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                <span class="n">text_message</span><span class="p">,</span>
                                <span class="n">sender</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="c1"># type: (Text, Optional[Text]) -&gt; Dict[Text, Any]</span>
@@ -290,7 +292,7 @@
         <span class="k">return</span> <span class="n">processor</span><span class="o">.</span><span class="n">start_message_handling</span><span class="p">(</span>
                 <span class="n">UserMessage</span><span class="p">(</span><span class="n">text_message</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">sender</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Agent.continue_message_handling"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.agent.Agent.continue_message_handling">[docs]</a>    <span class="k">def</span> <span class="nf">continue_message_handling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender_id</span><span class="p">,</span> <span class="n">executed_action</span><span class="p">,</span> <span class="n">events</span><span class="p">):</span>
+<div class="viewcode-block" id="Agent.continue_message_handling"><a class="viewcode-back" href="../../api/agent.html#rasa_core.agent.Agent.continue_message_handling">[docs]</a>    <span class="k">def</span> <span class="nf">continue_message_handling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender_id</span><span class="p">,</span> <span class="n">executed_action</span><span class="p">,</span> <span class="n">events</span><span class="p">):</span>
         <span class="c1"># type: (Text, Text, List[Event]) -&gt; Dict[Text, Any]</span>
 
         <span class="n">processor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_processor</span><span class="p">()</span>
@@ -298,7 +300,7 @@
                                                    <span class="n">executed_action</span><span class="p">,</span>
                                                    <span class="n">events</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Agent.handle_channel"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.agent.Agent.handle_channel">[docs]</a>    <span class="k">def</span> <span class="nf">handle_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_channel</span><span class="p">,</span>
+<div class="viewcode-block" id="Agent.handle_channel"><a class="viewcode-back" href="../../api/agent.html#rasa_core.agent.Agent.handle_channel">[docs]</a>    <span class="k">def</span> <span class="nf">handle_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_channel</span><span class="p">,</span>
                        <span class="n">message_preprocessor</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="c1"># type: (InputChannel, Optional[Callable[[Text], Text]]) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Handle messages coming from the channel.&quot;&quot;&quot;</span>
@@ -306,7 +308,7 @@
         <span class="n">processor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_processor</span><span class="p">(</span><span class="n">message_preprocessor</span><span class="p">)</span>
         <span class="n">processor</span><span class="o">.</span><span class="n">handle_channel</span><span class="p">(</span><span class="n">input_channel</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Agent.toggle_memoization"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.agent.Agent.toggle_memoization">[docs]</a>    <span class="k">def</span> <span class="nf">toggle_memoization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">activate</span><span class="p">):</span>
+<div class="viewcode-block" id="Agent.toggle_memoization"><a class="viewcode-back" href="../../api/agent.html#rasa_core.agent.Agent.toggle_memoization">[docs]</a>    <span class="k">def</span> <span class="nf">toggle_memoization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">activate</span><span class="p">):</span>
         <span class="c1"># type: (bool) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Toggles the memoization on and off.</span>
 
@@ -323,7 +325,7 @@
             <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="n">MemoizationPolicy</span><span class="p">:</span>
                 <span class="n">p</span><span class="o">.</span><span class="n">toggle</span><span class="p">(</span><span class="n">activate</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Agent.train"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.agent.Agent.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="Agent.train"><a class="viewcode-back" href="../../api/agent.html#rasa_core.agent.Agent.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Optional[Text], **Any) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Train the policies / policy ensemble using dialogue data from file&quot;&quot;&quot;</span>
 
@@ -331,7 +333,7 @@
                                 <span class="bp">self</span><span class="o">.</span><span class="n">featurizer</span><span class="p">)</span>
         <span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Agent.train_online"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.agent.Agent.train_online">[docs]</a>    <span class="k">def</span> <span class="nf">train_online</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="Agent.train_online"><a class="viewcode-back" href="../../api/agent.html#rasa_core.agent.Agent.train_online">[docs]</a>    <span class="k">def</span> <span class="nf">train_online</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                      <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                      <span class="n">input_channel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                      <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -351,7 +353,7 @@
                                       <span class="bp">self</span><span class="o">.</span><span class="n">featurizer</span><span class="p">)</span>
         <span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">interpreter</span><span class="p">,</span> <span class="n">input_channel</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Agent.persist"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.agent.Agent.persist">[docs]</a>    <span class="k">def</span> <span class="nf">persist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_path</span><span class="p">):</span>
+<div class="viewcode-block" id="Agent.persist"><a class="viewcode-back" href="../../api/agent.html#rasa_core.agent.Agent.persist">[docs]</a>    <span class="k">def</span> <span class="nf">persist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_path</span><span class="p">):</span>
         <span class="c1"># type: (Text) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Persists this agent into a directory for later loading and usage.&quot;&quot;&quot;</span>
 
@@ -449,17 +451,19 @@
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.1
+        v: 0.7.0a5
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="../../0.7.1/_modules/rasa_core/agent.html">0.7.1</a></dd>
-            <dd><a href="../../0.7.0a5/index.html">0.7.0a5</a></dd>
+            <dd><a href="../../0.7.0a5/_modules/rasa_core/agent.html">0.7.0a5</a></dd>
             <dd><a href="../../0.7.0a6/index.html">0.7.0a6</a></dd>
             <dd><a href="../../0.7.0a7/index.html">0.7.0a7</a></dd>
             <dd><a href="../../0.7.0a8/index.html">0.7.0a8</a></dd>
+            <dd><a href="../../0.7.0a9/index.html">0.7.0a9</a></dd>
+            <dd><a href="../../0.6.9/index.html">0.6.9</a></dd>
+            <dd><a href="../../0.6.5/index.html">0.6.5</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
@@ -474,7 +478,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.7.0a3',
+            VERSION:'0.7.0a5',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

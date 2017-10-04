@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Change Log &mdash; Rasa Core 0.7.0a8 documentation</title>
+  <title>Change Log &mdash; Rasa Core 0.7.0a9 documentation</title>
   
 
   
@@ -35,8 +35,8 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.0a8 documentation" href="index.html"/>
-        <link rel="prev" title="Events" href="api/events.html"/> 
+    <link rel="top" title="Rasa Core 0.7.0a9 documentation" href="index.html"/>
+        <link rel="prev" title="Tracking Conversation State" href="state.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -101,26 +101,24 @@
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http.html">Using Rasa Core as a HTTP server</a></li>
-<li class="toctree-l1"><a class="reference internal" href="slot_types.html">Slot Types Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">Rasa Core as a HTTP server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains_actions.html">Domains and Actions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
-<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stories.html">Stories Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stories.html">Training Data Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling Reminders</a></li>
-<li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="message_handling.html">Message Handling</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p class="caption"><span class="caption-text">Python API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api/agent.html">Agent</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/events.html">Events</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer Documentation</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Change Log</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#unreleased-master">[Unreleased] - master</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#added">Added</a></li>
@@ -223,7 +221,7 @@
 
 
 
-    <p class="scv-banner scv-sphinx_rtd_theme"><a href="../0.7.1/changelog.html"><b>Warning:</b> This document is for the development version of Rasa Core. The latest version is 0.7.1.</a></p>
+    <p class="scv-banner scv-sphinx_rtd_theme"><a href="../0.7.0a5/changelog.html"><b>Warning:</b> This document is for the development version of Rasa Core. The latest version is 0.7.0a5.</a></p>
 
 <style>
 /* CSS overrides for sphinx_rtd_theme */
@@ -372,7 +370,7 @@ This project adheres to <a class="reference external" href="http://semver.org/">
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="api/events.html" class="btn btn-neutral" title="Events" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="state.html" class="btn btn-neutral" title="Tracking Conversation State" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -405,11 +403,13 @@ This project adheres to <a class="reference external" href="http://semver.org/">
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="../0.7.1/changelog.html">0.7.1</a></dd>
             <dd><a href="../0.7.0a5/changelog.html">0.7.0a5</a></dd>
             <dd><a href="../0.7.0a6/changelog.html">0.7.0a6</a></dd>
             <dd><a href="../0.7.0a7/changelog.html">0.7.0a7</a></dd>
             <dd><a href="../0.7.0a8/changelog.html">0.7.0a8</a></dd>
+            <dd><a href="../0.7.0a9/changelog.html">0.7.0a9</a></dd>
+            <dd><a href="../0.6.9/changelog.html">0.6.9</a></dd>
+            <dd><a href="../0.6.5/changelog.html">0.6.5</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
@@ -424,7 +424,7 @@ This project adheres to <a class="reference external" href="http://semver.org/">
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.0a8',
+            VERSION:'0.7.0a9',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

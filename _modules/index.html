@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Overview: module code &mdash; Rasa Core 0.7.0a3 documentation</title>
+  <title>Overview: module code &mdash; Rasa Core 0.7.0a5 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="Rasa Core 0.7.0a3 documentation" href="../index.html"/> 
+    <link rel="top" title="Rasa Core 0.7.0a5 documentation" href="../index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -100,6 +100,7 @@
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../patterns.html">Common Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http.html">Using Rasa Core as a HTTP server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../slot_types.html">Slot Types Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plumbing.html">Plumbing - How it all fits together</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../connectors.html">Connecting to messaging &amp; voice platforms</a></li>
@@ -114,7 +115,8 @@
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../library.html">Library Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/agent.html">Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/events.html">Events</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer Documentation</span></p>
 <ul>
@@ -187,37 +189,8 @@
 
 
 <h1>All modules for which code is available</h1>
-<ul><li><a href="abc.html">abc</a></li>
-<li><a href="rasa_core/actions/action.html">rasa_core.actions.action</a></li>
-<li><a href="rasa_core/actions/factories.html">rasa_core.actions.factories</a></li>
-<li><a href="rasa_core/agent.html">rasa_core.agent</a></li>
-<li><a href="rasa_core/channels/channel.html">rasa_core.channels.channel</a></li>
-<li><a href="rasa_core/channels/console.html">rasa_core.channels.console</a></li>
-<li><a href="rasa_core/channels/direct.html">rasa_core.channels.direct</a></li>
-<li><a href="rasa_core/channels/file.html">rasa_core.channels.file</a></li>
-<li><a href="rasa_core/channels/rest.html">rasa_core.channels.rest</a></li>
-<li><a href="rasa_core/conversation.html">rasa_core.conversation</a></li>
-<li><a href="rasa_core/dispatcher.html">rasa_core.dispatcher</a></li>
-<li><a href="rasa_core/domain.html">rasa_core.domain</a></li>
+<ul><li><a href="rasa_core/agent.html">rasa_core.agent</a></li>
 <li><a href="rasa_core/events.html">rasa_core.events</a></li>
-<li><a href="rasa_core/featurizers.html">rasa_core.featurizers</a></li>
-<li><a href="rasa_core/interpreter.html">rasa_core.interpreter</a></li>
-<li><a href="rasa_core/policies/ensemble.html">rasa_core.policies.ensemble</a></li>
-<li><a href="rasa_core/policies/keras_policy.html">rasa_core.policies.keras_policy</a></li>
-<li><a href="rasa_core/policies/memoization.html">rasa_core.policies.memoization</a></li>
-<li><a href="rasa_core/policies/online_policy_trainer.html">rasa_core.policies.online_policy_trainer</a></li>
-<li><a href="rasa_core/policies/policy.html">rasa_core.policies.policy</a></li>
-<li><a href="rasa_core/policies/scoring_policy.html">rasa_core.policies.scoring_policy</a></li>
-<li><a href="rasa_core/policies/trainer.html">rasa_core.policies.trainer</a></li>
-<li><a href="rasa_core/processor.html">rasa_core.processor</a></li>
-<li><a href="rasa_core/slots.html">rasa_core.slots</a></li>
-<li><a href="rasa_core/tracker_store.html">rasa_core.tracker_store</a></li>
-<li><a href="rasa_core/trackers.html">rasa_core.trackers</a></li>
-<li><a href="rasa_core/train.html">rasa_core.train</a></li>
-<li><a href="rasa_core/training_utils.html">rasa_core.training_utils</a></li>
-<ul><li><a href="rasa_core/training_utils/dsl.html">rasa_core.training_utils.dsl</a></li>
-<li><a href="rasa_core/training_utils/story_graph.html">rasa_core.training_utils.story_graph</a></li>
-</ul><li><a href="rasa_core/utils.html">rasa_core.utils</a></li>
 </ul>
 
            </div>
@@ -247,17 +220,19 @@
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.1
+        v: 0.7.0a5
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="../0.7.1/_modules/index.html">0.7.1</a></dd>
-            <dd><a href="../0.7.0a5/index.html">0.7.0a5</a></dd>
+            <dd><a href="../0.7.0a5/_modules/index.html">0.7.0a5</a></dd>
             <dd><a href="../0.7.0a6/index.html">0.7.0a6</a></dd>
             <dd><a href="../0.7.0a7/index.html">0.7.0a7</a></dd>
             <dd><a href="../0.7.0a8/index.html">0.7.0a8</a></dd>
+            <dd><a href="../0.7.0a9/index.html">0.7.0a9</a></dd>
+            <dd><a href="../0.6.9/index.html">0.6.9</a></dd>
+            <dd><a href="../0.6.5/index.html">0.6.5</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
@@ -272,7 +247,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.7.0a3',
+            VERSION:'0.7.0a5',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

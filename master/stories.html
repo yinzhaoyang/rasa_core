@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Stories Data Format &mdash; Rasa Core 0.7.0a8 documentation</title>
+  <title>Training Data Format &mdash; Rasa Core 0.7.0a9 documentation</title>
   
 
   
@@ -35,9 +35,9 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.0a8 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.7.0a9 documentation" href="index.html"/>
         <link rel="next" title="Scheduling Reminders" href="scheduling.html"/>
-        <link rel="prev" title="Creating Policies" href="policies.html"/> 
+        <link rel="prev" title="Connecting to messaging &amp; voice platforms" href="connectors.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -102,29 +102,27 @@
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http.html">Using Rasa Core as a HTTP server</a></li>
-<li class="toctree-l1"><a class="reference internal" href="slot_types.html">Slot Types Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">Rasa Core as a HTTP server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains_actions.html">Domains and Actions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
-<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Stories Data Format</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Training Data Format</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#visualization-of-story-training-data">Visualization of story training data</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling Reminders</a></li>
-<li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="message_handling.html">Message Handling</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API</span></p>
+<p class="caption"><span class="caption-text">Python API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api/agent.html">Agent</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/events.html">Events</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer Documentation</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Change Log</a></li>
 </ul>
 
@@ -170,7 +168,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Stories Data Format</li>
+      <li>Training Data Format</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -197,7 +195,7 @@
 
 
 
-    <p class="scv-banner scv-sphinx_rtd_theme"><a href="../0.7.1/stories.html"><b>Warning:</b> This document is for the development version of Rasa Core. The latest version is 0.7.1.</a></p>
+    <p class="scv-banner scv-sphinx_rtd_theme"><a href="../0.7.0a5/stories.html"><b>Warning:</b> This document is for the development version of Rasa Core. The latest version is 0.7.0a5.</a></p>
 
 <style>
 /* CSS overrides for sphinx_rtd_theme */
@@ -232,8 +230,8 @@
     margin-right: 4px;  /* make room for the exclamation icon */
 }
 </style>
-<div class="section" id="stories-data-format">
-<span id="stories"></span><h1>Stories Data Format<a class="headerlink" href="#stories-data-format" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="training-data-format">
+<span id="stories"></span><h1>Training Data Format<a class="headerlink" href="#training-data-format" title="Permalink to this headline">¶</a></h1>
 <p>Here&#8217;s an example from the bAbi data:</p>
 <div class="highlight-md"><div class="highlight"><pre><span></span><span class="gu">##</span> story_07715946
 <span class="k">*</span> _greet
@@ -247,7 +245,8 @@
    <span class="k">-</span> action_ack_dosearch
 </pre></div>
 </div>
-<p>A story starts with a name preceeded by two hashes <code class="docutils literal"><span class="pre">##</span> <span class="pre">story_03248462</span></code>, this is arbitrary but can be used for debugging.
+<p>This is what we call a <strong>story</strong>. A story starts with a name preceeded by two
+hashes <code class="docutils literal"><span class="pre">##</span> <span class="pre">story_03248462</span></code>, this is arbitrary but can be used for debugging.
 After this point, we have two types of events which sequentially happen when separated by a newline.</p>
 <p>An event such as <code class="docutils literal"><span class="pre">*</span> <span class="pre">_inform[location=bombay]</span></code> is a user utterance. These utterances are written like <code class="docutils literal"><span class="pre">*</span> <span class="pre">_{intent}[{entities}]</span></code>.
 The intent and entities provided (as well as those in the past)
@@ -303,7 +302,7 @@ did in the above example with the <code class="docutils literal"><span class="pr
         <a href="scheduling.html" class="btn btn-neutral float-right" title="Scheduling Reminders" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="policies.html" class="btn btn-neutral" title="Creating Policies" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="connectors.html" class="btn btn-neutral" title="Connecting to messaging &amp; voice platforms" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -336,11 +335,13 @@ did in the above example with the <code class="docutils literal"><span class="pr
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="../0.7.1/stories.html">0.7.1</a></dd>
             <dd><a href="../0.7.0a5/stories.html">0.7.0a5</a></dd>
             <dd><a href="../0.7.0a6/stories.html">0.7.0a6</a></dd>
             <dd><a href="../0.7.0a7/stories.html">0.7.0a7</a></dd>
             <dd><a href="../0.7.0a8/stories.html">0.7.0a8</a></dd>
+            <dd><a href="../0.7.0a9/stories.html">0.7.0a9</a></dd>
+            <dd><a href="../0.6.9/stories.html">0.6.9</a></dd>
+            <dd><a href="../0.6.5/stories.html">0.6.5</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
@@ -355,7 +356,7 @@ did in the above example with the <code class="docutils literal"><span class="pr
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.0a8',
+            VERSION:'0.7.0a9',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

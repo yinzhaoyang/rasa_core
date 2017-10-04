@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Plumbing - How it all fits together &mdash; Rasa Core 0.7.0a3 documentation</title>
+  <title>Plumbing - How it all fits together &mdash; Rasa Core 0.7.0a5 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.0a3 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.7.0a5 documentation" href="index.html"/>
         <link rel="next" title="Connecting to messaging &amp; voice platforms" href="connectors.html"/>
         <link rel="prev" title="Slot Types Reference" href="slot_types.html"/> 
 
@@ -102,6 +102,7 @@
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">Using Rasa Core as a HTTP server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="slot_types.html">Slot Types Reference</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Plumbing - How it all fits together</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
@@ -116,7 +117,8 @@
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="library.html">Library Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/agent.html">Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/events.html">Events</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer Documentation</span></p>
 <ul>
@@ -246,7 +248,7 @@ It receives the info that a new message has come in.</li>
 <p>The steps above are carried out by the <code class="docutils literal"><span class="pre">Controller</span></code>, which adds messages to a queue as they come in,
 and asynchronously works through the message queue to respond to users.
 In most cases, you shouldn&#8217;t have to worry at all about this, but the details are explained in <a class="reference internal" href="message_handling.html#message-handling"><span class="std std-ref">Message Handling</span></a>.</p>
-<p>Now check out the <span class="xref doc">tutorial</span> and <a class="reference internal" href="tutorial_scratch.html"><span class="doc">A Bot From Scratch</span></a>!</p>
+<p>Now check out the <a class="reference internal" href="tour.html"><span class="doc">A Quick Tour (no ML)</span></a> and <a class="reference internal" href="tutorial_scratch.html"><span class="doc">A Bot From Scratch</span></a>!</p>
 </div>
 
 
@@ -286,17 +288,19 @@ In most cases, you shouldn&#8217;t have to worry at all about this, but the deta
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.1
+        v: 0.7.0a5
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="0.7.1/plumbing.html">0.7.1</a></dd>
             <dd><a href="0.7.0a5/plumbing.html">0.7.0a5</a></dd>
             <dd><a href="0.7.0a6/plumbing.html">0.7.0a6</a></dd>
             <dd><a href="0.7.0a7/plumbing.html">0.7.0a7</a></dd>
             <dd><a href="0.7.0a8/plumbing.html">0.7.0a8</a></dd>
+            <dd><a href="0.7.0a9/plumbing.html">0.7.0a9</a></dd>
+            <dd><a href="0.6.9/plumbing.html">0.6.9</a></dd>
+            <dd><a href="0.6.5/plumbing.html">0.6.5</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
@@ -311,7 +315,7 @@ In most cases, you shouldn&#8217;t have to worry at all about this, but the deta
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.0a3',
+            VERSION:'0.7.0a5',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Read this first &mdash; Rasa Core 0.7.0a3 documentation</title>
+  <title>Read this first &mdash; Rasa Core 0.7.0a5 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.0a3 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.7.0a5 documentation" href="index.html"/>
         <link rel="next" title="Installation and Hello World" href="installation.html"/>
         <link rel="prev" title="The Rasa dialogue engine" href="index.html"/> 
 
@@ -109,6 +109,7 @@
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">Using Rasa Core as a HTTP server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="slot_types.html">Slot Types Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
@@ -123,7 +124,8 @@
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="library.html">Library Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/agent.html">Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/events.html">Events</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer Documentation</span></p>
 <ul>
@@ -285,15 +287,16 @@ a training set, check the <a class="reference internal" href="tutorial_babi.html
 <p><em>why python?</em></p>
 <blockquote>
 <div>Because of its ecosystem of machine learning tools.
-The machine learning happens inside the <code class="docutils literal"><span class="pre">Policy</span></code> subclasses, and you are free to use
-whichever algorithm in whichever ML framework you like: an SVM from sklearn,
-an LSTM implemented with Keras, some funky thing you implemented with autograd, whatever.</div></blockquote>
+The machine learning happens inside the <code class="docutils literal"><span class="pre">Policy</span></code> subclasses, Rasa Core
+ships with an implementation that uses Keras to predict the bot actions.</div></blockquote>
 <p><em>is this only for ML experts?</em></p>
 <blockquote>
-<div>You can use Rasa if you don&#8217;t know anything about machine learning, but if you do it&#8217;s easy to experiment.</div></blockquote>
+<div>You can use Rasa if you don&#8217;t know anything about machine learning, but if
+you do it&#8217;s easy to experiment.</div></blockquote>
 <p><em>how much training data do I need?</em></p>
 <blockquote>
-<div>You can bootstrap from zero training data by using interactive learning. Try the tutorials!</div></blockquote>
+<div>You can bootstrap from zero training data by using interactive learning.
+Try the tutorials!</div></blockquote>
 </div>
 </div>
 
@@ -334,17 +337,19 @@ an LSTM implemented with Keras, some funky thing you implemented with autograd, 
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.1
+        v: 0.7.0a5
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="0.7.1/read_first.html">0.7.1</a></dd>
             <dd><a href="0.7.0a5/read_first.html">0.7.0a5</a></dd>
             <dd><a href="0.7.0a6/read_first.html">0.7.0a6</a></dd>
             <dd><a href="0.7.0a7/read_first.html">0.7.0a7</a></dd>
             <dd><a href="0.7.0a8/read_first.html">0.7.0a8</a></dd>
+            <dd><a href="0.7.0a9/read_first.html">0.7.0a9</a></dd>
+            <dd><a href="0.6.9/read_first.html">0.6.9</a></dd>
+            <dd><a href="0.6.5/read_first.html">0.6.5</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
@@ -359,7 +364,7 @@ an LSTM implemented with Keras, some funky thing you implemented with autograd, 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.0a3',
+            VERSION:'0.7.0a5',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
