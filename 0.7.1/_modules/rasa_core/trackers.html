@@ -208,7 +208,7 @@
 <span class="kn">from</span> <span class="nn">rasa_core</span> <span class="k">import</span> <span class="n">utils</span>
 <span class="kn">from</span> <span class="nn">rasa_core.conversation</span> <span class="k">import</span> <span class="n">Dialogue</span>
 <span class="kn">from</span> <span class="nn">rasa_core.events</span> <span class="k">import</span> <span class="n">UserUttered</span><span class="p">,</span> <span class="n">TopicSet</span><span class="p">,</span> <span class="n">ActionExecuted</span><span class="p">,</span> \
-    <span class="n">Event</span><span class="p">,</span> <span class="n">SlotSet</span>
+    <span class="n">Event</span><span class="p">,</span> <span class="n">SlotSet</span><span class="p">,</span> <span class="n">Restarted</span><span class="p">,</span> <span class="n">ActionReverted</span><span class="p">,</span> <span class="n">UserUtteranceReverted</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -326,7 +326,7 @@
                                        <span class="bp">self</span><span class="o">.</span><span class="n">topics</span><span class="p">,</span>
                                        <span class="bp">self</span><span class="o">.</span><span class="n">default_topic</span><span class="p">)</span>
 
-        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_events_after_latest_restart</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_applied_events</span><span class="p">():</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">ActionExecuted</span><span class="p">):</span>
                 <span class="k">yield</span> <span class="n">tracker</span>
             <span class="n">tracker</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
@@ -339,6 +339,36 @@
 
         <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">e</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_applied_events</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># type: () -&gt; List[Event]</span>
+        <span class="sd">&quot;&quot;&quot;Returns all actions that should be applied - w/o reverted events.&quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">undo_till_previous</span><span class="p">(</span><span class="n">event_type</span><span class="p">,</span> <span class="n">done_events</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Removes events from `done_events` until `event_type` is found.&quot;&quot;&quot;</span>
+            <span class="c1"># list gets modified - hence we need to copy events!</span>
+            <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">done_events</span><span class="p">[:]):</span>
+                <span class="k">del</span> <span class="n">done_events</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">event_type</span><span class="p">):</span>
+                    <span class="k">break</span>
+
+        <span class="n">applied_events</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">Restarted</span><span class="p">):</span>
+                <span class="n">applied_events</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">ActionReverted</span><span class="p">):</span>
+                <span class="n">undo_till_previous</span><span class="p">(</span><span class="n">ActionExecuted</span><span class="p">,</span> <span class="n">applied_events</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">UserUtteranceReverted</span><span class="p">):</span>
+                <span class="n">undo_till_previous</span><span class="p">(</span><span class="n">UserUttered</span><span class="p">,</span> <span class="n">applied_events</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">applied_events</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">applied_events</span>
+
+<div class="viewcode-block" id="DialogueStateTracker.replay_events"><a class="viewcode-back" href="../../tracker.html#rasa_core.trackers.DialogueStateTracker.replay_events">[docs]</a>    <span class="k">def</span> <span class="nf">replay_events</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># type: (int) -&gt; None</span>
+        <span class="sd">&quot;&quot;&quot;Update the tracker based on a list of events.&quot;&quot;&quot;</span>
+        <span class="n">applied_events</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_applied_events</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">applied_events</span><span class="p">:</span>
+            <span class="n">event</span><span class="o">.</span><span class="n">apply_to</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DialogueStateTracker.update_from_dialogue"><a class="viewcode-back" href="../../tracker.html#rasa_core.trackers.DialogueStateTracker.update_from_dialogue">[docs]</a>    <span class="k">def</span> <span class="nf">update_from_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dialogue</span><span class="p">):</span>
         <span class="c1"># type: (Dialogue) -&gt; None</span>
@@ -378,7 +408,7 @@
         <span class="kn">from</span> <span class="nn">rasa_core.training_utils.dsl</span> <span class="k">import</span> <span class="n">StoryStep</span><span class="p">,</span> <span class="n">Story</span>
 
         <span class="n">story_step</span> <span class="o">=</span> <span class="n">StoryStep</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_applied_events</span><span class="p">():</span>
             <span class="n">story_step</span><span class="o">.</span><span class="n">add_event</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
         <span class="n">story</span> <span class="o">=</span> <span class="n">Story</span><span class="p">([</span><span class="n">story_step</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">story</span><span class="o">.</span><span class="n">as_story_string</span><span class="p">(</span><span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
