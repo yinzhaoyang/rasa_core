@@ -294,15 +294,6 @@ of this tracker exactly.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rasa_core.trackers.DialogueStateTracker.recreate_from_dialogue">
-<code class="descname">recreate_from_dialogue</code><span class="sig-paren">(</span><em>dialogue</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.recreate_from_dialogue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.recreate_from_dialogue" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use a serialised <cite>Dialogue</cite> to update the trackers state.</p>
-<p>This uses the state as is persisted in a <code class="docutils literal"><span class="pre">TrackerStore</span></code>. If the
-tracker is blank before calling this method, the final state will be
-identical to the tracker from which the dialogue was created.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="rasa_core.trackers.DialogueStateTracker.replay_events">
 <code class="descname">replay_events</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.replay_events"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.replay_events" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the tracker based on a list of events.</p>
@@ -324,6 +315,21 @@ identical to the tracker from which the dialogue was created.</p>
 <dt id="rasa_core.trackers.DialogueStateTracker.update">
 <code class="descname">update</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modify the state of the tracker according to an <code class="docutils literal"><span class="pre">Event</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.trackers.DialogueStateTracker.update_from_dialogue">
+<code class="descname">update_from_dialogue</code><span class="sig-paren">(</span><em>dialogue</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.update_from_dialogue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.update_from_dialogue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use a serialised <cite>Dialogue</cite> to update the trackers state.</p>
+<p>This uses the state as is persisted in a <code class="docutils literal"><span class="pre">TrackerStore</span></code>. If the
+tracker is blank before calling this method, the final state will be
+identical to the tracker from which the dialogue was created.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.trackers.DialogueStateTracker.update_from_events">
+<code class="descname">update_from_events</code><span class="sig-paren">(</span><em>events</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.update_from_events"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.update_from_events" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the tracker based on a list of events.</p>
 </dd></dl>
 
 </dd></dl>

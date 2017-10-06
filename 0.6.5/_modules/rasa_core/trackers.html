@@ -336,6 +336,13 @@
 
         <span class="k">yield</span> <span class="n">tracker</span>  <span class="c1"># yields the final state</span></div>
 
+<div class="viewcode-block" id="DialogueStateTracker.update_from_events"><a class="viewcode-back" href="../../tracker.html#rasa_core.trackers.DialogueStateTracker.update_from_events">[docs]</a>    <span class="k">def</span> <span class="nf">update_from_events</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">events</span><span class="p">):</span>
+        <span class="c1"># type: (List[Event]) -&gt; None</span>
+        <span class="sd">&quot;&quot;&quot;Update the tracker based on a list of events.&quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">e</span><span class="p">)</span></div>
+
     <span class="k">def</span> <span class="nf">_applied_events</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># type: () -&gt; List[Event]</span>
         <span class="sd">&quot;&quot;&quot;Returns all actions that should be applied - w/o reverted events.&quot;&quot;&quot;</span>
@@ -366,7 +373,7 @@
         <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">applied_events</span><span class="p">:</span>
             <span class="n">event</span><span class="o">.</span><span class="n">apply_to</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DialogueStateTracker.recreate_from_dialogue"><a class="viewcode-back" href="../../tracker.html#rasa_core.trackers.DialogueStateTracker.recreate_from_dialogue">[docs]</a>    <span class="k">def</span> <span class="nf">recreate_from_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dialogue</span><span class="p">):</span>
+<div class="viewcode-block" id="DialogueStateTracker.update_from_dialogue"><a class="viewcode-back" href="../../tracker.html#rasa_core.trackers.DialogueStateTracker.update_from_dialogue">[docs]</a>    <span class="k">def</span> <span class="nf">update_from_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dialogue</span><span class="p">):</span>
         <span class="c1"># type: (Dialogue) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Use a serialised `Dialogue` to update the trackers state.</span>
 
@@ -378,9 +385,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;story </span><span class="si">{0}</span><span class="s2"> is not of type Dialogue. &quot;</span>
                              <span class="s2">&quot;Have you deserialized it?&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dialogue</span><span class="p">))</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_reset</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">dialogue</span><span class="o">.</span><span class="n">events</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">replay_events</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_from_events</span><span class="p">(</span><span class="n">dialogue</span><span class="o">.</span><span class="n">events</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DialogueStateTracker.as_dialogue"><a class="viewcode-back" href="../../tracker.html#rasa_core.trackers.DialogueStateTracker.as_dialogue">[docs]</a>    <span class="k">def</span> <span class="nf">as_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># type: () -&gt; Dialogue</span>
@@ -428,6 +433,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_paused</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">latest_action_name</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">latest_message</span> <span class="o">=</span> <span class="n">UserUttered</span><span class="o">.</span><span class="n">empty</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_past_user_utterances</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">follow_up_action</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_topic_stack</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">TopicStack</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">topics</span><span class="p">,</span> <span class="p">[],</span>
                                              <span class="bp">self</span><span class="o">.</span><span class="n">default_topic</span><span class="p">)</span>

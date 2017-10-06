@@ -252,7 +252,7 @@
 <div class="viewcode-block" id="TrackerStore.deserialise_tracker"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.tracker_store.TrackerStore.deserialise_tracker">[docs]</a>    <span class="k">def</span> <span class="nf">deserialise_tracker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender_id</span><span class="p">,</span> <span class="n">_json</span><span class="p">):</span>
         <span class="n">dialogue</span> <span class="o">=</span> <span class="n">pickler</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">_json</span><span class="p">)</span>
         <span class="n">tracker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_tracker</span><span class="p">(</span><span class="n">sender_id</span><span class="p">)</span>
-        <span class="n">tracker</span><span class="o">.</span><span class="n">recreate_from_dialogue</span><span class="p">(</span><span class="n">dialogue</span><span class="p">)</span>
+        <span class="n">tracker</span><span class="o">.</span><span class="n">update_from_dialogue</span><span class="p">(</span><span class="n">dialogue</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">tracker</span></div></div>
 
 
