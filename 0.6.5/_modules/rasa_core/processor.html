@@ -451,13 +451,14 @@
 <span class="sd">        Reminders with the same `id` property will overwrite one another</span>
 <span class="sd">        (i.e. only one of them will eventually run).&quot;&quot;&quot;</span>
 
-        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">ReminderScheduled</span><span class="p">):</span>
-                <span class="n">scheduler</span><span class="o">.</span><span class="n">add_job</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle_reminder</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span>
-                                  <span class="n">run_date</span><span class="o">=</span><span class="n">e</span><span class="o">.</span><span class="n">trigger_date_time</span><span class="p">,</span>
-                                  <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">e</span><span class="p">,</span> <span class="n">dispatcher</span><span class="p">],</span>
-                                  <span class="nb">id</span><span class="o">=</span><span class="n">e</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                                  <span class="n">replace_existing</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">events</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">ReminderScheduled</span><span class="p">):</span>
+                    <span class="n">scheduler</span><span class="o">.</span><span class="n">add_job</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle_reminder</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span>
+                                      <span class="n">run_date</span><span class="o">=</span><span class="n">e</span><span class="o">.</span><span class="n">trigger_date_time</span><span class="p">,</span>
+                                      <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">e</span><span class="p">,</span> <span class="n">dispatcher</span><span class="p">],</span>
+                                      <span class="nb">id</span><span class="o">=</span><span class="n">e</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                                      <span class="n">replace_existing</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_run_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">dispatcher</span><span class="p">):</span>
         <span class="c1"># events and return values are used to update</span>
