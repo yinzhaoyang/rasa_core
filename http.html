@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Rasa Core as a HTTP server &mdash; Rasa Core 0.7.0 documentation</title>
+  <title>Rasa Core as a HTTP server &mdash; Rasa Core 0.7.1 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.0 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.7.1 documentation" href="index.html"/>
         <link rel="next" title="Domain, Slots, and Actions" href="domains.html"/>
         <link rel="prev" title="Plumbing - How it all fits together" href="plumbing.html"/> 
 
@@ -258,10 +258,10 @@ via <a class="reference external" href="https://gitter.im/RasaHQ/rasa_core">Gitt
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>The general idea is to run the actions within your code (arbitrary language),
-instead of python. To do this, Rasa Core will startup a web server where you
+instead of python. To do this, Rasa Core will start up a web server where you
 need to pass the user messages to. Rasa Core on the other side will tell you
 which actions you need to run. After running these actions, you need to notify
-the framework that you executed them, and tell the model about any update of the
+the framework that you executed them and tell the model about any update of the
 internal dialogue state for that user. All of these interactions are done using
 a HTTP REST interface.</p>
 <p>To activate the remote mode, include</p>
@@ -473,7 +473,7 @@ your code should execute the mentioned next action. If you receive
 </div>
 <div class="section" id="get-version">
 <h3><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/version</span></code><a class="headerlink" href="#get-version" title="Permalink to this headline">¶</a></h3>
-<p>This will return the current version of the Rasa NLU instance.</p>
+<p>This will return the current version of the Rasa Core instance.</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ curl http://localhost:5005/version <span class="p">|</span> python -mjson.tool
 <span class="o">{</span>
   <span class="s2">&quot;version&quot;</span> : <span class="s2">&quot;0.7.0&quot;</span>
@@ -521,12 +521,13 @@ your code should execute the mentioned next action. If you receive
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.0
+        v: 0.7.1
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
+            <dd><a href="0.7.1/http.html">0.7.1</a></dd>
             <dd><a href="0.7.0/http.html">0.7.0</a></dd>
             <dd><a href="0.7.0a10/http.html">0.7.0a10</a></dd>
             <dd><a href="0.7.0a5/http.html">0.7.0a5</a></dd>
@@ -550,7 +551,7 @@ your code should execute the mentioned next action. If you receive
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.0',
+            VERSION:'0.7.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -576,7 +577,18 @@ your code should execute the mentioned next action. If you receive
           SphinxRtdTheme.StickyNav.enable();
       });
   </script>
-   
+  
+ 
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-87333416-4"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments)};
+gtag('js', new Date());
+
+gtag('config', 'UA-87333416-4');
+</script>
+
 
 </body>
 </html>
