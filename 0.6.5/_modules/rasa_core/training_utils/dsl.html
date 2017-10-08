@@ -273,9 +273,6 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_action_listen</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">event</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="StoryStep.num_actions"><a class="viewcode-back" href="../../../rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryStep.num_actions">[docs]</a>    <span class="k">def</span> <span class="nf">num_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">events</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">ActionExecuted</span><span class="p">))</span></div>
-
 <div class="viewcode-block" id="StoryStep.as_story_string"><a class="viewcode-back" href="../../../rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryStep.as_story_string">[docs]</a>    <span class="k">def</span> <span class="nf">as_story_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="c1"># if the result should be flattened, we</span>
         <span class="c1"># will exclude the caption and any checkpoints.</span>
@@ -412,18 +409,6 @@
 <div class="viewcode-block" id="Story"><a class="viewcode-back" href="../../../rasa_dm.training_utils.html#rasa_core.training_utils.dsl.Story">[docs]</a><span class="k">class</span> <span class="nc">Story</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">story_steps</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">story_steps</span> <span class="o">=</span> <span class="n">story_steps</span> <span class="k">if</span> <span class="n">story_steps</span> <span class="k">else</span> <span class="p">[]</span>
-
-<div class="viewcode-block" id="Story.used_actions"><a class="viewcode-back" href="../../../rasa_dm.training_utils.html#rasa_core.training_utils.dsl.Story.used_actions">[docs]</a>    <span class="k">def</span> <span class="nf">used_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">story_steps</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">step</span><span class="o">.</span><span class="n">events</span><span class="p">:</span>
-                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">ActionExecuted</span><span class="p">):</span>
-                    <span class="k">yield</span> <span class="n">s</span><span class="o">.</span><span class="n">action_name</span></div>
-
-<div class="viewcode-block" id="Story.num_actions"><a class="viewcode-back" href="../../../rasa_dm.training_utils.html#rasa_core.training_utils.dsl.Story.num_actions">[docs]</a>    <span class="k">def</span> <span class="nf">num_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">story_steps</span><span class="p">:</span>
-            <span class="n">c</span> <span class="o">+=</span> <span class="n">step</span><span class="o">.</span><span class="n">num_actions</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">c</span></div>
 
 <div class="viewcode-block" id="Story.as_dialogue"><a class="viewcode-back" href="../../../rasa_dm.training_utils.html#rasa_core.training_utils.dsl.Story.as_dialogue">[docs]</a>    <span class="k">def</span> <span class="nf">as_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">interpreter</span><span class="o">=</span><span class="n">RegexInterpreter</span><span class="p">()):</span>
         <span class="n">events</span> <span class="o">=</span> <span class="p">[]</span>
@@ -894,42 +879,6 @@
         <span class="n">X_unique</span> <span class="o">=</span> <span class="n">t_data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">y_unique</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t_data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">casted_y</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">X_unique</span><span class="p">,</span> <span class="n">y_unique</span>
-
-    <span class="k">def</span> <span class="nf">_feature_vector_to_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="c1"># type: (ndarray) -&gt; Text</span>
-        <span class="sd">&quot;&quot;&quot;Transforms the feature vector into a string&quot;&quot;&quot;</span>
-
-        <span class="n">decoded</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">featurizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">input_features</span><span class="p">,</span>
-                                         <span class="n">ndigits</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">decoded</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_prepare_events</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
-        <span class="c1"># type: (StoryStep) -&gt; List[Event]</span>
-        <span class="sd">&quot;&quot;&quot;Returns events contained in the story step inserting implicit events.</span>
-
-<span class="sd">        Not all events are always listed in the story dsl.</span>
-<span class="sd">        This includes listen actions as well as implicitly</span>
-<span class="sd">        set slots. This functions makes these events explicit</span>
-<span class="sd">        and returns them with the rest of the steps events.&quot;&quot;&quot;</span>
-
-        <span class="n">events</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">step</span><span class="o">.</span><span class="n">events</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">UserUttered</span><span class="p">):</span>
-                <span class="n">parse_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">interpreter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-                <span class="n">updated_utterance</span> <span class="o">=</span> <span class="n">UserUttered</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">parse_data</span><span class="p">[</span><span class="s2">&quot;intent&quot;</span><span class="p">],</span>
-                                                <span class="n">parse_data</span><span class="p">[</span><span class="s2">&quot;entities&quot;</span><span class="p">],</span>
-                                                <span class="n">parse_data</span><span class="p">)</span>
-                <span class="n">events</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ActionExecuted</span><span class="p">(</span><span class="n">ActionListen</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">()))</span>
-                <span class="n">events</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">updated_utterance</span><span class="p">)</span>
-                <span class="n">events</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">slots_for_entities</span><span class="p">(</span><span class="n">parse_data</span><span class="p">[</span><span class="s2">&quot;entities&quot;</span><span class="p">]))</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">events</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">step</span><span class="o">.</span><span class="n">end_checkpoint</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">events</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ActionExecuted</span><span class="p">(</span><span class="n">ActionListen</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">()))</span>
-        <span class="k">return</span> <span class="n">events</span>
 
     <span class="k">def</span> <span class="nf">_mark_first_action_in_story_steps_as_unpredictable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># type: () -&gt; None</span>
