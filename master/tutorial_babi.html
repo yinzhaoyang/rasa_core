@@ -305,7 +305,7 @@ can be a helpful tool in debugging a bot. More information can be found in <a cl
     <span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">RasaNLUConfig</span><span class="p">(</span><span class="s2">&quot;examples/babi/data/config_nlu.json&quot;</span><span class="p">))</span>
     <span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">training_data</span><span class="p">)</span>
     <span class="n">model_directory</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="s1">&#39;examples/babi/models/nlu/&#39;</span><span class="p">,</span>
-                                      <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">)</span>
+                                      <span class="n">fixed_model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">model_directory</span>
 </pre></div>
 </div>
