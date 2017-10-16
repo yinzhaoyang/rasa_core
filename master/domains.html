@@ -90,6 +90,7 @@
                 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="read_first.html">Read this first</a></li>
+<li class="toctree-l1"><a class="reference internal" href="no_python.html">But I don&#8217;t code in python!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Hello World</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tour.html">A Quick Tour (no ML)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial_scratch.html">A Bot From Scratch</a></li>
@@ -105,7 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
 <li class="toctree-l1"><a class="reference internal" href="http.html">Rasa Core as a HTTP server</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Domain, Slots, and Actions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#domain">Domain</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Domain</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#defining-custom-actions">Defining Custom Actions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#putting-it-all-together">Putting it all together</a></li>
 </ul>
@@ -245,9 +246,9 @@
 }
 </style>
 <div class="section" id="domain-slots-and-actions">
-<h1>Domain, Slots, and Actions<a class="headerlink" href="#domain-slots-and-actions" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="domain">
-<h2>Domain<a class="headerlink" href="#domain" title="Permalink to this headline">¶</a></h2>
+<span id="domain"></span><h1>Domain, Slots, and Actions<a class="headerlink" href="#domain-slots-and-actions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>Domain<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">Domain</span></code> defines the universe in which your bot operates. It specifies exactly:</p>
 <ul class="simple">
 <li>which <code class="docutils literal"><span class="pre">intents</span></code> you are expecting to respond to</li>
@@ -356,7 +357,7 @@ actions using their module path.</p>
 </div>
 </div>
 <div class="section" id="slot-types">
-<span id="id1"></span><h2>Slot Types<a class="headerlink" href="#slot-types" title="Permalink to this headline">¶</a></h2>
+<span id="id2"></span><h2>Slot Types<a class="headerlink" href="#slot-types" title="Permalink to this headline">¶</a></h2>
 <p>Slots influence the prediction of the next action the bot should run. For the
 prediction, the slots value is not used directly, but rather it is featurized.
 E.g. for a slot of type <code class="docutils literal"><span class="pre">text</span></code>, the value is irrelevant, for the featurization
