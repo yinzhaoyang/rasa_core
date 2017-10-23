@@ -224,6 +224,7 @@
 <span class="kn">from</span> <span class="nn">rasa_core.slots</span> <span class="k">import</span> <span class="n">Slot</span>
 <span class="kn">from</span> <span class="nn">rasa_core.trackers</span> <span class="k">import</span> <span class="n">DialogueStateTracker</span><span class="p">,</span> <span class="n">SlotSet</span>
 <span class="kn">from</span> <span class="nn">rasa_core</span> <span class="k">import</span> <span class="n">utils</span>
+<span class="kn">from</span> <span class="nn">rasa_core.utils</span> <span class="k">import</span> <span class="n">read_yaml_file</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -605,26 +606,23 @@
 <div class="viewcode-block" id="TemplateDomain"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.TemplateDomain">[docs]</a><span class="k">class</span> <span class="nc">TemplateDomain</span><span class="p">(</span><span class="n">Domain</span><span class="p">):</span>
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="TemplateDomain.load"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.TemplateDomain.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
-        <span class="kn">import</span> <span class="nn">yaml</span>
-        <span class="kn">import</span> <span class="nn">io</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file_name</span><span class="p">):</span>
-            <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">data</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-                <span class="n">templates</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;templates&quot;</span><span class="p">,</span> <span class="p">[])</span>
-                <span class="n">action_factory</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;action_factory&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-                <span class="n">topics</span> <span class="o">=</span> <span class="p">[</span><span class="n">Topic</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;topics&quot;</span><span class="p">,</span> <span class="p">[])]</span>
-                <span class="n">slots</span> <span class="o">=</span> <span class="n">TemplateDomain</span><span class="o">.</span><span class="n">collect_slots</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;slots&quot;</span><span class="p">,</span> <span class="p">{}))</span>
-                <span class="n">additional_arguments</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="p">{})</span>
-                <span class="k">return</span> <span class="n">TemplateDomain</span><span class="p">(</span>
-                        <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;intents&quot;</span><span class="p">,</span> <span class="p">[]),</span>
-                        <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;entities&quot;</span><span class="p">,</span> <span class="p">[]),</span>
-                        <span class="n">slots</span><span class="p">,</span>
-                        <span class="n">templates</span><span class="p">,</span>
-                        <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;actions&quot;</span><span class="p">,</span> <span class="p">[]),</span>
-                        <span class="n">action_factory</span><span class="p">,</span>
-                        <span class="n">topics</span><span class="p">,</span>
-                        <span class="o">**</span><span class="n">additional_arguments</span>
-                <span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">read_yaml_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+            <span class="n">templates</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;templates&quot;</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="n">action_factory</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;action_factory&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">topics</span> <span class="o">=</span> <span class="p">[</span><span class="n">Topic</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;topics&quot;</span><span class="p">,</span> <span class="p">[])]</span>
+            <span class="n">slots</span> <span class="o">=</span> <span class="n">TemplateDomain</span><span class="o">.</span><span class="n">collect_slots</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;slots&quot;</span><span class="p">,</span> <span class="p">{}))</span>
+            <span class="n">additional_arguments</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="p">{})</span>
+            <span class="k">return</span> <span class="n">TemplateDomain</span><span class="p">(</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;intents&quot;</span><span class="p">,</span> <span class="p">[]),</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;entities&quot;</span><span class="p">,</span> <span class="p">[]),</span>
+                    <span class="n">slots</span><span class="p">,</span>
+                    <span class="n">templates</span><span class="p">,</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;actions&quot;</span><span class="p">,</span> <span class="p">[]),</span>
+                    <span class="n">action_factory</span><span class="p">,</span>
+                    <span class="n">topics</span><span class="p">,</span>
+                    <span class="o">**</span><span class="n">additional_arguments</span>
+            <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
                     <span class="s2">&quot;Failed to load domain specification from &#39;</span><span class="si">{}</span><span class="s2">&#39;. &quot;</span>
