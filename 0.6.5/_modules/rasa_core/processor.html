@@ -298,39 +298,31 @@
 
         <span class="c1"># action loop. predicts actions until we hit action listen</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_should_handle_message</span><span class="p">(</span><span class="n">tracker</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_predict_next_and_return_state</span><span class="p">(</span><span class="n">tracker</span><span class="p">)</span>
+            <span class="c1"># this actually just calls the policy&#39;s method by the same name</span>
+            <span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_next_action</span><span class="p">(</span><span class="n">tracker</span><span class="p">)</span>
+
+            <span class="c1"># save tracker state to continue conversation from this state</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_save_tracker</span><span class="p">(</span><span class="n">tracker</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;next_action&quot;</span><span class="p">:</span> <span class="n">action</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span>
+                    <span class="s2">&quot;tracker&quot;</span><span class="p">:</span> <span class="n">tracker</span><span class="o">.</span><span class="n">current_state</span><span class="p">()}</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;next_action&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-                    <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="s2">&quot;Bot is currently paused and no restart was &quot;</span>
-                            <span class="s2">&quot;received yet.&quot;</span><span class="p">,</span>
                     <span class="s2">&quot;tracker&quot;</span><span class="p">:</span> <span class="n">tracker</span><span class="o">.</span><span class="n">current_state</span><span class="p">()}</span></div>
 
 <div class="viewcode-block" id="MessageProcessor.continue_message_handling"><a class="viewcode-back" href="../../rasa_core.html#rasa_core.processor.MessageProcessor.continue_message_handling">[docs]</a>    <span class="k">def</span> <span class="nf">continue_message_handling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender_id</span><span class="p">,</span> <span class="n">executed_action</span><span class="p">,</span> <span class="n">events</span><span class="p">):</span>
         <span class="c1"># type: (Text, Text, List[Event]) -&gt; Dict[Text, Any]</span>
 
         <span class="n">tracker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_tracker</span><span class="p">(</span><span class="n">sender_id</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">executed_action</span> <span class="o">!=</span> <span class="n">ACTION_LISTEN_NAME</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_log_action_on_tracker</span><span class="p">(</span><span class="n">tracker</span><span class="p">,</span> <span class="n">executed_action</span><span class="p">,</span> <span class="n">events</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log_action_on_tracker</span><span class="p">(</span><span class="n">tracker</span><span class="p">,</span> <span class="n">executed_action</span><span class="p">,</span> <span class="n">events</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_should_predict_another_action</span><span class="p">(</span><span class="n">executed_action</span><span class="p">,</span> <span class="n">events</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_predict_next_and_return_state</span><span class="p">(</span><span class="n">tracker</span><span class="p">)</span>
+            <span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_next_action</span><span class="p">(</span><span class="n">tracker</span><span class="p">)</span>
+            <span class="c1"># save tracker state to continue conversation from this state</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_save_tracker</span><span class="p">(</span><span class="n">tracker</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;next_action&quot;</span><span class="p">:</span> <span class="n">action</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span>
+                    <span class="s2">&quot;tracker&quot;</span><span class="p">:</span> <span class="n">tracker</span><span class="o">.</span><span class="n">current_state</span><span class="p">()}</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;next_action&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-                    <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="s2">&quot;You do not need to call continue after action &quot;</span>
-                            <span class="s2">&quot;listen got returned for the previous continue &quot;</span>
-                            <span class="s2">&quot;call. You are expected to call &#39;parse&#39; with the &quot;</span>
-                            <span class="s2">&quot;next user message.&quot;</span><span class="p">,</span>
                     <span class="s2">&quot;tracker&quot;</span><span class="p">:</span> <span class="n">tracker</span><span class="o">.</span><span class="n">current_state</span><span class="p">()}</span></div>
-
-    <span class="k">def</span> <span class="nf">_predict_next_and_return_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracker</span><span class="p">):</span>
-        <span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_next_action</span><span class="p">(</span><span class="n">tracker</span><span class="p">)</span>
-        <span class="c1"># save tracker state to continue conversation from this state</span>
-        <span class="k">if</span> <span class="n">action</span><span class="o">.</span><span class="n">name</span><span class="p">()</span> <span class="o">==</span> <span class="n">ACTION_LISTEN_NAME</span><span class="p">:</span>
-            <span class="c1"># action listen always get logged automatically - no need to</span>
-            <span class="c1"># call continue</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_log_action_on_tracker</span><span class="p">(</span><span class="n">tracker</span><span class="p">,</span> <span class="n">action</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span> <span class="p">[])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_save_tracker</span><span class="p">(</span><span class="n">tracker</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;next_action&quot;</span><span class="p">:</span> <span class="n">action</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span>
-                <span class="s2">&quot;tracker&quot;</span><span class="p">:</span> <span class="n">tracker</span><span class="o">.</span><span class="n">current_state</span><span class="p">()}</span>
 
     <span class="k">def</span> <span class="nf">_log_slots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracker</span><span class="p">):</span>
         <span class="c1"># Log currently set slots</span>
