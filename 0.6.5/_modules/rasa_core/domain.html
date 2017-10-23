@@ -206,24 +206,26 @@
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">six</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
 <span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="nb">str</span>
+<span class="kn">from</span> <span class="nn">six</span> <span class="k">import</span> <span class="n">string_types</span>
 <span class="kn">from</span> <span class="nn">six</span> <span class="k">import</span> <span class="n">with_metaclass</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">List</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Optional</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Text</span>
 
+<span class="kn">from</span> <span class="nn">rasa_core</span> <span class="k">import</span> <span class="n">utils</span>
 <span class="kn">from</span> <span class="nn">rasa_core.actions</span> <span class="k">import</span> <span class="n">Action</span>
-<span class="kn">from</span> <span class="nn">rasa_core.conversation</span> <span class="k">import</span> <span class="n">DefaultTopic</span>
-<span class="kn">from</span> <span class="nn">rasa_core.actions.action</span> <span class="k">import</span> <span class="n">ActionListen</span><span class="p">,</span> <span class="n">UtterAction</span><span class="p">,</span> <span class="n">ActionRestart</span>
-
+<span class="kn">from</span> <span class="nn">rasa_core.actions.action</span> <span class="k">import</span> <span class="n">ActionListen</span><span class="p">,</span> <span class="n">ActionRestart</span>
 <span class="kn">from</span> <span class="nn">rasa_core.actions.factories</span> <span class="k">import</span> <span class="n">action_factory_by_name</span>
+<span class="kn">from</span> <span class="nn">rasa_core.conversation</span> <span class="k">import</span> <span class="n">DefaultTopic</span>
 <span class="kn">from</span> <span class="nn">rasa_core.conversation</span> <span class="k">import</span> <span class="n">Topic</span>
 <span class="kn">from</span> <span class="nn">rasa_core.events</span> <span class="k">import</span> <span class="n">ActionExecuted</span>
 <span class="kn">from</span> <span class="nn">rasa_core.featurizers</span> <span class="k">import</span> <span class="n">Featurizer</span>
 <span class="kn">from</span> <span class="nn">rasa_core.slots</span> <span class="k">import</span> <span class="n">Slot</span>
 <span class="kn">from</span> <span class="nn">rasa_core.trackers</span> <span class="k">import</span> <span class="n">DialogueStateTracker</span><span class="p">,</span> <span class="n">SlotSet</span>
-<span class="kn">from</span> <span class="nn">rasa_core</span> <span class="k">import</span> <span class="n">utils</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -512,7 +514,6 @@
         <span class="k">return</span> <span class="n">feature_dict</span></div>
 
 <div class="viewcode-block" id="Domain.slots_for_entities"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.Domain.slots_for_entities">[docs]</a>    <span class="k">def</span> <span class="nf">slots_for_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entities</span><span class="p">):</span>
-        <span class="n">events</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">store_entities_as_slots</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[</span><span class="n">SlotSet</span><span class="p">(</span><span class="n">entity</span><span class="p">[</span><span class="s1">&#39;entity&#39;</span><span class="p">],</span> <span class="n">entity</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
                     <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entities</span>
@@ -597,7 +598,7 @@
 
     <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractproperty</span>
     <span class="k">def</span> <span class="nf">templates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># type: () -&gt; List[Text]</span>
+        <span class="c1"># type: () -&gt; List[Dict[Text, Any]]</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
                 <span class="s2">&quot;domain must provide a dictionary of response templates&quot;</span><span class="p">)</span></div>
 
@@ -605,30 +606,28 @@
 <div class="viewcode-block" id="TemplateDomain"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.TemplateDomain">[docs]</a><span class="k">class</span> <span class="nc">TemplateDomain</span><span class="p">(</span><span class="n">Domain</span><span class="p">):</span>
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="TemplateDomain.load"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.TemplateDomain.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
-        <span class="kn">import</span> <span class="nn">yaml</span>
-        <span class="kn">import</span> <span class="nn">io</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file_name</span><span class="p">):</span>
-            <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">data</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-                <span class="n">templates</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;templates&quot;</span><span class="p">,</span> <span class="p">[])</span>
-                <span class="n">action_factory</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;action_factory&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-                <span class="n">topics</span> <span class="o">=</span> <span class="p">[</span><span class="n">Topic</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;topics&quot;</span><span class="p">,</span> <span class="p">[])]</span>
-                <span class="n">slots</span> <span class="o">=</span> <span class="n">TemplateDomain</span><span class="o">.</span><span class="n">collect_slots</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;slots&quot;</span><span class="p">,</span> <span class="p">{}))</span>
-                <span class="n">additional_arguments</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="p">{})</span>
-                <span class="k">return</span> <span class="n">TemplateDomain</span><span class="p">(</span>
-                        <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;intents&quot;</span><span class="p">,</span> <span class="p">[]),</span>
-                        <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;entities&quot;</span><span class="p">,</span> <span class="p">[]),</span>
-                        <span class="n">slots</span><span class="p">,</span>
-                        <span class="n">templates</span><span class="p">,</span>
-                        <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;actions&quot;</span><span class="p">,</span> <span class="p">[]),</span>
-                        <span class="n">action_factory</span><span class="p">,</span>
-                        <span class="n">topics</span><span class="p">,</span>
-                        <span class="o">**</span><span class="n">additional_arguments</span>
-                <span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file_name</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
                     <span class="s2">&quot;Failed to load domain specification from &#39;</span><span class="si">{}</span><span class="s2">&#39;. &quot;</span>
-                    <span class="s2">&quot;File not found!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">file_name</span><span class="p">)))</span></div>
+                    <span class="s2">&quot;File not found!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">file_name</span><span class="p">)))</span>
+
+        <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+            <span class="n">utter_templates</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">collect_templates</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;templates&quot;</span><span class="p">,</span> <span class="p">{}))</span>
+            <span class="n">action_factory</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;action_factory&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">topics</span> <span class="o">=</span> <span class="p">[</span><span class="n">Topic</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;topics&quot;</span><span class="p">,</span> <span class="p">[])]</span>
+            <span class="n">slots</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">collect_slots</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;slots&quot;</span><span class="p">,</span> <span class="p">{}))</span>
+            <span class="n">additional_arguments</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="p">{})</span>
+            <span class="k">return</span> <span class="n">TemplateDomain</span><span class="p">(</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;intents&quot;</span><span class="p">,</span> <span class="p">[]),</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;entities&quot;</span><span class="p">,</span> <span class="p">[]),</span>
+                    <span class="n">slots</span><span class="p">,</span>
+                    <span class="n">utter_templates</span><span class="p">,</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;actions&quot;</span><span class="p">,</span> <span class="p">[]),</span>
+                    <span class="n">action_factory</span><span class="p">,</span>
+                    <span class="n">topics</span><span class="p">,</span>
+                    <span class="o">**</span><span class="n">additional_arguments</span>
+            <span class="p">)</span></div>
 
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="TemplateDomain.collect_slots"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.TemplateDomain.collect_slots">[docs]</a>    <span class="k">def</span> <span class="nf">collect_slots</span><span class="p">(</span><span class="n">slot_dict</span><span class="p">):</span>
@@ -642,6 +641,28 @@
             <span class="n">slot</span> <span class="o">=</span> <span class="n">slot_class</span><span class="p">(</span><span class="n">slot_name</span><span class="p">,</span> <span class="o">**</span><span class="n">slot_dict</span><span class="p">[</span><span class="n">slot_name</span><span class="p">])</span>
             <span class="n">slots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">slot</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">slots</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="TemplateDomain.collect_templates"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.TemplateDomain.collect_templates">[docs]</a>    <span class="k">def</span> <span class="nf">collect_templates</span><span class="p">(</span><span class="n">yml_templates</span><span class="p">):</span>
+        <span class="c1"># type: (Dict[Text, List[Any]]) -&gt; Dict[Text, List[Dict[Text, Any]]]</span>
+        <span class="sd">&quot;&quot;&quot;Go through the templates and make sure they are all in dict format&quot;&quot;&quot;</span>
+
+        <span class="n">templates</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">template_key</span><span class="p">,</span> <span class="n">template_variations</span> <span class="ow">in</span> <span class="n">yml_templates</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">validated_variations</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">template_variations</span><span class="p">:</span>
+                <span class="c1"># templates can either directly be strings or a dict with</span>
+                <span class="c1"># options we will always create a dict out of them</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span>
+                    <span class="n">validated_variations</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">t</span><span class="p">})</span>
+                <span class="k">elif</span> <span class="s2">&quot;text&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Utter template &#39;</span><span class="si">{}</span><span class="s2">&#39; needs to contain&quot;</span>
+                                    <span class="s2">&quot;&#39;- text: &#39; attribute to be a proper&quot;</span>
+                                    <span class="s2">&quot;template&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">template_key</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">validated_variations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+            <span class="n">templates</span><span class="p">[</span><span class="n">template_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">validated_variations</span>
+        <span class="k">return</span> <span class="n">templates</span></div>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">intents</span><span class="p">,</span> <span class="n">entities</span><span class="p">,</span> <span class="n">slots</span><span class="p">,</span> <span class="n">templates</span><span class="p">,</span> <span class="n">action_names</span><span class="p">,</span>
                  <span class="n">action_factory</span><span class="p">,</span> <span class="n">topics</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>

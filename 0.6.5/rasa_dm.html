@@ -428,7 +428,13 @@ can be changed to correct wrong behaviour.</p>
 
 <dl class="method">
 <dt id="rasa_core.dispatcher.Dispatcher.utter_message">
-<code class="descname">utter_message</code><span class="sig-paren">(</span><em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/dispatcher.html#Dispatcher.utter_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.dispatcher.Dispatcher.utter_message" title="Permalink to this definition">¶</a></dt>
+<code class="descname">utter_message</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/dispatcher.html#Dispatcher.utter_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.dispatcher.Dispatcher.utter_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#8220;Send a text to the output channel</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.dispatcher.Dispatcher.utter_response">
+<code class="descname">utter_response</code><span class="sig-paren">(</span><em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/dispatcher.html#Dispatcher.utter_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.dispatcher.Dispatcher.utter_response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send a message to the client.</p>
 </dd></dl>
 
@@ -657,6 +663,12 @@ he slice length.</p>
 <dt id="rasa_core.domain.TemplateDomain.collect_slots">
 <em class="property">static </em><code class="descname">collect_slots</code><span class="sig-paren">(</span><em>slot_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#TemplateDomain.collect_slots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.TemplateDomain.collect_slots" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="rasa_core.domain.TemplateDomain.collect_templates">
+<em class="property">static </em><code class="descname">collect_templates</code><span class="sig-paren">(</span><em>yml_templates</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#TemplateDomain.collect_templates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.TemplateDomain.collect_templates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Go through the templates and make sure they are all in dict format</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="rasa_core.domain.TemplateDomain.entities">
