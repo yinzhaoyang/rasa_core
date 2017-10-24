@@ -233,6 +233,23 @@
 <div class="section" id="module-rasa_core.training_utils.dsl">
 <span id="rasa-core-training-utils-dsl-module"></span><h2>rasa_core.training_utils.dsl module<a class="headerlink" href="#module-rasa_core.training_utils.dsl" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
+<dt id="rasa_core.training_utils.dsl.Checkpoint">
+<em class="property">class </em><code class="descclassname">rasa_core.training_utils.dsl.</code><code class="descname">Checkpoint</code><span class="sig-paren">(</span><em>name</em>, <em>conditions=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#Checkpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.Checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.Checkpoint.as_story_string">
+<code class="descname">as_story_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#Checkpoint.as_story_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.Checkpoint.as_story_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.Checkpoint.filter_trackers">
+<code class="descname">filter_trackers</code><span class="sig-paren">(</span><em>trackers</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#Checkpoint.filter_trackers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.Checkpoint.filter_trackers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters out all trackers that do not satisfy the conditions.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="rasa_core.training_utils.dsl.FeaturizedTracker">
 <em class="property">class </em><code class="descclassname">rasa_core.training_utils.dsl.</code><code class="descname">FeaturizedTracker</code><span class="sig-paren">(</span><em>tracker</em>, <em>max_history</em>, <em>featurization=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#FeaturizedTracker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.FeaturizedTracker" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
@@ -297,7 +314,7 @@
 <p>Helper class to read a story file.</p>
 <dl class="method">
 <dt id="rasa_core.training_utils.dsl.StoryFileReader.add_checkpoint">
-<code class="descname">add_checkpoint</code><span class="sig-paren">(</span><em>checkpoint</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryFileReader.add_checkpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryFileReader.add_checkpoint" title="Permalink to this definition">¶</a></dt>
+<code class="descname">add_checkpoint</code><span class="sig-paren">(</span><em>name</em>, <em>conditions</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryFileReader.add_checkpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryFileReader.add_checkpoint" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -360,6 +377,11 @@
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="rasa_core.training_utils.dsl.StoryStep.end_checkpoint_name">
+<code class="descname">end_checkpoint_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryStep.end_checkpoint_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryStep.end_checkpoint_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="rasa_core.training_utils.dsl.StoryStep.explicit_events">
 <code class="descname">explicit_events</code><span class="sig-paren">(</span><em>domain</em>, <em>interpreter</em>, <em>should_append_final_listen=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryStep.explicit_events"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryStep.explicit_events" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns events contained in the story step including implicit events.</p>
@@ -369,6 +391,11 @@ set slots. This functions makes these events explicit and
 returns them with the rest of the steps events.</p>
 </dd></dl>
 
+<dl class="method">
+<dt id="rasa_core.training_utils.dsl.StoryStep.start_checkpoint_name">
+<code class="descname">start_checkpoint_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryStep.start_checkpoint_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryStep.start_checkpoint_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -377,7 +404,7 @@ returns them with the rest of the steps events.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <dl class="method">
 <dt id="rasa_core.training_utils.dsl.StoryStepBuilder.add_checkpoint">
-<code class="descname">add_checkpoint</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryStepBuilder.add_checkpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryStepBuilder.add_checkpoint" title="Permalink to this definition">¶</a></dt>
+<code class="descname">add_checkpoint</code><span class="sig-paren">(</span><em>name</em>, <em>conditions</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/training_utils/dsl.html#StoryStepBuilder.add_checkpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.training_utils.dsl.StoryStepBuilder.add_checkpoint" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
