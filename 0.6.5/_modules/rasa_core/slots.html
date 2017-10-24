@@ -247,7 +247,13 @@
         <span class="k">for</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">utils</span><span class="o">.</span><span class="n">all_subclasses</span><span class="p">(</span><span class="n">Slot</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">type_name</span> <span class="o">==</span> <span class="n">type_name</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">cls</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown slot type name &#39;</span><span class="si">{}</span><span class="s2">&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">type_name</span><span class="p">))</span></div>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">utils</span><span class="o">.</span><span class="n">class_from_module_path</span><span class="p">(</span><span class="n">type_name</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Failed to find slot type. Neither a known type nor. If &quot;</span>
+                    <span class="s2">&quot;you are creating your own slot type, make sure its &quot;</span>
+                    <span class="s2">&quot;module path is correct: </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">type_name</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="Slot.additional_persistence_info"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.slots.Slot.additional_persistence_info">[docs]</a>    <span class="k">def</span> <span class="nf">additional_persistence_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{}</span></div></div>
