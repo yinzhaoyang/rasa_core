@@ -199,12 +199,13 @@
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
 
 <span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">logging</span><span class="o">,</span> <span class="nn">os</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="nb">range</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="nb">input</span><span class="p">,</span> <span class="nb">range</span>
 
 <span class="kn">from</span> <span class="nn">rasa_core</span> <span class="k">import</span> <span class="n">utils</span>
+<span class="kn">from</span> <span class="nn">rasa_core.actions.action</span> <span class="k">import</span> <span class="n">ACTION_LISTEN_NAME</span>
 <span class="kn">from</span> <span class="nn">rasa_core.channels.console</span> <span class="k">import</span> <span class="n">ConsoleInputChannel</span>
 <span class="kn">from</span> <span class="nn">rasa_core.domain</span> <span class="k">import</span> <span class="n">check_domain_sanity</span>
 <span class="kn">from</span> <span class="nn">rasa_core.events</span> <span class="k">import</span> <span class="n">UserUtteranceReverted</span><span class="p">,</span> <span class="n">UserUttered</span><span class="p">,</span> <span class="n">StoryExported</span>
@@ -213,6 +214,11 @@
 <span class="kn">from</span> <span class="nn">rasa_core.policies.ensemble</span> <span class="k">import</span> <span class="n">PolicyEnsemble</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="TrainingFinishedException"><a class="viewcode-back" href="../../../rasa_dm.policies.html#rasa_core.policies.online_policy_trainer.TrainingFinishedException">[docs]</a><span class="k">class</span> <span class="nc">TrainingFinishedException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Signal a finished online learning. Needed to break out of loops.&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
 
 
 <div class="viewcode-block" id="OnlinePolicyTrainer"><a class="viewcode-back" href="../../../rasa_dm.policies.html#rasa_core.policies.online_policy_trainer.OnlinePolicyTrainer">[docs]</a><span class="k">class</span> <span class="nc">OnlinePolicyTrainer</span><span class="p">(</span><span class="n">PolicyTrainer</span><span class="p">):</span>
@@ -246,8 +252,11 @@
                     <span class="n">interpreter</span><span class="o">=</span><span class="n">interpreter</span><span class="p">)</span>
         <span class="n">bot</span><span class="o">.</span><span class="n">toggle_memoization</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 
-        <span class="n">bot</span><span class="o">.</span><span class="n">handle_channel</span><span class="p">(</span>
-                <span class="n">input_channel</span> <span class="k">if</span> <span class="n">input_channel</span> <span class="k">else</span> <span class="n">ConsoleInputChannel</span><span class="p">())</span></div></div>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">bot</span><span class="o">.</span><span class="n">handle_channel</span><span class="p">(</span>
+                    <span class="n">input_channel</span> <span class="k">if</span> <span class="n">input_channel</span> <span class="k">else</span> <span class="n">ConsoleInputChannel</span><span class="p">())</span>
+        <span class="k">except</span> <span class="n">TrainingFinishedException</span><span class="p">:</span>
+            <span class="k">pass</span>    <span class="c1"># training has finished</span></div></div>
 
 
 <div class="viewcode-block" id="OnlinePolicyEnsemble"><a class="viewcode-back" href="../../../rasa_dm.policies.html#rasa_core.policies.online_policy_trainer.OnlinePolicyEnsemble">[docs]</a><span class="k">class</span> <span class="nc">OnlinePolicyEnsemble</span><span class="p">(</span><span class="n">PolicyEnsemble</span><span class="p">):</span>
@@ -301,6 +310,8 @@
         <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">feature_vector</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">user_input</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
             <span class="c1"># max prob prediction was correct</span>
+            <span class="k">if</span> <span class="n">action_name</span> <span class="o">==</span> <span class="n">ACTION_LISTEN_NAME</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Next user input:&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">probabilities</span>
         <span class="k">elif</span> <span class="n">user_input</span> <span class="o">==</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span>
             <span class="c1"># max prob prediction was false, new action required</span>
@@ -318,12 +329,21 @@
             <span class="n">tracker</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">latest_message</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">probabilities_using_best_policy</span><span class="p">(</span><span class="n">tracker</span><span class="p">,</span> <span class="n">domain</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">user_input</span> <span class="o">==</span> <span class="s2">&quot;0&quot;</span><span class="p">:</span>
-            <span class="c1"># export current stories and quit</span>
-            <span class="n">tracker</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">StoryExported</span><span class="p">())</span>
-            <span class="n">exit</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_export_stories</span><span class="p">(</span><span class="n">tracker</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">TrainingFinishedException</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
                     <span class="s2">&quot;Incorrect user input received &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user_input</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="nf">_export_stories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracker</span><span class="p">):</span>
+        <span class="c1"># export current stories and quit</span>
+        <span class="n">export_file_path</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">request_input</span><span class="p">(</span>
+                <span class="n">prompt</span><span class="o">=</span><span class="s2">&quot;File to export to (if file exists, this &quot;</span>
+                       <span class="s2">&quot;will append the stories) [stories.md]: &quot;</span><span class="p">)</span>
+        <span class="n">exported</span> <span class="o">=</span> <span class="n">StoryExported</span><span class="p">(</span><span class="n">export_file_path</span><span class="p">)</span>
+        <span class="n">tracker</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">exported</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Stories got exported to &#39;</span><span class="si">{}</span><span class="s2">&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">exported</span><span class="o">.</span><span class="n">path</span><span class="p">)))</span>
 
     <span class="k">def</span> <span class="nf">_fit_example</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
         <span class="c1"># takes the new example labelled and learns it</span>

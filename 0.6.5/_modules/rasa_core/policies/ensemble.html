@@ -216,7 +216,7 @@
 
 <span class="k">if</span> <span class="n">typing</span><span class="o">.</span><span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">rasa_core.domain</span> <span class="k">import</span> <span class="n">Domain</span>
-
+    <span class="kn">from</span> <span class="nn">rasa_core.featurizers</span> <span class="k">import</span> <span class="n">Featurizer</span>
 
 <div class="viewcode-block" id="PolicyEnsemble"><a class="viewcode-back" href="../../../rasa_dm.policies.html#rasa_core.policies.ensemble.PolicyEnsemble">[docs]</a><span class="k">class</span> <span class="nc">PolicyEnsemble</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policies</span><span class="p">):</span>
@@ -280,7 +280,7 @@
 
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="PolicyEnsemble.load"><a class="viewcode-back" href="../../../rasa_dm.policies.html#rasa_core.policies.ensemble.PolicyEnsemble.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">featurizer</span><span class="p">):</span>
-        <span class="c1"># type: (Text, Optional[Domain]) -&gt; PolicyEnsemble</span>
+        <span class="c1"># type: (Text, Optional[Featurizer]) -&gt; PolicyEnsemble</span>
         <span class="sd">&quot;&quot;&quot;Loads policy and domain specification from storage&quot;&quot;&quot;</span>
 
         <span class="n">metadata</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">load_metadata</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>

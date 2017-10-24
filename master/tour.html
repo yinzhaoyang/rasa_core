@@ -330,7 +330,13 @@ Below is the restaurant domain from the examples folder.</p>
   <span class="n">utter_ask_numpeople</span><span class="p">:</span>
     <span class="o">-</span> <span class="s2">&quot;for how many people?&quot;</span>
   <span class="n">utter_ask_price</span><span class="p">:</span> 
-    <span class="o">-</span> <span class="s2">&quot;in which price range?&quot;</span>
+    <span class="o">-</span> <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;in which price range?&quot;</span>
+      <span class="n">buttons</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">title</span><span class="p">:</span> <span class="s2">&quot;cheap&quot;</span>
+        <span class="n">payload</span><span class="p">:</span> <span class="s2">&quot;cheap&quot;</span>
+      <span class="o">-</span> <span class="n">title</span><span class="p">:</span> <span class="s2">&quot;expensive&quot;</span>
+        <span class="n">payload</span><span class="p">:</span> <span class="s2">&quot;expensive&quot;</span>
+
   <span class="n">utter_on_it</span><span class="p">:</span> 
     <span class="o">-</span> <span class="s2">&quot;I&#39;m on it&quot;</span>
 

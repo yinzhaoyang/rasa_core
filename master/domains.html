@@ -111,6 +111,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#putting-it-all-together">Putting it all together</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#utterance-templates">Utterance templates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#slot-types">Slot Types</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#type-bool"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">bool</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#type-categorical"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">categorical</span></code></a></li>
@@ -344,9 +345,9 @@ action in a module called <code class="docutils literal"><span class="pre">resta
       <span class="p p-Indicator">-</span> <span class="s">&quot;default</span><span class="nv"> </span><span class="s">message&quot;</span>
 
 <span class="l l-Scalar l-Scalar-Plain">actions</span><span class="p p-Indicator">:</span>
-   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
-   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">greet</span>
-   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">goodbye</span>
+   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">utter_default</span>
+   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">utter_greet</span>
+   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">utter_goodbye</span>
    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">restaurant.actions.ActionCheckRestaurants</span>
 </pre></div>
 </div>
@@ -354,6 +355,46 @@ action in a module called <code class="docutils literal"><span class="pre">resta
 of your domain, you can list utter actions (which respond an utter template to the user) as well as custom
 actions using their module path.</p>
 <p>For an example you can run, check the <a class="reference internal" href="tutorial_scratch.html"><span class="doc">A Bot From Scratch</span></a>.</p>
+</div>
+</div>
+<div class="section" id="utterance-templates">
+<h2>Utterance templates<a class="headerlink" href="#utterance-templates" title="Permalink to this headline">¶</a></h2>
+<p>Utterance templates are messages the bot will send back to the user. Either
+automatically by an action with the same name as the utterance (e.g. in the
+above example the <cite>utter_default</cite> template and action) or by an action with
+custom code.</p>
+<p>Templates defined in a domains yaml file can contain images and buttons as well:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">templates</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">utter_greeting</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">text</span><span class="p p-Indicator">:</span> <span class="s">&quot;Hey!</span><span class="nv"> </span><span class="s">How</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">you?&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">buttons</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;great&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">payload</span><span class="p p-Indicator">:</span> <span class="s">&quot;great&quot;</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;super</span><span class="nv"> </span><span class="s">sad&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">payload</span><span class="p p-Indicator">:</span> <span class="s">&quot;super</span><span class="nv"> </span><span class="s">sad&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">utter_cheer_up</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">text</span><span class="p p-Indicator">:</span> <span class="s">&quot;Here</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">something</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">cheer</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">up:&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="s">&quot;https://cdn77.eatliver.com/wp-content/uploads/2017/10/trump-frog.jpg&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Please keep in mind that it is up to the implementation of the output
+channel on how to display the defined buttons. E.g. the cmdline
+interface can not display buttons or images, but tries to mimic them in
+the command line.</p>
+</div>
+<p>In custom code, you can retrieve a template by using:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ActionCustom</span><span class="p">(</span><span class="n">Action</span><span class="p">):</span>
+   <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="k">return</span> <span class="s2">&quot;action_custom&quot;</span>
+
+   <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dispatcher</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
+      <span class="c1"># send utter default template to user</span>
+      <span class="n">dispatcher</span><span class="o">.</span><span class="n">utter_template</span><span class="p">(</span><span class="s2">&quot;utter_default&quot;</span><span class="p">)</span>
+      <span class="c1"># ... other code</span>
+      <span class="k">return</span> <span class="p">[]</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="slot-types">

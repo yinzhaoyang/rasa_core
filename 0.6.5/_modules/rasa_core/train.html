@@ -200,9 +200,12 @@
 
 <span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+
 <span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="nb">str</span>
 
 <span class="kn">from</span> <span class="nn">rasa_core.agent</span> <span class="k">import</span> <span class="n">Agent</span>
+<span class="kn">from</span> <span class="nn">rasa_core.channels.console</span> <span class="k">import</span> <span class="n">ConsoleInputChannel</span>
+<span class="kn">from</span> <span class="nn">rasa_core.interpreter</span> <span class="k">import</span> <span class="n">RasaNLUInterpreter</span><span class="p">,</span> <span class="n">RegexInterpreter</span>
 <span class="kn">from</span> <span class="nn">rasa_core.policies.keras_policy</span> <span class="k">import</span> <span class="n">KerasPolicy</span>
 <span class="kn">from</span> <span class="nn">rasa_core.policies.memoization</span> <span class="k">import</span> <span class="n">MemoizationPolicy</span>
 
@@ -226,6 +229,11 @@
             <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="n">help</span><span class="o">=</span><span class="s2">&quot;domain specification yaml file&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s1">&#39;-u&#39;</span><span class="p">,</span> <span class="s1">&#39;--nlu&#39;</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;trained nlu model&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
             <span class="s1">&#39;-v&#39;</span><span class="p">,</span> <span class="s1">&#39;--verbose&#39;</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="n">help</span><span class="o">=</span><span class="s2">&quot;use verbose logging&quot;</span><span class="p">)</span>
@@ -242,6 +250,11 @@
             <span class="n">default</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
             <span class="n">help</span><span class="o">=</span><span class="s2">&quot;number of training samples to put into one training batch&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s1">&#39;--online&#39;</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;enable online training&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
             <span class="s1">&#39;--augmentation&#39;</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
             <span class="n">help</span><span class="o">=</span><span class="s2">&quot;how much data augmentation to use during training&quot;</span><span class="p">)</span>
@@ -249,14 +262,26 @@
     <span class="k">return</span> <span class="n">parser</span></div>
 
 
-<div class="viewcode-block" id="train_dialogue_model"><a class="viewcode-back" href="../../rasa_core.html#rasa_core.train.train_dialogue_model">[docs]</a><span class="k">def</span> <span class="nf">train_dialogue_model</span><span class="p">(</span><span class="n">domain_file</span><span class="p">,</span> <span class="n">stories_file</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="train_dialogue_model"><a class="viewcode-back" href="../../rasa_core.html#rasa_core.train.train_dialogue_model">[docs]</a><span class="k">def</span> <span class="nf">train_dialogue_model</span><span class="p">(</span><span class="n">domain_file</span><span class="p">,</span> <span class="n">stories_file</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span>
+                         <span class="n">use_online_learning</span><span class="p">,</span> <span class="n">nlu_model_path</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
     <span class="n">agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span><span class="n">domain_file</span><span class="p">,</span> <span class="n">policies</span><span class="o">=</span><span class="p">[</span><span class="n">MemoizationPolicy</span><span class="p">(),</span> <span class="n">KerasPolicy</span><span class="p">()])</span>
 
-    <span class="n">agent</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
-            <span class="n">stories_file</span><span class="p">,</span>
-            <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-            <span class="o">**</span><span class="n">kwargs</span>
-    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">use_online_learning</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">nlu_model_path</span><span class="p">:</span>
+            <span class="n">agent</span><span class="o">.</span><span class="n">interpreter</span> <span class="o">=</span> <span class="n">RasaNLUInterpreter</span><span class="p">(</span><span class="n">nlu_model_path</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">agent</span><span class="o">.</span><span class="n">interpreter</span> <span class="o">=</span> <span class="n">RegexInterpreter</span><span class="p">()</span>
+        <span class="n">agent</span><span class="o">.</span><span class="n">train_online</span><span class="p">(</span>
+                <span class="n">stories_file</span><span class="p">,</span>
+                <span class="n">input_channel</span><span class="o">=</span><span class="n">ConsoleInputChannel</span><span class="p">(),</span>
+                <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                <span class="n">model_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">agent</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+                <span class="n">stories_file</span><span class="p">,</span>
+                <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span>
 
     <span class="n">agent</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span></div>
 
@@ -279,6 +304,8 @@
     <span class="n">train_dialogue_model</span><span class="p">(</span><span class="n">cmdline_args</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span>
                          <span class="n">cmdline_args</span><span class="o">.</span><span class="n">stories</span><span class="p">,</span>
                          <span class="n">cmdline_args</span><span class="o">.</span><span class="n">out</span><span class="p">,</span>
+                         <span class="n">cmdline_args</span><span class="o">.</span><span class="n">online</span><span class="p">,</span>
+                         <span class="n">cmdline_args</span><span class="o">.</span><span class="n">nlu</span><span class="p">,</span>
                          <span class="n">additional_arguments</span><span class="p">)</span>
 </pre></div>
 

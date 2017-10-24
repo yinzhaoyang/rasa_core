@@ -213,7 +213,8 @@
 <span class="kn">from</span> <span class="nn">rasa_core.policies</span> <span class="k">import</span> <span class="n">PolicyTrainer</span>
 <span class="kn">from</span> <span class="nn">rasa_core.policies.ensemble</span> <span class="k">import</span> <span class="n">SimplePolicyEnsemble</span><span class="p">,</span> <span class="n">PolicyEnsemble</span>
 <span class="kn">from</span> <span class="nn">rasa_core.policies.memoization</span> <span class="k">import</span> <span class="n">MemoizationPolicy</span>
-<span class="kn">from</span> <span class="nn">rasa_core.policies.online_policy_trainer</span> <span class="k">import</span> <span class="n">OnlinePolicyTrainer</span>
+<span class="kn">from</span> <span class="nn">rasa_core.policies.online_policy_trainer</span> <span class="k">import</span> <span class="n">OnlinePolicyTrainer</span><span class="p">,</span> \
+    <span class="n">TrainingFinishedException</span>
 <span class="kn">from</span> <span class="nn">rasa_core.processor</span> <span class="k">import</span> <span class="n">MessageProcessor</span>
 <span class="kn">from</span> <span class="nn">rasa_core.tracker_store</span> <span class="k">import</span> <span class="n">InMemoryTrackerStore</span><span class="p">,</span> <span class="n">TrackerStore</span>
 
@@ -331,19 +332,24 @@
             <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="n">MemoizationPolicy</span><span class="p">:</span>
                 <span class="n">p</span><span class="o">.</span><span class="n">toggle</span><span class="p">(</span><span class="n">activate</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Agent.train"><a class="viewcode-back" href="../../api/agent.html#rasa_core.agent.Agent.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="c1"># type: (Optional[Text], **Any) -&gt; None</span>
+<div class="viewcode-block" id="Agent.train"><a class="viewcode-back" href="../../api/agent.html#rasa_core.agent.Agent.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">model_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># type: (Optional[Text], Optional[Text], **Any) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Train the policies / policy ensemble using dialogue data from file&quot;&quot;&quot;</span>
 
         <span class="n">trainer</span> <span class="o">=</span> <span class="n">PolicyTrainer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">policy_ensemble</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span>
                                 <span class="bp">self</span><span class="o">.</span><span class="n">featurizer</span><span class="p">)</span>
-        <span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">model_path</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Agent.train_online"><a class="viewcode-back" href="../../api/agent.html#rasa_core.agent.Agent.train_online">[docs]</a>    <span class="k">def</span> <span class="nf">train_online</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                     <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                     <span class="n">input_channel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                     <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="c1"># type: (Optional[Text], Optional[InputChannel], **Any) -&gt; None</span>
+                     <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Text]</span>
+                     <span class="n">input_channel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[InputChannel]</span>
+                     <span class="n">model_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Text]</span>
+                     <span class="o">**</span><span class="n">kwargs</span>  <span class="c1"># type: **Any</span>
+                     <span class="p">):</span>
+        <span class="c1"># type: (...) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Runs an online training session on the set policies / ensemble.</span>
 
 <span class="sd">        The policies will be pretrained using the data from `filename`.</span>
@@ -357,7 +363,10 @@
                     <span class="s2">&quot;an interpreter for the agent to use.&quot;</span><span class="p">)</span>
         <span class="n">trainer</span> <span class="o">=</span> <span class="n">OnlinePolicyTrainer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">policy_ensemble</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span>
                                       <span class="bp">self</span><span class="o">.</span><span class="n">featurizer</span><span class="p">)</span>
-        <span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">interpreter</span><span class="p">,</span> <span class="n">input_channel</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">interpreter</span><span class="p">,</span> <span class="n">input_channel</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">model_path</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Agent.persist"><a class="viewcode-back" href="../../api/agent.html#rasa_core.agent.Agent.persist">[docs]</a>    <span class="k">def</span> <span class="nf">persist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_path</span><span class="p">):</span>
         <span class="c1"># type: (Text) -&gt; None</span>

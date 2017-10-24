@@ -363,13 +363,13 @@ training data.</p>
 
 <dl class="method">
 <dt id="rasa_core.agent.Agent.train">
-<code class="descname">train</code><span class="sig-paren">(</span><em>filename=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/agent.html#Agent.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.agent.Agent.train" title="Permalink to this definition">¶</a></dt>
+<code class="descname">train</code><span class="sig-paren">(</span><em>filename=None</em>, <em>model_path=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/agent.html#Agent.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.agent.Agent.train" title="Permalink to this definition">¶</a></dt>
 <dd><p>Train the policies / policy ensemble using dialogue data from file</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="rasa_core.agent.Agent.train_online">
-<code class="descname">train_online</code><span class="sig-paren">(</span><em>filename=None</em>, <em>input_channel=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/agent.html#Agent.train_online"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.agent.Agent.train_online" title="Permalink to this definition">¶</a></dt>
+<code class="descname">train_online</code><span class="sig-paren">(</span><em>filename=None</em>, <em>input_channel=None</em>, <em>model_path=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/agent.html#Agent.train_online"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.agent.Agent.train_online" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs an online training session on the set policies / ensemble.</p>
 <p>The policies will be pretrained using the data from <cite>filename</cite>.
 After that the model will get trained on dialogues from the input
@@ -428,7 +428,13 @@ can be changed to correct wrong behaviour.</p>
 
 <dl class="method">
 <dt id="rasa_core.dispatcher.Dispatcher.utter_message">
-<code class="descname">utter_message</code><span class="sig-paren">(</span><em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/dispatcher.html#Dispatcher.utter_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.dispatcher.Dispatcher.utter_message" title="Permalink to this definition">¶</a></dt>
+<code class="descname">utter_message</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/dispatcher.html#Dispatcher.utter_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.dispatcher.Dispatcher.utter_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#8220;Send a text to the output channel</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.dispatcher.Dispatcher.utter_response">
+<code class="descname">utter_response</code><span class="sig-paren">(</span><em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/dispatcher.html#Dispatcher.utter_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.dispatcher.Dispatcher.utter_response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send a message to the client.</p>
 </dd></dl>
 
@@ -658,6 +664,12 @@ he slice length.</p>
 <em class="property">static </em><code class="descname">collect_slots</code><span class="sig-paren">(</span><em>slot_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#TemplateDomain.collect_slots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.TemplateDomain.collect_slots" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="staticmethod">
+<dt id="rasa_core.domain.TemplateDomain.collect_templates">
+<em class="property">static </em><code class="descname">collect_templates</code><span class="sig-paren">(</span><em>yml_templates</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#TemplateDomain.collect_templates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.TemplateDomain.collect_templates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Go through the templates and make sure they are all in dict format</p>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="rasa_core.domain.TemplateDomain.entities">
 <code class="descname">entities</code><a class="headerlink" href="#rasa_core.domain.TemplateDomain.entities" title="Permalink to this definition">¶</a></dt>
@@ -692,6 +704,12 @@ he slice length.</p>
 <dt id="rasa_core.domain.TemplateDomain.templates">
 <code class="descname">templates</code><a class="headerlink" href="#rasa_core.domain.TemplateDomain.templates" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="rasa_core.domain.TemplateDomain.validate_domain_yaml">
+<em class="property">classmethod </em><code class="descname">validate_domain_yaml</code><span class="sig-paren">(</span><em>file_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#TemplateDomain.validate_domain_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.TemplateDomain.validate_domain_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate domain yaml.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -1380,7 +1398,7 @@ will use the value stored in the private property.</p>
 
 <dl class="function">
 <dt id="rasa_core.utils.request_input">
-<code class="descclassname">rasa_core.utils.</code><code class="descname">request_input</code><span class="sig-paren">(</span><em>valid_values</em>, <em>prompt=None</em>, <em>max_suggested=3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/utils.html#request_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.utils.request_input" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">rasa_core.utils.</code><code class="descname">request_input</code><span class="sig-paren">(</span><em>valid_values=None</em>, <em>prompt=None</em>, <em>max_suggested=3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/utils.html#request_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.utils.request_input" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
