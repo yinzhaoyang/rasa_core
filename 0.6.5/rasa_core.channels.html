@@ -230,29 +230,207 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="rasa-core-channels-channel-module">
-<h2>rasa_core.channels.channel module<a class="headerlink" href="#rasa-core-channels-channel-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-rasa_core.channels.channel">
+<span id="rasa-core-channels-channel-module"></span><h2>rasa_core.channels.channel module<a class="headerlink" href="#module-rasa_core.channels.channel" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rasa_core.channels.channel.InputChannel">
+<em class="property">class </em><code class="descclassname">rasa_core.channels.channel.</code><code class="descname">InputChannel</code><a class="reference internal" href="_modules/rasa_core/channels/channel.html#InputChannel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.channel.InputChannel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Input channel base class.</p>
+<p>Collects messages from some source and puts them into the message queue.</p>
+<dl class="method">
+<dt id="rasa_core.channels.channel.InputChannel.start_async_listening">
+<code class="descname">start_async_listening</code><span class="sig-paren">(</span><em>message_queue</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/channel.html#InputChannel.start_async_listening"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.channel.InputChannel.start_async_listening" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start to push the incoming messages from channel into the queue.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.channels.channel.InputChannel.start_sync_listening">
+<code class="descname">start_sync_listening</code><span class="sig-paren">(</span><em>message_handler</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/channel.html#InputChannel.start_sync_listening"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.channel.InputChannel.start_sync_listening" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should call the message handler for every incoming message.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rasa_core.channels.channel.OutputChannel">
+<em class="property">class </em><code class="descclassname">rasa_core.channels.channel.</code><code class="descname">OutputChannel</code><a class="reference internal" href="_modules/rasa_core/channels/channel.html#OutputChannel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.channel.OutputChannel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Output channel base class.</p>
+<p>Provides sane implementation of the send methods
+for text only output channels.</p>
+<dl class="method">
+<dt id="rasa_core.channels.channel.OutputChannel.send_custom_message">
+<code class="descname">send_custom_message</code><span class="sig-paren">(</span><em>recipient_id</em>, <em>elements</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/channel.html#OutputChannel.send_custom_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.channel.OutputChannel.send_custom_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends elements to the output.</p>
+<p>Default implementation will just post the elements as a string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.channels.channel.OutputChannel.send_image_url">
+<code class="descname">send_image_url</code><span class="sig-paren">(</span><em>recipient_id</em>, <em>image_url</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/channel.html#OutputChannel.send_image_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.channel.OutputChannel.send_image_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends an image. Default will just post the url as a string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.channels.channel.OutputChannel.send_text_message">
+<code class="descname">send_text_message</code><span class="sig-paren">(</span><em>recipient_id</em>, <em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/channel.html#OutputChannel.send_text_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.channel.OutputChannel.send_text_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send a message through this channel.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.channels.channel.OutputChannel.send_text_with_buttons">
+<code class="descname">send_text_with_buttons</code><span class="sig-paren">(</span><em>recipient_id</em>, <em>message</em>, <em>buttons</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/channel.html#OutputChannel.send_text_with_buttons"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.channel.OutputChannel.send_text_with_buttons" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends buttons to the output.</p>
+<p>Default implementation will just post the buttons as a string.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rasa_core.channels.channel.UserMessage">
+<em class="property">class </em><code class="descclassname">rasa_core.channels.channel.</code><code class="descname">UserMessage</code><span class="sig-paren">(</span><em>text</em>, <em>output_channel=None</em>, <em>sender_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/channel.html#UserMessage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.channel.UserMessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Represents an incoming message.</p>
+<p>Includes the channel the responses should be sent to.</p>
+<dl class="attribute">
+<dt id="rasa_core.channels.channel.UserMessage.DEFAULT_SENDER">
+<code class="descname">DEFAULT_SENDER</code><em class="property"> = u'default'</em><a class="headerlink" href="#rasa_core.channels.channel.UserMessage.DEFAULT_SENDER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="rasa-core-channels-console-module">
-<h2>rasa_core.channels.console module<a class="headerlink" href="#rasa-core-channels-console-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-rasa_core.channels.console">
+<span id="rasa-core-channels-console-module"></span><h2>rasa_core.channels.console module<a class="headerlink" href="#module-rasa_core.channels.console" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rasa_core.channels.console.ConsoleInputChannel">
+<em class="property">class </em><code class="descclassname">rasa_core.channels.console.</code><code class="descname">ConsoleInputChannel</code><a class="reference internal" href="_modules/rasa_core/channels/console.html#ConsoleInputChannel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.console.ConsoleInputChannel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="rasa_dm.channels.html#rasa_core.channels.channel.InputChannel" title="rasa_core.channels.channel.InputChannel"><code class="xref py py-class docutils literal"><span class="pre">rasa_core.channels.channel.InputChannel</span></code></a></p>
+<p>Input channel that reads the user messages from the command line.</p>
+<dl class="method">
+<dt id="rasa_core.channels.console.ConsoleInputChannel.start_async_listening">
+<code class="descname">start_async_listening</code><span class="sig-paren">(</span><em>message_queue</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/console.html#ConsoleInputChannel.start_async_listening"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.console.ConsoleInputChannel.start_async_listening" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.channels.console.ConsoleInputChannel.start_sync_listening">
+<code class="descname">start_sync_listening</code><span class="sig-paren">(</span><em>message_handler</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/console.html#ConsoleInputChannel.start_sync_listening"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.console.ConsoleInputChannel.start_sync_listening" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rasa_core.channels.console.ConsoleOutputChannel">
+<em class="property">class </em><code class="descclassname">rasa_core.channels.console.</code><code class="descname">ConsoleOutputChannel</code><a class="reference internal" href="_modules/rasa_core/channels/console.html#ConsoleOutputChannel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.console.ConsoleOutputChannel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="rasa_dm.channels.html#rasa_core.channels.channel.OutputChannel" title="rasa_core.channels.channel.OutputChannel"><code class="xref py py-class docutils literal"><span class="pre">rasa_core.channels.channel.OutputChannel</span></code></a></p>
+<p>Simple bot that outputs the bots messages to the command line.</p>
+<dl class="attribute">
+<dt id="rasa_core.channels.console.ConsoleOutputChannel.default_output_color">
+<code class="descname">default_output_color</code><em class="property"> = u'\x1b[94m'</em><a class="headerlink" href="#rasa_core.channels.console.ConsoleOutputChannel.default_output_color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.channels.console.ConsoleOutputChannel.send_text_message">
+<code class="descname">send_text_message</code><span class="sig-paren">(</span><em>recipient_id</em>, <em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/console.html#ConsoleOutputChannel.send_text_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.console.ConsoleOutputChannel.send_text_message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="rasa-core-channels-custom-module">
 <h2>rasa_core.channels.custom module<a class="headerlink" href="#rasa-core-channels-custom-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="rasa-core-channels-direct-module">
-<h2>rasa_core.channels.direct module<a class="headerlink" href="#rasa-core-channels-direct-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-rasa_core.channels.direct">
+<span id="rasa-core-channels-direct-module"></span><h2>rasa_core.channels.direct module<a class="headerlink" href="#module-rasa_core.channels.direct" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rasa_core.channels.direct.CollectingOutputChannel">
+<em class="property">class </em><code class="descclassname">rasa_core.channels.direct.</code><code class="descname">CollectingOutputChannel</code><a class="reference internal" href="_modules/rasa_core/channels/direct.html#CollectingOutputChannel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.direct.CollectingOutputChannel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="rasa_dm.channels.html#rasa_core.channels.channel.OutputChannel" title="rasa_core.channels.channel.OutputChannel"><code class="xref py py-class docutils literal"><span class="pre">rasa_core.channels.channel.OutputChannel</span></code></a></p>
+<p>Output channel that collects send messages in a list</p>
+<p>(doesn&#8217;t send them anywhere, just collects them).</p>
+<dl class="method">
+<dt id="rasa_core.channels.direct.CollectingOutputChannel.latest_output">
+<code class="descname">latest_output</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/direct.html#CollectingOutputChannel.latest_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.direct.CollectingOutputChannel.latest_output" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.channels.direct.CollectingOutputChannel.send_text_message">
+<code class="descname">send_text_message</code><span class="sig-paren">(</span><em>recipient_id</em>, <em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/direct.html#CollectingOutputChannel.send_text_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.direct.CollectingOutputChannel.send_text_message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="rasa-core-channels-facebook-module">
 <h2>rasa_core.channels.facebook module<a class="headerlink" href="#rasa-core-channels-facebook-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="rasa-core-channels-file-module">
-<h2>rasa_core.channels.file module<a class="headerlink" href="#rasa-core-channels-file-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-rasa_core.channels.file">
+<span id="rasa-core-channels-file-module"></span><h2>rasa_core.channels.file module<a class="headerlink" href="#module-rasa_core.channels.file" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rasa_core.channels.file.FileInputChannel">
+<em class="property">class </em><code class="descclassname">rasa_core.channels.file.</code><code class="descname">FileInputChannel</code><span class="sig-paren">(</span><em>file_name</em>, <em>output_channel=None</em>, <em>message_line_pattern=u'.*'</em>, <em>max_messages=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/file.html#FileInputChannel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.file.FileInputChannel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="rasa_dm.channels.html#rasa_core.channels.channel.InputChannel" title="rasa_core.channels.channel.InputChannel"><code class="xref py py-class docutils literal"><span class="pre">rasa_core.channels.channel.InputChannel</span></code></a></p>
+<p>Input channel that reads the user messages from a specified file.</p>
+<p>If there are lines in the file that should not be used as user messages,
+or if the user messages are surrounded by other symbols that should not be
+part of the user message, you can use a regular expression to only match
+the user message. The <cite>message_line_pattern</cite> needs to be passed in as a
+string. The default is <cite>.*</cite> hence, considering the whole line as the user
+message. Either the whole message (if no capturing group is present) or the
+first capturing group will be used as the user message.</p>
+<dl class="method">
+<dt id="rasa_core.channels.file.FileInputChannel.start_async_listening">
+<code class="descname">start_async_listening</code><span class="sig-paren">(</span><em>message_queue</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/file.html#FileInputChannel.start_async_listening"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.file.FileInputChannel.start_async_listening" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.channels.file.FileInputChannel.start_sync_listening">
+<code class="descname">start_sync_listening</code><span class="sig-paren">(</span><em>message_handler</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/file.html#FileInputChannel.start_sync_listening"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.file.FileInputChannel.start_sync_listening" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="rasa-core-channels-rest-module">
-<h2>rasa_core.channels.rest module<a class="headerlink" href="#rasa-core-channels-rest-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-rasa_core.channels.rest">
+<span id="rasa-core-channels-rest-module"></span><h2>rasa_core.channels.rest module<a class="headerlink" href="#module-rasa_core.channels.rest" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rasa_core.channels.rest.HttpInputChannel">
+<em class="property">class </em><code class="descclassname">rasa_core.channels.rest.</code><code class="descname">HttpInputChannel</code><span class="sig-paren">(</span><em>http_port</em>, <em>url_prefix</em>, <em>*listener_components</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/rest.html#HttpInputChannel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.rest.HttpInputChannel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="rasa_dm.channels.html#rasa_core.channels.channel.InputChannel" title="rasa_core.channels.channel.InputChannel"><code class="xref py py-class docutils literal"><span class="pre">rasa_core.channels.channel.InputChannel</span></code></a></p>
+<p>An input channel that collects messages from an HTTP endpoint.</p>
+<p>There is no actual API definition of the HTTP endpoint here. Instead, the
+channel expects <cite>listener_components</cite> to be passed in. These components
+define API endpoints, e.g. there can be a rasa REST endpoint, a facebook
+REST endpoint and so on. This channel will then start a HTTP server for
+accepting the incoming HTTP requests and redirecting them to the appropriate
+listener components.</p>
+<dl class="method">
+<dt id="rasa_core.channels.rest.HttpInputChannel.start_async_listening">
+<code class="descname">start_async_listening</code><span class="sig-paren">(</span><em>message_queue</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/rest.html#HttpInputChannel.start_async_listening"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.rest.HttpInputChannel.start_async_listening" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.channels.rest.HttpInputChannel.start_sync_listening">
+<code class="descname">start_sync_listening</code><span class="sig-paren">(</span><em>message_handler</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/rest.html#HttpInputChannel.start_sync_listening"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.rest.HttpInputChannel.start_sync_listening" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rasa_core.channels.rest.HttpInputComponent">
+<em class="property">class </em><code class="descclassname">rasa_core.channels.rest.</code><code class="descname">HttpInputComponent</code><a class="reference internal" href="_modules/rasa_core/channels/rest.html#HttpInputComponent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.rest.HttpInputComponent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rasa_core.channels.rest.HttpInputComponent.blueprint">
+<code class="descname">blueprint</code><span class="sig-paren">(</span><em>on_new_message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/rest.html#HttpInputComponent.blueprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.rest.HttpInputComponent.blueprint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-rasa_core.channels">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-rasa_core.channels" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

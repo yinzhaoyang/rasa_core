@@ -241,8 +241,66 @@
     margin-right: 4px;  /* make room for the exclamation icon */
 }
 </style>
-<div class="section" id="policies">
-<h1>Policies<a class="headerlink" href="#policies" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-rasa_core.policies">
+<span id="policies"></span><h1>Policies<a class="headerlink" href="#module-rasa_core.policies" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="rasa_core.policies.Policy">
+<em class="property">class </em><code class="descclassname">rasa_core.policies.</code><code class="descname">Policy</code><span class="sig-paren">(</span><em>featurizer=None</em>, <em>max_history=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/policies/policy.html#Policy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.policies.Policy" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="rasa_core.policies.Policy.continue_training">
+<code class="descname">continue_training</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>domain</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/policies/policy.html#Policy.continue_training"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.policies.Policy.continue_training" title="Permalink to this definition">¶</a></dt>
+<dd><p>Continues training an already trained policy.</p>
+<p>This doesn&#8217;t need to be supported by every policy. If it is supported,
+the policy can be used for online training and the implementation for
+the continued training should be put into this function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.policies.Policy.featurize">
+<code class="descname">featurize</code><span class="sig-paren">(</span><em>tracker</em>, <em>domain</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/policies/policy.html#Policy.featurize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.policies.Policy.featurize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform tracker into a vector representation.</p>
+<p>The tracker, consisting of multiple turns, will be transformed
+into a float vector which can be used by a ML model.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.policies.Policy.persist">
+<code class="descname">persist</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/policies/policy.html#Policy.persist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.policies.Policy.persist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Persists the policy to storage.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.policies.Policy.train">
+<code class="descname">train</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>domain</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/policies/policy.html#Policy.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.policies.Policy.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trains the policy on given training data.</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-rasa_core.policies.keras_policy"></span><dl class="class">
+<dt id="rasa_core.policies.keras_policy.KerasPolicy">
+<em class="property">class </em><code class="descclassname">rasa_core.policies.keras_policy.</code><code class="descname">KerasPolicy</code><span class="sig-paren">(</span><em>model=None</em>, <em>graph=None</em>, <em>current_epoch=0</em>, <em>featurizer=None</em>, <em>max_history=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/policies/keras_policy.html#KerasPolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.policies.keras_policy.KerasPolicy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<span class="target" id="module-rasa_core.policies.memoization"></span><dl class="class">
+<dt id="rasa_core.policies.memoization.MemoizationPolicy">
+<em class="property">class </em><code class="descclassname">rasa_core.policies.memoization.</code><code class="descname">MemoizationPolicy</code><span class="sig-paren">(</span><em>lookup=None</em>, <em>featurizer=None</em>, <em>max_history=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/policies/memoization.html#MemoizationPolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.policies.memoization.MemoizationPolicy" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="rasa_core.policies.memoization.MemoizationPolicy.predict_action_probabilities">
+<code class="descname">predict_action_probabilities</code><span class="sig-paren">(</span><em>tracker</em>, <em>domain</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/policies/memoization.html#MemoizationPolicy.predict_action_probabilities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.policies.memoization.MemoizationPolicy.predict_action_probabilities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predicts the next action the bot should take after seeing x.</p>
+<p>This should be overwritten by more advanced policies to use ML to
+predict the action. Returns the index of the next action</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.policies.memoization.MemoizationPolicy.train">
+<code class="descname">train</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>domain</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/policies/memoization.html#MemoizationPolicy.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.policies.memoization.MemoizationPolicy.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trains the policy on given training data.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
