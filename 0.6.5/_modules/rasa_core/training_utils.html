@@ -212,8 +212,8 @@
                                     <span class="n">featurizer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                     <span class="n">interpreter</span><span class="o">=</span><span class="n">RegexInterpreter</span><span class="p">(),</span>
                                     <span class="n">max_number_of_trackers</span><span class="o">=</span><span class="mi">2000</span><span class="p">):</span>
-    <span class="n">graph</span> <span class="o">=</span> <span class="n">extract_story_graph_from_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">domain</span><span class="p">)</span>
-    <span class="n">extractor</span> <span class="o">=</span> <span class="n">TrainingsDataExtractor</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">featurizer</span><span class="p">,</span> <span class="n">interpreter</span><span class="p">)</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="n">extract_story_graph_from_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">interpreter</span><span class="p">)</span>
+    <span class="n">extractor</span> <span class="o">=</span> <span class="n">TrainingsDataExtractor</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">featurizer</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">extractor</span><span class="o">.</span><span class="n">extract_trainings_data</span><span class="p">(</span><span class="n">remove_duplicates</span><span class="p">,</span>
                                             <span class="n">augmentation_factor</span><span class="p">,</span>
                                             <span class="n">max_history</span><span class="p">,</span>
@@ -222,18 +222,16 @@
 
 <div class="viewcode-block" id="extract_stories_from_file"><a class="viewcode-back" href="../../rasa_dm.training_utils.html#rasa_core.training_utils.extract_stories_from_file">[docs]</a><span class="k">def</span> <span class="nf">extract_stories_from_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span>
                               <span class="n">domain</span><span class="p">,</span>
-                              <span class="n">remove_duplicates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                               <span class="n">interpreter</span><span class="o">=</span><span class="n">RegexInterpreter</span><span class="p">(),</span>
                               <span class="n">max_number_of_trackers</span><span class="o">=</span><span class="mi">2000</span><span class="p">):</span>
-    <span class="n">graph</span> <span class="o">=</span> <span class="n">extract_story_graph_from_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">domain</span><span class="p">)</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="n">extract_story_graph_from_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">interpreter</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">graph</span><span class="o">.</span><span class="n">build_stories</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span>
-                               <span class="n">interpreter</span><span class="p">,</span>
-                               <span class="n">remove_duplicates</span><span class="p">,</span>
                                <span class="n">max_number_of_trackers</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="extract_story_graph_from_file"><a class="viewcode-back" href="../../rasa_dm.training_utils.html#rasa_core.training_utils.extract_story_graph_from_file">[docs]</a><span class="k">def</span> <span class="nf">extract_story_graph_from_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
-    <span class="n">story_steps</span> <span class="o">=</span> <span class="n">StoryFileReader</span><span class="o">.</span><span class="n">read_from_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">domain</span><span class="p">)</span>
+<div class="viewcode-block" id="extract_story_graph_from_file"><a class="viewcode-back" href="../../rasa_dm.training_utils.html#rasa_core.training_utils.extract_story_graph_from_file">[docs]</a><span class="k">def</span> <span class="nf">extract_story_graph_from_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span>
+                                  <span class="n">interpreter</span><span class="o">=</span><span class="n">RegexInterpreter</span><span class="p">()):</span>
+    <span class="n">story_steps</span> <span class="o">=</span> <span class="n">StoryFileReader</span><span class="o">.</span><span class="n">read_from_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">interpreter</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">StoryGraph</span><span class="p">(</span><span class="n">story_steps</span><span class="p">)</span></div>
 </pre></div>
 

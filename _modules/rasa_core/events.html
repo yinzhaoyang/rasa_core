@@ -296,6 +296,11 @@
                 <span class="s2">&quot;entities&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">,</span>
                 <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">text</span><span class="p">}</span>
 
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="UserUttered.from_parse_data"><a class="viewcode-back" href="../../api/events.html#rasa_core.events.UserUttered.from_parse_data">[docs]</a>    <span class="k">def</span> <span class="nf">from_parse_data</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">parse_data</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">UserUttered</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">parse_data</span><span class="p">[</span><span class="s2">&quot;intent&quot;</span><span class="p">],</span> <span class="n">parse_data</span><span class="p">[</span><span class="s2">&quot;entities&quot;</span><span class="p">],</span>
+                           <span class="n">parse_data</span><span class="p">)</span></div>
+
     <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">intent</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">)))</span>
 
