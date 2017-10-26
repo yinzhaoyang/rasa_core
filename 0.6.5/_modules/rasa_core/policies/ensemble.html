@@ -218,14 +218,19 @@
     <span class="kn">from</span> <span class="nn">rasa_core.domain</span> <span class="k">import</span> <span class="n">Domain</span>
     <span class="kn">from</span> <span class="nn">rasa_core.featurizers</span> <span class="k">import</span> <span class="n">Featurizer</span>
 
+
 <div class="viewcode-block" id="PolicyEnsemble"><a class="viewcode-back" href="../../../rasa_dm.policies.html#rasa_core.policies.ensemble.PolicyEnsemble">[docs]</a><span class="k">class</span> <span class="nc">PolicyEnsemble</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policies</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">policies</span> <span class="o">=</span> <span class="n">policies</span>
 
 <div class="viewcode-block" id="PolicyEnsemble.train"><a class="viewcode-back" href="../../../rasa_dm.policies.html#rasa_core.policies.ensemble.PolicyEnsemble.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">featurizer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">policy</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">policies</span><span class="p">:</span>
-            <span class="n">policy</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">featurizer</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="n">policy</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">utils</span><span class="o">.</span><span class="n">is_training_data_empty</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">policy</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">policies</span><span class="p">:</span>
+                <span class="n">policy</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">featurizer</span><span class="p">,</span> <span class="n">max_history</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">policy</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Skipped training, because there are no &quot;</span>
+                        <span class="s2">&quot;training samples.&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PolicyEnsemble.predict_next_action"><a class="viewcode-back" href="../../../rasa_dm.policies.html#rasa_core.policies.ensemble.PolicyEnsemble.predict_next_action">[docs]</a>    <span class="k">def</span> <span class="nf">predict_next_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
         <span class="c1"># type: (DialogueStateTracker, Domain) -&gt; (float, int)</span>

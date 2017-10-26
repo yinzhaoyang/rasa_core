@@ -450,6 +450,11 @@
     <span class="n">fix_yaml_loader</span><span class="p">()</span>
     <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="is_training_data_empty"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.utils.is_training_data_empty">[docs]</a><span class="k">def</span> <span class="nf">is_training_data_empty</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check if the training matrix does contain training samples.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span></div>
 </pre></div>
 
            </div>
