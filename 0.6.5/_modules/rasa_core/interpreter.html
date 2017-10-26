@@ -220,7 +220,8 @@
             <span class="k">return</span> <span class="n">obj</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">RasaNLUInterpreter</span><span class="p">(</span><span class="n">model_directory</span><span class="o">=</span><span class="n">obj</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">None</span></div></div>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">RegexInterpreter</span><span class="p">()</span>   <span class="c1"># default interpreter</span></div></div>
 
 
 <div class="viewcode-block" id="RegexInterpreter"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.interpreter.RegexInterpreter">[docs]</a><span class="k">class</span> <span class="nc">RegexInterpreter</span><span class="p">(</span><span class="n">NaturalLanguageInterpreter</span><span class="p">):</span>
