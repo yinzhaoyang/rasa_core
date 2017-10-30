@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Change Log &mdash; Rasa Core 0.7.1 documentation</title>
+  <title>Change Log &mdash; Rasa Core 0.7.2 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.1 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.7.2 documentation" href="index.html"/>
         <link rel="prev" title="Tracking Conversation State" href="state.html"/> 
 
   
@@ -130,27 +130,33 @@
 <li class="toctree-l3"><a class="reference internal" href="#fixed">Fixed</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id1">[0.7.1] - 2017-10-06</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">Fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">[0.7.2] - 2017-10-30</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Changed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Fixed</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">[0.7.0] - 2017-10-04</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id4">Added</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">Changed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">[0.7.1] - 2017-10-06</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Fixed</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id6">[0.6.0] - 2017-08-27</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id7">Added</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id8">Changed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">[0.7.0] - 2017-10-04</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Changed</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id9">[0.5.0] - 2017-06-18</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id10">Added</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">Changed</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id12">Fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">[0.6.0] - 2017-08-27</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id11">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">Changed</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id13">[0.2.0] - 2017-05-18</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id13">[0.5.0] - 2017-06-18</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id14">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">Changed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id17">[0.2.0] - 2017-05-18</a></li>
 </ul>
 </li>
 </ul>
@@ -271,6 +277,21 @@ This project adheres to <a class="reference external" href="http://semver.org/">
 </div>
 <div class="section" id="added">
 <h3>Added<a class="headerlink" href="#added" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="changed">
+<h3>Changed<a class="headerlink" href="#changed" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="removed">
+<h3>Removed<a class="headerlink" href="#removed" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="fixed">
+<h3>Fixed<a class="headerlink" href="#fixed" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>[0.7.2] - 2017-10-30<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>Added<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>added facebook bot example</li>
 <li>added support for conditional checkpoints. a checkpoint can be restricted to
@@ -280,42 +301,40 @@ only allow one to use it if certain slots are set. see docs for details</li>
 <li><code class="docutils literal"><span class="pre">run</span></code> script to load models and handle messages from an input channel</li>
 </ul>
 </div>
-<div class="section" id="changed">
-<h3>Changed<a class="headerlink" href="#changed" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Changed<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>small dropout in standard keras model to decrease reliance on exact intents</li>
+<li>a LOT of documentation improvements</li>
 </ul>
 </div>
-<div class="section" id="removed">
-<h3>Removed<a class="headerlink" href="#removed" title="Permalink to this headline">¶</a></h3>
-</div>
-<div class="section" id="fixed">
-<h3>Fixed<a class="headerlink" href="#fixed" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Fixed<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>fixed http error if action listen is not confirmed. #42</li>
 </ul>
 </div>
 </div>
-<div class="section" id="id1">
-<h2>[0.7.1] - 2017-10-06<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id2">
-<h3>Fixed<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h2>[0.7.1] - 2017-10-06<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h3>Fixed<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>issues with restart events. They created wrong a messed up history leading to
 wrong predictions</li>
 </ul>
 </div>
 </div>
-<div class="section" id="id3">
-<h2>[0.7.0] - 2017-10-04<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id4">
-<h3>Added<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id7">
+<h2>[0.7.0] - 2017-10-04<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h3>Added<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>support for Rasa Core usage as a server with remote action execution</li>
 </ul>
 </div>
-<div class="section" id="id5">
-<h3>Changed<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id9">
+<h3>Changed<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>switched to max code line length 80</li>
 <li>removed action id - use <code class="docutils literal"><span class="pre">action.name()</span></code> instead. if an action implementation overrides the name, it should include the <code class="docutils literal"><span class="pre">action_</span></code> prefix (as it is not automatically added anymore)</li>
@@ -328,10 +347,10 @@ wrong predictions</li>
 </ul>
 </div>
 </div>
-<div class="section" id="id6">
-<h2>[0.6.0] - 2017-08-27<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id7">
-<h3>Added<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id10">
+<h2>[0.6.0] - 2017-08-27<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id11">
+<h3>Added<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>support for multiple policies (e.g. one memoization and a Keras policy at the same time)</li>
 <li>loading domains from yaml files instead of defining them with python code</li>
@@ -339,25 +358,25 @@ wrong predictions</li>
 <li>support for reminders</li>
 </ul>
 </div>
-<div class="section" id="id8">
-<h3>Changed<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id12">
+<h3>Changed<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>large refactoring of code base</li>
 </ul>
 </div>
 </div>
-<div class="section" id="id9">
-<h2>[0.5.0] - 2017-06-18<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id10">
-<h3>Added<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id13">
+<h2>[0.5.0] - 2017-06-18<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id14">
+<h3>Added<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">ScoringPolicy</span></code> added to policy implementations (less strict than standard default policy)</li>
 <li><code class="docutils literal"><span class="pre">RasaNLUInterpreter</span></code> to run a nlu instance within dm (instead of using the http interface)</li>
 <li>more tests</li>
 </ul>
 </div>
-<div class="section" id="id11">
-<h3>Changed<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id15">
+<h3>Changed<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">UserUtterance</span></code> now holds the complete parse data from nlu (e.g. to access attributes other than entities or intent)</li>
 <li><code class="docutils literal"><span class="pre">Turn</span></code> has a reference to a <code class="docutils literal"><span class="pre">UserUtterance</span></code> instead of directly storing intent &amp; entities (allows access to other data)</li>
@@ -365,8 +384,8 @@ wrong predictions</li>
 <li>order of actions in the DefaultPolicy in <code class="docutils literal"><span class="pre">possible_actions</span></code> (<code class="docutils literal"><span class="pre">ActionListen</span></code> now always has index 0)</li>
 </ul>
 </div>
-<div class="section" id="id12">
-<h3>Fixed<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id16">
+<h3>Fixed<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">RedisTrackerStore</span></code> checks if tracker is stored before accessing it (otherwise a <code class="docutils literal"><span class="pre">None</span></code> access exception is thrown)</li>
 <li><code class="docutils literal"><span class="pre">RegexInterpreter</span></code> checks if the regex actually matches the message instead of assuming it always does</li>
@@ -375,8 +394,8 @@ wrong predictions</li>
 </ul>
 </div>
 </div>
-<div class="section" id="id13">
-<h2>[0.2.0] - 2017-05-18<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id17">
+<h2>[0.2.0] - 2017-05-18<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h2>
 <p>First released version.</p>
 </div>
 </div>
@@ -446,7 +465,7 @@ wrong predictions</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.1',
+            VERSION:'0.7.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

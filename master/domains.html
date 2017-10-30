@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Domain, Slots, and Actions &mdash; Rasa Core 0.7.1 documentation</title>
+  <title>Domain, Slots, and Actions &mdash; Rasa Core 0.7.2 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.1 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.7.2 documentation" href="index.html"/>
         <link rel="next" title="Stories - The Training Data" href="stories.html"/>
         <link rel="prev" title="Rasa Core without Python" href="tutorial_remote.html"/> 
 
@@ -110,7 +110,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#putting-it-all-together">Putting it all together</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#utterance-templates">Utterance templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#utterance-templates">Utterance templates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#images-and-buttons">Images and Buttons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#variables">Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#variations">Variations</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#slots">Slots</a></li>
 </ul>
 </li>
@@ -249,26 +254,28 @@
 <li>which <code class="docutils literal"><span class="pre">slots</span></code> you wish to track</li>
 <li>which <code class="docutils literal"><span class="pre">actions</span></code> your bot can take</li>
 </ul>
-<p>For example, the <code class="docutils literal"><span class="pre">DefaultDomain</span></code> has the following yaml definition (no slots here - but we will get there):</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">intents</span><span class="p p-Indicator">:</span>
+<p>For example, the <code class="docutils literal"><span class="pre">DefaultDomain</span></code> has the following yaml definition:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># all hashtags are comments :)</span>
+<span class="l l-Scalar l-Scalar-Plain">intents</span><span class="p p-Indicator">:</span>
  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">greet</span>
  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">goodbye</span>
+
+<span class="l l-Scalar l-Scalar-Plain">entities</span><span class="p p-Indicator">:</span>
+ <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span>
 
 <span class="l l-Scalar l-Scalar-Plain">slots</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">text</span>
 
-<span class="l l-Scalar l-Scalar-Plain">entities</span><span class="p p-Indicator">:</span>
- <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span>
-
 <span class="l l-Scalar l-Scalar-Plain">templates</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">utter_greet</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">hey there {name}!</span>
+    <span class="p p-Indicator">-</span> <span class="s">&quot;hey</span><span class="nv"> </span><span class="s">there</span><span class="nv"> </span><span class="s">{name}!&quot;</span>    <span class="c1"># variable will be filled by slot with the same name or by custom code</span>
   <span class="l l-Scalar l-Scalar-Plain">utter_goodbye</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">goodbye :(</span>
+    <span class="p p-Indicator">-</span> <span class="s">&quot;goodbye</span><span class="nv"> </span><span class="s">:(&quot;</span>
+    <span class="p p-Indicator">-</span> <span class="s">&quot;bye</span><span class="nv"> </span><span class="s">bye&quot;</span>              <span class="c1"># multiple templates will allow the bot to randomly pick from them</span>
   <span class="l l-Scalar l-Scalar-Plain">utter_default</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">default message</span>
+    <span class="p p-Indicator">-</span> <span class="s">&quot;default</span><span class="nv"> </span><span class="s">message&quot;</span>
 
 <span class="l l-Scalar l-Scalar-Plain">actions</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">utter_default</span>
@@ -292,6 +299,11 @@ For example, an <code class="docutils literal"><span class="pre">action</span></
 <li>make an external API call</li>
 <li>query a database</li>
 </ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For mor information about the utter template format (e.g. the use of
+variables like <code class="docutils literal"><span class="pre">{name}</span></code> or buttons) take a look at <a class="reference internal" href="#utter-templates"><span class="std std-ref">Utterance templates</span></a>.</p>
+</div>
 <div class="section" id="defining-custom-actions">
 <span id="custom-actions"></span><h3>Defining Custom Actions<a class="headerlink" href="#defining-custom-actions" title="Permalink to this headline">¶</a></h3>
 <p>The easiest are <code class="docutils literal"><span class="pre">UtterActions</span></code>, which just send a message to the user. You define them by adding an entry to the
@@ -325,30 +337,16 @@ own state.</p>
 <h3>Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Permalink to this headline">¶</a></h3>
 <p>Let&#8217;s add just this one new action to a custom domain (assuming we stored the
 action in a module called <code class="docutils literal"><span class="pre">restaurant.actions</span></code>):</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">intents</span><span class="p p-Indicator">:</span>
-   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">greet</span>
-   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
-   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">goodbye</span>
-
-<span class="l l-Scalar l-Scalar-Plain">entities</span><span class="p p-Indicator">:</span>
-   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span>
-
-<span class="l l-Scalar l-Scalar-Plain">templates</span><span class="p p-Indicator">:</span>
-   <span class="l l-Scalar l-Scalar-Plain">utter_greet</span><span class="p p-Indicator">:</span>
-      <span class="p p-Indicator">-</span> <span class="s">&quot;hey</span><span class="nv"> </span><span class="s">there!&quot;</span>
-   <span class="l l-Scalar l-Scalar-Plain">utter_goodbye</span><span class="p p-Indicator">:</span>
-      <span class="p p-Indicator">-</span> <span class="s">&quot;goodbye</span><span class="nv"> </span><span class="s">:(&quot;</span>
-   <span class="l l-Scalar l-Scalar-Plain">utter_default</span><span class="p p-Indicator">:</span>
-      <span class="p p-Indicator">-</span> <span class="s">&quot;default</span><span class="nv"> </span><span class="s">message&quot;</span>
-
-<span class="l l-Scalar l-Scalar-Plain">actions</span><span class="p p-Indicator">:</span>
-   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">utter_default</span>
-   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">utter_greet</span>
-   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">utter_goodbye</span>
-   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">restaurant.actions.ActionCheckRestaurants</span>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">actions</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">utter_default</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">utter_greet</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">utter_goodbye</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">restaurant.actions.ActionCheckRestaurants</span>   <span class="c1"># custom action</span>
 </pre></div>
 </div>
-<p>The point of this is just to show how the pieces fit together. As you can see, in the <code class="docutils literal"><span class="pre">actions</span></code> section
+<p>We only show the changed action list here, you also need to include the other
+parts from the original domain! The point of this is just to show how the pieces
+fit together. As you can see, in the <code class="docutils literal"><span class="pre">actions</span></code> section
 of your domain, you can list utter actions (which respond an utter template to the user) as well as custom
 actions using their module path.</p>
 <p>For an example you can run, check the <a class="reference internal" href="tutorial_basics.html"><span class="doc">Building a Simple Bot</span></a>.</p>
@@ -360,6 +358,8 @@ actions using their module path.</p>
 automatically by an action with the same name as the utterance (e.g. in the
 above example the <cite>utter_default</cite> template and action) or by an action with
 custom code.</p>
+<div class="section" id="images-and-buttons">
+<h3>Images and Buttons<a class="headerlink" href="#images-and-buttons" title="Permalink to this headline">¶</a></h3>
 <p>Templates defined in a domains yaml file can contain images and buttons as well:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">templates</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">utter_greeting</span><span class="p p-Indicator">:</span>
@@ -381,6 +381,20 @@ channel on how to display the defined buttons. E.g. the cmdline
 interface can not display buttons or images, but tries to mimic them in
 the command line.</p>
 </div>
+</div>
+<div class="section" id="variables">
+<h3>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h3>
+<p>You can also use <strong>variables</strong> in your templates to insert information
+collected during the dialogue. You can either do that in your custom python
+code or by using the automatic slot filling mechanism. E.g if you got a template
+like this:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">templates</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">utter_greeting</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">text</span><span class="p p-Indicator">:</span> <span class="s">&quot;Hey,</span><span class="nv"> </span><span class="s">{name}.</span><span class="nv"> </span><span class="s">How</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">you?&quot;</span>
+</pre></div>
+</div>
+<p>Rasa will automatically fill that variable with a value found in a slot called
+<code class="docutils literal"><span class="pre">name</span></code>.</p>
 <p>In custom code, you can retrieve a template by using:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ActionCustom</span><span class="p">(</span><span class="n">Action</span><span class="p">):</span>
    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -392,6 +406,23 @@ the command line.</p>
       <span class="c1"># ... other code</span>
       <span class="k">return</span> <span class="p">[]</span>
 </pre></div>
+</div>
+<p>If the template contains variables denoted with <code class="docutils literal"><span class="pre">{my_variable}</span></code> you can supply
+values for the fields by passing them as key word arguments to <code class="docutils literal"><span class="pre">utter_template</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">dispatcher</span><span class="o">.</span><span class="n">utter_template</span><span class="p">(</span><span class="s2">&quot;utter_default&quot;</span><span class="p">,</span> <span class="n">my_variable</span><span class="o">=</span><span class="s2">&quot;my text&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="variations">
+<h3>Variations<a class="headerlink" href="#variations" title="Permalink to this headline">¶</a></h3>
+<p>If you want to randomly vary the response send to the user, you can list
+multiple responses and the bot will randomly pick one of them, e.g.:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">templates</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">utter_greeting</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">text</span><span class="p p-Indicator">:</span> <span class="s">&quot;Hey,</span><span class="nv"> </span><span class="s">{name}.</span><span class="nv"> </span><span class="s">How</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">you?&quot;</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">text</span><span class="p p-Indicator">:</span> <span class="s">&quot;Hey,</span><span class="nv"> </span><span class="s">{name}.</span><span class="nv"> </span><span class="s">How</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">your</span><span class="nv"> </span><span class="s">day</span><span class="nv"> </span><span class="s">going?&quot;</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="slots">
@@ -665,7 +696,7 @@ any custom logic.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.1',
+            VERSION:'0.7.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
