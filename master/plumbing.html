@@ -30,13 +30,15 @@
   
     <link rel="stylesheet" href="_static/banner.css" type="text/css" />
   
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Rasa Core 0.7.1 documentation" href="index.html"/>
-        <link rel="next" title="Rasa Core as a HTTP server" href="http.html"/>
+        <link rel="next" title="HTTP server" href="http.html"/>
         <link rel="prev" title="Common Patterns" href="patterns.html"/> 
 
   
@@ -89,25 +91,25 @@
             
                 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="read_first.html">Read this first</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motivation.html">Motivation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="no_python.html">But I don&#8217;t code in python!</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Hello World</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tour.html">A Quick Tour (no ML)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_scratch.html">A Bot From Scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">More Tutorials</span></p>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_babi.html">Supervised Learning Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_fake_user.html">Interactive Learning with a Fake User</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_basics.html">Building a Simple Bot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_supervised.html">Supervised Learning Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_interactive_learning.html">Interactive Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_remote.html">Rasa Core without Python</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stories.html">Stories - The Training Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Plumbing - How it all fits together</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http.html">Rasa Core as a HTTP server</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">HTTP server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stories.html">Training Data Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling Reminders</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Python API</span></p>
@@ -119,7 +121,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">Custom Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Change Log</a></li>
 </ul>
@@ -186,6 +188,15 @@
            <div itemprop="articleBody">
             
   
+
+
+    
+    
+
+
+
+    <p class="scv-banner scv-sphinx_rtd_theme"><a href="../0.7.1/plumbing.html"><b>Warning:</b> This document is for the development version of Rasa Core. The latest version is 0.7.1.</a></p>
+
 <style>
 /* CSS overrides for sphinx_rtd_theme */
 
@@ -222,7 +233,7 @@
 <div class="section" id="plumbing-how-it-all-fits-together">
 <span id="plumbing"></span><h1>Plumbing - How it all fits together<a class="headerlink" href="#plumbing-how-it-all-fits-together" title="Permalink to this headline">¶</a></h1>
 <p>This diagram shows the basic steps of how a Rasa Core app responds to a message:</p>
-<img alt="_images/intro_1.png" src="_images/intro_1.png" />
+<img alt="_images/rasa_arch_colour.png" src="_images/rasa_arch_colour.png" />
 <p>The steps are:</p>
 <ol class="arabic simple">
 <li>The message is received and passed to an <code class="docutils literal"><span class="pre">Interpreter</span></code>, which converts it into a dictionary
@@ -238,10 +249,10 @@ It receives the info that a new message has come in.</li>
 <p class="first admonition-title">Note</p>
 <p class="last">Messages can be text typed by a human, but can equally well be a button payload, or a message that&#8217;s already been interpreted (as you would get from an Amazon Echo). See the section on <a class="reference internal" href="interpreters.html#interpreters"><span class="std std-ref">Interpreters</span></a> for details.</p>
 </div>
-<p>The steps above are carried out by the <code class="docutils literal"><span class="pre">Controller</span></code>, which adds messages to a queue as they come in,
-and asynchronously works through the message queue to respond to users.
-In most cases, you shouldn&#8217;t have to worry at all about this, but the details are explained in <span class="xref std std-ref">message_handling</span>.</p>
-<p>Now check out the <a class="reference internal" href="tour.html"><span class="doc">A Quick Tour (no ML)</span></a> and <a class="reference internal" href="tutorial_scratch.html"><span class="doc">A Bot From Scratch</span></a>!</p>
+<p>The steps above are carried out by the <code class="docutils literal"><span class="pre">MessageProcessor</span></code>, which receives
+the messages and processes them as they arrive.</p>
+<p>Feel free to check out the <a class="reference internal" href="tutorial_basics.html"><span class="doc">Building a Simple Bot</span></a> and
+<a class="reference internal" href="tutorial_interactive_learning.html"><span class="doc">Interactive Learning</span></a> to see a bot in action!</p>
 </div>
 
 
@@ -251,7 +262,7 @@ In most cases, you shouldn&#8217;t have to worry at all about this, but the deta
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="http.html" class="btn btn-neutral float-right" title="Rasa Core as a HTTP server" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="http.html" class="btn btn-neutral float-right" title="HTTP server" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="patterns.html" class="btn btn-neutral" title="Common Patterns" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -287,8 +298,7 @@ In most cases, you shouldn&#8217;t have to worry at all about this, but the deta
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="../0.6.5/plumbing.html">0.6.5</a></dd>
-            <dd><a href="../0.6.9/plumbing.html">0.6.9</a></dd>
+            <dd><a href="../0.7.1/plumbing.html">0.7.1</a></dd>
             <dd><a href="../0.7.0/plumbing.html">0.7.0</a></dd>
             <dd><a href="../0.7.0a10/plumbing.html">0.7.0a10</a></dd>
             <dd><a href="../0.7.0a5/plumbing.html">0.7.0a5</a></dd>
@@ -296,12 +306,12 @@ In most cases, you shouldn&#8217;t have to worry at all about this, but the deta
             <dd><a href="../0.7.0a7/plumbing.html">0.7.0a7</a></dd>
             <dd><a href="../0.7.0a8/plumbing.html">0.7.0a8</a></dd>
             <dd><a href="../0.7.0a9/plumbing.html">0.7.0a9</a></dd>
-            <dd><a href="../0.7.1/plumbing.html">0.7.1</a></dd>
+            <dd><a href="../0.6.9/plumbing.html">0.6.9</a></dd>
+            <dd><a href="../0.6.5/plumbing.html">0.6.5</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="plumbing.html">master</a></dd>
-            <dd><a href="../wildcard/plumbing.html">wildcard</a></dd>
         </dl>
     </div>
 </div>

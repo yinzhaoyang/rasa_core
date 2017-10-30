@@ -30,6 +30,8 @@
   
     <link rel="stylesheet" href="_static/banner.css" type="text/css" />
   
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
@@ -37,7 +39,7 @@
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Rasa Core 0.7.1 documentation" href="index.html"/>
         <link rel="next" title="Plumbing - How it all fits together" href="plumbing.html"/>
-        <link rel="prev" title="Interactive Learning with a Fake User" href="tutorial_fake_user.html"/> 
+        <link rel="prev" title="Stories - The Training Data" href="stories.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -89,19 +91,21 @@
             
                 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="read_first.html">Read this first</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motivation.html">Motivation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="no_python.html">But I don&#8217;t code in python!</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Hello World</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tour.html">A Quick Tour (no ML)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_scratch.html">A Bot From Scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">More Tutorials</span></p>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_babi.html">Supervised Learning Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_fake_user.html">Interactive Learning with a Fake User</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_basics.html">Building a Simple Bot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_supervised.html">Supervised Learning Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_interactive_learning.html">Interactive Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_remote.html">Rasa Core without Python</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stories.html">Stories - The Training Data</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Common Patterns</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#collecting-information-to-complete-a-request">Collecting Information to Complete a Request</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#using-slot-values-to-influence-which-actions-are-predicted">Using Slot Values to Influence Which Actions are Predicted</a></li>
@@ -109,10 +113,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http.html">Rasa Core as a HTTP server</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">HTTP server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stories.html">Training Data Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling Reminders</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Python API</span></p>
@@ -124,7 +126,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">Custom Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Change Log</a></li>
 </ul>
@@ -191,6 +193,15 @@
            <div itemprop="articleBody">
             
   
+
+
+    
+    
+
+
+
+    <p class="scv-banner scv-sphinx_rtd_theme"><a href="../0.7.1/patterns.html"><b>Warning:</b> This document is for the development version of Rasa Core. The latest version is 0.7.1.</a></p>
+
 <style>
 /* CSS overrides for sphinx_rtd_theme */
 
@@ -250,14 +261,14 @@ people for the duration of the conversation.</p>
 <p>When Rasa sees an entity with the same name as one of the slots, this value is automatically saved.
 For example, if your NLU module detects the entity <code class="docutils literal"><span class="pre">people=8</span></code> in the sentence <em>&#8220;I&#8217;d like a table for 8&#8221;</em>,
 this will be saved as a slot,</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">tracker</span><span class="o">.</span><span class="n">slots</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="p">{</span><span class="s2">&quot;people&quot;</span><span class="p">:</span> <span class="s2">&quot;8&quot;</span><span class="p">}</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tracker</span><span class="o">.</span><span class="n">slots</span>
+<span class="go">{&#39;people&#39;: &lt;TextSlot(people: 8)&gt;}</span>
 </pre></div>
 </div>
 <p>When Rasa Core predicts the next action to take, the only information it has about the <code class="docutils literal"><span class="pre">TextSlot</span></code> s is
 <strong>whether or not they are defined</strong>. So you have enough information to know that you don&#8217;t have to ask for this
 information again, but the <em>value</em> has no impact on which actions Rasa Core predicts.
-The full set of slot types and their behaviour is described here: <a class="reference internal" href="domains.html#slot-types"><span class="std std-ref">Slot Types</span></a>.</p>
+The full set of slot types and their behaviour is described here: <a class="reference internal" href="domains.html#slot-types"><span class="std std-ref">Slots</span></a>.</p>
 </div>
 <div class="section" id="using-slot-values-to-influence-which-actions-are-predicted">
 <h2>Using Slot Values to Influence Which Actions are Predicted<a class="headerlink" href="#using-slot-values-to-influence-which-actions-are-predicted" title="Permalink to this headline">¶</a></h2>
@@ -279,7 +290,7 @@ you have some training stories where the appropriate responses take place, e.g.:
 <span class="k">-</span> action_explain_table_limit
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasa_core.slots</span> <span class="kn">import</span> <span class="n">Slot</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasa_core.slots</span> <span class="k">import</span> <span class="n">Slot</span>
 
 <span class="k">class</span> <span class="nc">NumberOfPeopleSlot</span><span class="p">(</span><span class="n">Slot</span><span class="p">):</span>
 
@@ -298,9 +309,9 @@ you have some training stories where the appropriate responses take place, e.g.:
 </div>
 <p>If you want to store something like the price range, this is actually a little simpler. Variables
 like price range usually take on one-of-n values, e.g. low, medium, high. For these cases you can use
-a <code class="docutils literal"><span class="pre">CategoricalSlot</span></code>.</p>
+a <code class="docutils literal"><span class="pre">categorical</span></code> slot.</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">slots</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">pricerange</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">price_range</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">categorical</span>
     <span class="l l-Scalar l-Scalar-Plain">values</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">low, medium, high</span>
 </pre></div>
@@ -311,14 +322,18 @@ a <code class="docutils literal"><span class="pre">CategoricalSlot</span></code>
 <h2>Storing API responses in the tracker<a class="headerlink" href="#storing-api-responses-in-the-tracker" title="Permalink to this headline">¶</a></h2>
 <p>You often want to save some information in the tracker, like the results from
 a database query, or from an API call. If you don&#8217;t want the value to influence the
-dialogue, you can use a <code class="docutils literal"><span class="pre">UnfeaturizedSlot</span></code>. You can explicitly set this value in a custom action:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasa_core.actions</span> <span class="kn">import</span> <span class="n">Action</span>
+dialogue, you can use a <code class="docutils literal"><span class="pre">unfeaturized</span></code> slot. You can explicitly set this value in a custom action:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasa_core.actions</span> <span class="k">import</span> <span class="n">Action</span>
+<span class="kn">from</span> <span class="nn">rasa_core.events</span> <span class="k">import</span> <span class="n">SlotSet</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="k">class</span> <span class="nc">ApiAction</span><span class="p">(</span><span class="n">Action</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;api_action&quot;</span>
+
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">dispatcher</span><span class="p">):</span>
-      <span class="n">data</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span>
-      <span class="k">return</span> <span class="p">[</span><span class="n">SetSlot</span><span class="p">(</span><span class="s2">&quot;api_result&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">SlotSet</span><span class="p">(</span><span class="s2">&quot;api_result&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -334,7 +349,7 @@ dialogue, you can use a <code class="docutils literal"><span class="pre">Unfeatu
         <a href="plumbing.html" class="btn btn-neutral float-right" title="Plumbing - How it all fits together" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="tutorial_fake_user.html" class="btn btn-neutral" title="Interactive Learning with a Fake User" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="stories.html" class="btn btn-neutral" title="Stories - The Training Data" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -367,8 +382,7 @@ dialogue, you can use a <code class="docutils literal"><span class="pre">Unfeatu
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="../0.6.5/patterns.html">0.6.5</a></dd>
-            <dd><a href="../0.6.9/patterns.html">0.6.9</a></dd>
+            <dd><a href="../0.7.1/patterns.html">0.7.1</a></dd>
             <dd><a href="../0.7.0/patterns.html">0.7.0</a></dd>
             <dd><a href="../0.7.0a10/patterns.html">0.7.0a10</a></dd>
             <dd><a href="../0.7.0a5/patterns.html">0.7.0a5</a></dd>
@@ -376,12 +390,12 @@ dialogue, you can use a <code class="docutils literal"><span class="pre">Unfeatu
             <dd><a href="../0.7.0a7/patterns.html">0.7.0a7</a></dd>
             <dd><a href="../0.7.0a8/patterns.html">0.7.0a8</a></dd>
             <dd><a href="../0.7.0a9/patterns.html">0.7.0a9</a></dd>
-            <dd><a href="../0.7.1/patterns.html">0.7.1</a></dd>
+            <dd><a href="../0.6.9/patterns.html">0.6.9</a></dd>
+            <dd><a href="../0.6.5/patterns.html">0.6.5</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="patterns.html">master</a></dd>
-            <dd><a href="../wildcard/patterns.html">wildcard</a></dd>
         </dl>
     </div>
 </div>

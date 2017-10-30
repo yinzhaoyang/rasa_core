@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Training Data Format &mdash; Rasa Core 0.7.1 documentation</title>
+  <title>Stories - The Training Data &mdash; Rasa Core 0.7.1 documentation</title>
   
 
   
@@ -30,14 +30,16 @@
   
     <link rel="stylesheet" href="_static/banner.css" type="text/css" />
   
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Rasa Core 0.7.1 documentation" href="index.html"/>
-        <link rel="next" title="Scheduling Reminders" href="scheduling.html"/>
-        <link rel="prev" title="Connecting to messaging &amp; voice platforms" href="connectors.html"/> 
+        <link rel="next" title="Common Patterns" href="patterns.html"/>
+        <link rel="prev" title="Domain, Slots, and Actions" href="domains.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -89,28 +91,29 @@
             
                 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="read_first.html">Read this first</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motivation.html">Motivation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="no_python.html">But I don&#8217;t code in python!</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Hello World</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tour.html">A Quick Tour (no ML)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_scratch.html">A Bot From Scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">More Tutorials</span></p>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_babi.html">Supervised Learning Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_fake_user.html">Interactive Learning with a Fake User</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_basics.html">Building a Simple Bot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_supervised.html">Supervised Learning Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_interactive_learning.html">Interactive Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_remote.html">Rasa Core without Python</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http.html">Rasa Core as a HTTP server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Training Data Format</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#visualization-of-story-training-data">Visualization of story training data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Stories - The Training Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#format">Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#visualization-of-stories">Visualization of Stories</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">HTTP server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling Reminders</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Python API</span></p>
@@ -122,7 +125,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">Custom Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Change Log</a></li>
 </ul>
@@ -169,7 +172,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Training Data Format</li>
+      <li>Stories - The Training Data</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -189,6 +192,15 @@
            <div itemprop="articleBody">
             
   
+
+
+    
+    
+
+
+
+    <p class="scv-banner scv-sphinx_rtd_theme"><a href="../0.7.1/stories.html"><b>Warning:</b> This document is for the development version of Rasa Core. The latest version is 0.7.1.</a></p>
+
 <style>
 /* CSS overrides for sphinx_rtd_theme */
 
@@ -222,41 +234,44 @@
     margin-right: 4px;  /* make room for the exclamation icon */
 }
 </style>
-<div class="section" id="training-data-format">
-<span id="stories"></span><h1>Training Data Format<a class="headerlink" href="#training-data-format" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="stories-the-training-data">
+<span id="stories"></span><h1>Stories - The Training Data<a class="headerlink" href="#stories-the-training-data" title="Permalink to this headline">¶</a></h1>
+<p>A training data sample for the dialogue system is called a <strong>story</strong>. This
+shows you how to define them and how to visualise them.</p>
+<div class="section" id="format">
+<h2>Format<a class="headerlink" href="#format" title="Permalink to this headline">¶</a></h2>
 <p>Here&#8217;s an example from the bAbi data:</p>
-<div class="highlight-md"><div class="highlight"><pre><span></span><span class="gu">##</span> story_07715946
+<div class="highlight-md"><div class="highlight"><pre><span></span><span class="gu">##</span> story_07715946                     &lt;!-- name of the story - just for debugging --&gt;
 <span class="k">*</span> _greet
    <span class="k">-</span> action_ask_howcanhelp
 <span class="k">*</span> _inform[location=rome,price=cheap]
-   <span class="k">-</span> action_on_it
+   <span class="k">-</span> action_on_it                     &lt;!-- user utterance, in format _intent[entities] --&gt;
    <span class="k">-</span> action_ask_cuisine
 <span class="k">*</span> _inform[cuisine=spanish]
-   <span class="k">-</span> action_ask_numpeople
+   <span class="k">-</span> action_ask_numpeople             &lt;!-- action of the bot to execute --&gt;
 <span class="k">*</span> _inform[people=six]
    <span class="k">-</span> action_ack_dosearch
 </pre></div>
 </div>
-<p>This is what we call a <strong>story</strong>. A story starts with a name preceeded by two
+<p>This is what we call a <strong>story</strong>. A story starts with a name preceded by two
 hashes <code class="docutils literal"><span class="pre">##</span> <span class="pre">story_03248462</span></code>, this is arbitrary but can be used for debugging.
-After this point, we have two types of events which sequentially happen when separated by a newline.</p>
-<p>An event such as <code class="docutils literal"><span class="pre">*</span> <span class="pre">_inform[location=bombay]</span></code> is a user utterance. These utterances are written like <code class="docutils literal"><span class="pre">*</span> <span class="pre">_{intent}[{entities}]</span></code>.
-The intent and entities provided (as well as those in the past)
-are the input features to the neural network which then predicts the bot’s next action,
-which is in the format <code class="docutils literal"><span class="pre">-</span> <span class="pre">action_{action_name}</span></code> where actions can be anything from a bot response sent
-to the user or something internal. For example in our case,
-<code class="docutils literal"><span class="pre">-</span> <span class="pre">action_store_stot</span></code> stores the entities given by the user into internal slots within the bot. The user will not
-see this step. However, something such as <code class="docutils literal"><span class="pre">-</span> <span class="pre">action_ask_howcanhelp</span></code> is the bot asking how it can help.</p>
-<p>The end of a story is denoted by a newline, and then a new story starts again with <code class="docutils literal"><span class="pre">##</span></code>.</p>
-<div class="section" id="visualization-of-story-training-data">
-<span id="story-visualization"></span><h2>Visualization of story training data<a class="headerlink" href="#visualization-of-story-training-data" title="Permalink to this headline">¶</a></h2>
-<p>Sometimes it is helpful to get an overview of the conversational paths that are described within a story file. To make
-debugging easier and to ease discussions about bot flows, you can visualize the content of a story file. For this to
-work, you need to install graphviz. These are the instructions to do that on OSX, for other systems the instructions
-might be slightly different:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>brew install graphviz
-pip install pygraphviz --install-option<span class="o">=</span><span class="s2">&quot;--include-path=/usr/include/graphviz&quot;</span> --install-option<span class="o">=</span><span class="s2">&quot;--library-path=/usr/lib/graphviz/&quot;</span>
+The end of a story is denoted by a newline, and then a new story starts again with <code class="docutils literal"><span class="pre">##</span></code>.</p>
+</div>
+<div class="section" id="visualization-of-stories">
+<span id="story-visualization"></span><h2>Visualization of Stories<a class="headerlink" href="#visualization-of-stories" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes it is helpful to get an overview of the conversational paths that
+are described within a story file. To make debugging easier and to ease
+discussions about bot flows, you can visualize the content of a story file.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>For this to
+work, you need to <strong>install graphviz</strong>. These are the instructions to do that
+on OSX, for other systems the instructions might be slightly different:</p>
+<div class="last highlight-bash"><div class="highlight"><pre><span></span>brew install graphviz
+pip install pygraphviz --install-option<span class="o">=</span><span class="s2">&quot;--include-path=/usr/include/graphviz&quot;</span> <span class="se">\</span>
+  --install-option<span class="o">=</span><span class="s2">&quot;--library-path=/usr/lib/graphviz/&quot;</span>
 </pre></div>
+</div>
 </div>
 <p>As soon as this is installed you can visualize stories like this:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>python -m rasa_core.visualize -d examples/concerts/data/stories.md -o graph.png
@@ -266,12 +281,16 @@ pip install pygraphviz --install-option<span class="o">=</span><span class="s2">
 output image <code class="docutils literal"><span class="pre">graph.png</span></code>.</p>
 <img alt="_images/concert_stories.png" src="_images/concert_stories.png" />
 <p>You can also call the visualization directly from your code using:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasa_core.training_utils</span> <span class="k">import</span> <span class="n">create_stories_from_file</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasa_core.training_utils.dsl</span> <span class="k">import</span> <span class="n">StoryFileReader</span>
+<span class="kn">from</span> <span class="nn">rasa_core.domain</span> <span class="k">import</span> <span class="n">TemplateDomain</span>
 <span class="kn">from</span> <span class="nn">rasa_core.training_utils.visualization</span> <span class="k">import</span> <span class="n">visualize_stories</span>
 <span class="kn">from</span> <span class="nn">rasa_nlu.converters</span> <span class="k">import</span> <span class="n">load_data</span>
 
-<span class="n">stories</span> <span class="o">=</span> <span class="n">create_stories_from_file</span><span class="p">(</span><span class="s2">&quot;examples/babi/data/babi_task5_dev_rasa_even_smaller.md&quot;</span><span class="p">)</span>
-<span class="n">training_data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="s2">&quot;examples/babi/data/babi_dialog_nlu.json&quot;</span><span class="p">)</span>
+<span class="n">domain</span> <span class="o">=</span> <span class="n">TemplateDomain</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;examples/restaurantbot/restaurant_domain.yml&quot;</span><span class="p">)</span>
+<span class="n">stories</span> <span class="o">=</span> <span class="n">StoryFileReader</span><span class="o">.</span><span class="n">read_from_file</span><span class="p">(</span><span class="s2">&quot;examples/restaurantbot/data/babi_stories.md&quot;</span><span class="p">,</span>
+                                             <span class="n">domain</span><span class="p">)</span>
+
+<span class="n">training_data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="s2">&quot;examples/restaurantbot/data/franken_data.json&quot;</span><span class="p">)</span>
 <span class="n">visualize_stories</span><span class="p">(</span><span class="n">stories</span><span class="p">,</span> <span class="s2">&quot;graph.png&quot;</span><span class="p">,</span> <span class="n">training_data</span><span class="o">=</span><span class="n">training_data</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -291,10 +310,10 @@ did in the above example with the <code class="docutils literal"><span class="pr
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="scheduling.html" class="btn btn-neutral float-right" title="Scheduling Reminders" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="patterns.html" class="btn btn-neutral float-right" title="Common Patterns" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="connectors.html" class="btn btn-neutral" title="Connecting to messaging &amp; voice platforms" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="domains.html" class="btn btn-neutral" title="Domain, Slots, and Actions" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -327,8 +346,7 @@ did in the above example with the <code class="docutils literal"><span class="pr
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="../0.6.5/stories.html">0.6.5</a></dd>
-            <dd><a href="../0.6.9/stories.html">0.6.9</a></dd>
+            <dd><a href="../0.7.1/stories.html">0.7.1</a></dd>
             <dd><a href="../0.7.0/stories.html">0.7.0</a></dd>
             <dd><a href="../0.7.0a10/stories.html">0.7.0a10</a></dd>
             <dd><a href="../0.7.0a5/stories.html">0.7.0a5</a></dd>
@@ -336,12 +354,12 @@ did in the above example with the <code class="docutils literal"><span class="pr
             <dd><a href="../0.7.0a7/stories.html">0.7.0a7</a></dd>
             <dd><a href="../0.7.0a8/stories.html">0.7.0a8</a></dd>
             <dd><a href="../0.7.0a9/stories.html">0.7.0a9</a></dd>
-            <dd><a href="../0.7.1/stories.html">0.7.1</a></dd>
+            <dd><a href="../0.6.9/stories.html">0.6.9</a></dd>
+            <dd><a href="../0.6.5/stories.html">0.6.5</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="stories.html">master</a></dd>
-            <dd><a href="../wildcard/stories.html">wildcard</a></dd>
         </dl>
     </div>
 </div>

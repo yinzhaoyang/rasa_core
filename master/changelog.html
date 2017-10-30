@@ -30,6 +30,8 @@
   
     <link rel="stylesheet" href="_static/banner.css" type="text/css" />
   
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
@@ -88,25 +90,25 @@
             
                 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="read_first.html">Read this first</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motivation.html">Motivation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="no_python.html">But I don&#8217;t code in python!</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Hello World</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tour.html">A Quick Tour (no ML)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_scratch.html">A Bot From Scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">More Tutorials</span></p>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_babi.html">Supervised Learning Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_fake_user.html">Interactive Learning with a Fake User</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_basics.html">Building a Simple Bot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_supervised.html">Supervised Learning Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_interactive_learning.html">Interactive Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_remote.html">Rasa Core without Python</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stories.html">Stories - The Training Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http.html">Rasa Core as a HTTP server</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">HTTP server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stories.html">Training Data Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling Reminders</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Python API</span></p>
@@ -118,7 +120,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">Custom Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Change Log</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#unreleased-master">[Unreleased] - master</a><ul>
@@ -215,6 +217,15 @@
            <div itemprop="articleBody">
             
   
+
+
+    
+    
+
+
+
+    <p class="scv-banner scv-sphinx_rtd_theme"><a href="../0.7.1/changelog.html"><b>Warning:</b> This document is for the development version of Rasa Core. The latest version is 0.7.1.</a></p>
+
 <style>
 /* CSS overrides for sphinx_rtd_theme */
 
@@ -411,8 +422,7 @@ wrong predictions</li>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="../0.6.5/changelog.html">0.6.5</a></dd>
-            <dd><a href="../0.6.9/changelog.html">0.6.9</a></dd>
+            <dd><a href="../0.7.1/changelog.html">0.7.1</a></dd>
             <dd><a href="../0.7.0/changelog.html">0.7.0</a></dd>
             <dd><a href="../0.7.0a10/changelog.html">0.7.0a10</a></dd>
             <dd><a href="../0.7.0a5/changelog.html">0.7.0a5</a></dd>
@@ -420,12 +430,12 @@ wrong predictions</li>
             <dd><a href="../0.7.0a7/changelog.html">0.7.0a7</a></dd>
             <dd><a href="../0.7.0a8/changelog.html">0.7.0a8</a></dd>
             <dd><a href="../0.7.0a9/changelog.html">0.7.0a9</a></dd>
-            <dd><a href="../0.7.1/changelog.html">0.7.1</a></dd>
+            <dd><a href="../0.6.9/changelog.html">0.6.9</a></dd>
+            <dd><a href="../0.6.5/changelog.html">0.6.5</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="changelog.html">master</a></dd>
-            <dd><a href="../wildcard/changelog.html">wildcard</a></dd>
         </dl>
     </div>
 </div>
