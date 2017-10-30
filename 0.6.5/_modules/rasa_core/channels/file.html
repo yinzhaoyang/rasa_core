@@ -183,16 +183,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
-
-
-    
-    
-
-
-
-    <p class="scv-banner scv-sphinx_rtd_theme"><b>Warning:</b> This document is for an old version of Rasa Core.</p>
-<h1>Source code for rasa_core.channels.file</h1><div class="highlight"><pre>
+  <h1>Source code for rasa_core.channels.file</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
@@ -201,6 +192,9 @@
 <span class="kn">import</span> <span class="nn">io</span>
 <span class="kn">import</span> <span class="nn">re</span>
 
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Text</span>
+
+<span class="kn">from</span> <span class="nn">rasa_core.channels</span> <span class="k">import</span> <span class="n">OutputChannel</span>
 <span class="kn">from</span> <span class="nn">rasa_core.channels.channel</span> <span class="k">import</span> <span class="n">InputChannel</span><span class="p">,</span> <span class="n">UserMessage</span>
 
 
@@ -220,7 +214,9 @@
                  <span class="n">output_channel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">message_line_pattern</span><span class="o">=</span><span class="s2">&quot;.*&quot;</span><span class="p">,</span>
                  <span class="n">max_messages</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># type: (Text, OutputChannel, Text, Optional[int]) -&gt; None</span>
         <span class="kn">from</span> <span class="nn">rasa_core.channels.console</span> <span class="k">import</span> <span class="n">ConsoleOutputChannel</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">message_filter</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">message_line_pattern</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span> <span class="o">=</span> <span class="n">file_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_messages</span> <span class="o">=</span> <span class="n">max_messages</span>
@@ -279,7 +275,8 @@
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="../../../../0.7.1/index.html">0.7.1</a></dd>
+            <dd><a href="file.html">0.6.5</a></dd>
+            <dd><a href="../../../../0.6.9/index.html">0.6.9</a></dd>
             <dd><a href="../../../../0.7.0/index.html">0.7.0</a></dd>
             <dd><a href="../../../../0.7.0a10/index.html">0.7.0a10</a></dd>
             <dd><a href="../../../../0.7.0a5/index.html">0.7.0a5</a></dd>
@@ -287,12 +284,12 @@
             <dd><a href="../../../../0.7.0a7/index.html">0.7.0a7</a></dd>
             <dd><a href="../../../../0.7.0a8/index.html">0.7.0a8</a></dd>
             <dd><a href="../../../../0.7.0a9/index.html">0.7.0a9</a></dd>
-            <dd><a href="../../../../0.6.9/index.html">0.6.9</a></dd>
-            <dd><a href="file.html">0.6.5</a></dd>
+            <dd><a href="../../../../0.7.1/index.html">0.7.1</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="../../../../master/index.html">master</a></dd>
+            <dd><a href="../../../../wildcard/index.html">wildcard</a></dd>
         </dl>
     </div>
 </div>

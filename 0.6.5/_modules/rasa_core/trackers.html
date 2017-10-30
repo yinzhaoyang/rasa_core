@@ -183,16 +183,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
-
-
-    
-    
-
-
-
-    <p class="scv-banner scv-sphinx_rtd_theme"><b>Warning:</b> This document is for an old version of Rasa Core.</p>
-<h1>Source code for rasa_core.trackers</h1><div class="highlight"><pre>
+  <h1>Source code for rasa_core.trackers</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
@@ -268,13 +259,15 @@
         <span class="c1"># type: () -&gt; Dict[Text, Any]</span>
         <span class="sd">&quot;&quot;&quot;Returns the current tracker state as an object.&quot;&quot;&quot;</span>
 
-        <span class="n">serialised_slots</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">slot</span><span class="o">.</span><span class="n">value</span>
-                            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">slot</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">&quot;sender_id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sender_id</span><span class="p">,</span>
-            <span class="s2">&quot;slots&quot;</span><span class="p">:</span> <span class="n">serialised_slots</span><span class="p">,</span>
+            <span class="s2">&quot;slots&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_slot_values</span><span class="p">(),</span>
             <span class="s2">&quot;latest_message&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">latest_message</span><span class="o">.</span><span class="n">parse_data</span>
         <span class="p">}</span></div>
+
+<div class="viewcode-block" id="DialogueStateTracker.current_slot_values"><a class="viewcode-back" href="../../tracker.html#rasa_core.trackers.DialogueStateTracker.current_slot_values">[docs]</a>    <span class="k">def</span> <span class="nf">current_slot_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the currently set values of the slots&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">slot</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">slot</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span></div>
 
 <div class="viewcode-block" id="DialogueStateTracker.get_slot"><a class="viewcode-back" href="../../tracker.html#rasa_core.trackers.DialogueStateTracker.get_slot">[docs]</a>    <span class="k">def</span> <span class="nf">get_slot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="c1"># type: (Text) -&gt; Optional[Any]</span>
@@ -513,7 +506,8 @@
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="../../../0.7.1/index.html">0.7.1</a></dd>
+            <dd><a href="trackers.html">0.6.5</a></dd>
+            <dd><a href="../../../0.6.9/index.html">0.6.9</a></dd>
             <dd><a href="../../../0.7.0/index.html">0.7.0</a></dd>
             <dd><a href="../../../0.7.0a10/index.html">0.7.0a10</a></dd>
             <dd><a href="../../../0.7.0a5/index.html">0.7.0a5</a></dd>
@@ -521,12 +515,12 @@
             <dd><a href="../../../0.7.0a7/index.html">0.7.0a7</a></dd>
             <dd><a href="../../../0.7.0a8/index.html">0.7.0a8</a></dd>
             <dd><a href="../../../0.7.0a9/index.html">0.7.0a9</a></dd>
-            <dd><a href="../../../0.6.9/index.html">0.6.9</a></dd>
-            <dd><a href="trackers.html">0.6.5</a></dd>
+            <dd><a href="../../../0.7.1/index.html">0.7.1</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="../../../master/index.html">master</a></dd>
+            <dd><a href="../../../wildcard/index.html">wildcard</a></dd>
         </dl>
     </div>
 </div>

@@ -90,6 +90,7 @@
                 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="read_first.html">Read this first</a></li>
+<li class="toctree-l1"><a class="reference internal" href="no_python.html">But I don&#8217;t code in python!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Hello World</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tour.html">A Quick Tour (no ML)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial_scratch.html">A Bot From Scratch</a></li>
@@ -200,12 +201,6 @@
            <div itemprop="articleBody">
             
   
-
-
-
-
-
-
 <style>
 /* CSS overrides for sphinx_rtd_theme */
 
@@ -302,7 +297,7 @@ can be a helpful tool in debugging a bot. More information can be found in <a cl
     <span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">RasaNLUConfig</span><span class="p">(</span><span class="s2">&quot;examples/babi/data/config_nlu.json&quot;</span><span class="p">))</span>
     <span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">training_data</span><span class="p">)</span>
     <span class="n">model_directory</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="s1">&#39;examples/babi/models/nlu/&#39;</span><span class="p">,</span>
-                                      <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">)</span>
+                                      <span class="n">fixed_model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">model_directory</span>
 </pre></div>
 </div>
@@ -397,7 +392,13 @@ feel free to skip this if you don&#8217;t care, or read <a class="reference inte
   <span class="l l-Scalar l-Scalar-Plain">utter_ask_numpeople</span><span class="p p-Indicator">:</span>
     <span class="p p-Indicator">-</span> <span class="s">&quot;for</span><span class="nv"> </span><span class="s">how</span><span class="nv"> </span><span class="s">many</span><span class="nv"> </span><span class="s">people?&quot;</span>
   <span class="l l-Scalar l-Scalar-Plain">utter_ask_price</span><span class="p p-Indicator">:</span> 
-    <span class="p p-Indicator">-</span> <span class="s">&quot;in</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">price</span><span class="nv"> </span><span class="s">range?&quot;</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">text</span><span class="p p-Indicator">:</span> <span class="s">&quot;in</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">price</span><span class="nv"> </span><span class="s">range?&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">buttons</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;cheap&quot;</span>
+        <span class="l l-Scalar l-Scalar-Plain">payload</span><span class="p p-Indicator">:</span> <span class="s">&quot;cheap&quot;</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;expensive&quot;</span>
+        <span class="l l-Scalar l-Scalar-Plain">payload</span><span class="p p-Indicator">:</span> <span class="s">&quot;expensive&quot;</span>
+
   <span class="l l-Scalar l-Scalar-Plain">utter_on_it</span><span class="p p-Indicator">:</span> 
     <span class="p p-Indicator">-</span> <span class="s">&quot;I&#39;m</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">it&quot;</span>
 
@@ -534,13 +535,14 @@ give, but at least its trying!</p>
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.1
+        v: master
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="0.7.1/tutorial_babi.html">0.7.1</a></dd>
+            <dd><a href="0.6.5/tutorial_babi.html">0.6.5</a></dd>
+            <dd><a href="0.6.9/tutorial_babi.html">0.6.9</a></dd>
             <dd><a href="0.7.0/tutorial_babi.html">0.7.0</a></dd>
             <dd><a href="0.7.0a10/tutorial_babi.html">0.7.0a10</a></dd>
             <dd><a href="0.7.0a5/tutorial_babi.html">0.7.0a5</a></dd>
@@ -548,12 +550,12 @@ give, but at least its trying!</p>
             <dd><a href="0.7.0a7/tutorial_babi.html">0.7.0a7</a></dd>
             <dd><a href="0.7.0a8/tutorial_babi.html">0.7.0a8</a></dd>
             <dd><a href="0.7.0a9/tutorial_babi.html">0.7.0a9</a></dd>
-            <dd><a href="0.6.9/tutorial_babi.html">0.6.9</a></dd>
-            <dd><a href="0.6.5/tutorial_babi.html">0.6.5</a></dd>
+            <dd><a href="0.7.1/tutorial_babi.html">0.7.1</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="master/tutorial_babi.html">master</a></dd>
+            <dd><a href="wildcard/tutorial_babi.html">wildcard</a></dd>
         </dl>
     </div>
 </div>

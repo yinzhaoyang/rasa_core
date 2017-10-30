@@ -183,23 +183,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
-
-
-    
-    
-
-
-
-    <p class="scv-banner scv-sphinx_rtd_theme"><b>Warning:</b> This document is for an old version of Rasa Core.</p>
-<h1>Source code for rasa_core.dispatcher</h1><div class="highlight"><pre>
+  <h1>Source code for rasa_core.dispatcher</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Text</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
 <span class="kn">import</span> <span class="nn">copy</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Text</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
 
 <span class="kn">from</span> <span class="nn">rasa_core.domain</span> <span class="k">import</span> <span class="n">Domain</span>
 <span class="kn">from</span> <span class="nn">rasa_core.channels</span> <span class="k">import</span> <span class="n">OutputChannel</span>
@@ -274,30 +266,36 @@
         <span class="sd">&quot;&quot;&quot;Send a message to the client with attachements.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">output_channel</span><span class="o">.</span><span class="n">send_image_url</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">attachment</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Dispatcher.utter_button_template"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.dispatcher.Dispatcher.utter_button_template">[docs]</a>    <span class="k">def</span> <span class="nf">utter_button_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">buttons</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="Dispatcher.utter_button_template"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.dispatcher.Dispatcher.utter_button_template">[docs]</a>    <span class="k">def</span> <span class="nf">utter_button_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">buttons</span><span class="p">,</span> <span class="n">filled_slots</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Text, List[Dict[Text, Any]], **Any) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Sends a message template with buttons to the output channel.&quot;&quot;&quot;</span>
 
-        <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_template</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_template</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">filled_slots</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="s2">&quot;buttons&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
             <span class="n">t</span><span class="p">[</span><span class="s2">&quot;buttons&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">buttons</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">t</span><span class="p">[</span><span class="s2">&quot;buttons&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">buttons</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">utter_response</span><span class="p">(</span><span class="n">t</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Dispatcher.utter_template"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.dispatcher.Dispatcher.utter_template">[docs]</a>    <span class="k">def</span> <span class="nf">utter_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="Dispatcher.utter_template"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.dispatcher.Dispatcher.utter_template">[docs]</a>    <span class="k">def</span> <span class="nf">utter_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">filled_slots</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Text, **Any) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;&quot;Send a message to the client based on a template.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">utter_response</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">retrieve_template</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Dispatcher.retrieve_template"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.dispatcher.Dispatcher.retrieve_template">[docs]</a>    <span class="k">def</span> <span class="nf">retrieve_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_template</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">filled_slots</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">utter_response</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Dispatcher.retrieve_template"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.dispatcher.Dispatcher.retrieve_template">[docs]</a>    <span class="k">def</span> <span class="nf">retrieve_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">filled_slots</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Text, **Any) -&gt; Dict[Text, Any]</span>
         <span class="sd">&quot;&quot;&quot;Retrieve a named template from the domain.&quot;&quot;&quot;</span>
 
         <span class="n">r</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">random_template_for</span><span class="p">(</span><span class="n">template</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">r</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">filled_slots</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">filled_slots</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">template_vars</span> <span class="o">=</span> <span class="n">filled_slots</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">template_vars</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">template_vars</span><span class="p">:</span>
+                <span class="n">r</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">template_vars</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">r</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Undefined utter template &lt;</span><span class="si">{}</span><span class="s2">&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">template</span><span class="p">)}</span></div></div>
@@ -336,7 +334,8 @@
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="../../../0.7.1/index.html">0.7.1</a></dd>
+            <dd><a href="dispatcher.html">0.6.5</a></dd>
+            <dd><a href="../../../0.6.9/index.html">0.6.9</a></dd>
             <dd><a href="../../../0.7.0/index.html">0.7.0</a></dd>
             <dd><a href="../../../0.7.0a10/index.html">0.7.0a10</a></dd>
             <dd><a href="../../../0.7.0a5/index.html">0.7.0a5</a></dd>
@@ -344,12 +343,12 @@
             <dd><a href="../../../0.7.0a7/index.html">0.7.0a7</a></dd>
             <dd><a href="../../../0.7.0a8/index.html">0.7.0a8</a></dd>
             <dd><a href="../../../0.7.0a9/index.html">0.7.0a9</a></dd>
-            <dd><a href="../../../0.6.9/index.html">0.6.9</a></dd>
-            <dd><a href="dispatcher.html">0.6.5</a></dd>
+            <dd><a href="../../../0.7.1/index.html">0.7.1</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="../../../master/index.html">master</a></dd>
+            <dd><a href="../../../wildcard/index.html">wildcard</a></dd>
         </dl>
     </div>
 </div>

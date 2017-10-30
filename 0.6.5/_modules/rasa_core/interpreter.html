@@ -183,16 +183,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
-
-
-    
-    
-
-
-
-    <p class="scv-banner scv-sphinx_rtd_theme"><b>Warning:</b> This document is for an old version of Rasa Core.</p>
-<h1>Source code for rasa_core.interpreter</h1><div class="highlight"><pre>
+  <h1>Source code for rasa_core.interpreter</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
@@ -319,17 +310,12 @@
 
 <div class="viewcode-block" id="RasaNLUInterpreter"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.interpreter.RasaNLUInterpreter">[docs]</a><span class="k">class</span> <span class="nc">RasaNLUInterpreter</span><span class="p">(</span><span class="n">NaturalLanguageInterpreter</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_directory</span><span class="p">,</span> <span class="n">config_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lazy_init</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">rasa_nlu.model</span> <span class="k">import</span> <span class="n">Interpreter</span>
-        <span class="kn">from</span> <span class="nn">rasa_nlu.model</span> <span class="k">import</span> <span class="n">Metadata</span>
-        <span class="kn">from</span> <span class="nn">rasa_nlu.config</span> <span class="k">import</span> <span class="n">RasaNLUConfig</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">Metadata</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_directory</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_directory</span> <span class="o">=</span> <span class="n">model_directory</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lazy_init</span> <span class="o">=</span> <span class="n">lazy_init</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">config_file</span> <span class="o">=</span> <span class="n">config_file</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">lazy_init</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">interpreter</span> <span class="o">=</span> <span class="n">Interpreter</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span>
-                                                <span class="n">RasaNLUConfig</span><span class="p">(</span><span class="n">config_file</span><span class="p">,</span>
-                                                              <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_load_interpreter</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">interpreter</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -339,12 +325,16 @@
 <span class="sd">        Returns a default value if the parsing of the text failed.&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lazy_init</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">interpreter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">rasa_nlu.model</span> <span class="k">import</span> <span class="n">Interpreter</span>
-            <span class="kn">from</span> <span class="nn">rasa_nlu.config</span> <span class="k">import</span> <span class="n">RasaNLUConfig</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">interpreter</span> <span class="o">=</span> <span class="n">Interpreter</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span>
-                                                <span class="n">RasaNLUConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_file</span><span class="p">,</span>
-                                                              <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">))</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">interpreter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_load_interpreter</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">interpreter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_load_interpreter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">rasa_nlu.model</span> <span class="k">import</span> <span class="n">Interpreter</span>
+        <span class="kn">from</span> <span class="nn">rasa_nlu.config</span> <span class="k">import</span> <span class="n">RasaNLUConfig</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">interpreter</span> <span class="o">=</span> <span class="n">Interpreter</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_directory</span><span class="p">,</span>
+                                            <span class="n">RasaNLUConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_file</span><span class="p">,</span>
+                                                          <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">))</span></div>
 </pre></div>
 
            </div>
@@ -380,7 +370,8 @@
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="../../../0.7.1/index.html">0.7.1</a></dd>
+            <dd><a href="interpreter.html">0.6.5</a></dd>
+            <dd><a href="../../../0.6.9/index.html">0.6.9</a></dd>
             <dd><a href="../../../0.7.0/index.html">0.7.0</a></dd>
             <dd><a href="../../../0.7.0a10/index.html">0.7.0a10</a></dd>
             <dd><a href="../../../0.7.0a5/index.html">0.7.0a5</a></dd>
@@ -388,12 +379,12 @@
             <dd><a href="../../../0.7.0a7/index.html">0.7.0a7</a></dd>
             <dd><a href="../../../0.7.0a8/index.html">0.7.0a8</a></dd>
             <dd><a href="../../../0.7.0a9/index.html">0.7.0a9</a></dd>
-            <dd><a href="../../../0.6.9/index.html">0.6.9</a></dd>
-            <dd><a href="interpreter.html">0.6.5</a></dd>
+            <dd><a href="../../../0.7.1/index.html">0.7.1</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="../../../master/index.html">master</a></dd>
+            <dd><a href="../../../wildcard/index.html">wildcard</a></dd>
         </dl>
     </div>
 </div>

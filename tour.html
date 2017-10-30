@@ -90,6 +90,7 @@
                 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="read_first.html">Read this first</a></li>
+<li class="toctree-l1"><a class="reference internal" href="no_python.html">But I don&#8217;t code in python!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Hello World</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">A Quick Tour (no ML)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#define-a-domain">Define a Domain</a></li>
@@ -191,12 +192,6 @@
            <div itemprop="articleBody">
             
   
-
-
-
-
-
-
 <style>
 /* CSS overrides for sphinx_rtd_theme */
 
@@ -326,7 +321,13 @@ Below is the restaurant domain from the examples folder.</p>
   <span class="n">utter_ask_numpeople</span><span class="p">:</span>
     <span class="o">-</span> <span class="s2">&quot;for how many people?&quot;</span>
   <span class="n">utter_ask_price</span><span class="p">:</span> 
-    <span class="o">-</span> <span class="s2">&quot;in which price range?&quot;</span>
+    <span class="o">-</span> <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;in which price range?&quot;</span>
+      <span class="n">buttons</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">title</span><span class="p">:</span> <span class="s2">&quot;cheap&quot;</span>
+        <span class="n">payload</span><span class="p">:</span> <span class="s2">&quot;cheap&quot;</span>
+      <span class="o">-</span> <span class="n">title</span><span class="p">:</span> <span class="s2">&quot;expensive&quot;</span>
+        <span class="n">payload</span><span class="p">:</span> <span class="s2">&quot;expensive&quot;</span>
+
   <span class="n">utter_on_it</span><span class="p">:</span> 
     <span class="o">-</span> <span class="s2">&quot;I&#39;m on it&quot;</span>
 
@@ -476,13 +477,14 @@ command line in the following python example: <code class="docutils literal"><sp
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.1
+        v: master
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="0.7.1/tour.html">0.7.1</a></dd>
+            <dd><a href="0.6.5/tour.html">0.6.5</a></dd>
+            <dd><a href="0.6.9/tour.html">0.6.9</a></dd>
             <dd><a href="0.7.0/tour.html">0.7.0</a></dd>
             <dd><a href="0.7.0a10/tour.html">0.7.0a10</a></dd>
             <dd><a href="0.7.0a5/tour.html">0.7.0a5</a></dd>
@@ -490,12 +492,12 @@ command line in the following python example: <code class="docutils literal"><sp
             <dd><a href="0.7.0a7/tour.html">0.7.0a7</a></dd>
             <dd><a href="0.7.0a8/tour.html">0.7.0a8</a></dd>
             <dd><a href="0.7.0a9/tour.html">0.7.0a9</a></dd>
-            <dd><a href="0.6.9/tour.html">0.6.9</a></dd>
-            <dd><a href="0.6.5/tour.html">0.6.5</a></dd>
+            <dd><a href="0.7.1/tour.html">0.7.1</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="master/tour.html">master</a></dd>
+            <dd><a href="wildcard/tour.html">wildcard</a></dd>
         </dl>
     </div>
 </div>

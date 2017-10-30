@@ -90,6 +90,7 @@
                 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="read_first.html">Read this first</a></li>
+<li class="toctree-l1"><a class="reference internal" href="no_python.html">But I don&#8217;t code in python!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Hello World</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tour.html">A Quick Tour (no ML)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial_scratch.html">A Bot From Scratch</a></li>
@@ -189,12 +190,6 @@
            <div itemprop="articleBody">
             
   
-
-
-
-
-
-
 <style>
 /* CSS overrides for sphinx_rtd_theme */
 
@@ -388,7 +383,7 @@ These base classes have already implemented the logic of persisting and reloadin
         <span class="c1"># Build Model</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
         <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Masking</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_input_shape</span><span class="o">=</span><span class="n">batch_shape</span><span class="p">))</span>
-        <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">,</span> <span class="n">batch_input_shape</span><span class="o">=</span><span class="n">batch_shape</span><span class="p">))</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">,</span> <span class="n">batch_input_shape</span><span class="o">=</span><span class="n">batch_shape</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.2</span><span class="p">))</span>
         <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">n_hidden</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">num_actions</span><span class="p">))</span>
         <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
 
@@ -463,13 +458,14 @@ These base classes have already implemented the logic of persisting and reloadin
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.1
+        v: master
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="0.7.1/policies.html">0.7.1</a></dd>
+            <dd><a href="0.6.5/policies.html">0.6.5</a></dd>
+            <dd><a href="0.6.9/policies.html">0.6.9</a></dd>
             <dd><a href="0.7.0/policies.html">0.7.0</a></dd>
             <dd><a href="0.7.0a10/policies.html">0.7.0a10</a></dd>
             <dd><a href="0.7.0a5/policies.html">0.7.0a5</a></dd>
@@ -477,12 +473,12 @@ These base classes have already implemented the logic of persisting and reloadin
             <dd><a href="0.7.0a7/policies.html">0.7.0a7</a></dd>
             <dd><a href="0.7.0a8/policies.html">0.7.0a8</a></dd>
             <dd><a href="0.7.0a9/policies.html">0.7.0a9</a></dd>
-            <dd><a href="0.6.9/policies.html">0.6.9</a></dd>
-            <dd><a href="0.6.5/policies.html">0.6.5</a></dd>
+            <dd><a href="0.7.1/policies.html">0.7.1</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="master/policies.html">master</a></dd>
+            <dd><a href="wildcard/policies.html">wildcard</a></dd>
         </dl>
     </div>
 </div>

@@ -183,16 +183,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
-
-
-    
-    
-
-
-
-    <p class="scv-banner scv-sphinx_rtd_theme"><b>Warning:</b> This document is for an old version of Rasa Core.</p>
-<h1>Source code for rasa_core.policies.keras_policy</h1><div class="highlight"><pre>
+  <h1>Source code for rasa_core.policies.keras_policy</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
@@ -252,6 +243,11 @@
         <span class="k">return</span> <span class="n">y_pred</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span></div>
 
     <span class="k">def</span> <span class="nf">_build_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_features</span><span class="p">,</span> <span class="n">num_actions</span><span class="p">,</span> <span class="n">max_history_len</span><span class="p">):</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Deprecated, use `model_architecture` instead.&quot;</span><span class="p">,</span>
+                      <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span>
+
+<div class="viewcode-block" id="KerasPolicy.model_architecture"><a class="viewcode-back" href="../../../rasa_dm.policies.html#rasa_core.policies.keras_policy.KerasPolicy.model_architecture">[docs]</a>    <span class="k">def</span> <span class="nf">model_architecture</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_features</span><span class="p">,</span> <span class="n">num_actions</span><span class="p">,</span> <span class="n">max_history_len</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Build a keras model and return a compiled model.</span>
 
 <span class="sd">        :param max_history_len: The maximum number of historical</span>
@@ -274,12 +270,12 @@
                       <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
 
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
-        <span class="k">return</span> <span class="n">model</span>
+        <span class="k">return</span> <span class="n">model</span></div>
 
 <div class="viewcode-block" id="KerasPolicy.train"><a class="viewcode-back" href="../../../rasa_dm.policies.html#rasa_core.policies.keras_policy.KerasPolicy.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_model</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">num_features</span><span class="p">,</span>
-                                       <span class="n">domain</span><span class="o">.</span><span class="n">num_actions</span><span class="p">,</span>
-                                       <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_architecture</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">num_features</span><span class="p">,</span>
+                                             <span class="n">domain</span><span class="o">.</span><span class="n">num_actions</span><span class="p">,</span>
+                                             <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">y_one_hot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">domain</span><span class="o">.</span><span class="n">num_actions</span><span class="p">))</span>
         <span class="n">y_one_hot</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)),</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
@@ -398,7 +394,8 @@
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="../../../../0.7.1/index.html">0.7.1</a></dd>
+            <dd><a href="keras_policy.html">0.6.5</a></dd>
+            <dd><a href="../../../../0.6.9/index.html">0.6.9</a></dd>
             <dd><a href="../../../../0.7.0/index.html">0.7.0</a></dd>
             <dd><a href="../../../../0.7.0a10/index.html">0.7.0a10</a></dd>
             <dd><a href="../../../../0.7.0a5/index.html">0.7.0a5</a></dd>
@@ -406,12 +403,12 @@
             <dd><a href="../../../../0.7.0a7/index.html">0.7.0a7</a></dd>
             <dd><a href="../../../../0.7.0a8/index.html">0.7.0a8</a></dd>
             <dd><a href="../../../../0.7.0a9/index.html">0.7.0a9</a></dd>
-            <dd><a href="../../../../0.6.9/index.html">0.6.9</a></dd>
-            <dd><a href="keras_policy.html">0.6.5</a></dd>
+            <dd><a href="../../../../0.7.1/index.html">0.7.1</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="../../../../master/index.html">master</a></dd>
+            <dd><a href="../../../../wildcard/index.html">wildcard</a></dd>
         </dl>
     </div>
 </div>

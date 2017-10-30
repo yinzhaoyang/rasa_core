@@ -199,15 +199,6 @@
            <div itemprop="articleBody">
             
   
-
-
-    
-    
-
-
-
-    <p class="scv-banner scv-sphinx_rtd_theme"><b>Warning:</b> This document is for an old version of Rasa Core.</p>
-
 <style>
 /* CSS overrides for sphinx_rtd_theme */
 
@@ -280,7 +271,22 @@ into a float vector which can be used by a ML model.</p>
 <span class="target" id="module-rasa_core.policies.keras_policy"></span><dl class="class">
 <dt id="rasa_core.policies.keras_policy.KerasPolicy">
 <em class="property">class </em><code class="descclassname">rasa_core.policies.keras_policy.</code><code class="descname">KerasPolicy</code><span class="sig-paren">(</span><em>model=None</em>, <em>graph=None</em>, <em>current_epoch=0</em>, <em>featurizer=None</em>, <em>max_history=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/policies/keras_policy.html#KerasPolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.policies.keras_policy.KerasPolicy" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="method">
+<dt id="rasa_core.policies.keras_policy.KerasPolicy.model_architecture">
+<code class="descname">model_architecture</code><span class="sig-paren">(</span><em>num_features</em>, <em>num_actions</em>, <em>max_history_len</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/policies/keras_policy.html#KerasPolicy.model_architecture"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.policies.keras_policy.KerasPolicy.model_architecture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a keras model and return a compiled model.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>max_history_len</strong> &#8211; The maximum number of historical
+turns used to decide on next action</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
 
 <span class="target" id="module-rasa_core.policies.memoization"></span><dl class="class">
 <dt id="rasa_core.policies.memoization.MemoizationPolicy">
@@ -346,7 +352,8 @@ predict the action. Returns the index of the next action</p>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="../0.7.1/index.html">0.7.1</a></dd>
+            <dd><a href="policy.html">0.6.5</a></dd>
+            <dd><a href="../0.6.9/index.html">0.6.9</a></dd>
             <dd><a href="../0.7.0/index.html">0.7.0</a></dd>
             <dd><a href="../0.7.0a10/index.html">0.7.0a10</a></dd>
             <dd><a href="../0.7.0a5/index.html">0.7.0a5</a></dd>
@@ -354,12 +361,12 @@ predict the action. Returns the index of the next action</p>
             <dd><a href="../0.7.0a7/index.html">0.7.0a7</a></dd>
             <dd><a href="../0.7.0a8/index.html">0.7.0a8</a></dd>
             <dd><a href="../0.7.0a9/index.html">0.7.0a9</a></dd>
-            <dd><a href="../0.6.9/index.html">0.6.9</a></dd>
-            <dd><a href="policy.html">0.6.5</a></dd>
+            <dd><a href="../0.7.1/index.html">0.7.1</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="../master/index.html">master</a></dd>
+            <dd><a href="../wildcard/policy.html">wildcard</a></dd>
         </dl>
     </div>
 </div>

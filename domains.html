@@ -90,6 +90,7 @@
                 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="read_first.html">Read this first</a></li>
+<li class="toctree-l1"><a class="reference internal" href="no_python.html">But I don&#8217;t code in python!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Hello World</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tour.html">A Quick Tour (no ML)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial_scratch.html">A Bot From Scratch</a></li>
@@ -105,13 +106,14 @@
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
 <li class="toctree-l1"><a class="reference internal" href="http.html">Rasa Core as a HTTP server</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Domain, Slots, and Actions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#domain">Domain</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Domain</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#defining-custom-actions">Defining Custom Actions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#putting-it-all-together">Putting it all together</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#utterance-templates">Utterance templates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#slot-types">Slot Types</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#type-boolean"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">boolean</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#type-bool"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">bool</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#type-categorical"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">categorical</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#type-data"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">data</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#type-float"><code class="docutils literal"><span class="pre">type:</span> <span class="pre">float</span></code></a></li>
@@ -202,12 +204,6 @@
            <div itemprop="articleBody">
             
   
-
-
-
-
-
-
 <style>
 /* CSS overrides for sphinx_rtd_theme */
 
@@ -242,9 +238,9 @@
 }
 </style>
 <div class="section" id="domain-slots-and-actions">
-<h1>Domain, Slots, and Actions<a class="headerlink" href="#domain-slots-and-actions" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="domain">
-<h2>Domain<a class="headerlink" href="#domain" title="Permalink to this headline">¶</a></h2>
+<span id="domain"></span><h1>Domain, Slots, and Actions<a class="headerlink" href="#domain-slots-and-actions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>Domain<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">Domain</span></code> defines the universe in which your bot operates. It specifies exactly:</p>
 <ul class="simple">
 <li>which <code class="docutils literal"><span class="pre">intents</span></code> you are expecting to respond to</li>
@@ -340,9 +336,9 @@ action in a module called <code class="docutils literal"><span class="pre">resta
       <span class="p p-Indicator">-</span> <span class="s">&quot;default</span><span class="nv"> </span><span class="s">message&quot;</span>
 
 <span class="l l-Scalar l-Scalar-Plain">actions</span><span class="p p-Indicator">:</span>
-   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
-   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">greet</span>
-   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">goodbye</span>
+   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">utter_default</span>
+   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">utter_greet</span>
+   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">utter_goodbye</span>
    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">restaurant.actions.ActionCheckRestaurants</span>
 </pre></div>
 </div>
@@ -352,8 +348,48 @@ actions using their module path.</p>
 <p>For an example you can run, check the <a class="reference internal" href="tutorial_scratch.html"><span class="doc">A Bot From Scratch</span></a>.</p>
 </div>
 </div>
+<div class="section" id="utterance-templates">
+<h2>Utterance templates<a class="headerlink" href="#utterance-templates" title="Permalink to this headline">¶</a></h2>
+<p>Utterance templates are messages the bot will send back to the user. Either
+automatically by an action with the same name as the utterance (e.g. in the
+above example the <cite>utter_default</cite> template and action) or by an action with
+custom code.</p>
+<p>Templates defined in a domains yaml file can contain images and buttons as well:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">templates</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">utter_greeting</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">text</span><span class="p p-Indicator">:</span> <span class="s">&quot;Hey!</span><span class="nv"> </span><span class="s">How</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">you?&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">buttons</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;great&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">payload</span><span class="p p-Indicator">:</span> <span class="s">&quot;great&quot;</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="s">&quot;super</span><span class="nv"> </span><span class="s">sad&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">payload</span><span class="p p-Indicator">:</span> <span class="s">&quot;super</span><span class="nv"> </span><span class="s">sad&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">utter_cheer_up</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">text</span><span class="p p-Indicator">:</span> <span class="s">&quot;Here</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">something</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">cheer</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">up:&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="s">&quot;https://cdn77.eatliver.com/wp-content/uploads/2017/10/trump-frog.jpg&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Please keep in mind that it is up to the implementation of the output
+channel on how to display the defined buttons. E.g. the cmdline
+interface can not display buttons or images, but tries to mimic them in
+the command line.</p>
+</div>
+<p>In custom code, you can retrieve a template by using:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ActionCustom</span><span class="p">(</span><span class="n">Action</span><span class="p">):</span>
+   <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="k">return</span> <span class="s2">&quot;action_custom&quot;</span>
+
+   <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dispatcher</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
+      <span class="c1"># send utter default template to user</span>
+      <span class="n">dispatcher</span><span class="o">.</span><span class="n">utter_template</span><span class="p">(</span><span class="s2">&quot;utter_default&quot;</span><span class="p">)</span>
+      <span class="c1"># ... other code</span>
+      <span class="k">return</span> <span class="p">[]</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="slot-types">
-<span id="id1"></span><h2>Slot Types<a class="headerlink" href="#slot-types" title="Permalink to this headline">¶</a></h2>
+<span id="id2"></span><h2>Slot Types<a class="headerlink" href="#slot-types" title="Permalink to this headline">¶</a></h2>
 <p>Slots influence the prediction of the next action the bot should run. For the
 prediction, the slots value is not used directly, but rather it is featurized.
 E.g. for a slot of type <code class="docutils literal"><span class="pre">text</span></code>, the value is irrelevant, for the featurization
@@ -362,8 +398,8 @@ the only thing that matters is if a text is set or not.</p>
 the dialogue flow (e.g. the users age influences which question follows next)
 you should choose a slot where the value influences the dialogue model.</p>
 <p>These are all of the predefined slot classes and what they&#8217;re useful for.</p>
-<div class="section" id="type-boolean">
-<h3><code class="docutils literal"><span class="pre">type:</span> <span class="pre">boolean</span></code><a class="headerlink" href="#type-boolean" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="type-bool">
+<h3><code class="docutils literal"><span class="pre">type:</span> <span class="pre">bool</span></code><a class="headerlink" href="#type-bool" title="Permalink to this headline">¶</a></h3>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -504,13 +540,14 @@ action the bot should run.</td>
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.1
+        v: master
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="0.7.1/domains.html">0.7.1</a></dd>
+            <dd><a href="0.6.5/index.html">0.6.5</a></dd>
+            <dd><a href="0.6.9/domains.html">0.6.9</a></dd>
             <dd><a href="0.7.0/domains.html">0.7.0</a></dd>
             <dd><a href="0.7.0a10/domains.html">0.7.0a10</a></dd>
             <dd><a href="0.7.0a5/index.html">0.7.0a5</a></dd>
@@ -518,12 +555,12 @@ action the bot should run.</td>
             <dd><a href="0.7.0a7/index.html">0.7.0a7</a></dd>
             <dd><a href="0.7.0a8/index.html">0.7.0a8</a></dd>
             <dd><a href="0.7.0a9/domains.html">0.7.0a9</a></dd>
-            <dd><a href="0.6.9/domains.html">0.6.9</a></dd>
-            <dd><a href="0.6.5/index.html">0.6.5</a></dd>
+            <dd><a href="0.7.1/domains.html">0.7.1</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="master/domains.html">master</a></dd>
+            <dd><a href="wildcard/index.html">wildcard</a></dd>
         </dl>
     </div>
 </div>
