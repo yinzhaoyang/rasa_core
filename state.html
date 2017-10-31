@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tracking Conversation State &mdash; Rasa Core 0.7.1 documentation</title>
+  <title>Tracking Conversation State &mdash; Rasa Core 0.7.2 documentation</title>
   
 
   
@@ -30,14 +30,16 @@
   
     <link rel="stylesheet" href="_static/banner.css" type="text/css" />
   
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.1 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.7.2 documentation" href="index.html"/>
         <link rel="next" title="Change Log" href="changelog.html"/>
-        <link rel="prev" title="Creating Policies" href="policies.html"/> 
+        <link rel="prev" title="Custom Policies" href="policies.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -89,24 +91,25 @@
             
                 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="read_first.html">Read this first</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Hello World</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tour.html">A Quick Tour (no ML)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_scratch.html">A Bot From Scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motivation.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="no_python.html">But I don&#8217;t code in python!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">More Tutorials</span></p>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_babi.html">Supervised Learning Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_fake_user.html">Interactive Learning with a Fake User</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_basics.html">Building a Simple Bot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_supervised.html">Supervised Learning Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_interactive_learning.html">Interactive Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_remote.html">Rasa Core without Python</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stories.html">Stories - The Training Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http.html">Rasa Core as a HTTP server</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">HTTP server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stories.html">Training Data Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling Reminders</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Python API</span></p>
@@ -118,7 +121,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">Custom Policies</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Tracking Conversation State</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#persisting-trackers">Persisting Trackers:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#serialisation">Serialisation</a></li>
@@ -235,12 +238,12 @@ The only way the tracker should ever be updated is by passing <code class="docut
 For example:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rasa_core.trackers</span> <span class="k">import</span> <span class="n">DialogueStateTracker</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rasa_core.slots</span> <span class="k">import</span> <span class="n">TextSlot</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rasa_core.events</span> <span class="k">import</span> <span class="n">SetSlot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rasa_core.events</span> <span class="k">import</span> <span class="n">SlotSet</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tracker</span> <span class="o">=</span> <span class="n">DialogueStateTracker</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="p">[</span><span class="n">TextSlot</span><span class="p">(</span><span class="s2">&quot;cuisine&quot;</span><span class="p">)])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">tracker</span><span class="o">.</span><span class="n">slots</span><span class="p">)</span>
 <span class="go">{u&#39;cuisine&#39;: &lt;TextSlot(cuisine: None)&gt;}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tracker</span><span class="o">.</span><span class="n">log_event</span><span class="p">(</span><span class="n">SetSlot</span><span class="p">(</span><span class="s2">&quot;cuisine&quot;</span><span class="p">,</span><span class="s2">&quot;Mexican&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tracker</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">SlotSet</span><span class="p">(</span><span class="s2">&quot;cuisine&quot;</span><span class="p">,</span><span class="s2">&quot;Mexican&quot;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">tracker</span><span class="o">.</span><span class="n">slots</span><span class="p">)</span>
 <span class="go">{u&#39;cuisine&#39;: &lt;TextSlot(cuisine: Mexican)&gt;}</span>
 </pre></div>
@@ -267,7 +270,26 @@ To return to the current state of the conversation,
 we iterate over the turns and log the events in each.</p>
 <p>We use the <code class="docutils literal"><span class="pre">jsonpickle</span></code> library to serialise these Dialogues.
 Here&#8217;s a simple example of a dialogue as it would be stored in the TrackerStore:</p>
-<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>  
+<div class="highlight-json"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>  
   <span class="nt">&quot;py/object&quot;</span><span class="p">:</span><span class="s2">&quot;rasa_core.conversation.Dialogue&quot;</span><span class="p">,</span>
   <span class="nt">&quot;events&quot;</span><span class="p">:[</span>
     <span class="p">{</span>
@@ -288,7 +310,7 @@ Here&#8217;s a simple example of a dialogue as it would be stored in the Tracker
   <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;hello_world&quot;</span>
 <span class="p">}</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 </div>
 
@@ -302,7 +324,7 @@ Here&#8217;s a simple example of a dialogue as it would be stored in the Tracker
         <a href="changelog.html" class="btn btn-neutral float-right" title="Change Log" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="policies.html" class="btn btn-neutral" title="Creating Policies" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="policies.html" class="btn btn-neutral" title="Custom Policies" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -329,12 +351,13 @@ Here&#8217;s a simple example of a dialogue as it would be stored in the Tracker
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.1
+        v: 0.7.2
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
+            <dd><a href="0.7.2/state.html">0.7.2</a></dd>
             <dd><a href="0.7.1/state.html">0.7.1</a></dd>
             <dd><a href="0.7.0/state.html">0.7.0</a></dd>
             <dd><a href="0.7.0a10/state.html">0.7.0a10</a></dd>
@@ -359,7 +382,7 @@ Here&#8217;s a simple example of a dialogue as it would be stored in the Tracker
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.1',
+            VERSION:'0.7.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

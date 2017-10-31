@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Creating Policies &mdash; Rasa Core 0.7.1 documentation</title>
+  <title>Custom Policies &mdash; Rasa Core 0.7.2 documentation</title>
   
 
   
@@ -30,12 +30,14 @@
   
     <link rel="stylesheet" href="_static/banner.css" type="text/css" />
   
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.1 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.7.2 documentation" href="index.html"/>
         <link rel="next" title="Tracking Conversation State" href="state.html"/>
         <link rel="prev" title="Interpreters" href="interpreters.html"/> 
 
@@ -89,24 +91,25 @@
             
                 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="read_first.html">Read this first</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Hello World</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tour.html">A Quick Tour (no ML)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_scratch.html">A Bot From Scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motivation.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="no_python.html">But I don&#8217;t code in python!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">More Tutorials</span></p>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_babi.html">Supervised Learning Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_fake_user.html">Interactive Learning with a Fake User</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_basics.html">Building a Simple Bot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_supervised.html">Supervised Learning Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_interactive_learning.html">Interactive Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_remote.html">Rasa Core without Python</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stories.html">Stories - The Training Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http.html">Rasa Core as a HTTP server</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">HTTP server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stories.html">Training Data Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling Reminders</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Python API</span></p>
@@ -118,7 +121,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating Policies</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Custom Policies</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#creating-policies-from-stories">Creating Policies from Stories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#generalising-to-new-dialogues">Generalising to new Dialogues</a></li>
 </ul>
@@ -169,7 +172,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Creating Policies</li>
+      <li>Custom Policies</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -228,10 +231,10 @@
     margin-right: 4px;  /* make room for the exclamation icon */
 }
 </style>
-<div class="section" id="creating-policies">
-<h1>Creating Policies<a class="headerlink" href="#creating-policies" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="custom-policies">
+<span id="id1"></span><h1>Custom Policies<a class="headerlink" href="#custom-policies" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="docutils literal"><span class="pre">Policy</span></code> is the core of your bot, and it really just has one important method:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">predict_action_probabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">predict_action_probabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
     <span class="c1"># type: (DialogueStateTracker, Domain) -&gt; List[float]</span>
 
     <span class="k">return</span> <span class="p">[]</span>
@@ -240,14 +243,15 @@
 <p>This uses the current state of the conversation (provided by the tracker) to choose the next action to take.
 The domain is there if you need it, but only some policy types make use of it. The returned array contains
 the probabilities for each action to be executed next. The action that is most likely will be executed.</p>
-<p>Let&#8217;s look at the simplest possible example, taken from our hello world bot:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SimplePolicy</span><span class="p">(</span><span class="n">Policy</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">predict_action_probabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
-        <span class="c1"># type: (DialogueStateTracker, Domain) -&gt; List[float]</span>
+<p>Let&#8217;s look at a simple example for a custom policy:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasa_core.policies</span> <span class="k">import</span> <span class="n">Policy</span>
+<span class="kn">from</span> <span class="nn">rasa_core.actions.action</span> <span class="k">import</span> <span class="n">ACTION_LISTEN_NAME</span>
+<span class="kn">from</span> <span class="nn">rasa_core</span> <span class="k">import</span> <span class="n">utils</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-        <span class="n">responses</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;greet&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="p">}</span>
+<span class="k">class</span> <span class="nc">SimplePolicy</span><span class="p">(</span><span class="n">Policy</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">predict_action_probabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
+        <span class="n">responses</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;greet&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
 
         <span class="k">if</span> <span class="n">tracker</span><span class="o">.</span><span class="n">latest_action_name</span> <span class="o">==</span> <span class="n">ACTION_LISTEN_NAME</span><span class="p">:</span>
             <span class="n">key</span> <span class="o">=</span> <span class="n">tracker</span><span class="o">.</span><span class="n">latest_message</span><span class="o">.</span><span class="n">intent</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
@@ -374,7 +378,7 @@ which uses Keras as a machine learning library to train your dialogue model.
 These base classes have already implemented the logic of persisting and reloading models.</p>
 <p>By default, each of these trains a linear model to fit the <code class="docutils literal"><span class="pre">X,</span> <span class="pre">y</span></code> data.</p>
 <p>The model is defined here:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">_build_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_features</span><span class="p">,</span> <span class="n">num_actions</span><span class="p">,</span> <span class="n">max_history_len</span><span class="p">):</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">model_architecture</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_features</span><span class="p">,</span> <span class="n">num_actions</span><span class="p">,</span> <span class="n">max_history_len</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Build a keras model and return a compiled model.</span>
 
 <span class="sd">        :param max_history_len: The maximum number of historical</span>
@@ -388,7 +392,7 @@ These base classes have already implemented the logic of persisting and reloadin
         <span class="c1"># Build Model</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
         <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Masking</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_input_shape</span><span class="o">=</span><span class="n">batch_shape</span><span class="p">))</span>
-        <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">,</span> <span class="n">batch_input_shape</span><span class="o">=</span><span class="n">batch_shape</span><span class="p">))</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="n">n_hidden</span><span class="p">,</span> <span class="n">batch_input_shape</span><span class="o">=</span><span class="n">batch_shape</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.2</span><span class="p">))</span>
         <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">n_hidden</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">num_actions</span><span class="p">))</span>
         <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
 
@@ -402,9 +406,9 @@ These base classes have already implemented the logic of persisting and reloadin
 </div>
 <p>and the training is run here:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_model</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">num_features</span><span class="p">,</span>
-                                       <span class="n">domain</span><span class="o">.</span><span class="n">num_actions</span><span class="p">,</span>
-                                       <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_architecture</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">num_features</span><span class="p">,</span>
+                                             <span class="n">domain</span><span class="o">.</span><span class="n">num_actions</span><span class="p">,</span>
+                                             <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">y_one_hot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">domain</span><span class="o">.</span><span class="n">num_actions</span><span class="p">))</span>
         <span class="n">y_one_hot</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)),</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
@@ -463,12 +467,13 @@ These base classes have already implemented the logic of persisting and reloadin
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.1
+        v: 0.7.2
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
+            <dd><a href="0.7.2/policies.html">0.7.2</a></dd>
             <dd><a href="0.7.1/policies.html">0.7.1</a></dd>
             <dd><a href="0.7.0/policies.html">0.7.0</a></dd>
             <dd><a href="0.7.0a10/policies.html">0.7.0a10</a></dd>
@@ -493,7 +498,7 @@ These base classes have already implemented the logic of persisting and reloadin
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.1',
+            VERSION:'0.7.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

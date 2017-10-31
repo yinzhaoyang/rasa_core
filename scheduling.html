@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Scheduling Reminders &mdash; Rasa Core 0.7.1 documentation</title>
+  <title>Scheduling Reminders &mdash; Rasa Core 0.7.2 documentation</title>
   
 
   
@@ -30,14 +30,16 @@
   
     <link rel="stylesheet" href="_static/banner.css" type="text/css" />
   
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.1 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.7.2 documentation" href="index.html"/>
         <link rel="next" title="Agent" href="api/agent.html"/>
-        <link rel="prev" title="Training Data Format" href="stories.html"/> 
+        <link rel="prev" title="Connecting to messaging &amp; voice platforms" href="connectors.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -89,24 +91,25 @@
             
                 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="read_first.html">Read this first</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Hello World</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tour.html">A Quick Tour (no ML)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_scratch.html">A Bot From Scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motivation.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="no_python.html">But I don&#8217;t code in python!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">More Tutorials</span></p>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_babi.html">Supervised Learning Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_fake_user.html">Interactive Learning with a Fake User</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_basics.html">Building a Simple Bot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_supervised.html">Supervised Learning Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_interactive_learning.html">Interactive Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_remote.html">Rasa Core without Python</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stories.html">Stories - The Training Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http.html">Rasa Core as a HTTP server</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">HTTP server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stories.html">Training Data Format</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Scheduling Reminders</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#scheduling-the-reminder">Scheduling the reminder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#what-happens-when-the-reminder-is-triggered">What happens when the reminder is triggered</a></li>
@@ -122,7 +125,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">Custom Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Change Log</a></li>
 </ul>
@@ -241,13 +244,17 @@ Don&#8217;t worry! Rasa has you covered.</p>
 <p>To schedule an action for later execution, there is a special event called <code class="docutils literal"><span class="pre">Reminder</span></code>.
 Let&#8217;s make our example a bit more specific:
 We want a confirmation to book a restaurant table - without it the reservation won&#8217;t be made.</p>
-<div class="highlight-md"><div class="highlight"><pre><span></span><span class="gu">##</span> book a restaurant
+<div class="highlight-md"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gu">##</span> book a restaurant
 <span class="k">*</span> _start_booking
     <span class="k">-</span> action_suggest_restaurant
 <span class="k">*</span> _select_restaurant[name=Papi&#39;s Pizza Place]
     <span class="k">-</span> action_confirm_booking
 </pre></div>
-</div>
+</td></tr></table></div>
 <p>The last action in this story, <code class="docutils literal"><span class="pre">action_confirm_booking</span></code>, will ask the user for a confirmation and usually
 the user would directly send a confirmation - but sometimes they might forget to do that.</p>
 <dl class="docutils">
@@ -301,7 +308,21 @@ If you do not want that to happen you need so set the <code class="docutils lite
 <p>After the action is triggered, the action execution continues as though the user had sent the bot an
 empty message.
 So in our stories we need to define what happens after the reminder was executed:</p>
-<div class="highlight-md"><div class="highlight"><pre><span></span><span class="gu">##</span> book a restaurant
+<div class="highlight-md"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gu">##</span> book a restaurant
 <span class="k">*</span> _start_booking
     <span class="k">-</span> action_suggest_restaurant
 <span class="k">*</span> _select_restaurant[name=Papi&#39;s Pizza Place]
@@ -317,7 +338,7 @@ So in our stories we need to define what happens after the reminder was executed
 <span class="k">*</span> _deny
     <span class="k">-</span> action_cancel_booking
 </pre></div>
-</div>
+</td></tr></table></div>
 <p>We have added two stories: One where the user agrees to the message we sent in the reminder and one where they
 decide to cancel the booking.</p>
 <div class="admonition warning">
@@ -340,7 +361,7 @@ So make sure to add a story into your training data that starts with the action 
         <a href="api/agent.html" class="btn btn-neutral float-right" title="Agent" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="stories.html" class="btn btn-neutral" title="Training Data Format" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="connectors.html" class="btn btn-neutral" title="Connecting to messaging &amp; voice platforms" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -367,12 +388,13 @@ So make sure to add a story into your training data that starts with the action 
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.1
+        v: 0.7.2
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
+            <dd><a href="0.7.2/scheduling.html">0.7.2</a></dd>
             <dd><a href="0.7.1/scheduling.html">0.7.1</a></dd>
             <dd><a href="0.7.0/scheduling.html">0.7.0</a></dd>
             <dd><a href="0.7.0a10/scheduling.html">0.7.0a10</a></dd>
@@ -397,7 +419,7 @@ So make sure to add a story into your training data that starts with the action 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.1',
+            VERSION:'0.7.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

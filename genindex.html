@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; Rasa Core 0.7.1 documentation</title>
+  <title>Index &mdash; Rasa Core 0.7.2 documentation</title>
   
 
   
@@ -31,12 +31,14 @@
   
     <link rel="stylesheet" href="_static/banner.css" type="text/css" />
   
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
 
   
         <link rel="index" title="Index"
               href="#"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.1 documentation" href="index.html"/> 
+    <link rel="top" title="Rasa Core 0.7.2 documentation" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -88,24 +90,25 @@
             
                 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="read_first.html">Read this first</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Hello World</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tour.html">A Quick Tour (no ML)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_scratch.html">A Bot From Scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="motivation.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="no_python.html">But I don&#8217;t code in python!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">More Tutorials</span></p>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_babi.html">Supervised Learning Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial_fake_user.html">Interactive Learning with a Fake User</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_basics.html">Building a Simple Bot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_supervised.html">Supervised Learning Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_interactive_learning.html">Interactive Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial_remote.html">Rasa Core without Python</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Deep Dives</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stories.html">Stories - The Training Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="patterns.html">Common Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plumbing.html">Plumbing - How it all fits together</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http.html">Rasa Core as a HTTP server</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domains.html">Domain, Slots, and Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http.html">HTTP server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stories.html">Training Data Format</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling Reminders</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Python API</span></p>
@@ -117,7 +120,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="featurisation.html">Featurization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpreters.html">Interpreters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="policies.html">Creating Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">Custom Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">Tracking Conversation State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Change Log</a></li>
 </ul>
@@ -186,7 +189,9 @@
 
 <div class="genindex-jumpbox">
  <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
  | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
  | <a href="#E"><strong>E</strong></a>
  | <a href="#F"><strong>F</strong></a>
  | <a href="#H"><strong>H</strong></a>
@@ -268,17 +273,69 @@
   </ul></td>
 </tr></table>
 
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    bool
+
+      <ul>
+        <li><a href="domains.html#cmdoption-arg-bool">command line option</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/agent.html#rasa_core.agent.Agent.continue_message_handling">continue_message_handling() (rasa_core.agent.Agent method)</a>
+      <li>
+    categorical
+
+      <ul>
+        <li><a href="domains.html#cmdoption-arg-categorical">command line option</a>
 </li>
+      </ul></li>
+      <li>
+    command line option
+
+      <ul>
+        <li><a href="domains.html#cmdoption-arg-bool">bool</a>
+</li>
+        <li><a href="domains.html#cmdoption-arg-categorical">categorical</a>
+</li>
+        <li><a href="domains.html#cmdoption-arg-data">data</a>
+</li>
+        <li><a href="domains.html#cmdoption-arg-float">float</a>
+</li>
+        <li><a href="domains.html#cmdoption-arg-list">list</a>
+</li>
+        <li><a href="domains.html#cmdoption-arg-text">text</a>
+</li>
+        <li><a href="domains.html#cmdoption-arg-unfeaturized">unfeaturized</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/agent.html#rasa_core.agent.Agent.continue_message_handling">continue_message_handling() (rasa_core.agent.Agent method)</a>
+</li>
       <li><a href="api/events.html#rasa_core.events.ConversationPaused">ConversationPaused (class in rasa_core.events)</a>
 </li>
       <li><a href="api/events.html#rasa_core.events.ConversationResumed">ConversationResumed (class in rasa_core.events)</a>
 </li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    data
+
+      <ul>
+        <li><a href="domains.html#cmdoption-arg-data">command line option</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -297,10 +354,17 @@
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/events.html#rasa_core.events.Event.from_parameters">from_parameters() (rasa_core.events.Event static method)</a>
+      <li>
+    float
+
+      <ul>
+        <li><a href="domains.html#cmdoption-arg-float">command line option</a>
 </li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/events.html#rasa_core.events.Event.from_parameters">from_parameters() (rasa_core.events.Event static method)</a>
+</li>
       <li><a href="api/events.html#rasa_core.events.UserUttered.from_parse_data">from_parse_data() (rasa_core.events.UserUttered static method)</a>
 </li>
       <li><a href="api/events.html#rasa_core.events.Event.from_story_string">from_story_string() (rasa_core.events.Event static method)</a>
@@ -322,6 +386,15 @@
 
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    list
+
+      <ul>
+        <li><a href="domains.html#cmdoption-arg-list">command line option</a>
+</li>
+      </ul></li>
+  </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/agent.html#rasa_core.agent.Agent.load">load() (rasa_core.agent.Agent class method)</a>
 </li>
@@ -371,6 +444,13 @@
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    text
+
+      <ul>
+        <li><a href="domains.html#cmdoption-arg-text">command line option</a>
+</li>
+      </ul></li>
       <li><a href="api/agent.html#rasa_core.agent.Agent.toggle_memoization">toggle_memoization() (rasa_core.agent.Agent method)</a>
 </li>
       <li><a href="api/events.html#rasa_core.events.TopicSet">TopicSet (class in rasa_core.events)</a>
@@ -411,10 +491,17 @@
 <h2 id="U">U</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/events.html#rasa_core.events.UserUtteranceReverted">UserUtteranceReverted (class in rasa_core.events)</a>
+      <li>
+    unfeaturized
+
+      <ul>
+        <li><a href="domains.html#cmdoption-arg-unfeaturized">command line option</a>
 </li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/events.html#rasa_core.events.UserUtteranceReverted">UserUtteranceReverted (class in rasa_core.events)</a>
+</li>
       <li><a href="api/events.html#rasa_core.events.UserUttered">UserUttered (class in rasa_core.events)</a>
 </li>
   </ul></td>
@@ -449,13 +536,14 @@
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.1
+        v: 0.7.2
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="0.7.1/genindex.html">0.7.1</a></dd>
+            <dd><a href="0.7.2/genindex.html">0.7.2</a></dd>
+            <dd><a href="0.7.1/index.html">0.7.1</a></dd>
             <dd><a href="0.7.0/index.html">0.7.0</a></dd>
             <dd><a href="0.7.0a10/index.html">0.7.0a10</a></dd>
             <dd><a href="0.7.0a5/index.html">0.7.0a5</a></dd>
@@ -479,7 +567,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.1',
+            VERSION:'0.7.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
