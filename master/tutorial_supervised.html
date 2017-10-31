@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Supervised Learning Tutorial &mdash; Rasa Core 0.7.2 documentation</title>
+  <title>Supervised Learning Tutorial &mdash; Rasa Core 0.7.3 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.2 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.7.3 documentation" href="index.html"/>
         <link rel="next" title="Interactive Learning" href="tutorial_interactive_learning.html"/>
         <link rel="prev" title="Building a Simple Bot" href="tutorial_basics.html"/> 
 
@@ -206,7 +206,7 @@
 
 
 
-    <p class="scv-banner scv-sphinx_rtd_theme"><a href="../0.7.2/tutorial_supervised.html"><b>Warning:</b> This document is for the development version of Rasa Core. The latest version is 0.7.2.</a></p>
+    <p class="scv-banner scv-sphinx_rtd_theme"><a href="../0.7.3/tutorial_supervised.html"><b>Warning:</b> This document is for the development version of Rasa Core. The latest version is 0.7.3.</a></p>
 
 <style>
 /* CSS overrides for sphinx_rtd_theme */
@@ -247,8 +247,8 @@
 <p class="first admonition-title">Note</p>
 <p>This tutorial will cover how to use Rasa Core directly from python. We will
 dive a bit deeper into the different concepts and overall structure of the
-library. You should already be familiar with the terms domain, stories, as
-well as some knowledge about NLU.</p>
+library. You should already be familiar with the terms domain, stories, and
+have some knowledge of NLU.</p>
 <p class="last"><a class="reference external" href="https://github.com/RasaHQ/rasa_core/tree/master/examples/restaurantbot">Example Code on GitHub</a></p>
 </div>
 <div class="section" id="goal">
@@ -485,7 +485,7 @@ There are 1000 stories in the training set, but you don&#8217;t need that many t
 a useful bot. How much data you need depends on the number of actions you define, and the
 number of edge cases you want to support. But a few dozen stories is a good place to start.</p>
 </div>
-<p>We converted the bAbI dialogue training set into the Rasa stories format, you
+<p>We have converted the bAbI dialogue training set into the Rasa stories format, you
 can download the stories training data from <a class="reference external" href="https://raw.githubusercontent.com/RasaHQ/rasa_core/master/examples/restaurantbot/data/babi_stories.md">GitHub</a>.
 Download that file, and store it in <code class="docutils literal"><span class="pre">babi_stories.yml</span></code>. Here&#8217;s an example
 conversation snippet:</p>
@@ -515,8 +515,8 @@ conversation snippet:</p>
 <p>See <a class="reference internal" href="stories.html#stories"><span class="std std-ref">Stories - The Training Data</span></a> to get more information about the Rasa Core data format.
 We can also visualize that training data to generate a graph which is similar to a flow chart:</p>
 <img alt="_images/babi_flow.png" src="_images/babi_flow.png" />
-<p>The chart shows the incoming user intents and entities and the action the bot is supposed to execute based on
-the stories from the training data. As you can see, flow charts get complicated quite quickly. Nevertheless, they
+<p>The graph shows all of the actions executed in the training data, and the user messages (if any)
+that occurred between them. As you can see, flow charts get complicated quite quickly. Nevertheless, they
 can be a helpful tool in debugging a bot. More information can be found in <a class="reference internal" href="stories.html#story-visualization"><span class="std std-ref">Visualization of Stories</span></a>.</p>
 </div>
 <div class="section" id="training-your-bot">
@@ -596,7 +596,7 @@ a dictionary with the intent and entities from a user message.</p>
 <h3>Dialogue Policy<a class="headerlink" href="#dialogue-policy" title="Permalink to this headline">¶</a></h3>
 <p>Now our bot needs to learn what to do in response to these messages.
 We do this by training one or multiple Rasa Core policies.</p>
-<p>For this bot, we came up with our own policy. Here are the glory details:</p>
+<p>For this bot, we came up with our own policy. Here are the gory details:</p>
 <div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -708,7 +708,7 @@ which owns an <code class="docutils literal"><span class="pre">Interpreter</span
 <p>We put the NLU model into an <code class="docutils literal"><span class="pre">Interpreter</span></code> and then put that into an <code class="docutils literal"><span class="pre">Agent</span></code>.</p>
 <p>We will pass messages directly to the bot, but this is just for
 this is just for demonstration purposes. You can look at how to
-build a command line bot and a facebook bot by checking out the other tutorials.</p>
+build a command line bot and a facebook bot by checking out the <a class="reference internal" href="connectors.html#connectors"><span class="std std-ref">Connecting to messaging &amp; voice platforms</span></a>.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasa_core.interpreter</span> <span class="k">import</span> <span class="n">RasaNLUInterpreter</span>
 <span class="kn">from</span> <span class="nn">rasa_core.agent</span> <span class="k">import</span> <span class="n">Agent</span>
 
@@ -729,7 +729,7 @@ that channel instead of handling messages directly, e.g.:</p>
 </div>
 <p>In this case messages will be retrieved from the command line because we specified
 the <code class="docutils literal"><span class="pre">ConsoleInputChannel</span></code>. Responses are printed to the command line as well. You
-can find a complete example on how to load an agent and chat with it on the
+can find a complete example of how to load an agent and chat with it on the
 command line in <code class="docutils literal"><span class="pre">examples/restaurantbot/run.py</span></code>.</p>
 </div>
 </div>
@@ -777,6 +777,7 @@ command line in <code class="docutils literal"><span class="pre">examples/restau
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
+            <dd><a href="../0.7.3/tutorial_supervised.html">0.7.3</a></dd>
             <dd><a href="../0.7.2/tutorial_supervised.html">0.7.2</a></dd>
             <dd><a href="../0.7.1/index.html">0.7.1</a></dd>
             <dd><a href="../0.7.0/index.html">0.7.0</a></dd>
@@ -802,7 +803,7 @@ command line in <code class="docutils literal"><span class="pre">examples/restau
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.2',
+            VERSION:'0.7.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

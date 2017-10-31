@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Building a Simple Bot &mdash; Rasa Core 0.7.2 documentation</title>
+  <title>Building a Simple Bot &mdash; Rasa Core 0.7.3 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.2 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.7.3 documentation" href="index.html"/>
         <link rel="next" title="Supervised Learning Tutorial" href="tutorial_supervised.html"/>
         <link rel="prev" title="Installation" href="installation.html"/> 
 
@@ -203,7 +203,7 @@
 
 
 
-    <p class="scv-banner scv-sphinx_rtd_theme"><a href="../0.7.2/tutorial_basics.html"><b>Warning:</b> This document is for the development version of Rasa Core. The latest version is 0.7.2.</a></p>
+    <p class="scv-banner scv-sphinx_rtd_theme"><a href="../0.7.3/tutorial_basics.html"><b>Warning:</b> This document is for the development version of Rasa Core. The latest version is 0.7.3.</a></p>
 
 <style>
 /* CSS overrides for sphinx_rtd_theme */
@@ -274,10 +274,8 @@ structure should look like this:</p>
 </div>
 <div class="section" id="define-a-domain">
 <h2>1. Define a Domain<a class="headerlink" href="#define-a-domain" title="Permalink to this headline">¶</a></h2>
-<p>The first thing we need is a <code class="docutils literal"><span class="pre">Domain</span></code> instance.
-The domain specifies the universe of possibilities in which the bot operates.
-You can define a domain as a python class or as a yaml file.
-Below is the restaurant domain from the examples folder.</p>
+<p>The first thing we need is a <code class="docutils literal"><span class="pre">Domain</span></code>.
+The domain defines the universe your bot lives in.</p>
 <p>Here is an example domain for our moodbot, <code class="docutils literal"><span class="pre">domain.yml</span></code>:</p>
 <div class="highlight-yaml" id="domain-yml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -320,7 +318,7 @@ Below is the restaurant domain from the examples folder.</p>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mood_affirm</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mood_deny</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mood_great</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mood_shitty</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mood_unhappy</span>
 
 <span class="l l-Scalar l-Scalar-Plain">templates</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">utter_greet</span><span class="p p-Indicator">:</span>
@@ -369,14 +367,14 @@ Below is the restaurant domain from the examples folder.</p>
 <td>things your bot can do and say</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">slots</span></code></td>
-<td>information to keep track of during a conversation (e.g. a users age) - similar to entities</td>
+<td>information to keep track of during a conversation (e.g. a users age)</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">templates</span></code></td>
 <td>template strings for the things your bot can say</td>
 </tr>
 </tbody>
 </table>
-<p>In our simple example we don&#8217;t need the slots, so that section doesn&#8217;t appear
+<p>In our simple example we don&#8217;t need slots, so that section doesn&#8217;t appear
 in our definition.</p>
 <p><strong>How does this fit together?</strong>
 Rasa takes the <code class="docutils literal"><span class="pre">intent</span></code>, <code class="docutils literal"><span class="pre">entities</span></code>, and the internal state of the dialogue,
@@ -389,7 +387,7 @@ and respond.</p>
 <p class="first admonition-title">Note</p>
 <p class="last">There is one special action, <code class="docutils literal"><span class="pre">ActionListen</span></code> which means to stop taking further
 actions until the user says something else.
-For more actions which do more than just sent a message, you can define them as
+For more actions which do more than just send a message, you can define them as
 python classes and reference them in the domain by their module path. See
 <a class="reference internal" href="domains.html#custom-actions"><span class="std std-ref">Defining Custom Actions</span></a> for more information about custom actions.</p>
 </div>
@@ -430,8 +428,7 @@ some intent examples in <code class="docutils literal"><span class="pre">data/nl
 25
 26
 27
-28
-29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gu">##</span> intent:greeting
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gu">##</span> intent:greeting
 <span class="k">-</span> hey
 <span class="k">-</span> hello
 <span class="k">-</span> moin
@@ -456,10 +453,9 @@ some intent examples in <code class="docutils literal"><span class="pre">data/nl
 <span class="k">-</span> I am amazing
 <span class="k">-</span> I am going to save the world
 
-<span class="gu">##</span> intent:mood_shitty
+<span class="gu">##</span> intent:mood_unhappy
 <span class="k">-</span> my day was horrible
 <span class="k">-</span> I am sad
-<span class="k">-</span> I am going to kill myself
 </pre></div>
 </td></tr></table></div>
 <p>Furthermore, we need a configuration file <code class="docutils literal"><span class="pre">nlu_model_config.json</span></code> for the
@@ -495,8 +491,8 @@ head over to the <a class="reference external" href="https://nlu.rasa.ai">Rasa N
 </div>
 <div class="section" id="define-stories">
 <h2>3. Define stories<a class="headerlink" href="#define-stories" title="Permalink to this headline">¶</a></h2>
-<p>Ok, no we&#8217;ve got a NLU model as well as a domain defining actions our bot can
-take as well as the inputs it should handle (intents &amp; entities). We are still
+<p>So far, we&#8217;ve got a NLU model, a domain defining the actions our bot can
+take, and inputs it should handle (intents &amp; entities). We are still
 missing the central piece, <strong>stories to tell our bot what to do at which
 point in the dialogue</strong>. There are two different ways to create stories (and
 you can mix them):</p>
@@ -541,19 +537,19 @@ stories. But enough talking, let&#8217;s get to our stories:</p>
 <span class="k">*</span> _mood_great               &lt;!-- user utterance, in format _intent[entities] --&gt;
   <span class="k">-</span> utter_happy
 
-<span class="gu">##</span> sad path                 &lt;!-- this is already the start of the next story --&gt;
+<span class="gu">##</span> sad path 1               &lt;!-- this is already the start of the next story --&gt;
 <span class="k">*</span> _greet
   <span class="k">-</span> utter_greet             &lt;!-- action of the bot to execute --&gt;
-<span class="k">*</span> _mood_shitty
+<span class="k">*</span> _mood_unhappy
   <span class="k">-</span> utter_cheer_up
   <span class="k">-</span> utter_did_that_help
 <span class="k">*</span> _mood_affirm
   <span class="k">-</span> utter_happy
 
-<span class="gu">##</span> sad path
+<span class="gu">##</span> sad path 2
 <span class="k">*</span> _greet
   <span class="k">-</span> utter_greet
-<span class="k">*</span> _mood_shitty
+<span class="k">*</span> _mood_unhappy
   <span class="k">-</span> utter_cheer_up
   <span class="k">-</span> utter_did_that_help
 <span class="k">*</span> _mood_deny
@@ -566,7 +562,7 @@ stories. But enough talking, let&#8217;s get to our stories:</p>
 </td></tr></table></div>
 <p>The bot actions are also events, and are specified by lines starting
 with a dash. The end of a story is denoted by a newline. See <a class="reference internal" href="stories.html#stories"><span class="std std-ref">Stories - The Training Data</span></a> for
-more infos about the data format.</p>
+more information about the data format.</p>
 </div>
 <div class="section" id="put-the-pieces-together">
 <h2>4. Put the pieces together<a class="headerlink" href="#put-the-pieces-together" title="Permalink to this headline">¶</a></h2>
@@ -652,6 +648,7 @@ into <code class="docutils literal"><span class="pre">credentials.yml</span></co
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
+            <dd><a href="../0.7.3/tutorial_basics.html">0.7.3</a></dd>
             <dd><a href="../0.7.2/tutorial_basics.html">0.7.2</a></dd>
             <dd><a href="../0.7.1/index.html">0.7.1</a></dd>
             <dd><a href="../0.7.0/index.html">0.7.0</a></dd>
@@ -677,7 +674,7 @@ into <code class="docutils literal"><span class="pre">credentials.yml</span></co
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.2',
+            VERSION:'0.7.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

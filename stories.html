@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Stories - The Training Data &mdash; Rasa Core 0.7.2 documentation</title>
+  <title>Stories - The Training Data &mdash; Rasa Core 0.7.3 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.2 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.7.3 documentation" href="index.html"/>
         <link rel="next" title="Common Patterns" href="patterns.html"/>
         <link rel="prev" title="Domain, Slots, and Actions" href="domains.html"/> 
 
@@ -271,32 +271,45 @@ pip install pygraphviz --install-option<span class="o">=</span><span class="s2">
 </div>
 </div>
 <p>As soon as this is installed you can visualize stories like this:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>python -m rasa_core.visualize -d examples/concerts/data/stories.md -o graph.png
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> examples/concertbot/
+python -m rasa_core.visualize -d concert_domain.yml -s data/stories.md -o graph.png
 </pre></div>
 </div>
-<p>This will run through the stories in <code class="docutils literal"><span class="pre">examples/concerts/data/stories.md</span></code> and create a graph stored in the
+<p>This will run through the stories of the <code class="docutils literal"><span class="pre">concertbot</span></code> example in
+<code class="docutils literal"><span class="pre">data/stories.md</span></code> and create a graph stored in the
 output image <code class="docutils literal"><span class="pre">graph.png</span></code>.</p>
 <img alt="_images/concert_stories.png" src="_images/concert_stories.png" />
-<p>You can also call the visualization directly from your code using:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasa_core.training_utils.dsl</span> <span class="k">import</span> <span class="n">StoryFileReader</span>
+<p>We can also run the visualisation directly from code. For this example, we can
+create a <code class="docutils literal"><span class="pre">visualize.py</span></code> in <code class="docutils literal"><span class="pre">examples/concertbot</span></code> with the following code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
+
 <span class="kn">from</span> <span class="nn">rasa_core.domain</span> <span class="k">import</span> <span class="n">TemplateDomain</span>
+<span class="kn">from</span> <span class="nn">rasa_core.training_utils.dsl</span> <span class="k">import</span> <span class="n">StoryFileReader</span>
 <span class="kn">from</span> <span class="nn">rasa_core.training_utils.visualization</span> <span class="k">import</span> <span class="n">visualize_stories</span>
-<span class="kn">from</span> <span class="nn">rasa_nlu.converters</span> <span class="k">import</span> <span class="n">load_data</span>
 
-<span class="n">domain</span> <span class="o">=</span> <span class="n">TemplateDomain</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;examples/restaurantbot/restaurant_domain.yml&quot;</span><span class="p">)</span>
-<span class="n">stories</span> <span class="o">=</span> <span class="n">StoryFileReader</span><span class="o">.</span><span class="n">read_from_file</span><span class="p">(</span><span class="s2">&quot;examples/restaurantbot/data/babi_stories.md&quot;</span><span class="p">,</span>
-                                             <span class="n">domain</span><span class="p">)</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">domain</span> <span class="o">=</span> <span class="n">TemplateDomain</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;concert_domain.yml&quot;</span><span class="p">)</span>
+    <span class="n">stories</span> <span class="o">=</span> <span class="n">StoryFileReader</span><span class="o">.</span><span class="n">read_from_file</span><span class="p">(</span><span class="s2">&quot;data/stories.md&quot;</span><span class="p">,</span> <span class="n">domain</span><span class="p">)</span>
 
-<span class="n">training_data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="s2">&quot;examples/restaurantbot/data/franken_data.json&quot;</span><span class="p">)</span>
-<span class="n">visualize_stories</span><span class="p">(</span><span class="n">stories</span><span class="p">,</span> <span class="s2">&quot;graph.png&quot;</span><span class="p">,</span> <span class="n">training_data</span><span class="o">=</span><span class="n">training_data</span><span class="p">)</span>
+    <span class="n">visualize_stories</span><span class="p">(</span><span class="n">stories</span><span class="p">,</span> <span class="s2">&quot;graph.png&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Which will create the same image as the above python script call. The shown graph is still very simple, but the graphs can get quite complex.</p>
-<p>If you want to replace the intent &amp; entity messages in the box with real world messages
-(if you want to replace the messages from the stories file, which
-usually look like <code class="docutils literal"><span class="pre">_greet</span></code> with real messages e.g. <code class="docutils literal"><span class="pre">hello</span></code>), you can pass in a Rasa
-NLU training data instance to replace them with messages from your training data, as we
-did in the above example with the <code class="docutils literal"><span class="pre">training_data</span></code> variable.</p>
+<p>Which will create the same image as the above python script call. The shown
+graph is still very simple, but the graphs can get quite complex.</p>
+<p>If you want to replace the messages from the stories file, which usually look
+like <code class="docutils literal"><span class="pre">_greet</span></code> with real messages e.g. <code class="docutils literal"><span class="pre">hello</span></code>, you can pass in a Rasa
+NLU training data instance to replace them with messages from your training
+data.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The story visualization needs to load your domain. If you have
+any custom actions written in python make sure they are part of the python
+path, and can be loaded by the visualization script using the module path
+given for the action in the domain (e.g. <code class="docutils literal"><span class="pre">actions.ActionSearchVenues</span></code>).</p>
+</div>
 </div>
 </div>
 
@@ -337,12 +350,13 @@ did in the above example with the <code class="docutils literal"><span class="pr
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.2
+        v: 0.7.3
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
+            <dd><a href="0.7.3/stories.html">0.7.3</a></dd>
             <dd><a href="0.7.2/stories.html">0.7.2</a></dd>
             <dd><a href="0.7.1/stories.html">0.7.1</a></dd>
             <dd><a href="0.7.0/stories.html">0.7.0</a></dd>
@@ -368,7 +382,7 @@ did in the above example with the <code class="docutils literal"><span class="pr
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.2',
+            VERSION:'0.7.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
