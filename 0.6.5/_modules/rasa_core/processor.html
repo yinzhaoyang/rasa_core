@@ -471,7 +471,15 @@
     <span class="k">def</span> <span class="nf">_run_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">dispatcher</span><span class="p">):</span>
         <span class="c1"># events and return values are used to update</span>
         <span class="c1"># the tracker state after an action has been taken</span>
-        <span class="n">events</span> <span class="o">=</span> <span class="n">action</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dispatcher</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">events</span> <span class="o">=</span> <span class="n">action</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dispatcher</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Encountered an exception while running action &#39;</span><span class="si">{}</span><span class="s2">&#39;. &quot;</span>
+                         <span class="s2">&quot;Bot will continue, but the actions events are lost. &quot;</span>
+                         <span class="s2">&quot;Make sure to fix the exception in your custom &quot;</span>
+                         <span class="s2">&quot;code.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">action</span><span class="o">.</span><span class="n">name</span><span class="p">()),</span> <span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">events</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_log_action_on_tracker</span><span class="p">(</span><span class="n">tracker</span><span class="p">,</span> <span class="n">action</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span> <span class="n">events</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_schedule_reminders</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">dispatcher</span><span class="p">)</span>
 
