@@ -256,6 +256,23 @@ shows you how to define them and how to visualise them.</p>
 <p>This is what we call a <strong>story</strong>. A story starts with a name preceded by two
 hashes <code class="docutils literal"><span class="pre">##</span> <span class="pre">story_03248462</span></code>, this is arbitrary but can be used for debugging.
 The end of a story is denoted by a newline, and then a new story starts again with <code class="docutils literal"><span class="pre">##</span></code>.</p>
+<p>You can use <code class="docutils literal"><span class="pre">&gt;</span> <span class="pre">checkpoints</span></code> to modularize and simplify your training data:</p>
+<div class="highlight-md"><div class="highlight"><pre><span></span><span class="gu">##</span> first story
+<span class="k">*</span> _hello
+   <span class="k">-</span> action_ask_user_question
+<span class="k">&gt; </span><span class="ge">check_asked_question</span>
+
+<span class="gu">##</span> user affirms question
+<span class="k">&gt; </span><span class="ge">check_asked_question</span>
+<span class="k">*</span> _affirm
+  <span class="k">-</span> action_handle_affirmation
+
+<span class="gu">##</span> user denies question
+<span class="k">&gt; </span><span class="ge">check_asked_question</span>
+<span class="k">*</span> _deny
+  <span class="k">-</span> action_handle_denial
+</pre></div>
+</div>
 </div>
 <div class="section" id="visualization-of-stories">
 <span id="story-visualization"></span><h2>Visualization of Stories<a class="headerlink" href="#visualization-of-stories" title="Permalink to this headline">¶</a></h2>
