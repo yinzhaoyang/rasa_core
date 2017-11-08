@@ -273,7 +273,7 @@
 
 <div class="viewcode-block" id="Dispatcher.utter_attachment"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.dispatcher.Dispatcher.utter_attachment">[docs]</a>    <span class="k">def</span> <span class="nf">utter_attachment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attachment</span><span class="p">):</span>
         <span class="c1"># type: (Text) -&gt; None</span>
-        <span class="sd">&quot;&quot;&quot;Send a message to the client with attachements.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Send a message to the client with attachments.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">output_channel</span><span class="o">.</span><span class="n">send_image_url</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">attachment</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Dispatcher.utter_button_template"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.dispatcher.Dispatcher.utter_button_template">[docs]</a>    <span class="k">def</span> <span class="nf">utter_button_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">buttons</span><span class="p">,</span> <span class="n">filled_slots</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>

@@ -217,7 +217,7 @@
 
 <div class="viewcode-block" id="PolicyTrainer.train"><a class="viewcode-back" href="../../../rasa_dm.policies.html#rasa_core.policies.trainer.PolicyTrainer.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_history</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
               <span class="n">augmentation_factor</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">max_training_samples</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-              <span class="n">max_number_of_trackers</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+              <span class="n">max_number_of_trackers</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">remove_duplicates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Trains a policy on a domain using training data from a file.</span>
 
 <span class="sd">        :param augmentation_factor: how many stories should be created by</span>
@@ -229,6 +229,8 @@
 <span class="sd">                                     train on - `None` to use all examples</span>
 <span class="sd">        :param max_number_of_trackers: limits the tracker generation during</span>
 <span class="sd">                                       story file parsing - `None` for unlimited</span>
+<span class="sd">        :param remove_duplicates: remove duplicates from the training set before</span>
+<span class="sd">                                  training</span>
 <span class="sd">        :param kwargs: additional arguments passed to the underlying ML trainer</span>
 <span class="sd">                       (e.g. keras parameters)</span>
 <span class="sd">        :return: trained policy</span>
@@ -240,13 +242,15 @@
         <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_training_data</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">max_history</span><span class="p">,</span>
                                            <span class="n">augmentation_factor</span><span class="p">,</span>
                                            <span class="n">max_training_samples</span><span class="p">,</span>
-                                           <span class="n">max_number_of_trackers</span><span class="p">)</span>
+                                           <span class="n">max_number_of_trackers</span><span class="p">,</span>
+                                           <span class="n">remove_duplicates</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ensemble</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">featurizer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_prepare_training_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">max_history</span><span class="p">,</span> <span class="n">augmentation_factor</span><span class="p">,</span>
                                <span class="n">max_training_samples</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                               <span class="n">max_number_of_trackers</span><span class="o">=</span><span class="mi">2000</span><span class="p">):</span>
+                               <span class="n">max_number_of_trackers</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+                               <span class="n">remove_duplicates</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reads training data from file and prepares it for the training.&quot;&quot;&quot;</span>
 
         <span class="kn">from</span> <span class="nn">rasa_core.training_utils</span> <span class="k">import</span> <span class="n">extract_training_data_from_file</span>
@@ -256,7 +260,7 @@
                     <span class="n">filename</span><span class="p">,</span>
                     <span class="n">augmentation_factor</span><span class="o">=</span><span class="n">augmentation_factor</span><span class="p">,</span>
                     <span class="n">max_history</span><span class="o">=</span><span class="n">max_history</span><span class="p">,</span>
-                    <span class="n">remove_duplicates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">remove_duplicates</span><span class="o">=</span><span class="n">remove_duplicates</span><span class="p">,</span>
                     <span class="n">domain</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span>
                     <span class="n">featurizer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">featurizer</span><span class="p">,</span>
                     <span class="n">interpreter</span><span class="o">=</span><span class="n">RegexInterpreter</span><span class="p">(),</span>

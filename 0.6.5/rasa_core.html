@@ -363,7 +363,7 @@ training data.</p>
 
 <dl class="method">
 <dt id="rasa_core.agent.Agent.train">
-<code class="descname">train</code><span class="sig-paren">(</span><em>filename=None</em>, <em>model_path=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/agent.html#Agent.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.agent.Agent.train" title="Permalink to this definition">¶</a></dt>
+<code class="descname">train</code><span class="sig-paren">(</span><em>filename=None</em>, <em>model_path=None</em>, <em>remove_duplicates=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/agent.html#Agent.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.agent.Agent.train" title="Permalink to this definition">¶</a></dt>
 <dd><p>Train the policies / policy ensemble using dialogue data from file</p>
 </dd></dl>
 
@@ -405,7 +405,7 @@ can be changed to correct wrong behaviour.</p>
 <dl class="method">
 <dt id="rasa_core.dispatcher.Dispatcher.utter_attachment">
 <code class="descname">utter_attachment</code><span class="sig-paren">(</span><em>attachment</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/dispatcher.html#Dispatcher.utter_attachment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.dispatcher.Dispatcher.utter_attachment" title="Permalink to this definition">¶</a></dt>
-<dd><p>Send a message to the client with attachements.</p>
+<dd><p>Send a message to the client with attachments.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1241,6 +1241,12 @@ of this tracker exactly.</p>
 <code class="descname">generate_all_prior_states</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.generate_all_prior_states"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.generate_all_prior_states" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a generator of the previous states of this tracker.</p>
 <p>The resulting array is representing the state before each action.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.trackers.DialogueStateTracker.get_latest_entity_values">
+<code class="descname">get_latest_entity_values</code><span class="sig-paren">(</span><em>entity_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.get_latest_entity_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.get_latest_entity_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get entity values found for the passed entity name in latest msg.</p>
 </dd></dl>
 
 <dl class="method">
