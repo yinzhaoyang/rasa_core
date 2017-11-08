@@ -249,8 +249,9 @@
                 <span class="c1"># and that need to handle all events of the step</span>
                 <span class="n">incoming_trackers</span> <span class="o">=</span> <span class="n">active_trackers</span><span class="p">[</span><span class="n">step</span><span class="o">.</span><span class="n">start_checkpoint_name</span><span class="p">()]</span>
 
-                <span class="n">incoming_trackers</span> <span class="o">=</span> <span class="n">step</span><span class="o">.</span><span class="n">start_checkpoint</span><span class="o">.</span><span class="n">filter_trackers</span><span class="p">(</span>
-                        <span class="n">incoming_trackers</span><span class="p">)</span>
+                <span class="c1"># TODO: we can&#39;t use tracker filter here to filter for</span>
+                <span class="c1">#       checkpoint conditions since we don&#39;t have trackers.</span>
+                <span class="c1">#       this code should rather use the code from the dsl.</span>
 
                 <span class="k">if</span> <span class="n">max_number_of_trackers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">incoming_trackers</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">subsample_array</span><span class="p">(</span>

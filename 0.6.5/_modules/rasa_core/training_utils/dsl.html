@@ -448,6 +448,7 @@
 
 <div class="viewcode-block" id="Story"><a class="viewcode-back" href="../../../rasa_dm.training_utils.html#rasa_core.training_utils.dsl.Story">[docs]</a><span class="k">class</span> <span class="nc">Story</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">story_steps</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># type: (List[StoryStep]) -&gt; None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">story_steps</span> <span class="o">=</span> <span class="n">story_steps</span> <span class="k">if</span> <span class="n">story_steps</span> <span class="k">else</span> <span class="p">[]</span>
 
 <div class="viewcode-block" id="Story.as_dialogue"><a class="viewcode-back" href="../../../rasa_dm.training_utils.html#rasa_core.training_utils.dsl.Story.as_dialogue">[docs]</a>    <span class="k">def</span> <span class="nf">as_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
