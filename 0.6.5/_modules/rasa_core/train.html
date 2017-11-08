@@ -239,14 +239,17 @@
             <span class="n">help</span><span class="o">=</span><span class="s2">&quot;use verbose logging&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
             <span class="s1">&#39;--history&#39;</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
             <span class="n">help</span><span class="o">=</span><span class="s2">&quot;max history to use of a story&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
             <span class="s1">&#39;--epochs&#39;</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
             <span class="n">help</span><span class="o">=</span><span class="s2">&quot;number of epochs to train the model&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
             <span class="s1">&#39;--batch_size&#39;</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
             <span class="n">help</span><span class="o">=</span><span class="s2">&quot;number of training samples to put into one training batch&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
@@ -256,6 +259,7 @@
             <span class="n">help</span><span class="o">=</span><span class="s2">&quot;enable online training&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
             <span class="s1">&#39;--augmentation&#39;</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
             <span class="n">help</span><span class="o">=</span><span class="s2">&quot;how much data augmentation to use during training&quot;</span><span class="p">)</span>
 
