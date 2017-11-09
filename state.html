@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tracking Conversation State &mdash; Rasa Core 0.7.3 documentation</title>
+  <title>Tracking Conversation State &mdash; Rasa Core 0.7.4 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.3 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.7.4 documentation" href="index.html"/>
         <link rel="next" title="Change Log" href="changelog.html"/>
         <link rel="prev" title="Custom Policies" href="policies.html"/> 
 
@@ -234,7 +234,7 @@
 <div class="section" id="tracking-conversation-state">
 <span id="state"></span><h1>Tracking Conversation State<a class="headerlink" href="#tracking-conversation-state" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="docutils literal"><span class="pre">DialogueStateTracker</span></code> is the stateful object which keeps track of a conversation.
-The only way the tracker should ever be updated is by passing <code class="docutils literal"><span class="pre">events</span></code> to the <code class="docutils literal"><span class="pre">log_event</span></code> method.
+The only way the tracker should ever be updated is by passing <code class="docutils literal"><span class="pre">events</span></code> to the <code class="docutils literal"><span class="pre">update</span></code> method.
 For example:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rasa_core.trackers</span> <span class="k">import</span> <span class="n">DialogueStateTracker</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rasa_core.slots</span> <span class="k">import</span> <span class="n">TextSlot</span>
@@ -351,12 +351,13 @@ Here&#8217;s a simple example of a dialogue as it would be stored in the Tracker
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.3
+        v: 0.7.4
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
+            <dd><a href="0.7.4/state.html">0.7.4</a></dd>
             <dd><a href="0.7.3/state.html">0.7.3</a></dd>
             <dd><a href="0.7.2/state.html">0.7.2</a></dd>
             <dd><a href="0.7.1/state.html">0.7.1</a></dd>
@@ -383,7 +384,7 @@ Here&#8217;s a simple example of a dialogue as it would be stored in the Tracker
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.3',
+            VERSION:'0.7.4',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

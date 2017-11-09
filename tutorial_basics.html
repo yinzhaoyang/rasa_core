@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Building a Simple Bot &mdash; Rasa Core 0.7.3 documentation</title>
+  <title>Building a Simple Bot &mdash; Rasa Core 0.7.4 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.3 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.7.4 documentation" href="index.html"/>
         <link rel="next" title="Supervised Learning Tutorial" href="tutorial_supervised.html"/>
         <link rel="prev" title="Installation" href="installation.html"/> 
 
@@ -262,7 +262,7 @@ structure should look like this:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>moodbot/
 ├── data/
 │   ├── stories.md            # dialogue training data
-│   └── nlu.json              # nlu training data
+│   └── nlu.md                # nlu training data
 ├── domain.yml                # dialogue configuration
 └── nlu_model_config.json     # nlu configuration
 </pre></div>
@@ -425,7 +425,7 @@ some intent examples in <code class="docutils literal"><span class="pre">data/nl
 25
 26
 27
-28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gu">##</span> intent:greeting
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gu">##</span> intent:greet
 <span class="k">-</span> hey
 <span class="k">-</span> hello
 <span class="k">-</span> moin
@@ -639,12 +639,13 @@ into <code class="docutils literal"><span class="pre">credentials.yml</span></co
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.3
+        v: 0.7.4
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
+            <dd><a href="0.7.4/tutorial_basics.html">0.7.4</a></dd>
             <dd><a href="0.7.3/tutorial_basics.html">0.7.3</a></dd>
             <dd><a href="0.7.2/tutorial_basics.html">0.7.2</a></dd>
             <dd><a href="0.7.1/index.html">0.7.1</a></dd>
@@ -671,7 +672,7 @@ into <code class="docutils literal"><span class="pre">credentials.yml</span></co
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.3',
+            VERSION:'0.7.4',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

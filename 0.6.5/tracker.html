@@ -283,8 +283,11 @@ of this tracker exactly.</p>
 
 <dl class="method">
 <dt id="rasa_core.trackers.DialogueStateTracker.get_latest_entity_values">
-<code class="descname">get_latest_entity_values</code><span class="sig-paren">(</span><em>entity_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.get_latest_entity_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.get_latest_entity_values" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_latest_entity_values</code><span class="sig-paren">(</span><em>entity_type</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.get_latest_entity_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.get_latest_entity_values" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get entity values found for the passed entity name in latest msg.</p>
+<p>If you are only interested in the first entity of a given type use
+<cite>next(tracker.get_latest_entity_values(&#8220;my_entity_name&#8221;), None)</cite>.
+If no entity is found <cite>None</cite> is the default result.</p>
 </dd></dl>
 
 <dl class="method">
@@ -385,6 +388,7 @@ identical to the tracker from which the dialogue was created.</p>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
+            <dd><a href="../0.7.4/index.html">0.7.4</a></dd>
             <dd><a href="../0.7.3/index.html">0.7.3</a></dd>
             <dd><a href="../0.7.2/index.html">0.7.2</a></dd>
             <dd><a href="../0.7.1/index.html">0.7.1</a></dd>

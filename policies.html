@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Custom Policies &mdash; Rasa Core 0.7.3 documentation</title>
+  <title>Custom Policies &mdash; Rasa Core 0.7.4 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.3 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.7.4 documentation" href="index.html"/>
         <link rel="next" title="Tracking Conversation State" href="state.html"/>
         <link rel="prev" title="Interpreters" href="interpreters.html"/> 
 
@@ -291,7 +291,7 @@ We won&#8217;t use machine learning yet, we will just create a policy which memo
 
     <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_history</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
               <span class="n">augmentation_factor</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">max_training_samples</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-              <span class="n">max_number_of_trackers</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+              <span class="n">max_number_of_trackers</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">remove_duplicates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Trains a policy on a domain using training data from a file.</span>
 
 <span class="sd">        :param augmentation_factor: how many stories should be created by</span>
@@ -303,6 +303,8 @@ We won&#8217;t use machine learning yet, we will just create a policy which memo
 <span class="sd">                                     train on - `None` to use all examples</span>
 <span class="sd">        :param max_number_of_trackers: limits the tracker generation during</span>
 <span class="sd">                                       story file parsing - `None` for unlimited</span>
+<span class="sd">        :param remove_duplicates: remove duplicates from the training set before</span>
+<span class="sd">                                  training</span>
 <span class="sd">        :param kwargs: additional arguments passed to the underlying ML trainer</span>
 <span class="sd">                       (e.g. keras parameters)</span>
 <span class="sd">        :return: trained policy</span>
@@ -314,13 +316,15 @@ We won&#8217;t use machine learning yet, we will just create a policy which memo
         <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_training_data</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">max_history</span><span class="p">,</span>
                                            <span class="n">augmentation_factor</span><span class="p">,</span>
                                            <span class="n">max_training_samples</span><span class="p">,</span>
-                                           <span class="n">max_number_of_trackers</span><span class="p">)</span>
+                                           <span class="n">max_number_of_trackers</span><span class="p">,</span>
+                                           <span class="n">remove_duplicates</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ensemble</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">featurizer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_prepare_training_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">max_history</span><span class="p">,</span> <span class="n">augmentation_factor</span><span class="p">,</span>
                                <span class="n">max_training_samples</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                               <span class="n">max_number_of_trackers</span><span class="o">=</span><span class="mi">2000</span><span class="p">):</span>
+                               <span class="n">max_number_of_trackers</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+                               <span class="n">remove_duplicates</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reads training data from file and prepares it for the training.&quot;&quot;&quot;</span>
 
         <span class="kn">from</span> <span class="nn">rasa_core.training_utils</span> <span class="k">import</span> <span class="n">extract_training_data_from_file</span>
@@ -330,7 +334,7 @@ We won&#8217;t use machine learning yet, we will just create a policy which memo
                     <span class="n">filename</span><span class="p">,</span>
                     <span class="n">augmentation_factor</span><span class="o">=</span><span class="n">augmentation_factor</span><span class="p">,</span>
                     <span class="n">max_history</span><span class="o">=</span><span class="n">max_history</span><span class="p">,</span>
-                    <span class="n">remove_duplicates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">remove_duplicates</span><span class="o">=</span><span class="n">remove_duplicates</span><span class="p">,</span>
                     <span class="n">domain</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span>
                     <span class="n">featurizer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">featurizer</span><span class="p">,</span>
                     <span class="n">interpreter</span><span class="o">=</span><span class="n">RegexInterpreter</span><span class="p">(),</span>
@@ -467,12 +471,13 @@ These base classes have already implemented the logic of persisting and reloadin
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.3
+        v: 0.7.4
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
+            <dd><a href="0.7.4/policies.html">0.7.4</a></dd>
             <dd><a href="0.7.3/policies.html">0.7.3</a></dd>
             <dd><a href="0.7.2/policies.html">0.7.2</a></dd>
             <dd><a href="0.7.1/policies.html">0.7.1</a></dd>
@@ -499,7 +504,7 @@ These base classes have already implemented the logic of persisting and reloadin
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.3',
+            VERSION:'0.7.4',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
