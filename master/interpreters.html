@@ -244,7 +244,10 @@ logic you may need. You can look at the <code class="docutils literal"><span cla
 which has a method <code class="docutils literal"><span class="pre">parse(message)</span></code> which takes a single string argument and returns a dict in the following format:</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;text&quot;</span><span class="o">:</span> <span class="s2">&quot;show me chinese restaurants&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;intent&quot;</span><span class="o">:</span> <span class="s2">&quot;restaurant_search&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;intent&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;restaurant_search&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;confidence&quot;</span><span class="o">:</span> <span class="mf">1.0</span>
+  <span class="p">}</span>
   <span class="s2">&quot;entities&quot;</span><span class="o">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="s2">&quot;start&quot;</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span>
