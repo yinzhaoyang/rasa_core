@@ -451,7 +451,7 @@
         <span class="c1"># type: (List[StoryStep]) -&gt; None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">story_steps</span> <span class="o">=</span> <span class="n">story_steps</span> <span class="k">if</span> <span class="n">story_steps</span> <span class="k">else</span> <span class="p">[]</span>
 
-<div class="viewcode-block" id="Story.as_dialogue"><a class="viewcode-back" href="../../../rasa_dm.training_utils.html#rasa_core.training_utils.dsl.Story.as_dialogue">[docs]</a>    <span class="k">def</span> <span class="nf">as_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
+<div class="viewcode-block" id="Story.as_dialogue"><a class="viewcode-back" href="../../../rasa_dm.training_utils.html#rasa_core.training_utils.dsl.Story.as_dialogue">[docs]</a>    <span class="k">def</span> <span class="nf">as_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender_id</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
         <span class="n">events</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">story_steps</span><span class="p">:</span>
             <span class="n">events</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
@@ -459,7 +459,7 @@
                                          <span class="n">should_append_final_listen</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 
         <span class="n">events</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ActionExecuted</span><span class="p">(</span><span class="n">ActionListen</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">()))</span>
-        <span class="k">return</span> <span class="n">Dialogue</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">events</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">Dialogue</span><span class="p">(</span><span class="n">sender_id</span><span class="p">,</span> <span class="n">events</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Story.as_story_string"><a class="viewcode-back" href="../../../rasa_dm.training_utils.html#rasa_core.training_utils.dsl.Story.as_story_string">[docs]</a>    <span class="k">def</span> <span class="nf">as_story_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="n">story_content</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
@@ -669,7 +669,7 @@
         <span class="c1"># type: (Domain, int) -&gt; FeaturizedTracker</span>
         <span class="sd">&quot;&quot;&quot;Creates a featurized tracker from a domain.&quot;&quot;&quot;</span>
 
-        <span class="n">tracker</span> <span class="o">=</span> <span class="n">DialogueStateTracker</span><span class="p">(</span><span class="n">UserMessage</span><span class="o">.</span><span class="n">DEFAULT_SENDER</span><span class="p">,</span>
+        <span class="n">tracker</span> <span class="o">=</span> <span class="n">DialogueStateTracker</span><span class="p">(</span><span class="n">UserMessage</span><span class="o">.</span><span class="n">DEFAULT_SENDER_ID</span><span class="p">,</span>
                                        <span class="n">domain</span><span class="o">.</span><span class="n">slots</span><span class="p">,</span>
                                        <span class="n">domain</span><span class="o">.</span><span class="n">topics</span><span class="p">,</span>
                                        <span class="n">domain</span><span class="o">.</span><span class="n">default_topic</span><span class="p">,</span>
