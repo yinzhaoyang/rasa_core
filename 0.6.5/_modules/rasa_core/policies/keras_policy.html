@@ -356,15 +356,15 @@
                 <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">meta_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                     <span class="n">meta</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
                 <span class="n">model_arch</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_load_model_arch</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">meta</span><span class="p">)</span>
-                <span class="k">return</span> <span class="n">KerasPolicy</span><span class="p">(</span>
+                <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
                         <span class="bp">cls</span><span class="o">.</span><span class="n">_load_weights_for_model</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">model_arch</span><span class="p">,</span> <span class="n">meta</span><span class="p">),</span>
                         <span class="n">current_epoch</span><span class="o">=</span><span class="n">meta</span><span class="p">[</span><span class="s2">&quot;epochs&quot;</span><span class="p">],</span>
                         <span class="n">max_history</span><span class="o">=</span><span class="n">max_history</span><span class="p">,</span>
                         <span class="n">featurizer</span><span class="o">=</span><span class="n">featurizer</span>
                 <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">KerasPolicy</span><span class="p">(</span><span class="n">max_history</span><span class="o">=</span><span class="n">max_history</span><span class="p">,</span>
-                                   <span class="n">featurizer</span><span class="o">=</span><span class="n">featurizer</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">max_history</span><span class="o">=</span><span class="n">max_history</span><span class="p">,</span>
+                           <span class="n">featurizer</span><span class="o">=</span><span class="n">featurizer</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Failed to load dialogue model. Path </span><span class="si">{}</span><span class="s2"> &quot;</span>
                             <span class="s2">&quot;doesn&#39;t exist&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">path</span><span class="p">)))</span></div></div>

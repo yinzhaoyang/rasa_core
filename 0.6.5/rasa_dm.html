@@ -826,10 +826,10 @@ format which a classifier can read.</p>
 but with intent features given with a probability.</p>
 <p>Given a dictionary of active_features (e.g. &#8216;intent_greet&#8217;,
 &#8216;prev_action_listen&#8217;,...) and intent probabilities
-from rasa_nlu, will a binary vector indicating which features of
-<cite>self.input_features</cite> are active.</p>
-<p>For example with two active features and an uncertain intent out of
-five possible features this would return a vector
+from rasa_nlu, will be a binary vector indicating which features
+of <cite>self.input_features</cite> are active.</p>
+<p>For example with two active features and two uncertain intents out
+of five possible features this would return a vector
 like <cite>[0.3, 0.7, 1, 0, 1]</cite>.</p>
 <p>If this is just a padding vector we set all values to <cite>-1</cite>.
 padding vectors are specified by a <cite>None</cite> or <cite>[None]</cite>

@@ -339,11 +339,11 @@
 
 <span class="sd">        Given a dictionary of active_features (e.g. &#39;intent_greet&#39;,</span>
 <span class="sd">        &#39;prev_action_listen&#39;,...) and intent probabilities</span>
-<span class="sd">        from rasa_nlu, will a binary vector indicating which features of</span>
-<span class="sd">        `self.input_features` are active.</span>
+<span class="sd">        from rasa_nlu, will be a binary vector indicating which features</span>
+<span class="sd">        of `self.input_features` are active.</span>
 
-<span class="sd">        For example with two active features and an uncertain intent out of</span>
-<span class="sd">        five possible features this would return a vector</span>
+<span class="sd">        For example with two active features and two uncertain intents out</span>
+<span class="sd">        of five possible features this would return a vector</span>
 <span class="sd">        like `[0.3, 0.7, 1, 0, 1]`.</span>
 
 <span class="sd">        If this is just a padding vector we set all values to `-1`.</span>
@@ -355,10 +355,6 @@
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">num_features</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
 
-            <span class="n">intent_probs</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span>
-                            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">active_features</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-                            <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;intent_&#39;</span><span class="p">)}</span>
-
             <span class="n">used_features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_features</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">active_feature</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">active_features</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="k">if</span> <span class="n">active_feature</span> <span class="ow">in</span> <span class="n">input_feature_map</span><span class="p">:</span>
@@ -368,8 +364,6 @@
                     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
                             <span class="s2">&quot;Found feature not in feature map. &quot;</span>
                             <span class="s2">&quot;Name: </span><span class="si">{}</span><span class="s2"> Value: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">active_feature</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
-            <span class="k">for</span> <span class="n">intent</span><span class="p">,</span> <span class="n">probability</span> <span class="ow">in</span> <span class="n">intent_probs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-                <span class="n">used_features</span><span class="p">[</span><span class="n">input_feature_map</span><span class="p">[</span><span class="n">intent</span><span class="p">]]</span> <span class="o">=</span> <span class="n">probability</span>
             <span class="k">return</span> <span class="n">used_features</span></div>
 
 <div class="viewcode-block" id="ProbabilisticFeaturizer.decode"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.featurizers.ProbabilisticFeaturizer.decode">[docs]</a>    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_vec</span><span class="p">,</span> <span class="n">input_features</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
