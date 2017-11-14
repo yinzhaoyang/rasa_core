@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Interpreters &mdash; Rasa Core 0.7.4 documentation</title>
+  <title>Interpreters &mdash; Rasa Core 0.7.5 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.4 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.7.5 documentation" href="index.html"/>
         <link rel="next" title="Custom Policies" href="policies.html"/>
         <link rel="prev" title="Featurization" href="featurisation.html"/> 
 
@@ -241,7 +241,10 @@ logic you may need. You can look at the <code class="docutils literal"><span cla
 which has a method <code class="docutils literal"><span class="pre">parse(message)</span></code> which takes a single string argument and returns a dict in the following format:</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;text&quot;</span><span class="o">:</span> <span class="s2">&quot;show me chinese restaurants&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;intent&quot;</span><span class="o">:</span> <span class="s2">&quot;restaurant_search&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;intent&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;restaurant_search&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;confidence&quot;</span><span class="o">:</span> <span class="mf">1.0</span>
+  <span class="p">}</span>
   <span class="s2">&quot;entities&quot;</span><span class="o">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="s2">&quot;start&quot;</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span>
@@ -297,12 +300,13 @@ This matches strings in the format <code class="docutils literal"><span class="p
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.4
+        v: 0.7.5
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
+            <dd><a href="0.7.5/interpreters.html">0.7.5</a></dd>
             <dd><a href="0.7.4/interpreters.html">0.7.4</a></dd>
             <dd><a href="0.7.3/interpreters.html">0.7.3</a></dd>
             <dd><a href="0.7.2/interpreters.html">0.7.2</a></dd>
@@ -330,7 +334,7 @@ This matches strings in the format <code class="docutils literal"><span class="p
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.4',
+            VERSION:'0.7.5',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

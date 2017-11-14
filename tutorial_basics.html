@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Building a Simple Bot &mdash; Rasa Core 0.7.4 documentation</title>
+  <title>Building a Simple Bot &mdash; Rasa Core 0.7.5 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.7.4 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.7.5 documentation" href="index.html"/>
         <link rel="next" title="Supervised Learning Tutorial" href="tutorial_supervised.html"/>
         <link rel="prev" title="Installation" href="installation.html"/> 
 
@@ -256,7 +256,7 @@ response will respond with a funny image or a message.</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>mkdir moodbot <span class="o">&amp;&amp;</span> <span class="nb">cd</span> moodbot
 </pre></div>
 </div>
-<p>We are need to create two data files (dialogue stories as well as nlu examples)
+<p>We need to create two data files (dialogue stories as well as nlu examples)
 as well as two configuration files (dialogue domain and nlu config). The final
 structure should look like this:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>moodbot/
@@ -425,34 +425,64 @@ some intent examples in <code class="docutils literal"><span class="pre">data/nl
 25
 26
 27
-28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gu">##</span> intent:greet
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gu">##</span> intent:greet
 <span class="k">-</span> hey
 <span class="k">-</span> hello
+<span class="k">-</span> hi
+<span class="k">-</span> hello there
+<span class="k">-</span> good morning
+<span class="k">-</span> good evening
 <span class="k">-</span> moin
 
 <span class="gu">##</span> intent:goodbye
 <span class="k">-</span> bye
 <span class="k">-</span> goodbye
+<span class="k">-</span> have a nice day
+<span class="k">-</span> see you around
+<span class="k">-</span> bye bye
 <span class="k">-</span> see you later
 
 <span class="gu">##</span> intent:mood_affirm
 <span class="k">-</span> yes
 <span class="k">-</span> indeed
+<span class="k">-</span> of course
+<span class="k">-</span> that sounds good
 <span class="k">-</span> correct
 
 <span class="gu">##</span> intent:mood_deny
 <span class="k">-</span> no
 <span class="k">-</span> never
+<span class="k">-</span> I don&#39;t think so
+<span class="k">-</span> don&#39;t like that
 <span class="k">-</span> no way
 
 <span class="gu">##</span> intent:mood_great
 <span class="k">-</span> wonderful
+<span class="k">-</span> I am feeling very good
+<span class="k">-</span> I am great
 <span class="k">-</span> I am amazing
 <span class="k">-</span> I am going to save the world
 
 <span class="gu">##</span> intent:mood_unhappy
 <span class="k">-</span> my day was horrible
 <span class="k">-</span> I am sad
+<span class="k">-</span> I don&#39;t feel very well
+<span class="k">-</span> I am disappointed
 </pre></div>
 </td></tr></table></div>
 <p>Furthermore, we need a configuration file <code class="docutils literal"><span class="pre">nlu_model_config.json</span></code> for the
@@ -565,11 +595,9 @@ more information about the data format.</p>
 <h2>4. Put the pieces together<a class="headerlink" href="#put-the-pieces-together" title="Permalink to this headline">¶</a></h2>
 <p>There are two things we still need to do: train the dialogue model and run it.</p>
 <p>To train the dialogue model, run:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>python -m rasa_core.train -s data/stories.md -d domain.yml -o models/dialogue
-</pre></div>
-</div>
-<p>This will train the model and store it into <code class="docutils literal"><span class="pre">models/dialogue</span></code>. Now we can use
-that trained dialogue model and the previously created NLU model to run our bot:</p>
+<p>This will train the dialogue model for <code class="docutils literal"><span class="pre">300</span></code> epochs and store it
+into <code class="docutils literal"><span class="pre">models/dialogue</span></code>. Now we can use that trained dialogue model
+and the previously created NLU model to run our bot:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>python -m rasa_core.run -d models/dialogue -u models/nlu/current
 </pre></div>
 </div>
@@ -639,12 +667,13 @@ into <code class="docutils literal"><span class="pre">credentials.yml</span></co
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: 0.7.4
+        v: 0.7.5
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
+            <dd><a href="0.7.5/tutorial_basics.html">0.7.5</a></dd>
             <dd><a href="0.7.4/tutorial_basics.html">0.7.4</a></dd>
             <dd><a href="0.7.3/tutorial_basics.html">0.7.3</a></dd>
             <dd><a href="0.7.2/tutorial_basics.html">0.7.2</a></dd>
@@ -672,7 +701,7 @@ into <code class="docutils literal"><span class="pre">credentials.yml</span></co
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.7.4',
+            VERSION:'0.7.5',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
