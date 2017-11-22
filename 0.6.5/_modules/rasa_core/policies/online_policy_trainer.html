@@ -327,6 +327,8 @@
             <span class="n">latest_message</span><span class="o">.</span><span class="n">intent</span> <span class="o">=</span> <span class="n">intent</span>
             <span class="n">tracker</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">UserUtteranceReverted</span><span class="p">())</span>
             <span class="n">tracker</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">latest_message</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">domain</span><span class="o">.</span><span class="n">slots_for_entities</span><span class="p">(</span><span class="n">latest_message</span><span class="o">.</span><span class="n">entities</span><span class="p">):</span>
+                <span class="n">tracker</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">probabilities_using_best_policy</span><span class="p">(</span><span class="n">tracker</span><span class="p">,</span> <span class="n">domain</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">user_input</span> <span class="o">==</span> <span class="s2">&quot;0&quot;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_export_stories</span><span class="p">(</span><span class="n">tracker</span><span class="p">)</span>
