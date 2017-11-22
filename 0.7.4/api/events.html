@@ -302,35 +302,6 @@ As a side effect the <code class="docutils literal"><span class="pre">Tracker</s
 </dd></dl>
 
 <dl class="class">
-<dt id="rasa_core.events.BotUttered">
-<em class="property">class </em><code class="descclassname">rasa_core.events.</code><code class="descname">BotUttered</code><span class="sig-paren">(</span><em>text=None</em>, <em>data=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rasa_core/events.html#BotUttered"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.events.BotUttered" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#rasa_core.events.Event" title="rasa_core.events.Event"><code class="xref py py-class docutils literal"><span class="pre">rasa_core.events.Event</span></code></a></p>
-<p>The bot has said something to the user.</p>
-<p>This class is not used in the story training as it is contained in the</p>
-<p><code class="docutils literal"><span class="pre">ActionExecuted</span></code> class. An entry is made in the <code class="docutils literal"><span class="pre">Tracker</span></code>.</p>
-<dl class="method">
-<dt id="rasa_core.events.BotUttered.apply_to">
-<code class="descname">apply_to</code><span class="sig-paren">(</span><em>tracker</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rasa_core/events.html#BotUttered.apply_to"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.events.BotUttered.apply_to" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="rasa_core.events.BotUttered.as_story_string">
-<code class="descname">as_story_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rasa_core/events.html#BotUttered.as_story_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.events.BotUttered.as_story_string" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="staticmethod">
-<dt id="rasa_core.events.BotUttered.empty">
-<em class="property">static </em><code class="descname">empty</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rasa_core/events.html#BotUttered.empty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.events.BotUttered.empty" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="rasa_core.events.BotUttered.type_name">
-<code class="descname">type_name</code><em class="property"> = u'bot'</em><a class="headerlink" href="#rasa_core.events.BotUttered.type_name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
 <dt id="rasa_core.events.ConversationPaused">
 <em class="property">class </em><code class="descclassname">rasa_core.events.</code><code class="descname">ConversationPaused</code><a class="reference internal" href="../_modules/rasa_core/events.html#ConversationPaused"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.events.ConversationPaused" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#rasa_core.events.Event" title="rasa_core.events.Event"><code class="xref py py-class docutils literal"><span class="pre">rasa_core.events.Event</span></code></a></p>
@@ -386,7 +357,7 @@ be set to <code class="docutils literal"><span class="pre">True</span></code>.</
 - something the user has said to the bot (starts a new turn)
 - the topic has been set
 - the bot has taken an action</p>
-<p>Events are logged by the Tracker&#8217;s update method.
+<p>Events are logged by the Tracker&#8217;s log_event method.
 This updates the list of turns so that the current state
 can be recovered by consuming the list of turns.</p>
 <dl class="method">

@@ -326,9 +326,7 @@
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">UserUttered</span><span class="p">):</span>
                 <span class="n">result</span> <span class="o">+=</span> <span class="s2">&quot;* </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">as_story_string</span><span class="p">())</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">Event</span><span class="p">):</span>
-                <span class="n">converted</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">as_story_string</span><span class="p">()</span>
-                <span class="k">if</span> <span class="n">converted</span><span class="p">:</span>
-                    <span class="n">result</span> <span class="o">+=</span> <span class="s2">&quot;    - </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">as_story_string</span><span class="p">())</span>
+                <span class="n">result</span> <span class="o">+=</span> <span class="s2">&quot;    - </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">as_story_string</span><span class="p">())</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unexpected element in story step: &quot;</span> <span class="o">+</span> <span class="n">s</span><span class="p">)</span>
 

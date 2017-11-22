@@ -212,7 +212,7 @@
 <span class="kn">from</span> <span class="nn">rasa_core.dispatcher</span> <span class="k">import</span> <span class="n">Dispatcher</span>
 <span class="kn">from</span> <span class="nn">rasa_core.domain</span> <span class="k">import</span> <span class="n">Domain</span>
 <span class="kn">from</span> <span class="nn">rasa_core.events</span> <span class="k">import</span> <span class="n">Restarted</span><span class="p">,</span> <span class="n">ReminderScheduled</span><span class="p">,</span> <span class="n">Event</span>
-<span class="kn">from</span> <span class="nn">rasa_core.events</span> <span class="k">import</span> <span class="n">UserUttered</span><span class="p">,</span> <span class="n">ActionExecuted</span><span class="p">,</span> <span class="n">BotUttered</span>
+<span class="kn">from</span> <span class="nn">rasa_core.events</span> <span class="k">import</span> <span class="n">UserUttered</span><span class="p">,</span> <span class="n">ActionExecuted</span>
 <span class="kn">from</span> <span class="nn">rasa_core.interpreter</span> <span class="k">import</span> <span class="n">NaturalLanguageInterpreter</span>
 <span class="kn">from</span> <span class="nn">rasa_core.interpreter</span> <span class="k">import</span> <span class="n">RegexInterpreter</span>
 <span class="kn">from</span> <span class="nn">rasa_core.policies.ensemble</span> <span class="k">import</span> <span class="n">PolicyEnsemble</span>
@@ -397,7 +397,7 @@
 
         <span class="n">parse_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_message</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 
-        <span class="c1"># don&#39;t ever directly mutate the tracker - instead pass its events to log</span>
+        <span class="c1"># don&#39;t ever directly mutate the tracker - instead pass it events to log</span>
         <span class="n">tracker</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">UserUttered</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">parse_data</span><span class="p">[</span><span class="s2">&quot;intent&quot;</span><span class="p">],</span>
                                    <span class="n">parse_data</span><span class="p">[</span><span class="s2">&quot;entities&quot;</span><span class="p">],</span> <span class="n">parse_data</span><span class="p">))</span>
         <span class="c1"># store all entities as slots</span>
@@ -481,22 +481,10 @@
                          <span class="s2">&quot;code.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">action</span><span class="o">.</span><span class="n">name</span><span class="p">()),</span> <span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="n">events</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_log_bot_utterances_on_tracker</span><span class="p">(</span><span class="n">tracker</span><span class="p">,</span> <span class="n">dispatcher</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_log_action_on_tracker</span><span class="p">(</span><span class="n">tracker</span><span class="p">,</span> <span class="n">action</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span> <span class="n">events</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_schedule_reminders</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">dispatcher</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_should_predict_another_action</span><span class="p">(</span><span class="n">action</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span> <span class="n">events</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_log_bot_utterances_on_tracker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">dispatcher</span><span class="p">):</span>
-        <span class="c1"># type: (DialogueStateTracker, Dispatcher) -&gt; None</span>
-
-        <span class="k">if</span> <span class="n">dispatcher</span><span class="o">.</span><span class="n">latest_bot_messages</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">dispatcher</span><span class="o">.</span><span class="n">latest_bot_messages</span><span class="p">:</span>
-                <span class="n">bot_utterance</span> <span class="o">=</span> <span class="n">BotUttered</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Bot utterance &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bot_utterance</span><span class="p">))</span>
-                <span class="n">tracker</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">bot_utterance</span><span class="p">)</span>
-
-            <span class="n">dispatcher</span><span class="o">.</span><span class="n">latest_bot_messages</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">def</span> <span class="nf">_log_action_on_tracker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">action_name</span><span class="p">,</span> <span class="n">events</span><span class="p">):</span>
         <span class="c1"># Ensures that the code still works even if a lazy programmer missed</span>
