@@ -210,12 +210,24 @@
 
 
 <div class="viewcode-block" id="action_factory_by_name"><a class="viewcode-back" href="../../../rasa_core.actions.html#rasa_core.actions.factories.action_factory_by_name">[docs]</a><span class="k">def</span> <span class="nf">action_factory_by_name</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;local&quot;</span> <span class="ow">or</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>     <span class="c1"># this is the default factory</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;local&quot;</span> <span class="ow">or</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># this is the default factory</span>
         <span class="k">return</span> <span class="n">local_action_factory</span>
     <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;remote&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">remote_action_factory</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unknown executor name &#39;</span><span class="si">{}</span><span class="s2">&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="ensure_action_name_uniqueness"><a class="viewcode-back" href="../../../rasa_core.actions.html#rasa_core.actions.factories.ensure_action_name_uniqueness">[docs]</a><span class="k">def</span> <span class="nf">ensure_action_name_uniqueness</span><span class="p">(</span><span class="n">actions</span><span class="p">):</span>
+    <span class="n">actual_action_names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1"># used to collect unique action names</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">()</span> <span class="ow">in</span> <span class="n">actual_action_names</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Action names are not unique! Found two actions with name&quot;</span>
+                    <span class="s2">&quot; &#39;</span><span class="si">{}</span><span class="s2">&#39;. Either rename or remove one of them.&quot;</span>
+                    <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">()))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">actual_action_names</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">())</span></div>
 
 
 <div class="viewcode-block" id="local_action_factory"><a class="viewcode-back" href="../../../rasa_core.actions.html#rasa_core.actions.factories.local_action_factory">[docs]</a><span class="k">def</span> <span class="nf">local_action_factory</span><span class="p">(</span><span class="n">action_names</span><span class="p">,</span> <span class="n">utter_templates</span><span class="p">):</span>
@@ -253,7 +265,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">actions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_action_class</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
 
-    <span class="c1"># TODO: double check that action names are unique?</span>
+    <span class="n">ensure_action_name_uniqueness</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">actions</span></div>
 
 
@@ -271,6 +283,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">actions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RemoteAction</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
 
+    <span class="n">ensure_action_name_uniqueness</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">actions</span></div>
 
 
