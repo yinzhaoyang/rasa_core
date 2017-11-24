@@ -313,6 +313,11 @@ As a side effect the <code class="docutils literal"><span class="pre">Tracker</s
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="rasa_core.events.BotUttered.as_dict">
+<code class="descname">as_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rasa_core/events.html#BotUttered.as_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.events.BotUttered.as_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="rasa_core.events.BotUttered.as_story_string">
 <code class="descname">as_story_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rasa_core/events.html#BotUttered.as_story_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.events.BotUttered.as_story_string" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -394,6 +399,11 @@ can be recovered by consuming the list of turns.</p>
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="rasa_core.events.Event.as_dict">
+<code class="descname">as_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rasa_core/events.html#Event.as_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.events.Event.as_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="rasa_core.events.Event.as_story_string">
 <code class="descname">as_story_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rasa_core/events.html#Event.as_story_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.events.Event.as_story_string" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -428,6 +438,11 @@ can be recovered by consuming the list of turns.</p>
 <p>Allows asynchronous scheduling of action execution.</p>
 <p>As a side effect the message processor will schedule an action to be run
 at the trigger date.</p>
+<dl class="method">
+<dt id="rasa_core.events.ReminderScheduled.as_dict">
+<code class="descname">as_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rasa_core/events.html#ReminderScheduled.as_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.events.ReminderScheduled.as_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="rasa_core.events.ReminderScheduled.as_story_string">
 <code class="descname">as_story_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rasa_core/events.html#ReminderScheduled.as_story_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.events.ReminderScheduled.as_story_string" title="Permalink to this definition">¶</a></dt>
@@ -476,6 +491,11 @@ that <code class="docutils literal"><span class="pre">tracker.slots[key]=value</
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="rasa_core.events.SlotSet.as_dict">
+<code class="descname">as_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rasa_core/events.html#SlotSet.as_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.events.SlotSet.as_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="rasa_core.events.SlotSet.as_story_string">
 <code class="descname">as_story_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rasa_core/events.html#SlotSet.as_story_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.events.SlotSet.as_story_string" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -518,6 +538,11 @@ that <code class="docutils literal"><span class="pre">tracker.slots[key]=value</
 <dl class="method">
 <dt id="rasa_core.events.TopicSet.apply_to">
 <code class="descname">apply_to</code><span class="sig-paren">(</span><em>tracker</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rasa_core/events.html#TopicSet.apply_to"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.events.TopicSet.apply_to" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.events.TopicSet.as_dict">
+<code class="descname">as_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rasa_core/events.html#TopicSet.as_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.events.TopicSet.as_dict" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -565,6 +590,11 @@ As a side effect the <code class="docutils literal"><span class="pre">Tracker</s
 <dl class="method">
 <dt id="rasa_core.events.UserUttered.apply_to">
 <code class="descname">apply_to</code><span class="sig-paren">(</span><em>tracker</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rasa_core/events.html#UserUttered.apply_to"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.events.UserUttered.apply_to" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.events.UserUttered.as_dict">
+<code class="descname">as_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rasa_core/events.html#UserUttered.as_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.events.UserUttered.as_dict" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">

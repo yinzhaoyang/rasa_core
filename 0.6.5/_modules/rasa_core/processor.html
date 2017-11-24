@@ -311,7 +311,7 @@
         <span class="n">tracker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_tracker</span><span class="p">(</span><span class="n">sender_id</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">executed_action</span> <span class="o">!=</span> <span class="n">ACTION_LISTEN_NAME</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_log_action_on_tracker</span><span class="p">(</span><span class="n">tracker</span><span class="p">,</span> <span class="n">executed_action</span><span class="p">,</span> <span class="n">events</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_should_predict_another_action</span><span class="p">(</span><span class="n">executed_action</span><span class="p">,</span> <span class="n">events</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">should_predict_another_action</span><span class="p">(</span><span class="n">executed_action</span><span class="p">,</span> <span class="n">events</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_predict_next_and_return_state</span><span class="p">(</span><span class="n">tracker</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_save_tracker</span><span class="p">(</span><span class="n">tracker</span><span class="p">)</span>
@@ -448,10 +448,11 @@
 
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Current topic: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tracker</span><span class="o">.</span><span class="n">topic</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">_should_predict_another_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action_name</span><span class="p">,</span> <span class="n">events</span><span class="p">):</span>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="MessageProcessor.should_predict_another_action"><a class="viewcode-back" href="../../rasa_core.html#rasa_core.processor.MessageProcessor.should_predict_another_action">[docs]</a>    <span class="k">def</span> <span class="nf">should_predict_another_action</span><span class="p">(</span><span class="n">action_name</span><span class="p">,</span> <span class="n">events</span><span class="p">):</span>
         <span class="n">is_listen_action</span> <span class="o">=</span> <span class="n">action_name</span> <span class="o">==</span> <span class="n">ACTION_LISTEN_NAME</span>
-        <span class="n">contains_restart</span> <span class="o">=</span> <span class="n">events</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">events</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Restarted</span><span class="p">)</span>
-        <span class="k">return</span> <span class="ow">not</span> <span class="n">is_listen_action</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">contains_restart</span>
+        <span class="n">contains_restart</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">Restarted</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">events</span><span class="p">)</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="n">is_listen_action</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">contains_restart</span></div>
 
     <span class="k">def</span> <span class="nf">_schedule_reminders</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">dispatcher</span><span class="p">):</span>
         <span class="c1"># type: (List[Event], Dispatcher) -&gt; None</span>
@@ -481,13 +482,14 @@
                          <span class="s2">&quot;code.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">action</span><span class="o">.</span><span class="n">name</span><span class="p">()),</span> <span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="n">events</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_log_bot_utterances_on_tracker</span><span class="p">(</span><span class="n">tracker</span><span class="p">,</span> <span class="n">dispatcher</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_bot_utterances_on_tracker</span><span class="p">(</span><span class="n">tracker</span><span class="p">,</span> <span class="n">dispatcher</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_log_action_on_tracker</span><span class="p">(</span><span class="n">tracker</span><span class="p">,</span> <span class="n">action</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span> <span class="n">events</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_schedule_reminders</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">dispatcher</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_should_predict_another_action</span><span class="p">(</span><span class="n">action</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span> <span class="n">events</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">should_predict_another_action</span><span class="p">(</span><span class="n">action</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span> <span class="n">events</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_log_bot_utterances_on_tracker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">dispatcher</span><span class="p">):</span>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="MessageProcessor.log_bot_utterances_on_tracker"><a class="viewcode-back" href="../../rasa_core.html#rasa_core.processor.MessageProcessor.log_bot_utterances_on_tracker">[docs]</a>    <span class="k">def</span> <span class="nf">log_bot_utterances_on_tracker</span><span class="p">(</span><span class="n">tracker</span><span class="p">,</span> <span class="n">dispatcher</span><span class="p">):</span>
         <span class="c1"># type: (DialogueStateTracker, Dispatcher) -&gt; None</span>
 
         <span class="k">if</span> <span class="n">dispatcher</span><span class="o">.</span><span class="n">latest_bot_messages</span><span class="p">:</span>
@@ -496,7 +498,7 @@
                 <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Bot utterance &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bot_utterance</span><span class="p">))</span>
                 <span class="n">tracker</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">bot_utterance</span><span class="p">)</span>
 
-            <span class="n">dispatcher</span><span class="o">.</span><span class="n">latest_bot_messages</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">dispatcher</span><span class="o">.</span><span class="n">latest_bot_messages</span> <span class="o">=</span> <span class="p">[]</span></div>
 
     <span class="k">def</span> <span class="nf">_log_action_on_tracker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">action_name</span><span class="p">,</span> <span class="n">events</span><span class="p">):</span>
         <span class="c1"># Ensures that the code still works even if a lazy programmer missed</span>
