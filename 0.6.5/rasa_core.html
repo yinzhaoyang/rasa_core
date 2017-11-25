@@ -553,9 +553,9 @@ there are fewer than <cite>max_history</cite> states present.</p>
 <dd><p>Return a bag of active features from the tracker state</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="staticmethod">
 <dt id="rasa_core.domain.Domain.get_parsing_features">
-<code class="descname">get_parsing_features</code><span class="sig-paren">(</span><em>tracker</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#Domain.get_parsing_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.Domain.get_parsing_features" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">get_parsing_features</code><span class="sig-paren">(</span><em>tracker</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#Domain.get_parsing_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.Domain.get_parsing_features" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -670,7 +670,7 @@ he slice length.</p>
 
 <dl class="class">
 <dt id="rasa_core.domain.TemplateDomain">
-<em class="property">class </em><code class="descclassname">rasa_core.domain.</code><code class="descname">TemplateDomain</code><span class="sig-paren">(</span><em>intents</em>, <em>entities</em>, <em>slots</em>, <em>templates</em>, <em>action_names</em>, <em>action_factory</em>, <em>topics</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#TemplateDomain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.TemplateDomain" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">rasa_core.domain.</code><code class="descname">TemplateDomain</code><span class="sig-paren">(</span><em>intents</em>, <em>entities</em>, <em>slots</em>, <em>templates</em>, <em>action_classes</em>, <em>action_names</em>, <em>action_factory</em>, <em>topics</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#TemplateDomain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.TemplateDomain" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="rasa_dm.html#rasa_core.domain.Domain" title="rasa_core.domain.Domain"><code class="xref py py-class docutils literal"><span class="pre">rasa_core.domain.Domain</span></code></a></p>
 <dl class="attribute">
 <dt id="rasa_core.domain.TemplateDomain.actions">
@@ -695,7 +695,7 @@ he slice length.</p>
 
 <dl class="staticmethod">
 <dt id="rasa_core.domain.TemplateDomain.instantiate_actions">
-<em class="property">static </em><code class="descname">instantiate_actions</code><span class="sig-paren">(</span><em>facotry_name</em>, <em>action_names</em>, <em>templates</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#TemplateDomain.instantiate_actions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.TemplateDomain.instantiate_actions" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">instantiate_actions</code><span class="sig-paren">(</span><em>factory_name</em>, <em>action_classes</em>, <em>action_names</em>, <em>templates</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#TemplateDomain.instantiate_actions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.TemplateDomain.instantiate_actions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
