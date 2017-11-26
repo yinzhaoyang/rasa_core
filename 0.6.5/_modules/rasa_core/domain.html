@@ -219,9 +219,7 @@
 <span class="kn">from</span> <span class="nn">rasa_core</span> <span class="k">import</span> <span class="n">utils</span>
 <span class="kn">from</span> <span class="nn">rasa_core.actions</span> <span class="k">import</span> <span class="n">Action</span>
 <span class="kn">from</span> <span class="nn">rasa_core.actions.action</span> <span class="k">import</span> <span class="n">ActionListen</span><span class="p">,</span> <span class="n">ActionRestart</span>
-<span class="kn">from</span> <span class="nn">rasa_core.actions.factories</span> <span class="k">import</span> <span class="p">(</span>
-    <span class="n">action_factory_by_name</span><span class="p">,</span>
-    <span class="n">ensure_action_name_uniqueness</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">rasa_core.actions.factories</span> <span class="k">import</span> <span class="n">action_factory_by_name</span>
 <span class="kn">from</span> <span class="nn">rasa_core.conversation</span> <span class="k">import</span> <span class="n">DefaultTopic</span>
 <span class="kn">from</span> <span class="nn">rasa_core.conversation</span> <span class="k">import</span> <span class="n">Topic</span>
 <span class="kn">from</span> <span class="nn">rasa_core.events</span> <span class="k">import</span> <span class="n">ActionExecuted</span>
@@ -485,8 +483,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">{}</span></div>
 
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="Domain.get_parsing_features"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.Domain.get_parsing_features">[docs]</a>    <span class="k">def</span> <span class="nf">get_parsing_features</span><span class="p">(</span><span class="n">tracker</span><span class="p">):</span>
+<div class="viewcode-block" id="Domain.get_parsing_features"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.Domain.get_parsing_features">[docs]</a>    <span class="k">def</span> <span class="nf">get_parsing_features</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracker</span><span class="p">):</span>
         <span class="c1"># type: (DialogueStateTracker) -&gt; Dict[Text, float]</span>
 
         <span class="n">feature_dict</span> <span class="o">=</span> <span class="p">{}</span>
@@ -629,7 +626,6 @@
                 <span class="n">slots</span><span class="p">,</span>
                 <span class="n">utter_templates</span><span class="p">,</span>
                 <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;actions&quot;</span><span class="p">,</span> <span class="p">[]),</span>
-                <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;action_names&quot;</span><span class="p">,</span> <span class="p">[]),</span>
                 <span class="n">action_factory</span><span class="p">,</span>
                 <span class="n">topics</span><span class="p">,</span>
                 <span class="o">**</span><span class="n">additional_arguments</span>
@@ -691,27 +687,23 @@
             <span class="n">templates</span><span class="p">[</span><span class="n">template_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">validated_variations</span>
         <span class="k">return</span> <span class="n">templates</span></div>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">intents</span><span class="p">,</span> <span class="n">entities</span><span class="p">,</span> <span class="n">slots</span><span class="p">,</span> <span class="n">templates</span><span class="p">,</span> <span class="n">action_classes</span><span class="p">,</span>
-                 <span class="n">action_names</span><span class="p">,</span> <span class="n">action_factory</span><span class="p">,</span> <span class="n">topics</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">intents</span><span class="p">,</span> <span class="n">entities</span><span class="p">,</span> <span class="n">slots</span><span class="p">,</span> <span class="n">templates</span><span class="p">,</span> <span class="n">action_names</span><span class="p">,</span>
+                 <span class="n">action_factory</span><span class="p">,</span> <span class="n">topics</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_intents</span> <span class="o">=</span> <span class="n">intents</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_entities</span> <span class="o">=</span> <span class="n">entities</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_slots</span> <span class="o">=</span> <span class="n">slots</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_templates</span> <span class="o">=</span> <span class="n">templates</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_action_classes</span> <span class="o">=</span> <span class="n">action_classes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_action_names</span> <span class="o">=</span> <span class="n">action_names</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_factory_name</span> <span class="o">=</span> <span class="n">action_factory</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">instantiate_actions</span><span class="p">(</span>
-                <span class="n">action_factory</span><span class="p">,</span> <span class="n">action_classes</span><span class="p">,</span> <span class="n">action_names</span><span class="p">,</span> <span class="n">templates</span><span class="p">)</span>
+                <span class="n">action_factory</span><span class="p">,</span> <span class="n">action_names</span><span class="p">,</span> <span class="n">templates</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">TemplateDomain</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">topics</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="TemplateDomain.instantiate_actions"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.TemplateDomain.instantiate_actions">[docs]</a>    <span class="k">def</span> <span class="nf">instantiate_actions</span><span class="p">(</span><span class="n">factory_name</span><span class="p">,</span> <span class="n">action_classes</span><span class="p">,</span> <span class="n">action_names</span><span class="p">,</span>
-                            <span class="n">templates</span><span class="p">):</span>
-        <span class="n">action_factory</span> <span class="o">=</span> <span class="n">action_factory_by_name</span><span class="p">(</span><span class="n">factory_name</span><span class="p">)</span>
-        <span class="n">custom_actions</span> <span class="o">=</span> <span class="n">action_factory</span><span class="p">(</span><span class="n">action_classes</span><span class="p">,</span> <span class="n">action_names</span><span class="p">,</span> <span class="n">templates</span><span class="p">)</span>
-        <span class="n">actions</span> <span class="o">=</span> <span class="n">Domain</span><span class="o">.</span><span class="n">DEFAULT_ACTIONS</span><span class="p">[:]</span> <span class="o">+</span> <span class="n">custom_actions</span>
-        <span class="n">ensure_action_name_uniqueness</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">actions</span></div>
+<div class="viewcode-block" id="TemplateDomain.instantiate_actions"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.TemplateDomain.instantiate_actions">[docs]</a>    <span class="k">def</span> <span class="nf">instantiate_actions</span><span class="p">(</span><span class="n">facotry_name</span><span class="p">,</span> <span class="n">action_names</span><span class="p">,</span> <span class="n">templates</span><span class="p">):</span>
+        <span class="n">default_actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">Domain</span><span class="o">.</span><span class="n">DEFAULT_ACTIONS</span><span class="p">]</span>
+        <span class="n">action_factory</span> <span class="o">=</span> <span class="n">action_factory_by_name</span><span class="p">(</span><span class="n">facotry_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">action_factory</span><span class="p">(</span><span class="n">default_actions</span> <span class="o">+</span> <span class="n">action_names</span><span class="p">,</span> <span class="n">templates</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_slot_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">slots</span> <span class="o">=</span> <span class="p">{}</span>
@@ -727,7 +719,6 @@
         <span class="n">additional_config</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;store_entities_as_slots&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">store_entities_as_slots</span><span class="p">}</span>
         <span class="n">topic_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">topics</span><span class="p">]</span>
-        <span class="n">action_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">action_names</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">Domain</span><span class="o">.</span><span class="n">DEFAULT_ACTIONS</span><span class="p">):]</span>
 
         <span class="n">domain_data</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="n">additional_config</span><span class="p">,</span>
@@ -736,8 +727,7 @@
             <span class="s2">&quot;slots&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_slot_definitions</span><span class="p">(),</span>
             <span class="s2">&quot;templates&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="p">,</span>
             <span class="s2">&quot;topics&quot;</span><span class="p">:</span> <span class="n">topic_names</span><span class="p">,</span>
-            <span class="s2">&quot;actions&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_action_classes</span><span class="p">,</span>  <span class="c1"># class names of the actions</span>
-            <span class="s2">&quot;action_names&quot;</span><span class="p">:</span> <span class="n">action_names</span><span class="p">,</span>  <span class="c1"># names in stories</span>
+            <span class="s2">&quot;actions&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_action_names</span><span class="p">,</span>
             <span class="s2">&quot;action_factory&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_factory_name</span>
         <span class="p">}</span>
 

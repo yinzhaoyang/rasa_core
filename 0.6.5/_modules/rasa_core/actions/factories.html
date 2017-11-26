@@ -230,9 +230,10 @@
             <span class="n">actual_action_names</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">())</span></div>
 
 
-<div class="viewcode-block" id="local_action_factory"><a class="viewcode-back" href="../../../rasa_core.actions.html#rasa_core.actions.factories.local_action_factory">[docs]</a><span class="k">def</span> <span class="nf">local_action_factory</span><span class="p">(</span><span class="n">action_classes</span><span class="p">,</span> <span class="n">action_names</span><span class="p">,</span> <span class="n">utter_templates</span><span class="p">):</span>
-    <span class="c1"># type: (List[Text], List[Text], List[Text]) -&gt; List[Action]</span>
+<div class="viewcode-block" id="local_action_factory"><a class="viewcode-back" href="../../../rasa_core.actions.html#rasa_core.actions.factories.local_action_factory">[docs]</a><span class="k">def</span> <span class="nf">local_action_factory</span><span class="p">(</span><span class="n">action_names</span><span class="p">,</span> <span class="n">utter_templates</span><span class="p">):</span>
+    <span class="c1"># type: (List[Text]) -&gt; List[Action]</span>
     <span class="sd">&quot;&quot;&quot;Converts the names of actions into class instances.&quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">rasa_core.domain</span> <span class="k">import</span> <span class="n">Domain</span>
 
     <span class="k">def</span> <span class="nf">_action_class</span><span class="p">(</span><span class="n">action_name</span><span class="p">):</span>
         <span class="c1"># type: (Text) -&gt; Action</span>
@@ -253,29 +254,37 @@
                     <span class="s2">&quot;Remember to prefix actions that should utter a template &quot;</span>
                     <span class="s2">&quot;with `utter_`. Error: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">action_name</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
 
+    <span class="n">default_actions</span> <span class="o">=</span> <span class="p">{</span><span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">():</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">Domain</span><span class="o">.</span><span class="n">DEFAULT_ACTIONS</span><span class="p">}</span>
     <span class="n">actions</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">action_classes</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">utter_templates</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">action_names</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">default_actions</span><span class="p">:</span>
+            <span class="n">actions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">default_actions</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">utter_templates</span><span class="p">:</span>
             <span class="n">actions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">UtterAction</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">actions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_action_class</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
 
+    <span class="n">ensure_action_name_uniqueness</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">actions</span></div>
 
 
-<div class="viewcode-block" id="remote_action_factory"><a class="viewcode-back" href="../../../rasa_core.actions.html#rasa_core.actions.factories.remote_action_factory">[docs]</a><span class="k">def</span> <span class="nf">remote_action_factory</span><span class="p">(</span><span class="n">action_classes</span><span class="p">,</span> <span class="n">action_names</span><span class="p">,</span> <span class="n">utter_templates</span><span class="p">):</span>
-    <span class="c1"># type: (List[Text], List[Text], List[Text]) -&gt; List[Action]</span>
+<div class="viewcode-block" id="remote_action_factory"><a class="viewcode-back" href="../../../rasa_core.actions.html#rasa_core.actions.factories.remote_action_factory">[docs]</a><span class="k">def</span> <span class="nf">remote_action_factory</span><span class="p">(</span><span class="n">action_names</span><span class="p">,</span> <span class="n">utter_templates</span><span class="p">):</span>
+    <span class="c1"># type: (List[Text]) -&gt; List[Action]</span>
     <span class="sd">&quot;&quot;&quot;Converts the names of actions into class instances.&quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">rasa_core.domain</span> <span class="k">import</span> <span class="n">Domain</span>
 
-    <span class="k">if</span> <span class="n">action_names</span><span class="p">:</span>
-        <span class="n">remote_action_ids</span> <span class="o">=</span> <span class="n">action_names</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="c1"># if we do not have action names - we use the class names as identifiers</span>
-        <span class="c1"># for the remote actions</span>
-        <span class="n">remote_action_ids</span> <span class="o">=</span> <span class="n">action_classes</span>
+    <span class="n">default_actions</span> <span class="o">=</span> <span class="p">{</span><span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">():</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">Domain</span><span class="o">.</span><span class="n">DEFAULT_ACTIONS</span><span class="p">}</span>
+    <span class="n">actions</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">return</span> <span class="p">[</span><span class="n">RemoteAction</span><span class="p">(</span><span class="n">aid</span><span class="p">)</span> <span class="k">for</span> <span class="n">aid</span> <span class="ow">in</span> <span class="n">remote_action_ids</span><span class="p">]</span></div>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">action_names</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">default_actions</span><span class="p">:</span>
+            <span class="n">actions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">default_actions</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">actions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RemoteAction</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+
+    <span class="n">ensure_action_name_uniqueness</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">actions</span></div>
 
 
 <div class="viewcode-block" id="RemoteAction"><a class="viewcode-back" href="../../../rasa_core.actions.html#rasa_core.actions.factories.RemoteAction">[docs]</a><span class="k">class</span> <span class="nc">RemoteAction</span><span class="p">(</span><span class="n">Action</span><span class="p">):</span>
