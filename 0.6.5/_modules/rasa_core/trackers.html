@@ -265,15 +265,21 @@
     <span class="c1">###</span>
     <span class="c1"># Public tracker interface</span>
     <span class="c1">###</span>
-<div class="viewcode-block" id="DialogueStateTracker.current_state"><a class="viewcode-back" href="../../tracker.html#rasa_core.trackers.DialogueStateTracker.current_state">[docs]</a>    <span class="k">def</span> <span class="nf">current_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># type: () -&gt; Dict[Text, Any]</span>
+<div class="viewcode-block" id="DialogueStateTracker.current_state"><a class="viewcode-back" href="../../tracker.html#rasa_core.trackers.DialogueStateTracker.current_state">[docs]</a>    <span class="k">def</span> <span class="nf">current_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">should_include_events</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="c1"># type: (bool) -&gt; Dict[Text, Any]</span>
         <span class="sd">&quot;&quot;&quot;Returns the current tracker state as an object.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">should_include_events</span><span class="p">:</span>
+            <span class="n">events</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">events</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">&quot;sender_id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sender_id</span><span class="p">,</span>
             <span class="s2">&quot;slots&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_slot_values</span><span class="p">(),</span>
             <span class="s2">&quot;latest_message&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">latest_message</span><span class="o">.</span><span class="n">parse_data</span><span class="p">,</span>
-            <span class="s2">&quot;paused&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_paused</span><span class="p">()</span>
+            <span class="s2">&quot;paused&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_paused</span><span class="p">(),</span>
+            <span class="s2">&quot;events&quot;</span><span class="p">:</span> <span class="n">events</span>
         <span class="p">}</span></div>
 
 <div class="viewcode-block" id="DialogueStateTracker.current_slot_values"><a class="viewcode-back" href="../../tracker.html#rasa_core.trackers.DialogueStateTracker.current_slot_values">[docs]</a>    <span class="k">def</span> <span class="nf">current_slot_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
