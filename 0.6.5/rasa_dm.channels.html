@@ -338,8 +338,36 @@ for text only output channels.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="rasa-core-channels-facebook-module">
-<h2>rasa_core.channels.facebook module<a class="headerlink" href="#rasa-core-channels-facebook-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-rasa_core.channels.facebook">
+<span id="rasa-core-channels-facebook-module"></span><h2>rasa_core.channels.facebook module<a class="headerlink" href="#module-rasa_core.channels.facebook" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rasa_core.channels.facebook.FacebookInput">
+<em class="property">class </em><code class="descclassname">rasa_core.channels.facebook.</code><code class="descname">FacebookInput</code><span class="sig-paren">(</span><em>fb_verify</em>, <em>fb_secret</em>, <em>fb_tokens</em>, <em>debug_mode</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/facebook.html#FacebookInput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.facebook.FacebookInput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#rasa_core.channels.rest.HttpInputComponent" title="rasa_core.channels.rest.HttpInputComponent"><code class="xref py py-class docutils literal"><span class="pre">rasa_core.channels.rest.HttpInputComponent</span></code></a></p>
+<dl class="method">
+<dt id="rasa_core.channels.facebook.FacebookInput.blueprint">
+<code class="descname">blueprint</code><span class="sig-paren">(</span><em>on_new_message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/facebook.html#FacebookInput.blueprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.facebook.FacebookInput.blueprint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rasa_core.channels.facebook.MessengerBot">
+<em class="property">class </em><code class="descclassname">rasa_core.channels.facebook.</code><code class="descname">MessengerBot</code><span class="sig-paren">(</span><em>access_token</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/facebook.html#MessengerBot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.facebook.MessengerBot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">pymessenger.bot.Bot</span></code>, <a class="reference internal" href="#rasa_core.channels.channel.OutputChannel" title="rasa_core.channels.channel.OutputChannel"><code class="xref py py-class docutils literal"><span class="pre">rasa_core.channels.channel.OutputChannel</span></code></a></p>
+<p>A bot that uses fb-messenger to communicate.</p>
+<dl class="method">
+<dt id="rasa_core.channels.facebook.MessengerBot.send_custom_message">
+<code class="descname">send_custom_message</code><span class="sig-paren">(</span><em>recipient_id</em>, <em>elements</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/facebook.html#MessengerBot.send_custom_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.facebook.MessengerBot.send_custom_message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.channels.facebook.MessengerBot.send_text_with_buttons">
+<code class="descname">send_text_with_buttons</code><span class="sig-paren">(</span><em>recipient_id</em>, <em>text</em>, <em>buttons</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/channels/facebook.html#MessengerBot.send_text_with_buttons"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.channels.facebook.MessengerBot.send_text_with_buttons" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-rasa_core.channels.file">
 <span id="rasa-core-channels-file-module"></span><h2>rasa_core.channels.file module<a class="headerlink" href="#module-rasa_core.channels.file" title="Permalink to this headline">¶</a></h2>
