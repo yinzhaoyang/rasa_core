@@ -206,7 +206,6 @@
 <span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="nb">str</span>
 
 <span class="kn">from</span> <span class="nn">rasa_core</span> <span class="k">import</span> <span class="n">utils</span>
-<span class="kn">from</span> <span class="nn">rasa_core.actions.action</span> <span class="k">import</span> <span class="n">ACTION_LISTEN_NAME</span>
 
 <span class="k">if</span> <span class="n">typing</span><span class="o">.</span><span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">rasa_core.trackers</span> <span class="k">import</span> <span class="n">DialogueStateTracker</span>
@@ -520,9 +519,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_name</span></div>
 
 <div class="viewcode-block" id="Restarted.apply_to"><a class="viewcode-back" href="../../rasa_dm.events.html#rasa_core.events.Restarted.apply_to">[docs]</a>    <span class="k">def</span> <span class="nf">apply_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracker</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">rasa_core.actions.action</span> <span class="k">import</span> <span class="n">ActionListen</span>
         <span class="n">tracker</span><span class="o">.</span><span class="n">_reset</span><span class="p">()</span>
-        <span class="n">tracker</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ActionExecuted</span><span class="p">(</span><span class="n">ACTION_LISTEN_NAME</span><span class="p">))</span>
-        <span class="n">tracker</span><span class="o">.</span><span class="n">latest_restart_event</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tracker</span><span class="o">.</span><span class="n">events</span><span class="p">)</span></div></div>
+        <span class="c1"># will be the index of the first event after the restart</span>
+        <span class="n">tracker</span><span class="o">.</span><span class="n">latest_restart_event</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tracker</span><span class="o">.</span><span class="n">events</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">tracker</span><span class="o">.</span><span class="n">follow_up_action</span> <span class="o">=</span> <span class="n">ActionListen</span><span class="p">()</span></div></div>
 
 
 <span class="c1"># noinspection PyProtectedMember</span>

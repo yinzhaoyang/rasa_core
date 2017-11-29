@@ -451,8 +451,7 @@
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="MessageProcessor.should_predict_another_action"><a class="viewcode-back" href="../../rasa_core.html#rasa_core.processor.MessageProcessor.should_predict_another_action">[docs]</a>    <span class="k">def</span> <span class="nf">should_predict_another_action</span><span class="p">(</span><span class="n">action_name</span><span class="p">,</span> <span class="n">events</span><span class="p">):</span>
         <span class="n">is_listen_action</span> <span class="o">=</span> <span class="n">action_name</span> <span class="o">==</span> <span class="n">ACTION_LISTEN_NAME</span>
-        <span class="n">contains_restart</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">Restarted</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">events</span><span class="p">)</span>
-        <span class="k">return</span> <span class="ow">not</span> <span class="n">is_listen_action</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">contains_restart</span></div>
+        <span class="k">return</span> <span class="ow">not</span> <span class="n">is_listen_action</span></div>
 
     <span class="k">def</span> <span class="nf">_schedule_reminders</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">dispatcher</span><span class="p">):</span>
         <span class="c1"># type: (List[Event], Dispatcher) -&gt; None</span>
