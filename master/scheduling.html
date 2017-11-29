@@ -252,9 +252,9 @@ We want a confirmation to book a restaurant table - without it the reservation w
 3
 4
 5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gu">##</span> book a restaurant
-<span class="k">*</span> _start_booking
+<span class="k">*</span> start_booking
     <span class="k">-</span> action_suggest_restaurant
-<span class="k">*</span> _select_restaurant[name=Papi&#39;s Pizza Place]
+<span class="k">*</span> select_restaurant{&quot;name&quot;: &quot;Papi&#39;s Pizza Place&quot;}
     <span class="k">-</span> action_confirm_booking
 </pre></div>
 </td></tr></table></div>
@@ -326,19 +326,19 @@ So in our stories we need to define what happens after the reminder was executed
 13
 14
 15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gu">##</span> book a restaurant
-<span class="k">*</span> _start_booking
+<span class="k">*</span> start_booking
     <span class="k">-</span> action_suggest_restaurant
-<span class="k">*</span> _select_restaurant[name=Papi&#39;s Pizza Place]
+<span class="k">*</span> select_restaurant{&quot;name&quot;: &quot;Papi&#39;s Pizza Place&quot;}
     <span class="k">-</span> action_confirm_booking
 
 <span class="gu">##</span> reminder_confirm
     <span class="k">-</span> action_booking_reminder
-<span class="k">*</span> _agree
+<span class="k">*</span> agree
     <span class="k">-</span> action_book_restaurant
 
 <span class="gu">##</span> reminder_cancel
     <span class="k">-</span> action_booking_reminder
-<span class="k">*</span> _deny
+<span class="k">*</span> deny
     <span class="k">-</span> action_cancel_booking
 </pre></div>
 </td></tr></table></div>

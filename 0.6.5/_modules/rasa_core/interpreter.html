@@ -198,14 +198,18 @@
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
 
+<span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">re</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="nb">str</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Text</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">INTENT_MESSAGE_PREFIX</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span>
 
 
 <div class="viewcode-block" id="NaturalLanguageInterpreter"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.interpreter.NaturalLanguageInterpreter">[docs]</a><span class="k">class</span> <span class="nc">NaturalLanguageInterpreter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -221,15 +225,82 @@
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">RasaNLUInterpreter</span><span class="p">(</span><span class="n">model_directory</span><span class="o">=</span><span class="n">obj</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">RegexInterpreter</span><span class="p">()</span>   <span class="c1"># default interpreter</span></div></div>
+            <span class="k">return</span> <span class="n">RegexInterpreter</span><span class="p">()</span>  <span class="c1"># default interpreter</span></div></div>
 
 
 <div class="viewcode-block" id="RegexInterpreter"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.interpreter.RegexInterpreter">[docs]</a><span class="k">class</span> <span class="nc">RegexInterpreter</span><span class="p">(</span><span class="n">NaturalLanguageInterpreter</span><span class="p">):</span>
     <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="RegexInterpreter.allowed_prefixes"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.interpreter.RegexInterpreter.allowed_prefixes">[docs]</a>    <span class="k">def</span> <span class="nf">allowed_prefixes</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">INTENT_MESSAGE_PREFIX</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span>   <span class="c1"># _ is deprecated but supported</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_create_entities</span><span class="p">(</span><span class="n">parsed_entities</span><span class="p">,</span> <span class="n">sidx</span><span class="p">,</span> <span class="n">eidx</span><span class="p">):</span>
+        <span class="n">entities</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">vs</span> <span class="ow">in</span> <span class="n">parsed_entities</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">vs</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">vs</span> <span class="o">=</span> <span class="p">[</span><span class="n">vs</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">vs</span><span class="p">:</span>
+                <span class="n">entities</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s2">&quot;entity&quot;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span>
+                    <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="n">sidx</span><span class="p">,</span>
+                    <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="n">eidx</span><span class="p">,</span>  <span class="c1"># can&#39;t be more specific</span>
+                    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">value</span>
+                <span class="p">})</span>
+        <span class="k">return</span> <span class="n">entities</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_parse_parameters</span><span class="p">(</span><span class="n">entitiy_str</span><span class="p">,</span> <span class="n">sidx</span><span class="p">,</span> <span class="n">eidx</span><span class="p">,</span> <span class="n">user_input</span><span class="p">):</span>
+        <span class="c1"># type: (Text, int, int, Text) -&gt; List[Dict[Text, Any]]</span>
+        <span class="k">if</span> <span class="n">entitiy_str</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">entitiy_str</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+            <span class="c1"># if there is nothing to parse we will directly exit</span>
+            <span class="k">return</span> <span class="p">[]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">parsed_entities</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">entitiy_str</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parsed_entities</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">RegexInterpreter</span><span class="o">.</span><span class="n">_create_entities</span><span class="p">(</span><span class="n">parsed_entities</span><span class="p">,</span>
+                                                         <span class="n">sidx</span><span class="p">,</span> <span class="n">eidx</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Parsed value isn&#39;t a json object &quot;</span>
+                                <span class="s2">&quot;(instead parser found &#39;</span><span class="si">{}</span><span class="s2">&#39;)&quot;</span>
+                                <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">parsed_entities</span><span class="p">)))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Invalid to parse arguments in line &quot;</span>
+                           <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39;. Failed to decode parameters&quot;</span>
+                           <span class="s2">&quot;as a json object. Make sure the intent&quot;</span>
+                           <span class="s2">&quot;followed by a proper json object. &quot;</span>
+                           <span class="s2">&quot;Error: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user_input</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+            <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="RegexInterpreter.extract_intent_and_entities"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.interpreter.RegexInterpreter.extract_intent_and_entities">[docs]</a>    <span class="k">def</span> <span class="nf">extract_intent_and_entities</span><span class="p">(</span><span class="n">user_input</span><span class="p">):</span>
+        <span class="c1"># type: (Text) -&gt; object</span>
+        <span class="sd">&quot;&quot;&quot;Parse the user input using regexes to extract intent &amp; entities.&quot;&quot;&quot;</span>
+
+        <span class="n">prefixes</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">RegexInterpreter</span><span class="o">.</span><span class="n">allowed_prefixes</span><span class="p">())</span>
+        <span class="c1"># the regex matches &quot;slot{&quot;a&quot;: 1}&quot;</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;^[&#39;</span><span class="o">+</span><span class="n">prefixes</span><span class="o">+</span><span class="s1">&#39;]?([^{]+)([{].+)?&#39;</span><span class="p">,</span> <span class="n">user_input</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">event_name</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">entities</span> <span class="o">=</span> <span class="n">RegexInterpreter</span><span class="o">.</span><span class="n">_parse_parameters</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+                                                          <span class="n">m</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+                                                          <span class="n">m</span><span class="o">.</span><span class="n">end</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+                                                          <span class="n">user_input</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">event_name</span><span class="p">,</span> <span class="n">entities</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Failed to parse intent end entities from &quot;</span>
+                           <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39;. &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user_input</span><span class="p">))</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="p">[]</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="RegexInterpreter.deprecated_extraction"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.interpreter.RegexInterpreter.deprecated_extraction">[docs]</a>    <span class="k">def</span> <span class="nf">deprecated_extraction</span><span class="p">(</span><span class="n">user_input</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;DEPRECATED parse of user intput message.&quot;&quot;&quot;</span>
+
         <span class="n">value_assign_rx</span> <span class="o">=</span> <span class="s1">&#39;\s*(.+)\s*=\s*(.+)\s*&#39;</span>
-        <span class="n">structed_message_rx</span> <span class="o">=</span> <span class="s1">&#39;^_([^\[]+)(\[(.+)\])?&#39;</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">structed_message_rx</span><span class="p">,</span> <span class="n">user_input</span><span class="p">)</span>
+        <span class="n">prefixes</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">RegexInterpreter</span><span class="o">.</span><span class="n">allowed_prefixes</span><span class="p">())</span>
+        <span class="n">structured_message_rx</span> <span class="o">=</span> <span class="s1">&#39;^[&#39;</span><span class="o">+</span><span class="n">prefixes</span><span class="o">+</span><span class="s1">&#39;]?([^\[]+)(\[(.+)\])?&#39;</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">structured_message_rx</span><span class="p">,</span> <span class="n">user_input</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">intent</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
             <span class="n">offset</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -251,8 +322,24 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="p">[]</span></div>
 
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="RegexInterpreter.is_using_deprecated_format"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.interpreter.RegexInterpreter.is_using_deprecated_format">[docs]</a>    <span class="k">def</span> <span class="nf">is_using_deprecated_format</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Indicates if the text string is using the deprecated intent format.</span>
+
+<span class="sd">        In the deprecated format entities where annotated using `[name=Rasa]`</span>
+<span class="sd">        which has been replaced with `{&quot;name&quot;: &quot;Rasa&quot;}`.&quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;[&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
+                <span class="ow">and</span> <span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;{&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span>
+                     <span class="n">text</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;[&quot;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">text</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;{&quot;</span><span class="p">)))</span></div>
+
 <div class="viewcode-block" id="RegexInterpreter.parse"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.interpreter.RegexInterpreter.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
-        <span class="n">intent</span><span class="p">,</span> <span class="n">entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_intent_and_entities</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="sd">&quot;&quot;&quot;Parse a text message.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_using_deprecated_format</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+            <span class="n">intent</span><span class="p">,</span> <span class="n">entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deprecated_extraction</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">intent</span><span class="p">,</span> <span class="n">entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_intent_and_entities</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span>
             <span class="s1">&#39;intent&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -274,9 +361,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">server</span>
 
 <div class="viewcode-block" id="RasaNLUHttpInterpreter.parse"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.interpreter.RasaNLUHttpInterpreter.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Parses a text message.</span>
+        <span class="sd">&quot;&quot;&quot;Parse a text message.</span>
 
-<span class="sd">        Returns a default value if the parsing of the text failed.&quot;&quot;&quot;</span>
+<span class="sd">        Return a default value if the parsing of the text failed.&quot;&quot;&quot;</span>
 
         <span class="n">default_return</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;intent&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">},</span>
                           <span class="s2">&quot;entities&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">}</span>
@@ -287,7 +374,7 @@
     <span class="k">def</span> <span class="nf">_rasa_http_parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Send a text message to a running rasa NLU http server.</span>
 
-<span class="sd">        Returns `None` on failure.&quot;&quot;&quot;</span>
+<span class="sd">        Return `None` on failure.&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
@@ -329,9 +416,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">interpreter</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="RasaNLUInterpreter.parse"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.interpreter.RasaNLUInterpreter.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Parses a text message.</span>
+        <span class="sd">&quot;&quot;&quot;Parse a text message.</span>
 
-<span class="sd">        Returns a default value if the parsing of the text failed.&quot;&quot;&quot;</span>
+<span class="sd">        Return a default value if the parsing of the text failed.&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lazy_init</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">interpreter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_load_interpreter</span><span class="p">()</span>

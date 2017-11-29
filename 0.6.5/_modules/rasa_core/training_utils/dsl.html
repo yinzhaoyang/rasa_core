@@ -209,6 +209,7 @@
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">deque</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">Random</span>
 
@@ -221,8 +222,9 @@
 <span class="kn">from</span> <span class="nn">rasa_core.channels</span> <span class="k">import</span> <span class="n">UserMessage</span>
 <span class="kn">from</span> <span class="nn">rasa_core.conversation</span> <span class="k">import</span> <span class="n">Dialogue</span>
 <span class="kn">from</span> <span class="nn">rasa_core.domain</span> <span class="k">import</span> <span class="n">Domain</span>
-<span class="kn">from</span> <span class="nn">rasa_core.events</span> <span class="k">import</span> <span class="n">ActionExecuted</span><span class="p">,</span> <span class="n">UserUttered</span><span class="p">,</span> <span class="n">Event</span><span class="p">,</span> \
-    <span class="n">ActionReverted</span>
+<span class="kn">from</span> <span class="nn">rasa_core.events</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">ActionExecuted</span><span class="p">,</span> <span class="n">UserUttered</span><span class="p">,</span> <span class="n">Event</span><span class="p">,</span>
+    <span class="n">ActionReverted</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">rasa_core.featurizers</span> <span class="k">import</span> <span class="n">Featurizer</span>
 <span class="kn">from</span> <span class="nn">rasa_core.interpreter</span> <span class="k">import</span> <span class="n">RegexInterpreter</span><span class="p">,</span> <span class="n">NaturalLanguageInterpreter</span>
 <span class="kn">from</span> <span class="nn">rasa_core.trackers</span> <span class="k">import</span> <span class="n">DialogueStateTracker</span>
@@ -442,7 +444,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">current_steps</span> <span class="o">=</span> <span class="p">[]</span></div>
 
     <span class="k">def</span> <span class="nf">_next_story_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">start_checkpoints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_end_checkpoints</span><span class="p">()</span> <span class="ow">or</span> <span class="p">[</span><span class="n">Checkpoint</span><span class="p">(</span><span class="n">STORY_START</span><span class="p">)]</span>
+        <span class="n">start_checkpoints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prev_end_checkpoints</span><span class="p">()</span> <span class="ow">or</span> <span class="p">[</span>
+            <span class="n">Checkpoint</span><span class="p">(</span><span class="n">STORY_START</span><span class="p">)]</span>
         <span class="n">current_turns</span> <span class="o">=</span> <span class="p">[</span><span class="n">StoryStep</span><span class="p">(</span><span class="n">block_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">start_checkpoint</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
                          <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">start_checkpoints</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">current_turns</span></div>
@@ -500,32 +503,49 @@
             <span class="n">reader</span> <span class="o">=</span> <span class="n">StoryFileReader</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="n">interpreter</span><span class="p">,</span> <span class="n">template_variables</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">reader</span><span class="o">.</span><span class="n">process_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Failed to parse &#39;</span><span class="si">{}</span><span class="s2">&#39;. </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">file_name</span><span class="p">),</span> <span class="n">e</span><span class="p">))</span></div>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;Failed to parse &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">file_name</span><span class="p">)),</span> <span class="n">e</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid story file format.&quot;</span><span class="p">)</span></div>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_parse_event_line</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">parameter_default_value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_parameters_from_json_string</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+        <span class="c1"># type: (Text, Text) -&gt; Dict[Text, Any]</span>
+        <span class="sd">&quot;&quot;&quot;Parse the passed string as json and create a parameter dict.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">s</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+            <span class="c1"># if there is no strings there are not going to be any parameters</span>
+            <span class="k">return</span> <span class="p">{}</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">parsed_slots</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parsed_slots</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">parsed_slots</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Parsed value isn&#39;t a json object &quot;</span>
+                                <span class="s2">&quot;(instead parser found &#39;</span><span class="si">{}</span><span class="s2">&#39;)&quot;</span>
+                                <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">parsed_slots</span><span class="p">)))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid to parse arguments in line &quot;</span>
+                             <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39;. Failed to decode parameters&quot;</span>
+                             <span class="s2">&quot;as a json object. Make sure the event&quot;</span>
+                             <span class="s2">&quot;name is followed by a proper json &quot;</span>
+                             <span class="s2">&quot;object. Error: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_parse_event_line</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Tries to parse a single line as an event with arguments.&quot;&quot;&quot;</span>
 
-        <span class="c1"># the regex matches &quot;slot{&quot;a&quot;: 1}&quot; as well as &quot;slot[&quot;a&quot;]&quot;</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;^([^\[{]+)([\[{].+)?&#39;</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+        <span class="c1"># the regex matches &quot;slot{&quot;a&quot;: 1}&quot;</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;^([^{]+)([{].+)?&#39;</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">event_name</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
             <span class="n">slots_str</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-            <span class="n">parameters</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">if</span> <span class="n">slots_str</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">slots_str</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
-                <span class="n">parsed_slots</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">slots_str</span><span class="p">)</span>
-                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parsed_slots</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-                    <span class="k">for</span> <span class="n">slot</span> <span class="ow">in</span> <span class="n">parsed_slots</span><span class="p">:</span>
-                        <span class="n">parameters</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">parameter_default_value</span>
-                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parsed_slots</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-                    <span class="n">parameters</span> <span class="o">=</span> <span class="n">parsed_slots</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
-                            <span class="s2">&quot;Invalid slot string in line &#39;</span><span class="si">{}</span><span class="s2">&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+            <span class="n">parameters</span> <span class="o">=</span> <span class="n">StoryFileReader</span><span class="o">.</span><span class="n">_parameters_from_json_string</span><span class="p">(</span><span class="n">slots_str</span><span class="p">,</span>
+                                                                      <span class="n">line</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">event_name</span><span class="p">,</span> <span class="n">parameters</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Failed to parse action line &#39;</span><span class="si">{}</span><span class="s2">&#39;. &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Failed to parse action line &#39;</span><span class="si">{}</span><span class="s2">&#39;. &quot;</span>
+                          <span class="s2">&quot;Ignoring this line.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
             <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="p">{}</span>
 
 <div class="viewcode-block" id="StoryFileReader.process_lines"><a class="viewcode-back" href="../../../rasa_dm.training_utils.html#rasa_core.training_utils.dsl.StoryFileReader.process_lines">[docs]</a>    <span class="k">def</span> <span class="nf">process_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lines</span><span class="p">):</span>
@@ -609,6 +629,12 @@
         <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">:</span>
             <span class="n">parse_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">interpreter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
             <span class="n">utterance</span> <span class="o">=</span> <span class="n">UserUttered</span><span class="o">.</span><span class="n">from_parse_data</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">parse_data</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">):</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="n">utterance</span><span class="o">.</span><span class="n">as_story_string</span><span class="p">()</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Stating user intents with a leading &#39;_&#39; is &quot;</span>
+                            <span class="s2">&quot;deprecated. The new format is &quot;</span>
+                            <span class="s2">&quot;&#39;* </span><span class="si">{}</span><span class="s2">&#39;. Please update &quot;</span>
+                            <span class="s2">&quot;your example &#39;</span><span class="si">{}</span><span class="s2">&#39; to the new format.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span>
             <span class="n">intent_name</span> <span class="o">=</span> <span class="n">utterance</span><span class="o">.</span><span class="n">intent</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span> 
             <span class="k">if</span> <span class="n">intent_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">intents</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Found unknown intent &#39;</span><span class="si">{}</span><span class="s2">&#39; on line </span><span class="si">{}</span><span class="s2">. Please, &quot;</span>
@@ -932,7 +958,8 @@
         <span class="c1"># appends y to X so it appears to be just another feature</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">utils</span><span class="o">.</span><span class="n">is_training_data_empty</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
             <span class="n">casted_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">broadcast_to</span><span class="p">(</span>
-                    <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+                    <span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
             <span class="n">concatenated</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">X</span><span class="p">,</span> <span class="n">casted_y</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
             <span class="n">t_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">concatenated</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
             <span class="n">X_unique</span> <span class="o">=</span> <span class="n">t_data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>

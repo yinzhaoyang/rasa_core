@@ -205,6 +205,7 @@
 <span class="kn">from</span> <span class="nn">rasa_core.channels.channel</span> <span class="k">import</span> <span class="n">UserMessage</span>
 <span class="kn">from</span> <span class="nn">rasa_core.channels.channel</span> <span class="k">import</span> <span class="n">InputChannel</span><span class="p">,</span> <span class="n">OutputChannel</span>
 <span class="kn">from</span> <span class="nn">rasa_core</span> <span class="k">import</span> <span class="n">utils</span>
+<span class="kn">from</span> <span class="nn">rasa_core.interpreter</span> <span class="k">import</span> <span class="n">INTENT_MESSAGE_PREFIX</span>
 
 
 <div class="viewcode-block" id="ConsoleOutputChannel"><a class="viewcode-back" href="../../../rasa_dm.channels.html#rasa_core.channels.console.ConsoleOutputChannel">[docs]</a><span class="k">class</span> <span class="nc">ConsoleOutputChannel</span><span class="p">(</span><span class="n">OutputChannel</span><span class="p">):</span>
@@ -229,7 +230,7 @@
             <span class="k">if</span> <span class="n">six</span><span class="o">.</span><span class="n">PY2</span><span class="p">:</span>
                 <span class="c1"># in python 2 input doesn&#39;t return unicode values</span>
                 <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">text</span> <span class="o">==</span> <span class="s1">&#39;_stop&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">text</span> <span class="o">==</span> <span class="n">INTENT_MESSAGE_PREFIX</span> <span class="o">+</span> <span class="s1">&#39;stop&#39;</span><span class="p">:</span>
                 <span class="kn">import</span> <span class="nn">os</span>
                 <span class="c1"># sys.exit(1)</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">_exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>

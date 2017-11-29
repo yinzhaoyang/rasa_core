@@ -199,6 +199,7 @@
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">from</span> <span class="nn">types</span> <span class="k">import</span> <span class="n">LambdaType</span>
 
 <span class="kn">from</span> <span class="nn">apscheduler.schedulers.background</span> <span class="k">import</span> <span class="n">BackgroundScheduler</span>
@@ -213,7 +214,9 @@
 <span class="kn">from</span> <span class="nn">rasa_core.domain</span> <span class="k">import</span> <span class="n">Domain</span>
 <span class="kn">from</span> <span class="nn">rasa_core.events</span> <span class="k">import</span> <span class="n">Restarted</span><span class="p">,</span> <span class="n">ReminderScheduled</span><span class="p">,</span> <span class="n">Event</span>
 <span class="kn">from</span> <span class="nn">rasa_core.events</span> <span class="k">import</span> <span class="n">UserUttered</span><span class="p">,</span> <span class="n">ActionExecuted</span><span class="p">,</span> <span class="n">BotUttered</span>
-<span class="kn">from</span> <span class="nn">rasa_core.interpreter</span> <span class="k">import</span> <span class="n">NaturalLanguageInterpreter</span>
+<span class="kn">from</span> <span class="nn">rasa_core.interpreter</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">NaturalLanguageInterpreter</span><span class="p">,</span>
+    <span class="n">INTENT_MESSAGE_PREFIX</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">rasa_core.interpreter</span> <span class="k">import</span> <span class="n">RegexInterpreter</span>
 <span class="kn">from</span> <span class="nn">rasa_core.policies.ensemble</span> <span class="k">import</span> <span class="n">PolicyEnsemble</span>
 <span class="kn">from</span> <span class="nn">rasa_core.tracker_store</span> <span class="k">import</span> <span class="n">TrackerStore</span>
@@ -381,15 +384,22 @@
         <span class="c1"># for testing - you can short-cut the NLU part with a message</span>
         <span class="c1"># in the format _intent[entity1=val1,entity=val2]</span>
         <span class="c1"># parse_data is a dict of intent &amp; entities</span>
-        <span class="k">if</span> <span class="n">message</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">INTENT_MESSAGE_PREFIX</span><span class="p">)</span> <span class="ow">or</span>
+                <span class="n">message</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">RegexInterpreter</span><span class="o">.</span><span class="n">is_using_deprecated_format</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">text</span><span class="p">):</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                        <span class="s2">&quot;Parsing messages with leading `_` is deprecated and &quot;</span>
+                        <span class="s2">&quot;will be removed. Instead, prepend your intents with &quot;</span>
+                        <span class="s2">&quot;`</span><span class="si">{0}</span><span class="s2">`, e.g. `</span><span class="si">{0}</span><span class="s2">mood_greet`  &quot;</span>
+                        <span class="s2">&quot;or `</span><span class="si">{0}</span><span class="s2">restart`.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">INTENT_MESSAGE_PREFIX</span><span class="p">))</span>
             <span class="n">parse_data</span> <span class="o">=</span> <span class="n">RegexInterpreter</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">parse_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">interpreter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Received user message &#39;</span><span class="si">{}</span><span class="s2">&#39; with intent &#39;</span><span class="si">{}</span><span class="s2">&#39; &quot;</span>
-                     <span class="s2">&quot;and entities  &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
-                                                 <span class="n">parse_data</span><span class="p">[</span><span class="s2">&quot;intent&quot;</span><span class="p">],</span>
-                                                 <span class="n">parse_data</span><span class="p">[</span><span class="s2">&quot;entities&quot;</span><span class="p">]))</span>
+                     <span class="s2">&quot;and entities &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+                                                <span class="n">parse_data</span><span class="p">[</span><span class="s2">&quot;intent&quot;</span><span class="p">],</span>
+                                                <span class="n">parse_data</span><span class="p">[</span><span class="s2">&quot;entities&quot;</span><span class="p">]))</span>
         <span class="k">return</span> <span class="n">parse_data</span>
 
     <span class="k">def</span> <span class="nf">_handle_message_with_tracker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">tracker</span><span class="p">):</span>
@@ -425,9 +435,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_log_slots</span><span class="p">(</span><span class="n">tracker</span><span class="p">)</span>
 
         <span class="c1"># action loop. predicts actions until we hit action listen</span>
-        <span class="k">while</span> <span class="n">should_predict_another_action</span> <span class="ow">and</span> \
-                <span class="bp">self</span><span class="o">.</span><span class="n">_should_handle_message</span><span class="p">(</span><span class="n">tracker</span><span class="p">)</span> <span class="ow">and</span> \
-                <span class="n">num_predicted_actions</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_number_of_predictions</span><span class="p">:</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">should_predict_another_action</span>
+               <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_should_handle_message</span><span class="p">(</span><span class="n">tracker</span><span class="p">)</span>
+               <span class="ow">and</span> <span class="n">num_predicted_actions</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_number_of_predictions</span><span class="p">):</span>
             <span class="c1"># this actually just calls the policy&#39;s method by the same name</span>
             <span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_next_action</span><span class="p">(</span><span class="n">tracker</span><span class="p">)</span>
 
@@ -436,8 +446,8 @@
                                                              <span class="n">dispatcher</span><span class="p">)</span>
             <span class="n">num_predicted_actions</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        <span class="k">if</span> <span class="n">num_predicted_actions</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_number_of_predictions</span> <span class="ow">and</span> \
-                <span class="n">should_predict_another_action</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">num_predicted_actions</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_number_of_predictions</span> <span class="ow">and</span>
+                <span class="n">should_predict_another_action</span><span class="p">):</span>
             <span class="c1"># circuit breaker was tripped</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
                     <span class="s2">&quot;Circuit breaker tripped. Stopped predicting &quot;</span>
@@ -499,7 +509,8 @@
 
             <span class="n">dispatcher</span><span class="o">.</span><span class="n">latest_bot_messages</span> <span class="o">=</span> <span class="p">[]</span></div>
 
-    <span class="k">def</span> <span class="nf">_log_action_on_tracker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">action_name</span><span class="p">,</span> <span class="n">events</span><span class="p">):</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_log_action_on_tracker</span><span class="p">(</span><span class="n">tracker</span><span class="p">,</span> <span class="n">action_name</span><span class="p">,</span> <span class="n">events</span><span class="p">):</span>
         <span class="c1"># Ensures that the code still works even if a lazy programmer missed</span>
         <span class="c1"># to type `return []` at the end of an action or the run method</span>
         <span class="c1"># returns `None` for some other reason.</span>
@@ -541,8 +552,8 @@
                         <span class="s2">&quot;Instead of running that, we will ignore the action &quot;</span>
                         <span class="s2">&quot;and predict the next action.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">follow_up_action</span><span class="p">))</span>
 
-        <span class="k">if</span> <span class="n">tracker</span><span class="o">.</span><span class="n">latest_message</span><span class="o">.</span><span class="n">intent</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="o">==</span> \
-                <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">restart_intent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">tracker</span><span class="o">.</span><span class="n">latest_message</span><span class="o">.</span><span class="n">intent</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="o">==</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">restart_intent</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">ActionRestart</span><span class="p">()</span>
 
         <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">policy_ensemble</span><span class="o">.</span><span class="n">predict_next_action</span><span class="p">(</span><span class="n">tracker</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>

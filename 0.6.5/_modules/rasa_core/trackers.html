@@ -209,7 +209,7 @@
 <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">List</span>
 
 <span class="kn">from</span> <span class="nn">rasa_core</span> <span class="k">import</span> <span class="n">utils</span>
-<span class="kn">from</span> <span class="nn">rasa_core.conversation</span> <span class="k">import</span> <span class="n">Dialogue</span>
+<span class="kn">from</span> <span class="nn">rasa_core.conversation</span> <span class="k">import</span> <span class="n">Dialogue</span><span class="p">,</span> <span class="n">Topic</span>
 <span class="kn">from</span> <span class="nn">rasa_core.events</span> <span class="k">import</span> <span class="n">UserUttered</span><span class="p">,</span> <span class="n">TopicSet</span><span class="p">,</span> <span class="n">ActionExecuted</span><span class="p">,</span> \
     <span class="n">Event</span><span class="p">,</span> <span class="n">SlotSet</span><span class="p">,</span> <span class="n">Restarted</span><span class="p">,</span> <span class="n">ActionReverted</span><span class="p">,</span> <span class="n">UserUtteranceReverted</span><span class="p">,</span> <span class="n">BotUttered</span>
 
@@ -328,7 +328,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">topic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># type: () -&gt; Text</span>
+        <span class="c1"># type: () -&gt; Topic</span>
         <span class="sd">&quot;&quot;&quot;Retrieves current topic, or default if no topic has been set yet.&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_topic_stack</span><span class="o">.</span><span class="n">top</span>
@@ -378,6 +378,7 @@
 <div class="viewcode-block" id="DialogueStateTracker.replay_events"><a class="viewcode-back" href="../../tracker.html#rasa_core.trackers.DialogueStateTracker.replay_events">[docs]</a>    <span class="k">def</span> <span class="nf">replay_events</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># type: (int) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Update the tracker based on a list of events.&quot;&quot;&quot;</span>
+
         <span class="n">applied_events</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_applied_events</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">applied_events</span><span class="p">:</span>
             <span class="n">event</span><span class="o">.</span><span class="n">apply_to</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>

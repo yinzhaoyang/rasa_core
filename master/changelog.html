@@ -312,6 +312,9 @@ This project adheres to <a class="reference external" href="http://semver.org/">
 <div class="section" id="changed">
 <h3>Changed<a class="headerlink" href="#changed" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
+<li>story file utterance format changed from <code class="docutils literal"><span class="pre">*</span> <span class="pre">_intent_greet[name=Rasa]</span></code>
+to <code class="docutils literal"><span class="pre">*</span> <span class="pre">intent_greet{&quot;name&quot;:</span> <span class="pre">&quot;Rasa&quot;}</span></code> (old format is still supported but
+deprecated)</li>
 <li>persist action names in domain during model persistence</li>
 </ul>
 </div>

@@ -882,8 +882,8 @@ value for active_features.</p>
 <dl class="method">
 <dt id="rasa_core.interpreter.RasaNLUHttpInterpreter.parse">
 <code class="descname">parse</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/interpreter.html#RasaNLUHttpInterpreter.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.interpreter.RasaNLUHttpInterpreter.parse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parses a text message.</p>
-<p>Returns a default value if the parsing of the text failed.</p>
+<dd><p>Parse a text message.</p>
+<p>Return a default value if the parsing of the text failed.</p>
 </dd></dl>
 
 </dd></dl>
@@ -895,8 +895,8 @@ value for active_features.</p>
 <dl class="method">
 <dt id="rasa_core.interpreter.RasaNLUInterpreter.parse">
 <code class="descname">parse</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/interpreter.html#RasaNLUInterpreter.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.interpreter.RasaNLUInterpreter.parse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parses a text message.</p>
-<p>Returns a default value if the parsing of the text failed.</p>
+<dd><p>Parse a text message.</p>
+<p>Return a default value if the parsing of the text failed.</p>
 </dd></dl>
 
 </dd></dl>
@@ -906,14 +906,35 @@ value for active_features.</p>
 <em class="property">class </em><code class="descclassname">rasa_core.interpreter.</code><code class="descname">RegexInterpreter</code><a class="reference internal" href="_modules/rasa_core/interpreter.html#RegexInterpreter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.interpreter.RegexInterpreter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="rasa_dm.html#rasa_core.interpreter.NaturalLanguageInterpreter" title="rasa_core.interpreter.NaturalLanguageInterpreter"><code class="xref py py-class docutils literal"><span class="pre">rasa_core.interpreter.NaturalLanguageInterpreter</span></code></a></p>
 <dl class="staticmethod">
+<dt id="rasa_core.interpreter.RegexInterpreter.allowed_prefixes">
+<em class="property">static </em><code class="descname">allowed_prefixes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/interpreter.html#RegexInterpreter.allowed_prefixes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.interpreter.RegexInterpreter.allowed_prefixes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="rasa_core.interpreter.RegexInterpreter.deprecated_extraction">
+<em class="property">static </em><code class="descname">deprecated_extraction</code><span class="sig-paren">(</span><em>user_input</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/interpreter.html#RegexInterpreter.deprecated_extraction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.interpreter.RegexInterpreter.deprecated_extraction" title="Permalink to this definition">¶</a></dt>
+<dd><p>DEPRECATED parse of user intput message.</p>
+</dd></dl>
+
+<dl class="staticmethod">
 <dt id="rasa_core.interpreter.RegexInterpreter.extract_intent_and_entities">
 <em class="property">static </em><code class="descname">extract_intent_and_entities</code><span class="sig-paren">(</span><em>user_input</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/interpreter.html#RegexInterpreter.extract_intent_and_entities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.interpreter.RegexInterpreter.extract_intent_and_entities" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Parse the user input using regexes to extract intent &amp; entities.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rasa_core.interpreter.RegexInterpreter.is_using_deprecated_format">
+<em class="property">static </em><code class="descname">is_using_deprecated_format</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/interpreter.html#RegexInterpreter.is_using_deprecated_format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.interpreter.RegexInterpreter.is_using_deprecated_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates if the text string is using the deprecated intent format.</p>
+<p>In the deprecated format entities where annotated using <cite>[name=Rasa]</cite>
+which has been replaced with <cite>{&#8220;name&#8221;: &#8220;Rasa&#8221;}</cite>.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="rasa_core.interpreter.RegexInterpreter.parse">
 <code class="descname">parse</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/interpreter.html#RegexInterpreter.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.interpreter.RegexInterpreter.parse" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Parse a text message.</p>
+</dd></dl>
 
 </dd></dl>
 
