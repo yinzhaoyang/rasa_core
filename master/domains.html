@@ -319,9 +319,12 @@ your bot would execute the action <code class="docutils literal"><span class="pr
 
 <span class="k">class</span> <span class="nc">ActionCheckRestaurants</span><span class="p">(</span><span class="n">Action</span><span class="p">):</span>
    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="c1"># type: () -&gt; Text</span>
       <span class="k">return</span> <span class="s2">&quot;check_restaurants&quot;</span>
 
    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dispatcher</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
+      <span class="c1"># type: (Dispatcher, DialogueStateTracker, Domain) -&gt; List[Event]</span>
+
       <span class="n">cuisine</span> <span class="o">=</span> <span class="n">tracker</span><span class="o">.</span><span class="n">get_slot</span><span class="p">(</span><span class="s1">&#39;cuisine&#39;</span><span class="p">)</span>
       <span class="n">q</span> <span class="o">=</span> <span class="s2">&quot;select * from restaurants where cuisine=&#39;</span><span class="si">{0}</span><span class="s2">&#39; limit 1&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cuisine</span><span class="p">)</span>
       <span class="n">result</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
