@@ -452,53 +452,7 @@
                 <span class="n">utils</span><span class="o">.</span><span class="n">str_range_list</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">domain</span><span class="o">.</span><span class="n">num_actions</span><span class="p">)))</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;thanks! The bot will now &quot;</span>
               <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]</span><span class="se">\n</span><span class="s2"> -----------&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">action_for_index</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">()))</span>
-        <span class="k">return</span> <span class="n">out</span>
-
-<div class="viewcode-block" id="OnlinePolicyEnsemble.test"><a class="viewcode-back" href="../../../rasa_dm.policies.html#rasa_core.policies.online_policy_trainer.OnlinePolicyEnsemble.test">[docs]</a>    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">max_training_samples</span><span class="p">,</span> <span class="n">num_actions</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">n_test_epochs</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="n">n_examples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="n">max_training_samples</span>
-        <span class="n">valid_idxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_examples</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
-        <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">scores</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">js</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">valid_idxs</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_fit_example</span><span class="p">([</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]],</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">num_actions</span><span class="p">)</span>
-            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">n_examples</span><span class="p">:</span>
-                <span class="n">i</span> <span class="o">=</span> <span class="n">max_training_samples</span>
-                <span class="n">n_test_epochs</span> <span class="o">-=</span> <span class="mi">1</span>
-                <span class="k">if</span> <span class="n">n_test_epochs</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="k">break</span>
-            <span class="k">if</span> <span class="n">j</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_visualization</span><span class="p">:</span>
-                <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-                <span class="n">js</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="n">max_training_samples</span><span class="p">)</span>
-                <span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">valid_idxs</span><span class="p">,</span> <span class="p">:],</span> <span class="n">y</span><span class="p">[</span><span class="n">valid_idxs</span><span class="p">]))</span>
-                <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
-                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">js</span><span class="p">,</span> <span class="n">scores</span><span class="p">)</span>
-                <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;percentage of correct next-actions in &quot;</span>
-                           <span class="s2">&quot;held-out test set&quot;</span><span class="p">)</span>
-                <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;number of examples in training set&quot;</span><span class="p">)</span>
-                <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-                <span class="n">max_epochs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">j</span> <span class="o">/</span> <span class="p">(</span><span class="n">n_examples</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">valid_idxs</span><span class="p">))))</span>
-                <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_epochs</span><span class="p">):</span>
-                    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">((</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">n_examples</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">valid_idxs</span><span class="p">)),</span>
-                                <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
-                <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;training_score_with_slots</span><span class="si">{}</span><span class="s2">.jpg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                        <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;epochs&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)))</span></div>
-
-<div class="viewcode-block" id="OnlinePolicyEnsemble.score"><a class="viewcode-back" href="../../../rasa_dm.policies.html#rasa_core.policies.online_policy_trainer.OnlinePolicyEnsemble.score">[docs]</a>    <span class="k">def</span> <span class="nf">score</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="n">all_outs</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="mi">0</span><span class="p">]):</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="n">X</span><span class="p">[[</span><span class="n">idx</span><span class="p">],</span> <span class="p">:,</span> <span class="p">:]</span>
-            <span class="n">pred_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_ensemble</span><span class="o">.</span><span class="n">predict_next_action</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="n">all_outs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pred_out</span><span class="p">)</span>
-        <span class="c1"># all_outs == y is a boolean array, np.mean() treats True=1, False=0</span>
-        <span class="n">score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">all_outs</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">score</span></div></div>
+        <span class="k">return</span> <span class="n">out</span></div>
 </pre></div>
 
            </div>
