@@ -281,7 +281,10 @@
 
 <div class="viewcode-block" id="train_dialogue_model"><a class="viewcode-back" href="../../rasa_core.html#rasa_core.train.train_dialogue_model">[docs]</a><span class="k">def</span> <span class="nf">train_dialogue_model</span><span class="p">(</span><span class="n">domain_file</span><span class="p">,</span> <span class="n">stories_file</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span>
                          <span class="n">use_online_learning</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nlu_model_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                         <span class="n">kwargs</span><span class="o">=</span><span class="p">{}):</span>
+                         <span class="n">kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+
     <span class="n">agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span><span class="n">domain_file</span><span class="p">,</span> <span class="n">policies</span><span class="o">=</span><span class="p">[</span><span class="n">MemoizationPolicy</span><span class="p">(),</span> <span class="n">KerasPolicy</span><span class="p">()])</span>
 
     <span class="k">if</span> <span class="n">use_online_learning</span><span class="p">:</span>

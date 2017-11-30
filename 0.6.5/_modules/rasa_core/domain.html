@@ -526,11 +526,11 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[]</span></div>
 
-<div class="viewcode-block" id="Domain.persist"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.Domain.persist">[docs]</a>    <span class="k">def</span> <span class="nf">persist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
+<div class="viewcode-block" id="Domain.persist"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.Domain.persist">[docs]</a>    <span class="k">def</span> <span class="nf">persist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="Domain.load"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.Domain.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
+<div class="viewcode-block" id="Domain.load"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.Domain.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 <div class="viewcode-block" id="Domain.persist_specification"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.Domain.persist_specification">[docs]</a>    <span class="k">def</span> <span class="nf">persist_specification</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_path</span><span class="p">):</span>
@@ -609,14 +609,14 @@
 
 <div class="viewcode-block" id="TemplateDomain"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.TemplateDomain">[docs]</a><span class="k">class</span> <span class="nc">TemplateDomain</span><span class="p">(</span><span class="n">Domain</span><span class="p">):</span>
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="TemplateDomain.load"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.TemplateDomain.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">file_name</span><span class="p">,</span> <span class="n">action_factory</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file_name</span><span class="p">):</span>
+<div class="viewcode-block" id="TemplateDomain.load"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.TemplateDomain.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">action_factory</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
                     <span class="s2">&quot;Failed to load domain specification from &#39;</span><span class="si">{}</span><span class="s2">&#39;. &quot;</span>
-                    <span class="s2">&quot;File not found!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">file_name</span><span class="p">)))</span>
+                    <span class="s2">&quot;File not found!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">filename</span><span class="p">)))</span>
 
-        <span class="bp">cls</span><span class="o">.</span><span class="n">validate_domain_yaml</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">read_yaml_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">validate_domain_yaml</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">read_yaml_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="n">utter_templates</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">collect_templates</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;templates&quot;</span><span class="p">,</span> <span class="p">{}))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">action_factory</span><span class="p">:</span>
             <span class="n">action_factory</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;action_factory&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
@@ -636,16 +636,19 @@
         <span class="p">)</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="TemplateDomain.validate_domain_yaml"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.TemplateDomain.validate_domain_yaml">[docs]</a>    <span class="k">def</span> <span class="nf">validate_domain_yaml</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
+<div class="viewcode-block" id="TemplateDomain.validate_domain_yaml"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.TemplateDomain.validate_domain_yaml">[docs]</a>    <span class="k">def</span> <span class="nf">validate_domain_yaml</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Validate domain yaml.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">pykwalify.core</span> <span class="k">import</span> <span class="n">Core</span>
+        <span class="kn">import</span> <span class="nn">ruamel</span>
+        <span class="kn">import</span> <span class="nn">warnings</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">ruamel</span><span class="o">.</span><span class="n">yaml</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">UnsafeLoaderWarning</span><span class="p">)</span>
 
         <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;pykwalify&#39;</span><span class="p">)</span>
         <span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">WARN</span><span class="p">)</span>
 
         <span class="n">schema_file</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span>
                                                       <span class="s2">&quot;schemas/domain.yml&quot;</span><span class="p">)</span>
-        <span class="n">c</span> <span class="o">=</span> <span class="n">Core</span><span class="p">(</span><span class="n">source_file</span><span class="o">=</span><span class="n">file_name</span><span class="p">,</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">Core</span><span class="p">(</span><span class="n">source_file</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
                  <span class="n">schema_files</span><span class="o">=</span><span class="p">[</span><span class="n">schema_file</span><span class="p">])</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">c</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">raise_exception</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -654,7 +657,7 @@
                              <span class="s2">&quot;Make sure the file is correct, to do so&quot;</span>
                              <span class="s2">&quot;take a look at the errors logged during &quot;</span>
                              <span class="s2">&quot;validation previous to this exception. &quot;</span>
-                             <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">file_name</span><span class="p">)))</span></div>
+                             <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">filename</span><span class="p">)))</span></div>
 
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="TemplateDomain.collect_slots"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.TemplateDomain.collect_slots">[docs]</a>    <span class="k">def</span> <span class="nf">collect_slots</span><span class="p">(</span><span class="n">slot_dict</span><span class="p">):</span>
@@ -721,7 +724,7 @@
             <span class="n">slots</span><span class="p">[</span><span class="n">slot</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span>
         <span class="k">return</span> <span class="n">slots</span>
 
-<div class="viewcode-block" id="TemplateDomain.persist"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.TemplateDomain.persist">[docs]</a>    <span class="k">def</span> <span class="nf">persist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
+<div class="viewcode-block" id="TemplateDomain.persist"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.domain.TemplateDomain.persist">[docs]</a>    <span class="k">def</span> <span class="nf">persist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">yaml</span>
 
         <span class="n">additional_config</span> <span class="o">=</span> <span class="p">{</span>
@@ -741,7 +744,7 @@
             <span class="s2">&quot;action_factory&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_factory_name</span>
         <span class="p">}</span>
 
-        <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">yaml_file</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">yaml_file</span><span class="p">:</span>
             <span class="n">yaml</span><span class="o">.</span><span class="n">safe_dump</span><span class="p">(</span><span class="n">domain_data</span><span class="p">,</span> <span class="n">yaml_file</span><span class="p">,</span>
                            <span class="n">default_flow_style</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                            <span class="n">allow_unicode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>

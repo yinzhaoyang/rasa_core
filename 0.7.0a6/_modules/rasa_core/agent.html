@@ -385,6 +385,20 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Persisted model to &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span>
                     <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">model_path</span><span class="p">)))</span></div>
 
+<div class="viewcode-block" id="Agent.visualize"><a class="viewcode-back" href="../../api/agent.html#rasa_core.agent.Agent.visualize">[docs]</a>    <span class="k">def</span> <span class="nf">visualize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                  <span class="n">filename</span><span class="p">,</span>
+                  <span class="n">output_file</span><span class="p">,</span>
+                  <span class="n">max_history</span><span class="p">,</span>
+                  <span class="n">nlu_training_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span>
+                  <span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">rasa_core.training.visualization</span> <span class="k">import</span> <span class="n">visualize_stories</span>
+        <span class="kn">from</span> <span class="nn">rasa_core.training</span> <span class="k">import</span> <span class="n">StoryFileReader</span>
+
+        <span class="n">story_steps</span> <span class="o">=</span> <span class="n">StoryFileReader</span><span class="o">.</span><span class="n">read_from_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+        <span class="n">visualize_stories</span><span class="p">(</span><span class="n">story_steps</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span> <span class="n">max_history</span><span class="p">,</span>
+                          <span class="bp">self</span><span class="o">.</span><span class="n">interpreter</span><span class="p">,</span> <span class="n">nlu_training_data</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">)</span></div>
+
     <span class="k">def</span> <span class="nf">_ensure_agent_is_prepared</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># type: () -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Checks that an interpreter and a tracker store are set.</span>

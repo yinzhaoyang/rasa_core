@@ -420,7 +420,7 @@
         <span class="n">event</span><span class="o">.</span><span class="n">apply_to</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DialogueStateTracker.export_stories"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.trackers.DialogueStateTracker.export_stories">[docs]</a>    <span class="k">def</span> <span class="nf">export_stories</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">rasa_core.training_utils.dsl</span> <span class="k">import</span> <span class="n">StoryStep</span><span class="p">,</span> <span class="n">Story</span>
+        <span class="kn">from</span> <span class="nn">rasa_core.training.structures</span> <span class="k">import</span> <span class="n">StoryStep</span><span class="p">,</span> <span class="n">Story</span>
 
         <span class="n">story_step</span> <span class="o">=</span> <span class="n">StoryStep</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_applied_events</span><span class="p">():</span>
@@ -458,7 +458,9 @@
         <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Tried to set non existent slot &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Tried to set non existent slot &#39;</span><span class="si">{}</span><span class="s2">&#39;. Make sure you &quot;</span>
+                         <span class="s2">&quot;added all your slots to your domain file.&quot;</span>
+                         <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_create_events</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">events</span><span class="p">):</span>
         <span class="c1"># type: (List[Event]) -&gt; deque</span>

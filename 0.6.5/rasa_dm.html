@@ -272,10 +272,10 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="rasa_core.training_utils.html">rasa_core.training_utils package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="rasa_core.training_utils.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rasa_core.training_utils.html#module-rasa_core.training_utils.dsl">rasa_core.training_utils.dsl module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rasa_core.training_utils.html#module-rasa_core.training_utils.story_graph">rasa_core.training_utils.story_graph module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasa_core.training_utils.html#rasa-core-training-utils-dsl-module">rasa_core.training_utils.dsl module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasa_core.training_utils.html#rasa-core-training-utils-story-graph-module">rasa_core.training_utils.story_graph module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rasa_core.training_utils.html#rasa-core-training-utils-visualization-module">rasa_core.training_utils.visualization module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rasa_core.training_utils.html#module-rasa_core.training_utils">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasa_core.training_utils.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -376,6 +376,11 @@ After that the model will get trained on dialogues from the input
 channel. During the dialogue the annotations and state of the agent
 can be changed to correct wrong behaviour.</p>
 </dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.agent.Agent.visualize">
+<code class="descname">visualize</code><span class="sig-paren">(</span><em>filename</em>, <em>output_file</em>, <em>max_history</em>, <em>nlu_training_data=None</em>, <em>fontsize=12</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/agent.html#Agent.visualize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.agent.Agent.visualize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -598,7 +603,7 @@ there are fewer than <cite>max_history</cite> states present.</p>
 
 <dl class="classmethod">
 <dt id="rasa_core.domain.Domain.load">
-<em class="property">classmethod </em><code class="descname">load</code><span class="sig-paren">(</span><em>file_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#Domain.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.Domain.load" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">load</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#Domain.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.Domain.load" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="classmethod">
@@ -618,7 +623,7 @@ there are fewer than <cite>max_history</cite> states present.</p>
 
 <dl class="method">
 <dt id="rasa_core.domain.Domain.persist">
-<code class="descname">persist</code><span class="sig-paren">(</span><em>file_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#Domain.persist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.Domain.persist" title="Permalink to this definition">¶</a></dt>
+<code class="descname">persist</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#Domain.persist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.Domain.persist" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -705,12 +710,12 @@ he slice length.</p>
 
 <dl class="classmethod">
 <dt id="rasa_core.domain.TemplateDomain.load">
-<em class="property">classmethod </em><code class="descname">load</code><span class="sig-paren">(</span><em>file_name</em>, <em>action_factory=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#TemplateDomain.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.TemplateDomain.load" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">load</code><span class="sig-paren">(</span><em>filename</em>, <em>action_factory=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#TemplateDomain.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.TemplateDomain.load" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="rasa_core.domain.TemplateDomain.persist">
-<code class="descname">persist</code><span class="sig-paren">(</span><em>file_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#TemplateDomain.persist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.TemplateDomain.persist" title="Permalink to this definition">¶</a></dt>
+<code class="descname">persist</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#TemplateDomain.persist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.TemplateDomain.persist" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -725,7 +730,7 @@ he slice length.</p>
 
 <dl class="classmethod">
 <dt id="rasa_core.domain.TemplateDomain.validate_domain_yaml">
-<em class="property">classmethod </em><code class="descname">validate_domain_yaml</code><span class="sig-paren">(</span><em>file_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#TemplateDomain.validate_domain_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.TemplateDomain.validate_domain_yaml" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">validate_domain_yaml</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/domain.html#TemplateDomain.validate_domain_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.domain.TemplateDomain.validate_domain_yaml" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validate domain yaml.</p>
 </dd></dl>
 
@@ -1047,6 +1052,11 @@ which has been replaced with <cite>{&#8220;name&#8221;: &#8220;Rasa&#8221;}</cit
 <p>The dimensionality of the array returned by <cite>as_feature</cite> needs
 to correspond to this value.</p>
 </dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.slots.Slot.has_features">
+<code class="descname">has_features</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/slots.html#Slot.has_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.slots.Slot.has_features" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="rasa_core.slots.Slot.reset">
@@ -1408,6 +1418,11 @@ returned. Otherwise, the encapsulated ndarray itself is returned.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="rasa_core.utils.configure_colored_logging">
+<code class="descclassname">rasa_core.utils.</code><code class="descname">configure_colored_logging</code><span class="sig-paren">(</span><em>loglevel</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/utils.html#configure_colored_logging"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.utils.configure_colored_logging" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
 <dt id="rasa_core.utils.create_dir_for_file">
 <code class="descclassname">rasa_core.utils.</code><code class="descname">create_dir_for_file</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/utils.html#create_dir_for_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.utils.create_dir_for_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates any missing parent directories of this files path.</p>
@@ -1418,6 +1433,11 @@ returned. Otherwise, the encapsulated ndarray itself is returned.</p>
 <code class="descclassname">rasa_core.utils.</code><code class="descname">fix_yaml_loader</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/utils.html#fix_yaml_loader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.utils.fix_yaml_loader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ensure that any string read by yaml is represented as unicode.</p>
 </dd></dl>
+
+<dl class="function">
+<dt id="rasa_core.utils.generate_id">
+<code class="descclassname">rasa_core.utils.</code><code class="descname">generate_id</code><span class="sig-paren">(</span><em>prefix=u''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/utils.html#generate_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.utils.generate_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="function">
 <dt id="rasa_core.utils.is_int">
@@ -1481,8 +1501,13 @@ will use the value stored in the private property.</p>
 <div class="section" id="module-rasa_core.version">
 <span id="rasa-core-version-module"></span><h2>rasa_core.version module<a class="headerlink" href="#module-rasa_core.version" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="rasa-core-visualize-module">
-<h2>rasa_core.visualize module<a class="headerlink" href="#rasa-core-visualize-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-rasa_core.visualize">
+<span id="rasa-core-visualize-module"></span><h2>rasa_core.visualize module<a class="headerlink" href="#module-rasa_core.visualize" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="rasa_core.visualize.create_argument_parser">
+<code class="descclassname">rasa_core.visualize.</code><code class="descname">create_argument_parser</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/visualize.html#create_argument_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.visualize.create_argument_parser" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 <div class="section" id="module-rasa_core">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-rasa_core" title="Permalink to this headline">¶</a></h2>

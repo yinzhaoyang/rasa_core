@@ -248,7 +248,7 @@
 <em class="property">class </em><code class="descclassname">rasa_core.policies.</code><code class="descname">Policy</code><span class="sig-paren">(</span><em>featurizer=None</em>, <em>max_history=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/policies/policy.html#Policy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.policies.Policy" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
 <dt id="rasa_core.policies.Policy.continue_training">
-<code class="descname">continue_training</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>domain</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/policies/policy.html#Policy.continue_training"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.policies.Policy.continue_training" title="Permalink to this definition">¶</a></dt>
+<code class="descname">continue_training</code><span class="sig-paren">(</span><em>training_data</em>, <em>domain</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/policies/policy.html#Policy.continue_training"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.policies.Policy.continue_training" title="Permalink to this definition">¶</a></dt>
 <dd><p>Continues training an already trained policy.</p>
 <p>This doesn&#8217;t need to be supported by every policy. If it is supported,
 the policy can be used for online training and the implementation for
@@ -271,7 +271,7 @@ into a float vector which can be used by a ML model.</p>
 
 <dl class="method">
 <dt id="rasa_core.policies.Policy.train">
-<code class="descname">train</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>domain</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/policies/policy.html#Policy.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.policies.Policy.train" title="Permalink to this definition">¶</a></dt>
+<code class="descname">train</code><span class="sig-paren">(</span><em>training_data</em>, <em>domain</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/policies/policy.html#Policy.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.policies.Policy.train" title="Permalink to this definition">¶</a></dt>
 <dd><p>Trains the policy on given training data.</p>
 </dd></dl>
 
@@ -310,7 +310,7 @@ predict the action. Returns the index of the next action</p>
 
 <dl class="method">
 <dt id="rasa_core.policies.memoization.MemoizationPolicy.train">
-<code class="descname">train</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>domain</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/policies/memoization.html#MemoizationPolicy.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.policies.memoization.MemoizationPolicy.train" title="Permalink to this definition">¶</a></dt>
+<code class="descname">train</code><span class="sig-paren">(</span><em>training_data</em>, <em>domain</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/policies/memoization.html#MemoizationPolicy.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.policies.memoization.MemoizationPolicy.train" title="Permalink to this definition">¶</a></dt>
 <dd><p>Trains the policy on given training data.</p>
 </dd></dl>
 
