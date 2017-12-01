@@ -222,10 +222,14 @@
 
 
 <div class="viewcode-block" id="PolicyEnsemble"><a class="viewcode-back" href="../../../rasa_dm.policies.html#rasa_core.policies.ensemble.PolicyEnsemble">[docs]</a><span class="k">class</span> <span class="nc">PolicyEnsemble</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policies</span><span class="p">,</span> <span class="n">known_slot_events</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policies</span><span class="p">,</span> <span class="n">action_fingerprints</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">policies</span> <span class="o">=</span> <span class="n">policies</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">training_metadata</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">known_slot_events</span> <span class="o">=</span> <span class="n">known_slot_events</span> <span class="k">if</span> <span class="n">known_slot_events</span> <span class="k">else</span> <span class="p">{}</span>
+
+        <span class="k">if</span> <span class="n">action_fingerprints</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">action_fingerprints</span> <span class="o">=</span> <span class="n">action_fingerprints</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">action_fingerprints</span> <span class="o">=</span> <span class="p">{}</span>
 
 <div class="viewcode-block" id="PolicyEnsemble.train"><a class="viewcode-back" href="../../../rasa_dm.policies.html#rasa_core.policies.ensemble.PolicyEnsemble.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">training_data</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">featurizer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (DialogueTrainingData, Domain, Featurizer, **Any) -&gt; None</span>
@@ -254,26 +258,41 @@
 <div class="viewcode-block" id="PolicyEnsemble.probabilities_using_best_policy"><a class="viewcode-back" href="../../../rasa_dm.policies.html#rasa_core.policies.ensemble.PolicyEnsemble.probabilities_using_best_policy">[docs]</a>    <span class="k">def</span> <span class="nf">probabilities_using_best_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_create_action_fingerprints</span><span class="p">(</span><span class="n">training_events</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Fingerprint each action using the events it created during train.</span>
+
+<span class="sd">        This allows us to emit warnings when the model is used</span>
+<span class="sd">        if an action does things it hasn&#39;t done during training.&quot;&quot;&quot;</span>
+
+        <span class="n">action_fingerprints</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">vs</span> <span class="ow">in</span> <span class="n">training_events</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">slots</span> <span class="o">=</span> <span class="nb">list</span><span class="p">({</span><span class="n">v</span><span class="o">.</span><span class="n">key</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vs</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">SlotSet</span><span class="p">)})</span>
+            <span class="n">action_fingerprints</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;slots&quot;</span><span class="p">:</span> <span class="n">slots</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">action_fingerprints</span>
+
     <span class="k">def</span> <span class="nf">_persist_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">max_history</span><span class="p">):</span>
         <span class="c1"># type: (Text, Optional[int]) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Persists the domain specification to storage.&quot;&quot;&quot;</span>
 
+        <span class="c1"># make sure the directory we persist to exists</span>
         <span class="n">domain_spec_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;policy_metadata.json&#39;</span><span class="p">)</span>
         <span class="n">utils</span><span class="o">.</span><span class="n">create_dir_for_file</span><span class="p">(</span><span class="n">domain_spec_path</span><span class="p">)</span>
-        <span class="n">policy_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+
+        <span class="n">policy_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">utils</span><span class="o">.</span><span class="n">module_path_from_instance</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
                         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">policies</span><span class="p">]</span>
-        <span class="n">meta_events</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">training_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="p">{})</span>
-        <span class="n">slot_meta</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="nb">list</span><span class="p">({</span><span class="n">v</span><span class="o">.</span><span class="n">key</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vs</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">SlotSet</span><span class="p">)})</span>
-                     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">vs</span> <span class="ow">in</span> <span class="n">meta_events</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">training_events</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">training_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">action_fingerprints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_action_fingerprints</span><span class="p">(</span><span class="n">training_events</span><span class="p">)</span>
+
         <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;slot_meta&quot;</span><span class="p">:</span> <span class="n">slot_meta</span><span class="p">,</span>
+            <span class="s2">&quot;action_fingerprints&quot;</span><span class="p">:</span> <span class="n">action_fingerprints</span><span class="p">,</span>
             <span class="s2">&quot;rasa_core&quot;</span><span class="p">:</span> <span class="n">rasa_core</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span>
             <span class="s2">&quot;max_history&quot;</span><span class="p">:</span> <span class="n">max_history</span><span class="p">,</span>
             <span class="s2">&quot;ensemble_name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
             <span class="s2">&quot;policy_names&quot;</span><span class="p">:</span> <span class="n">policy_names</span>
         <span class="p">}</span>
-        <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">domain_spec_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)))</span>
+
+        <span class="n">utils</span><span class="o">.</span><span class="n">dump_obj_as_json_to_file</span><span class="p">(</span><span class="n">domain_spec_path</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span>
 
 <div class="viewcode-block" id="PolicyEnsemble.persist"><a class="viewcode-back" href="../../../rasa_dm.policies.html#rasa_core.policies.ensemble.PolicyEnsemble.persist">[docs]</a>    <span class="k">def</span> <span class="nf">persist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
         <span class="c1"># type: (Text) -&gt; None</span>
@@ -306,7 +325,8 @@
             <span class="n">policy</span> <span class="o">=</span> <span class="n">policy_cls</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">featurizer</span><span class="p">,</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;max_history&quot;</span><span class="p">])</span>
             <span class="n">policies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">policy</span><span class="p">)</span>
         <span class="n">ensemble_cls</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">class_from_module_path</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;ensemble_name&quot;</span><span class="p">])</span>
-        <span class="n">ensemble</span> <span class="o">=</span> <span class="n">ensemble_cls</span><span class="p">(</span><span class="n">policies</span><span class="p">,</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;slot_meta&quot;</span><span class="p">,</span> <span class="p">{}))</span>
+        <span class="n">fingerprints</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;action_fingerprints&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">ensemble</span> <span class="o">=</span> <span class="n">ensemble_cls</span><span class="p">(</span><span class="n">policies</span><span class="p">,</span> <span class="n">fingerprints</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ensemble</span></div></div>
 
 

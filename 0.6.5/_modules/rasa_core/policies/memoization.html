@@ -306,8 +306,7 @@
             <span class="s2">&quot;lookup&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup</span>
         <span class="p">}</span>
         <span class="n">utils</span><span class="o">.</span><span class="n">create_dir_for_file</span><span class="p">(</span><span class="n">memorized_file</span><span class="p">)</span>
-        <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">memorized_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)))</span></div>
+        <span class="n">utils</span><span class="o">.</span><span class="n">dump_obj_as_json_to_file</span><span class="p">(</span><span class="n">memorized_file</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
 
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="MemoizationPolicy.load"><a class="viewcode-back" href="../../../rasa_dm.policies.html#rasa_core.policies.memoization.MemoizationPolicy.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">featurizer</span><span class="p">,</span> <span class="n">max_history</span><span class="p">):</span>

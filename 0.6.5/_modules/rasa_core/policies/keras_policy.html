@@ -308,18 +308,25 @@
                        <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                        <span class="n">initial_epoch</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">current_epoch</span><span class="p">)</span></div>
 
+    <span class="k">def</span> <span class="nf">_persist_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_file</span><span class="p">):</span>
+        <span class="n">model_config</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;arch&quot;</span><span class="p">:</span> <span class="s2">&quot;keras_arch.json&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;weights&quot;</span><span class="p">:</span> <span class="s2">&quot;keras_weights.h5&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;epochs&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_epoch</span><span class="p">}</span>
+
+        <span class="n">utils</span><span class="o">.</span><span class="n">dump_obj_as_json_to_file</span><span class="p">(</span><span class="n">config_file</span><span class="p">,</span> <span class="n">model_config</span><span class="p">)</span>
+
 <div class="viewcode-block" id="KerasPolicy.persist"><a class="viewcode-back" href="../../../rasa_dm.policies.html#rasa_core.policies.keras_policy.KerasPolicy.persist">[docs]</a>    <span class="k">def</span> <span class="nf">persist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">:</span>
             <span class="n">arch_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;keras_arch.json&#39;</span><span class="p">)</span>
             <span class="n">weights_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;keras_weights.h5&#39;</span><span class="p">)</span>
+            <span class="n">config_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;keras_policy.json&#39;</span><span class="p">)</span>
+
+            <span class="c1"># makes sure the model directory exists</span>
             <span class="n">utils</span><span class="o">.</span><span class="n">create_dir_for_file</span><span class="p">(</span><span class="n">weights_file</span><span class="p">)</span>
-            <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">arch_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">to_json</span><span class="p">()))</span>
-            <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;keras_policy.json&#39;</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
-                    <span class="s2">&quot;arch&quot;</span><span class="p">:</span> <span class="s2">&quot;keras_arch.json&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;weights&quot;</span><span class="p">:</span> <span class="s2">&quot;keras_weights.h5&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;epochs&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_epoch</span><span class="p">})))</span>
+            <span class="n">utils</span><span class="o">.</span><span class="n">dump_obj_as_str_to_file</span><span class="p">(</span><span class="n">arch_file</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">to_json</span><span class="p">())</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_persist_configuration</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">save_weights</span><span class="p">(</span><span class="n">weights_file</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Persist called without a trained model present. &quot;</span>

@@ -316,13 +316,13 @@ We won&#8217;t use machine learning yet, we will just create a policy which memo
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Policy trainer got kwargs: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span>
         <span class="n">check_domain_sanity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
 
-        <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_training_data</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">max_history</span><span class="p">,</span>
+        <span class="n">training_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_training_data</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">max_history</span><span class="p">,</span>
                                            <span class="n">augmentation_factor</span><span class="p">,</span>
                                            <span class="n">max_training_samples</span><span class="p">,</span>
                                            <span class="n">max_number_of_trackers</span><span class="p">,</span>
                                            <span class="n">remove_duplicates</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">ensemble</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">featurizer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ensemble</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">training_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">featurizer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_prepare_training_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">max_history</span><span class="p">,</span> <span class="n">augmentation_factor</span><span class="p">,</span>
                                <span class="n">max_training_samples</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -330,25 +330,23 @@ We won&#8217;t use machine learning yet, we will just create a policy which memo
                                <span class="n">remove_duplicates</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reads training data from file and prepares it for the training.&quot;&quot;&quot;</span>
 
-        <span class="kn">from</span> <span class="nn">rasa_core.training_utils</span> <span class="k">import</span> <span class="n">extract_training_data_from_file</span>
+        <span class="kn">from</span> <span class="nn">rasa_core.training</span> <span class="k">import</span> <span class="n">extract_training_data_from_file</span>
 
         <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
-            <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">extract_training_data_from_file</span><span class="p">(</span>
+            <span class="n">training_data</span> <span class="o">=</span> <span class="n">extract_training_data_from_file</span><span class="p">(</span>
                     <span class="n">filename</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">featurizer</span><span class="p">,</span>
+                    <span class="n">interpreter</span><span class="o">=</span><span class="n">RegexInterpreter</span><span class="p">(),</span>
                     <span class="n">augmentation_factor</span><span class="o">=</span><span class="n">augmentation_factor</span><span class="p">,</span>
                     <span class="n">max_history</span><span class="o">=</span><span class="n">max_history</span><span class="p">,</span>
                     <span class="n">remove_duplicates</span><span class="o">=</span><span class="n">remove_duplicates</span><span class="p">,</span>
-                    <span class="n">domain</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span>
-                    <span class="n">featurizer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">featurizer</span><span class="p">,</span>
-                    <span class="n">interpreter</span><span class="o">=</span><span class="n">RegexInterpreter</span><span class="p">(),</span>
                     <span class="n">max_number_of_trackers</span><span class="o">=</span><span class="n">max_number_of_trackers</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">max_training_samples</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="n">max_training_samples</span><span class="p">,</span> <span class="p">:]</span>
-                <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="n">max_training_samples</span><span class="p">]</span>
+                <span class="n">training_data</span><span class="o">.</span><span class="n">limit_training_data_to</span><span class="p">(</span><span class="n">max_training_samples</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">training_data</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">num_features</span><span class="p">))</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">num_actions</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
+            <span class="k">return</span> <span class="n">DialogueTrainingData</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>What the <code class="docutils literal"><span class="pre">train()</span></code> method does is the following:</p>
@@ -412,22 +410,17 @@ These base classes have already implemented the logic of persisting and reloadin
 </pre></div>
 </div>
 <p>and the training is run here:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">training_data</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># type: (DialogueTrainingData, Domain, **Any) -&gt; None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_architecture</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">num_features</span><span class="p">,</span>
                                              <span class="n">domain</span><span class="o">.</span><span class="n">num_actions</span><span class="p">,</span>
-                                             <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="n">y_one_hot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">domain</span><span class="o">.</span><span class="n">num_actions</span><span class="p">))</span>
-        <span class="n">y_one_hot</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)),</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-
-        <span class="n">number_of_samples</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">number_of_samples</span><span class="p">)</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
-        <span class="n">shuffled_X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
-        <span class="n">shuffled_y</span> <span class="o">=</span> <span class="n">y_one_hot</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="p">:]</span>
+                                             <span class="n">training_data</span><span class="o">.</span><span class="n">max_history</span><span class="p">())</span>
+        <span class="n">shuffled_X</span><span class="p">,</span> <span class="n">shuffled_y</span> <span class="o">=</span> <span class="n">training_data</span><span class="o">.</span><span class="n">shuffled</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
 
         <span class="n">validation_split</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;validation_split&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Fitting model with </span><span class="si">{}</span><span class="s2"> total samples and a validation &quot;</span>
-                    <span class="s2">&quot;split of </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number_of_samples</span><span class="p">,</span> <span class="n">validation_split</span><span class="p">))</span>
+                    <span class="s2">&quot;split of </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">training_data</span><span class="o">.</span><span class="n">num_examples</span><span class="p">(),</span>
+                                         <span class="n">validation_split</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">shuffled_X</span><span class="p">,</span> <span class="n">shuffled_y</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">current_epoch</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;epochs&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Done fitting keras policy model&quot;</span><span class="p">)</span>

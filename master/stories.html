@@ -306,15 +306,15 @@ create a <code class="docutils literal"><span class="pre">visualize.py</span></c
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
 
-<span class="kn">from</span> <span class="nn">rasa_core.domain</span> <span class="k">import</span> <span class="n">TemplateDomain</span>
-<span class="kn">from</span> <span class="nn">rasa_core.training_utils.dsl</span> <span class="k">import</span> <span class="n">StoryFileReader</span>
-<span class="kn">from</span> <span class="nn">rasa_core.training_utils.visualization</span> <span class="k">import</span> <span class="n">visualize_stories</span>
+<span class="kn">from</span> <span class="nn">rasa_core.agent</span> <span class="k">import</span> <span class="n">Agent</span>
+<span class="kn">from</span> <span class="nn">rasa_core.policies.keras_policy</span> <span class="k">import</span> <span class="n">KerasPolicy</span>
+<span class="kn">from</span> <span class="nn">rasa_core.policies.memoization</span> <span class="k">import</span> <span class="n">MemoizationPolicy</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">domain</span> <span class="o">=</span> <span class="n">TemplateDomain</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;concert_domain.yml&quot;</span><span class="p">)</span>
-    <span class="n">stories</span> <span class="o">=</span> <span class="n">StoryFileReader</span><span class="o">.</span><span class="n">read_from_file</span><span class="p">(</span><span class="s2">&quot;data/stories.md&quot;</span><span class="p">,</span> <span class="n">domain</span><span class="p">)</span>
+    <span class="n">agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span><span class="s2">&quot;concert_domain.yml&quot;</span><span class="p">,</span>
+                  <span class="n">policies</span><span class="o">=</span><span class="p">[</span><span class="n">MemoizationPolicy</span><span class="p">(),</span> <span class="n">KerasPolicy</span><span class="p">()])</span>
 
-    <span class="n">visualize_stories</span><span class="p">(</span><span class="n">stories</span><span class="p">,</span> <span class="s2">&quot;graph.png&quot;</span><span class="p">)</span>
+    <span class="n">agent</span><span class="o">.</span><span class="n">visualize</span><span class="p">(</span><span class="s2">&quot;data/stories.md&quot;</span><span class="p">,</span> <span class="n">output_file</span><span class="o">=</span><span class="s2">&quot;graph.png&quot;</span><span class="p">,</span> <span class="n">max_history</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Which will create the same image as the above python script call. The shown

@@ -199,18 +199,21 @@
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
 
 <span class="kn">import</span> <span class="nn">errno</span>
+<span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">io</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">deque</span>
 <span class="kn">from</span> <span class="nn">hashlib</span> <span class="k">import</span> <span class="n">sha1</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">Random</span>
 
 <span class="kn">import</span> <span class="nn">six</span>
 <span class="kn">import</span> <span class="nn">yaml</span>
 <span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="nb">input</span><span class="p">,</span> <span class="nb">range</span><span class="p">,</span> <span class="nb">str</span>
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="nb">all</span><span class="p">,</span> <span class="n">array</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Text</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Text</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
 
 
 <div class="viewcode-block" id="class_from_module_path"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.utils.class_from_module_path">[docs]</a><span class="k">def</span> <span class="nf">class_from_module_path</span><span class="p">(</span><span class="n">module_path</span><span class="p">):</span>
+    <span class="c1"># type: (Text) -&gt; Any</span>
     <span class="sd">&quot;&quot;&quot;Given the module name and path of a class, tries to retrieve the class.</span>
 
 <span class="sd">    The loaded class can be used to instantiate new objects. &quot;&quot;&quot;</span>
@@ -226,14 +229,37 @@
         <span class="k">return</span> <span class="nb">globals</span><span class="p">()[</span><span class="n">module_path</span><span class="p">]</span></div>
 
 
+<div class="viewcode-block" id="module_path_from_instance"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.utils.module_path_from_instance">[docs]</a><span class="k">def</span> <span class="nf">module_path_from_instance</span><span class="p">(</span><span class="n">inst</span><span class="p">):</span>
+    <span class="c1"># type: (Any) -&gt; Text</span>
+    <span class="sd">&quot;&quot;&quot;Return the module path of an instances class.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">inst</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">inst</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span></div>
+
+
 <div class="viewcode-block" id="all_subclasses"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.utils.all_subclasses">[docs]</a><span class="k">def</span> <span class="nf">all_subclasses</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+    <span class="c1"># type: (Any) -&gt; List[Any]</span>
     <span class="sd">&quot;&quot;&quot;Returns all known (imported) subclasses of a class.&quot;&quot;&quot;</span>
 
     <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span> <span class="o">+</span> <span class="p">[</span><span class="n">g</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span>
                                    <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">all_subclasses</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span></div>
 
 
+<div class="viewcode-block" id="dump_obj_as_json_to_file"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.utils.dump_obj_as_json_to_file">[docs]</a><span class="k">def</span> <span class="nf">dump_obj_as_json_to_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+    <span class="c1"># type: (Text, Any) -&gt; None</span>
+    <span class="sd">&quot;&quot;&quot;Dump an object as a json string to a file.&quot;&quot;&quot;</span>
+
+    <span class="n">dump_obj_as_str_to_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="dump_obj_as_str_to_file"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.utils.dump_obj_as_str_to_file">[docs]</a><span class="k">def</span> <span class="nf">dump_obj_as_str_to_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+    <span class="c1"># type: (Text, Text) -&gt; None</span>
+    <span class="sd">&quot;&quot;&quot;Dump a text to a file.&quot;&quot;&quot;</span>
+
+    <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">text</span><span class="p">))</span></div>
+
+
 <div class="viewcode-block" id="subsample_array"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.utils.subsample_array">[docs]</a><span class="k">def</span> <span class="nf">subsample_array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">max_values</span><span class="p">,</span> <span class="n">can_modify_incoming_array</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rand</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># type: (List[Any], bool, Optional[Random]) -&gt; List[Any]</span>
     <span class="sd">&quot;&quot;&quot;Shuffles the array and returns `max_values` number of elements.&quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">random</span>
 
@@ -247,6 +273,7 @@
 
 
 <div class="viewcode-block" id="is_int"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.utils.is_int">[docs]</a><span class="k">def</span> <span class="nf">is_int</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="c1"># type: (Any) -&gt; bool</span>
     <span class="sd">&quot;&quot;&quot;Checks if a value is an integer.</span>
 
 <span class="sd">    The type of the value is not important, it might be an int or a float.&quot;&quot;&quot;</span>

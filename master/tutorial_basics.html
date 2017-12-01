@@ -562,31 +562,31 @@ stories. But enough talking, let&#8217;s get to our stories:</p>
 25
 26
 27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gu">##</span> happy path               &lt;!-- name of the story - just for debugging --&gt;
-<span class="k">*</span> _greet              
+<span class="k">*</span> greet              
   <span class="k">-</span> utter_greet
-<span class="k">*</span> _mood_great               &lt;!-- user utterance, in format _intent[entities] --&gt;
+<span class="k">*</span> mood_great               &lt;!-- user utterance, in format _intent[entities] --&gt;
   <span class="k">-</span> utter_happy
 
 <span class="gu">##</span> sad path 1               &lt;!-- this is already the start of the next story --&gt;
-<span class="k">*</span> _greet
+<span class="k">*</span> greet
   <span class="k">-</span> utter_greet             &lt;!-- action of the bot to execute --&gt;
-<span class="k">*</span> _mood_unhappy
+<span class="k">*</span> mood_unhappy
   <span class="k">-</span> utter_cheer_up
   <span class="k">-</span> utter_did_that_help
-<span class="k">*</span> _mood_affirm
+<span class="k">*</span> mood_affirm
   <span class="k">-</span> utter_happy
 
 <span class="gu">##</span> sad path 2
-<span class="k">*</span> _greet
+<span class="k">*</span> greet
   <span class="k">-</span> utter_greet
-<span class="k">*</span> _mood_unhappy
+<span class="k">*</span> mood_unhappy
   <span class="k">-</span> utter_cheer_up
   <span class="k">-</span> utter_did_that_help
-<span class="k">*</span> _mood_deny
+<span class="k">*</span> mood_deny
   <span class="k">-</span> utter_goodbye
 
 <span class="gu">##</span> say goodbye
-<span class="k">*</span> _goodbye
+<span class="k">*</span> goodbye
   <span class="k">-</span> utter_goodbye
 </pre></div>
 </td></tr></table></div>

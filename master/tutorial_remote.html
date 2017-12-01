@@ -497,33 +497,33 @@ get to the interesting part of running in remote mode). Let&#8217;s put them int
 27
 28
 29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gu">##</span> greet
-<span class="k">*</span> _greet
+<span class="k">*</span> greet
     <span class="k">-</span> greet
 
 <span class="gu">##</span> happy
-<span class="k">*</span> _thankyou
+<span class="k">*</span> thankyou
     <span class="k">-</span> youarewelcome
 
 <span class="gu">##</span> goodbye
-<span class="k">*</span> _goodbye
+<span class="k">*</span> goodbye
     <span class="k">-</span> goodbye
 
 <span class="gu">##</span> venue_search
-<span class="k">*</span> _search_venues
+<span class="k">*</span> search_venues
     <span class="k">-</span> search_venues
     <span class="k">-</span> slot{&quot;venues&quot;: [{&quot;name&quot;: &quot;Big Arena&quot;, &quot;reviews&quot;: 4.5}]}
 
 <span class="gu">##</span> concert_search
-<span class="k">*</span> _search_concerts
+<span class="k">*</span> search_concerts
     <span class="k">-</span> search_concerts
     <span class="k">-</span> slot{&quot;concerts&quot;: [{&quot;artist&quot;: &quot;Foo Fighters&quot;, &quot;reviews&quot;: 4.5}]}
 
 <span class="gu">##</span> compare_reviews_venues
-<span class="k">*</span> _compare_reviews
+<span class="k">*</span> compare_reviews
     <span class="k">-</span> show_venue_reviews
 
 <span class="gu">##</span> compare_reviews_concerts
-<span class="k">*</span> _compare_reviews
+<span class="k">*</span> compare_reviews
     <span class="k">-</span> show_concert_reviews
 </pre></div>
 </td></tr></table></div>
