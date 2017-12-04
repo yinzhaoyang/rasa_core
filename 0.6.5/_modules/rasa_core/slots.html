@@ -259,8 +259,8 @@
                     <span class="s2">&quot;you are creating your own slot type, make sure its &quot;</span>
                     <span class="s2">&quot;module path is correct: </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">type_name</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Slot.additional_persistence_info"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.slots.Slot.additional_persistence_info">[docs]</a>    <span class="k">def</span> <span class="nf">additional_persistence_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">{}</span></div></div>
+<div class="viewcode-block" id="Slot.persistence_info"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.slots.Slot.persistence_info">[docs]</a>    <span class="k">def</span> <span class="nf">persistence_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_name</span><span class="p">,</span> <span class="s2">&quot;initial_value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_value</span><span class="p">}</span></div></div>
 
 
 <div class="viewcode-block" id="FloatSlot"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.slots.FloatSlot">[docs]</a><span class="k">class</span> <span class="nc">FloatSlot</span><span class="p">(</span><span class="n">Slot</span><span class="p">):</span>
@@ -274,6 +274,20 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">FloatSlot</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">initial_value</span><span class="p">,</span> <span class="n">value_reset_delay</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_value</span> <span class="o">=</span> <span class="n">max_value</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">min_value</span> <span class="o">=</span> <span class="n">min_value</span>
+
+        <span class="k">if</span> <span class="n">min_value</span> <span class="o">&gt;=</span> <span class="n">max_value</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Float slot (&#39;</span><span class="si">{}</span><span class="s2">&#39;) created with an invalid range &quot;</span>
+                    <span class="s2">&quot;using min (</span><span class="si">{}</span><span class="s2">) and max (</span><span class="si">{}</span><span class="s2">) values. Make sure &quot;</span>
+                    <span class="s2">&quot;min is smaller than max.&quot;</span>
+                    <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_value</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">initial_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span>
+                <span class="ow">not</span> <span class="p">(</span><span class="n">min_value</span> <span class="o">&lt;=</span> <span class="n">initial_value</span> <span class="o">&lt;=</span> <span class="n">max_value</span><span class="p">)):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Float slot (&#39;</span><span class="si">{}</span><span class="s2">&#39;) created with an initial value </span><span class="si">{}</span><span class="s2">&quot;</span>
+                        <span class="s2">&quot;outside of configured min (</span><span class="si">{}</span><span class="s2">) and max (</span><span class="si">{}</span><span class="s2">) values.&quot;</span>
+                        <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_value</span><span class="p">,</span>
+                                  <span class="bp">self</span><span class="o">.</span><span class="n">max_value</span><span class="p">))</span>
 
 <div class="viewcode-block" id="FloatSlot.as_feature"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.slots.FloatSlot.as_feature">[docs]</a>    <span class="k">def</span> <span class="nf">as_feature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
@@ -345,8 +359,10 @@
                                               <span class="n">value_reset_delay</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values</span><span class="p">]</span> <span class="k">if</span> <span class="n">values</span> <span class="k">else</span> <span class="p">[]</span>
 
-<div class="viewcode-block" id="CategoricalSlot.additional_persistence_info"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.slots.CategoricalSlot.additional_persistence_info">[docs]</a>    <span class="k">def</span> <span class="nf">additional_persistence_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">}</span></div>
+<div class="viewcode-block" id="CategoricalSlot.persistence_info"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.slots.CategoricalSlot.persistence_info">[docs]</a>    <span class="k">def</span> <span class="nf">persistence_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">CategoricalSlot</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">persistence_info</span><span class="p">()</span>
+        <span class="n">d</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span>
+        <span class="k">return</span> <span class="n">d</span></div>
 
 <div class="viewcode-block" id="CategoricalSlot.as_feature"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.slots.CategoricalSlot.as_feature">[docs]</a>    <span class="k">def</span> <span class="nf">as_feature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">r</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_dimensionality</span><span class="p">()</span>

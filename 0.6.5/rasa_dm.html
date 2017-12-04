@@ -968,11 +968,6 @@ which has been replaced with <cite>{&#8220;name&#8221;: &#8220;Rasa&#8221;}</cit
 <em class="property">class </em><code class="descclassname">rasa_core.slots.</code><code class="descname">CategoricalSlot</code><span class="sig-paren">(</span><em>name</em>, <em>values=None</em>, <em>initial_value=None</em>, <em>value_reset_delay=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/slots.html#CategoricalSlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.slots.CategoricalSlot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#rasa_core.slots.Slot" title="rasa_core.slots.Slot"><code class="xref py py-class docutils literal"><span class="pre">rasa_core.slots.Slot</span></code></a></p>
 <dl class="method">
-<dt id="rasa_core.slots.CategoricalSlot.additional_persistence_info">
-<code class="descname">additional_persistence_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/slots.html#CategoricalSlot.additional_persistence_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.slots.CategoricalSlot.additional_persistence_info" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
 <dt id="rasa_core.slots.CategoricalSlot.as_feature">
 <code class="descname">as_feature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/slots.html#CategoricalSlot.as_feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.slots.CategoricalSlot.as_feature" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -980,6 +975,11 @@ which has been replaced with <cite>{&#8220;name&#8221;: &#8220;Rasa&#8221;}</cit
 <dl class="method">
 <dt id="rasa_core.slots.CategoricalSlot.feature_dimensionality">
 <code class="descname">feature_dimensionality</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/slots.html#CategoricalSlot.feature_dimensionality"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.slots.CategoricalSlot.feature_dimensionality" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.slots.CategoricalSlot.persistence_info">
+<code class="descname">persistence_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/slots.html#CategoricalSlot.persistence_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.slots.CategoricalSlot.persistence_info" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -1037,11 +1037,6 @@ which has been replaced with <cite>{&#8220;name&#8221;: &#8220;Rasa&#8221;}</cit
 <em class="property">class </em><code class="descclassname">rasa_core.slots.</code><code class="descname">Slot</code><span class="sig-paren">(</span><em>name</em>, <em>initial_value=None</em>, <em>value_reset_delay=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/slots.html#Slot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.slots.Slot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <dl class="method">
-<dt id="rasa_core.slots.Slot.additional_persistence_info">
-<code class="descname">additional_persistence_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/slots.html#Slot.additional_persistence_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.slots.Slot.additional_persistence_info" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
 <dt id="rasa_core.slots.Slot.as_feature">
 <code class="descname">as_feature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/slots.html#Slot.as_feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.slots.Slot.as_feature" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -1059,6 +1054,11 @@ to correspond to this value.</p>
 <code class="descname">has_features</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/slots.html#Slot.has_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.slots.Slot.has_features" title="Permalink to this definition">¶</a></dt>
 <dd><p>Indicate if the slot creates any features.</p>
 </dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.slots.Slot.persistence_info">
+<code class="descname">persistence_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/slots.html#Slot.persistence_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.slots.Slot.persistence_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="rasa_core.slots.Slot.reset">

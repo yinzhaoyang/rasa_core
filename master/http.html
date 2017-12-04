@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>HTTP server &mdash; Rasa Core 0.8.0a1 documentation</title>
+  <title>HTTP server &mdash; Rasa Core 0.8.0a2 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.8.0a1 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.8.0a2 documentation" href="index.html"/>
         <link rel="next" title="Connecting to messaging &amp; voice platforms" href="connectors.html"/>
         <link rel="prev" title="Plumbing - How it all fits together" href="plumbing.html"/> 
 
@@ -418,9 +418,9 @@ be reasonable given the <a class="reference internal" href="domains.html#slot-ty
 </div>
 <div class="section" id="endpoints">
 <h2>Endpoints<a class="headerlink" href="#endpoints" title="Permalink to this headline">¶</a></h2>
-<dl class="get">
-<dt id="get--conversations-(str-sender)-parse">
-<code class="descname">GET </code><code class="descname">/conversations/</code><span class="sig-paren">(</span><em class="property">str: </em><em>sender</em><span class="sig-paren">)</span><code class="descname">/parse</code><a class="headerlink" href="#get--conversations-(str-sender)-parse" title="Permalink to this definition">¶</a></dt>
+<dl class="post">
+<dt id="post--conversations-(str-sender)-parse">
+<code class="descname">POST </code><code class="descname">/conversations/</code><span class="sig-paren">(</span><em class="property">str: </em><em>sender</em><span class="sig-paren">)</span><code class="descname">/parse</code><a class="headerlink" href="#post--conversations-(str-sender)-parse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Notify the dialogue engine that the user posted a new message. You must
 <code class="docutils literal"><span class="pre">POST</span></code> data in this format <code class="docutils literal"><span class="pre">'{&quot;query&quot;:&quot;&lt;your</span> <span class="pre">text</span> <span class="pre">to</span> <span class="pre">parse&gt;&quot;}'</span></code>,
 you can do this with</p>
@@ -466,9 +466,9 @@ you can do this with</p>
 </table>
 </dd></dl>
 
-<dl class="get">
-<dt id="get--conversations-(str-sender)-continue">
-<code class="descname">GET </code><code class="descname">/conversations/</code><span class="sig-paren">(</span><em class="property">str: </em><em>sender</em><span class="sig-paren">)</span><code class="descname">/continue</code><a class="headerlink" href="#get--conversations-(str-sender)-continue" title="Permalink to this definition">¶</a></dt>
+<dl class="post">
+<dt id="post--conversations-(str-sender)-continue">
+<code class="descname">POST </code><code class="descname">/conversations/</code><span class="sig-paren">(</span><em class="property">str: </em><em>sender</em><span class="sig-paren">)</span><code class="descname">/continue</code><a class="headerlink" href="#post--conversations-(str-sender)-continue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Continue the prediction loop for the conversation with id <cite>user_id</cite>. Should
 be called until the endpoint returns <code class="docutils literal"><span class="pre">action_listen</span></code> as the next action.
 Between the calls to this endpoint, your code should execute the mentioned
@@ -625,7 +625,7 @@ wait for the next user input.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.8.0a1',
+            VERSION:'0.8.0a2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
