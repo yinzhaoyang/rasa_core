@@ -119,6 +119,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#endpoints">Endpoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#security-considerations">Security Considerations</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="connectors.html">Connecting to messaging &amp; voice platforms</a></li>
@@ -547,6 +548,22 @@ wait for the next user input.</p>
 </table>
 </dd></dl>
 
+</div>
+<div class="section" id="security-considerations">
+<h2>Security Considerations<a class="headerlink" href="#security-considerations" title="Permalink to this headline">¶</a></h2>
+<p>We recommend to not expose the Rasa Core server to the outside world but
+rather connect to it from your backend over a private connection (e.g.
+between docker containers).</p>
+<p>Nevertheless, there is build in token authentication. If you specify a token
+when starting the server, that token needs to be passed with every request:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python -m rasa_core.server --auth_token thisismysecret -d examples/babi/models/policy/current -u examples/babi/models/nlu/current_py2 -o out.log
+</pre></div>
+</div>
+<p>Your requests should pass the token, in our case <code class="docutils literal"><span class="pre">thisismysecret</span></code>,
+as a parameter:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ curl -XPOST localhost:5005/conversations/default/parse?token<span class="o">=</span>thisismysecret -d <span class="s1">&#39;{&quot;query&quot;:&quot;hello there&quot;}&#39;</span>
+</pre></div>
+</div>
 </div>
 </div>
 
