@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Change Log &mdash; Rasa Core 0.8.0a2 documentation</title>
+  <title>Change Log &mdash; Rasa Core 0.8.0a3 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Rasa Core 0.8.0a2 documentation" href="index.html"/>
+    <link rel="top" title="Rasa Core 0.8.0a3 documentation" href="index.html"/>
         <link rel="prev" title="Tracking Conversation State" href="state.html"/> 
 
   
@@ -314,6 +314,7 @@ to set the log level</li>
 <li>support for story cycles when using checkpoints</li>
 <li>warn if action emits events when using a model that it did never emit in
 any of the stories the model was trained on</li>
+<li>support for event pushing and endpoints to retrieve the tracker state from the server</li>
 </ul>
 </div>
 <div class="section" id="changed">
@@ -323,6 +324,7 @@ any of the stories the model was trained on</li>
 to <code class="docutils literal"><span class="pre">*</span> <span class="pre">intent_greet{&quot;name&quot;:</span> <span class="pre">&quot;Rasa&quot;}</span></code> (old format is still supported but
 deprecated)</li>
 <li>persist action names in domain during model persistence</li>
+<li>improved travis build speed by not using miniconda</li>
 </ul>
 </div>
 <div class="section" id="removed">
@@ -604,7 +606,7 @@ wrong predictions</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.8.0a2',
+            VERSION:'0.8.0a3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
