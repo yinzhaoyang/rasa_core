@@ -298,6 +298,11 @@ with an assistant.</p>
 <code class="descname">continue_message_handling</code><span class="sig-paren">(</span><em>sender_id</em>, <em>executed_action</em>, <em>events</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/agent.html#Agent.continue_message_handling"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.agent.Agent.continue_message_handling" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="classmethod">
+<dt id="rasa_core.agent.Agent.create_tracker_store">
+<em class="property">classmethod </em><code class="descname">create_tracker_store</code><span class="sig-paren">(</span><em>store</em>, <em>domain</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/agent.html#Agent.create_tracker_store"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.agent.Agent.create_tracker_store" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="rasa_core.agent.Agent.handle_channel">
 <code class="descname">handle_channel</code><span class="sig-paren">(</span><em>input_channel</em>, <em>message_preprocessor=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/agent.html#Agent.handle_channel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.agent.Agent.handle_channel" title="Permalink to this definition">¶</a></dt>
@@ -1000,8 +1005,77 @@ which has been replaced with <cite>{&#8220;name&#8221;: &#8220;Rasa&#8221;}</cit
 </dd></dl>
 
 </div>
-<div class="section" id="rasa-core-server-module">
-<h2>rasa_core.server module<a class="headerlink" href="#rasa-core-server-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-rasa_core.server">
+<span id="rasa-core-server-module"></span><h2>rasa_core.server module<a class="headerlink" href="#module-rasa_core.server" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rasa_core.server.RasaCoreServer">
+<em class="property">class </em><code class="descclassname">rasa_core.server.</code><code class="descname">RasaCoreServer</code><span class="sig-paren">(</span><em>model_directory</em>, <em>interpreter=None</em>, <em>loglevel=u'INFO'</em>, <em>log_file=u'rasa_core.log'</em>, <em>cors_origins=None</em>, <em>action_factory=None</em>, <em>auth_token=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/server.html#RasaCoreServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.server.RasaCoreServer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Class representing a Rasa Core HTTP server.</p>
+<dl class="attribute">
+<dt id="rasa_core.server.RasaCoreServer.app">
+<code class="descname">app</code><a class="headerlink" href="#rasa_core.server.RasaCoreServer.app" title="Permalink to this definition">¶</a></dt>
+<dd><p>L{Klein} is an object which is responsible for maintaining the routing
+configuration of our application.</p>
+<dl class="docutils">
+<dt>&#64;ivar _url_map: A C{werkzeug.routing.Map} object which will be used for</dt>
+<dd>routing resolution.</dd>
+</dl>
+<p>&#64;ivar _endpoints: A C{dict} mapping endpoint names to handler functions.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.server.RasaCoreServer.append_events">
+<code class="descname">append_events</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/server.html#RasaCoreServer.append_events"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.server.RasaCoreServer.append_events" title="Permalink to this definition">¶</a></dt>
+<dd><p>Append a list of events to the state of a conversation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.server.RasaCoreServer.continue_predicting">
+<code class="descname">continue_predicting</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/server.html#RasaCoreServer.continue_predicting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.server.RasaCoreServer.continue_predicting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.server.RasaCoreServer.hello">
+<code class="descname">hello</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/server.html#RasaCoreServer.hello"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.server.RasaCoreServer.hello" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the server is running and responds with the version.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.server.RasaCoreServer.parse">
+<code class="descname">parse</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/server.html#RasaCoreServer.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.server.RasaCoreServer.parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.server.RasaCoreServer.retrieve_tracker">
+<code class="descname">retrieve_tracker</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/server.html#RasaCoreServer.retrieve_tracker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.server.RasaCoreServer.retrieve_tracker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a dump of a conversations tracker including its events.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.server.RasaCoreServer.update_tracker">
+<code class="descname">update_tracker</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/server.html#RasaCoreServer.update_tracker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.server.RasaCoreServer.update_tracker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use a list of events to set a conversations tracker to a state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.server.RasaCoreServer.version">
+<code class="descname">version</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/server.html#RasaCoreServer.version"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.server.RasaCoreServer.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Respond with the version number of the installed Rasa Core.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="rasa_core.server.convert_obj_2_tracker_events">
+<code class="descclassname">rasa_core.server.</code><code class="descname">convert_obj_2_tracker_events</code><span class="sig-paren">(</span><em>serialized_events</em>, <em>domain</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/server.html#convert_obj_2_tracker_events"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.server.convert_obj_2_tracker_events" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rasa_core.server.create_argument_parser">
+<code class="descclassname">rasa_core.server.</code><code class="descname">create_argument_parser</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/server.html#create_argument_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.server.create_argument_parser" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 <div class="section" id="module-rasa_core.slots">
 <span id="rasa-core-slots-module"></span><h2>rasa_core.slots module<a class="headerlink" href="#module-rasa_core.slots" title="Permalink to this headline">¶</a></h2>
@@ -1221,7 +1295,7 @@ to correspond to this value.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <dl class="method">
 <dt id="rasa_core.tracker_store.TrackerStore.create_tracker">
-<code class="descname">create_tracker</code><span class="sig-paren">(</span><em>sender_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/tracker_store.html#TrackerStore.create_tracker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.tracker_store.TrackerStore.create_tracker" title="Permalink to this definition">¶</a></dt>
+<code class="descname">create_tracker</code><span class="sig-paren">(</span><em>sender_id</em>, <em>append_action_listen=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/tracker_store.html#TrackerStore.create_tracker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.tracker_store.TrackerStore.create_tracker" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new tracker for the sender_id.</p>
 <p>The tracker is initially listening.</p>
 </dd></dl>
@@ -1234,6 +1308,11 @@ to correspond to this value.</p>
 <dl class="method">
 <dt id="rasa_core.tracker_store.TrackerStore.get_or_create_tracker">
 <code class="descname">get_or_create_tracker</code><span class="sig-paren">(</span><em>sender_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/tracker_store.html#TrackerStore.get_or_create_tracker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.tracker_store.TrackerStore.get_or_create_tracker" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rasa_core.tracker_store.TrackerStore.init_tracker">
+<code class="descname">init_tracker</code><span class="sig-paren">(</span><em>sender_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/tracker_store.html#TrackerStore.init_tracker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.tracker_store.TrackerStore.init_tracker" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1283,7 +1362,7 @@ of this tracker exactly.</p>
 
 <dl class="method">
 <dt id="rasa_core.trackers.DialogueStateTracker.current_state">
-<code class="descname">current_state</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.current_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.current_state" title="Permalink to this definition">¶</a></dt>
+<code class="descname">current_state</code><span class="sig-paren">(</span><em>should_include_events=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rasa_core/trackers.html#DialogueStateTracker.current_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rasa_core.trackers.DialogueStateTracker.current_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the current tracker state as an object.</p>
 </dd></dl>
 

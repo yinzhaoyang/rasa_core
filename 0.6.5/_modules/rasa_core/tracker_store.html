@@ -220,19 +220,20 @@
             <span class="n">tracker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_tracker</span><span class="p">(</span><span class="n">sender_id</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">tracker</span></div>
 
-    <span class="k">def</span> <span class="nf">_init_tracker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender_id</span><span class="p">):</span>
+<div class="viewcode-block" id="TrackerStore.init_tracker"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.tracker_store.TrackerStore.init_tracker">[docs]</a>    <span class="k">def</span> <span class="nf">init_tracker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender_id</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">DialogueStateTracker</span><span class="p">(</span><span class="n">sender_id</span><span class="p">,</span>
                                        <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">slots</span><span class="p">,</span>
                                        <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">topics</span><span class="p">,</span>
-                                       <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">default_topic</span><span class="p">)</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">default_topic</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="TrackerStore.create_tracker"><a class="viewcode-back" href="../../tracker_store.html#rasa_core.tracker_store.TrackerStore.create_tracker">[docs]</a>    <span class="k">def</span> <span class="nf">create_tracker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender_id</span><span class="p">):</span>
+<div class="viewcode-block" id="TrackerStore.create_tracker"><a class="viewcode-back" href="../../tracker_store.html#rasa_core.tracker_store.TrackerStore.create_tracker">[docs]</a>    <span class="k">def</span> <span class="nf">create_tracker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender_id</span><span class="p">,</span> <span class="n">append_action_listen</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Creates a new tracker for the sender_id.</span>
 
 <span class="sd">        The tracker is initially listening.&quot;&quot;&quot;</span>
 
-        <span class="n">tracker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_tracker</span><span class="p">(</span><span class="n">sender_id</span><span class="p">)</span>
-        <span class="n">tracker</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ActionExecuted</span><span class="p">(</span><span class="n">ACTION_LISTEN_NAME</span><span class="p">))</span>
+        <span class="n">tracker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_tracker</span><span class="p">(</span><span class="n">sender_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">append_action_listen</span><span class="p">:</span>
+            <span class="n">tracker</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ActionExecuted</span><span class="p">(</span><span class="n">ACTION_LISTEN_NAME</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">tracker</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">tracker</span></div>
 
@@ -250,7 +251,7 @@
 
 <div class="viewcode-block" id="TrackerStore.deserialise_tracker"><a class="viewcode-back" href="../../rasa_dm.html#rasa_core.tracker_store.TrackerStore.deserialise_tracker">[docs]</a>    <span class="k">def</span> <span class="nf">deserialise_tracker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender_id</span><span class="p">,</span> <span class="n">_json</span><span class="p">):</span>
         <span class="n">dialogue</span> <span class="o">=</span> <span class="n">pickler</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">_json</span><span class="p">)</span>
-        <span class="n">tracker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_tracker</span><span class="p">(</span><span class="n">sender_id</span><span class="p">)</span>
+        <span class="n">tracker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_tracker</span><span class="p">(</span><span class="n">sender_id</span><span class="p">)</span>
         <span class="n">tracker</span><span class="o">.</span><span class="n">recreate_from_dialogue</span><span class="p">(</span><span class="n">dialogue</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">tracker</span></div></div>
 

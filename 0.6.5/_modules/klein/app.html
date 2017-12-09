@@ -1,0 +1,693 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>klein.app &mdash; Rasa Core 0.7.0a3 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Rasa Core 0.7.0a3 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Rasa Core
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../read_first.html">Read this first</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation and Hello World</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tour.html">A Quick Tour (no ML)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial_scratch.html">A Bot From Scratch</a></li>
+</ul>
+<p class="caption"><span class="caption-text">More Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial_babi.html">Supervised Learning Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial_fake_user.html">Interactive Learning with a Fake User</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Deep Dives</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../patterns.html">Common Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../slot_types.html">Slot Types Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plumbing.html">Plumbing - How it all fits together</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../connectors.html">Connecting to messaging &amp; voice platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../domains_actions.html">Domains and Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../state.html">Tracking Conversation State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../policies.html">Creating Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stories.html">Stories Data Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scheduling.html">Scheduling Reminders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../featurisation.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../interpreters.html">Interpreters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../message_handling.html">Message Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../library.html">Library Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change Log</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Rasa Core</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>klein.app</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+    
+    
+
+
+
+    <p class="scv-banner scv-sphinx_rtd_theme"><b>Warning:</b> This document is for an old version of Rasa Core.</p>
+<h1>Source code for klein.app</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Applications are great.  Lets have more of them.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">weakref</span>
+
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">namedtuple</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="k">import</span> <span class="n">contextmanager</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">inspect</span> <span class="k">import</span> <span class="n">iscoroutine</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">iscoroutine</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+<span class="kn">from</span> <span class="nn">twisted.internet</span> <span class="k">import</span> <span class="n">endpoints</span><span class="p">,</span> <span class="n">reactor</span>
+<span class="kn">from</span> <span class="nn">twisted.python</span> <span class="k">import</span> <span class="n">log</span>
+<span class="kn">from</span> <span class="nn">twisted.python.components</span> <span class="k">import</span> <span class="n">registerAdapter</span>
+<span class="kn">from</span> <span class="nn">twisted.web.server</span> <span class="k">import</span> <span class="n">Request</span><span class="p">,</span> <span class="n">Site</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">twisted.internet.defer</span> <span class="k">import</span> <span class="n">ensureDeferred</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">ensureDeferred</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwagrs</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Coroutines support requires Twisted&gt;=16.6&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">werkzeug.routing</span> <span class="k">import</span> <span class="n">Map</span><span class="p">,</span> <span class="n">Rule</span><span class="p">,</span> <span class="n">Submount</span>
+
+<span class="kn">from</span> <span class="nn">zope.interface</span> <span class="k">import</span> <span class="n">implementer</span>
+
+<span class="kn">from</span> <span class="nn">klein.interfaces</span> <span class="k">import</span> <span class="n">IKleinRequest</span>
+<span class="kn">from</span> <span class="nn">klein.resource</span> <span class="k">import</span> <span class="n">KleinResource</span>
+
+<span class="kn">from</span> <span class="nn">._decorators</span> <span class="k">import</span> <span class="n">modified</span><span class="p">,</span> <span class="n">named</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;Klein&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;run&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;route&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;resource&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_call</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">instance</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">&quot;__klein_bound__&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">instance</span><span class="p">,)</span> <span class="o">+</span> <span class="n">args</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">iscoroutine</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">ensureDeferred</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="nd">@implementer</span><span class="p">(</span><span class="n">IKleinRequest</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">KleinRequest</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">branch_segments</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">url_for</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="n">registerAdapter</span><span class="p">(</span><span class="n">KleinRequest</span><span class="p">,</span> <span class="n">Request</span><span class="p">,</span> <span class="n">IKleinRequest</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Klein</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    L{Klein} is an object which is responsible for maintaining the routing</span>
+<span class="sd">    configuration of our application.</span>
+
+<span class="sd">    @ivar _url_map: A C{werkzeug.routing.Map} object which will be used for</span>
+<span class="sd">        routing resolution.</span>
+<span class="sd">    @ivar _endpoints: A C{dict} mapping endpoint names to handler functions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_bound_klein_instances</span> <span class="o">=</span> <span class="n">weakref</span><span class="o">.</span><span class="n">WeakKeyDictionary</span><span class="p">()</span>
+
+    <span class="n">_subroute_segments</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_url_map</span> <span class="o">=</span> <span class="n">Map</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_endpoints</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_error_handlers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_instance</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Klein</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="nb">vars</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">NotImplemented</span>
+
+
+    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="bp">NotImplemented</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="n">result</span>
+
+
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">url_map</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Read only property exposing L{Klein._url_map}.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url_map</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">endpoints</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Read only property exposing L{Klein._endpoints}.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_endpoints</span>
+
+
+    <span class="k">def</span> <span class="nf">execute_endpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute the named endpoint with all arguments and possibly a bound</span>
+<span class="sd">        instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">endpoint_f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_endpoints</span><span class="p">[</span><span class="n">endpoint</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">endpoint_f</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_instance</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">execute_error_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">handler</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">failure</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute the passed error handler, possibly with a bound instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">handler</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_instance</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">failure</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">resource</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return an L{IResource} which suitably wraps this app.</span>
+
+<span class="sd">        @returns: An L{IResource}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">KleinResource</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get an instance of L{Klein} bound to C{instance}.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">instance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bound_klein_instances</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">()</span>
+            <span class="n">k</span><span class="o">.</span><span class="n">_url_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url_map</span>
+            <span class="n">k</span><span class="o">.</span><span class="n">_endpoints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_endpoints</span>
+            <span class="n">k</span><span class="o">.</span><span class="n">_error_handlers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_error_handlers</span>
+            <span class="n">k</span><span class="o">.</span><span class="n">_instance</span> <span class="o">=</span> <span class="n">instance</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_bound_klein_instances</span><span class="p">[</span><span class="n">instance</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span>
+
+        <span class="k">return</span> <span class="n">k</span>
+
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_segments_in_url</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+        <span class="n">segment_count</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">url</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">):</span>
+            <span class="n">segment_count</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">segment_count</span>
+
+
+    <span class="k">def</span> <span class="nf">route</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a new handler for C{url} passing C{args} and C{kwargs} directly to</span>
+<span class="sd">        C{werkzeug.routing.Rule}.  The handler function will be passed at least</span>
+<span class="sd">        one argument an L{twisted.web.server.Request} and any keyword arguments</span>
+<span class="sd">        taken from the C{url} pattern.</span>
+
+<span class="sd">        ::</span>
+<span class="sd">            @app.route(&quot;/&quot;)</span>
+<span class="sd">            def index(request):</span>
+<span class="sd">                return &quot;Hello&quot;</span>
+
+<span class="sd">        @param url: A werkzeug URL pattern given to C{werkzeug.routing.Rule}.</span>
+<span class="sd">        @type url: str</span>
+
+<span class="sd">        @param branch: A bool indiciated if a branch endpoint should</span>
+<span class="sd">            be added that allows all child path segments that don&#39;t</span>
+<span class="sd">            match some other route to be consumed.  Default C{False}.</span>
+<span class="sd">        @type branch: bool</span>
+
+
+<span class="sd">        @returns: decorated handler function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">segment_count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segments_in_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subroute_segments</span>
+
+        <span class="nd">@named</span><span class="p">(</span><span class="s2">&quot;router for &#39;&quot;</span> <span class="o">+</span> <span class="n">url</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">deco</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;endpoint&#39;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;branch&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+                <span class="n">branchKwargs</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="n">branchKwargs</span><span class="p">[</span><span class="s1">&#39;endpoint&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">branchKwargs</span><span class="p">[</span><span class="s1">&#39;endpoint&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_branch&#39;</span>
+
+                <span class="nd">@modified</span><span class="p">(</span><span class="s2">&quot;branch route &#39;</span><span class="si">{url}</span><span class="s2">&#39; executor&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">),</span> <span class="n">f</span><span class="p">)</span>
+                <span class="k">def</span> <span class="nf">branch_f</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+                    <span class="n">IKleinRequest</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">branch_segments</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="n">kw</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;__rest__&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+                    <span class="p">)</span>
+                    <span class="k">return</span> <span class="n">_call</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+
+                <span class="n">branch_f</span><span class="o">.</span><span class="n">segment_count</span> <span class="o">=</span> <span class="n">segment_count</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_endpoints</span><span class="p">[</span><span class="n">branchKwargs</span><span class="p">[</span><span class="s1">&#39;endpoint&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">branch_f</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_url_map</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+                    <span class="n">Rule</span><span class="p">(</span>
+                        <span class="n">url</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="s1">&#39;&lt;path:__rest__&gt;&#39;</span><span class="p">,</span>
+                        <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">branchKwargs</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+
+            <span class="nd">@modified</span><span class="p">(</span><span class="s2">&quot;route &#39;</span><span class="si">{url}</span><span class="s2">&#39; executor&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">),</span> <span class="n">f</span><span class="p">)</span>
+            <span class="k">def</span> <span class="nf">_f</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">_call</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+
+            <span class="n">_f</span><span class="o">.</span><span class="n">segment_count</span> <span class="o">=</span> <span class="n">segment_count</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_endpoints</span><span class="p">[</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;endpoint&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">_f</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_url_map</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Rule</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">f</span>
+        <span class="k">return</span> <span class="n">deco</span>
+
+
+    <span class="nd">@contextmanager</span>
+    <span class="k">def</span> <span class="nf">subroute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Within this block, C{@route} adds rules to a</span>
+<span class="sd">        C{werkzeug.routing.Submount}.</span>
+
+<span class="sd">        This is implemented by tinkering with the instance&#39;s C{_url_map}</span>
+<span class="sd">        variable. A context manager allows us to gracefully use the pattern of</span>
+<span class="sd">        &quot;change a variable, do some things with the new value, then put it back</span>
+<span class="sd">        to how it was before.</span>
+
+<span class="sd">        Named &quot;subroute&quot; to try and give callers a better idea of its</span>
+<span class="sd">        relationship to C{@route}.</span>
+
+<span class="sd">        Usage:</span>
+<span class="sd">        ::</span>
+<span class="sd">            with app.subroute(&quot;/prefix&quot;) as app:</span>
+<span class="sd">                @app.route(&quot;/foo&quot;)</span>
+<span class="sd">                def foo_handler(request):</span>
+<span class="sd">                    return &#39;I respond to /prefix/foo&#39;</span>
+
+<span class="sd">        @type prefix: string</span>
+<span class="sd">        @param prefix: The string that will be prepended to the paths of all</span>
+<span class="sd">                       routes established during the with-block.</span>
+<span class="sd">        @return: Returns None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">_map_before_submount</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url_map</span>
+
+        <span class="n">segments</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segments_in_url</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+
+        <span class="n">submount_map</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span>
+            <span class="s1">&#39;submount&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;rules&#39;</span><span class="p">,</span> <span class="s1">&#39;add&#39;</span><span class="p">])(</span>
+                <span class="p">[],</span> <span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">submount_map</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_url_map</span> <span class="o">=</span> <span class="n">submount_map</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_subroute_segments</span> <span class="o">+=</span> <span class="n">segments</span>
+            <span class="k">yield</span> <span class="bp">self</span>
+            <span class="n">_map_before_submount</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+                <span class="n">Submount</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">submount_map</span><span class="o">.</span><span class="n">rules</span><span class="p">))</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_url_map</span> <span class="o">=</span> <span class="n">_map_before_submount</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_subroute_segments</span> <span class="o">-=</span> <span class="n">segments</span>
+
+
+    <span class="k">def</span> <span class="nf">handle_errors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f_or_exception</span><span class="p">,</span> <span class="o">*</span><span class="n">additional_exceptions</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Register an error handler. This decorator supports two syntaxes. The</span>
+<span class="sd">        simpler of these can be used to register a handler for all C{Exception}</span>
+<span class="sd">        types::</span>
+
+<span class="sd">            @app.handle_errors</span>
+<span class="sd">            def error_handler(request, failure):</span>
+<span class="sd">                request.setResponseCode(500)</span>
+<span class="sd">                return &#39;Uh oh&#39;</span>
+
+<span class="sd">        Alternately, a handler can be registered for one or more specific</span>
+<span class="sd">        C{Exception} tyes::</span>
+
+<span class="sd">            @app.handle_errors(EncodingError, ValidationError):</span>
+<span class="sd">            def error_handler(request, failure)</span>
+<span class="sd">                request.setResponseCode(400)</span>
+<span class="sd">                return failure.getTraceback()</span>
+
+<span class="sd">        The handler will be passed a L{twisted.web.server.Request} as well as a</span>
+<span class="sd">        L{twisted.python.failure.Failure} instance. Error handlers may return a</span>
+<span class="sd">        deferred, a failure or a response body.</span>
+
+<span class="sd">        If more than one error handler is registered, the handlers will be</span>
+<span class="sd">        executed in the order in which they are defined, until a handler is</span>
+<span class="sd">        encountered which completes successfully. If no handler completes</span>
+<span class="sd">        successfully, L{twisted.web.server.Request}&#39;s processingFailed() method</span>
+<span class="sd">        will be called.</span>
+
+<span class="sd">        In addition to handling errors that occur within a route handler, error</span>
+<span class="sd">        handlers also handle any C{werkzeug.exceptions.HTTPException} which is</span>
+<span class="sd">        raised during routing. In particular, C{werkzeug.exceptions.NotFound}</span>
+<span class="sd">        will be raised if no matching route is found, so to return a custom 404</span>
+<span class="sd">        users can do the following::</span>
+
+<span class="sd">            @app.handle_errors(NotFound)</span>
+<span class="sd">            def error_handler(request, failure):</span>
+<span class="sd">                request.setResponseCode(404)</span>
+<span class="sd">                return &#39;Not found&#39;</span>
+
+<span class="sd">        @param f_or_exception: An error handler function, or an C{Exception}</span>
+<span class="sd">            subclass to scope the decorated handler to.</span>
+<span class="sd">        @type f_or_exception: C{function} or C{Exception}</span>
+
+<span class="sd">        @param additional_exceptions Additional C{Exception} subclasses to</span>
+<span class="sd">            scope the decorated function to.</span>
+<span class="sd">        @type additional_exceptions C{list} of C{Exception}s</span>
+
+<span class="sd">        @returns: decorated error handler function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Try to detect calls using the &quot;simple&quot; @app.handle_error syntax by</span>
+        <span class="c1"># introspecting the first argument - if it isn&#39;t a type which</span>
+        <span class="c1"># subclasses Exception we assume the simple syntax was used.</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f_or_exception</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="ow">or</span>
+            <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">f_or_exception</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_errors</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)(</span><span class="n">f_or_exception</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">deco</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+            <span class="nd">@modified</span><span class="p">(</span><span class="s2">&quot;error handling wrapper&quot;</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+            <span class="k">def</span> <span class="nf">_f</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">failure</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">_call</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">failure</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_error_handlers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">([</span><span class="n">f_or_exception</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">additional_exceptions</span><span class="p">),</span> <span class="n">_f</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">_f</span>
+
+        <span class="k">return</span> <span class="n">deco</span>
+
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">logFile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">endpoint_description</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run a minimal twisted.web server on the specified C{port}, bound to the</span>
+<span class="sd">        interface specified by C{host} and logging to C{logFile}.</span>
+
+<span class="sd">        This function will run the default reactor for your platform and so</span>
+<span class="sd">        will block the main thread of your application.  It should be the last</span>
+<span class="sd">        thing your klein application does.</span>
+
+<span class="sd">        @param host: The hostname or IP address to bind the listening socket</span>
+<span class="sd">            to.  &quot;0.0.0.0&quot; will allow you to listen on all interfaces, and</span>
+<span class="sd">            &quot;127.0.0.1&quot; will allow you to listen on just the loopback</span>
+<span class="sd">            interface.</span>
+<span class="sd">        @type host: str</span>
+
+<span class="sd">        @param port: The TCP port to accept HTTP requests on.</span>
+<span class="sd">        @type port: int</span>
+
+<span class="sd">        @param logFile: The file object to log to, by default C{sys.stdout}</span>
+<span class="sd">        @type logFile: file object</span>
+
+<span class="sd">        @param endpoint_description: specification of endpoint. Must contain</span>
+<span class="sd">            protocol, port and interface. May contain other optional arguments,</span>
+<span class="sd">             e.g. to use SSL: &quot;ssl:443:privateKey=key.pem:certKey=crt.pem&quot;</span>
+<span class="sd">        @type endpoint_description: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">logFile</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">logFile</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
+
+        <span class="n">log</span><span class="o">.</span><span class="n">startLogging</span><span class="p">(</span><span class="n">logFile</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">endpoint_description</span><span class="p">:</span>
+            <span class="n">endpoint_description</span> <span class="o">=</span> <span class="s2">&quot;tcp:port=</span><span class="si">{0}</span><span class="s2">:interface=</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">port</span><span class="p">,</span>
+                                                                       <span class="n">host</span><span class="p">)</span>
+
+        <span class="n">endpoint</span> <span class="o">=</span> <span class="n">endpoints</span><span class="o">.</span><span class="n">serverFromString</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="n">endpoint_description</span><span class="p">)</span>
+        <span class="n">endpoint</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="n">Site</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resource</span><span class="p">()))</span>
+        <span class="n">reactor</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+
+<span class="n">_globalKleinApp</span> <span class="o">=</span> <span class="n">Klein</span><span class="p">()</span>
+
+<span class="n">route</span> <span class="o">=</span> <span class="n">_globalKleinApp</span><span class="o">.</span><span class="n">route</span>
+<span class="n">run</span> <span class="o">=</span> <span class="n">_globalKleinApp</span><span class="o">.</span><span class="n">run</span>
+<span class="n">resource</span> <span class="o">=</span> <span class="n">_globalKleinApp</span><span class="o">.</span><span class="n">resource</span>
+<span class="n">handle_errors</span> <span class="o">=</span> <span class="n">_globalKleinApp</span><span class="o">.</span><span class="n">handle_errors</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Rasa Technologies GmbH.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 0.6.5
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../../0.7.9/index.html">0.7.9</a></dd>
+            <dd><a href="../../../0.7.8/index.html">0.7.8</a></dd>
+            <dd><a href="../../../0.7.7/index.html">0.7.7</a></dd>
+            <dd><a href="../../../0.7.6/index.html">0.7.6</a></dd>
+            <dd><a href="../../../0.7.5/index.html">0.7.5</a></dd>
+            <dd><a href="../../../0.7.4/index.html">0.7.4</a></dd>
+            <dd><a href="../../../0.7.3/index.html">0.7.3</a></dd>
+            <dd><a href="../../../0.7.2/index.html">0.7.2</a></dd>
+            <dd><a href="../../../0.7.1/index.html">0.7.1</a></dd>
+            <dd><a href="../../../0.7.0/index.html">0.7.0</a></dd>
+            <dd><a href="../../../0.7.0a10/index.html">0.7.0a10</a></dd>
+            <dd><a href="../../../0.7.0a5/index.html">0.7.0a5</a></dd>
+            <dd><a href="../../../0.7.0a6/index.html">0.7.0a6</a></dd>
+            <dd><a href="../../../0.7.0a7/index.html">0.7.0a7</a></dd>
+            <dd><a href="../../../0.7.0a8/index.html">0.7.0a8</a></dd>
+            <dd><a href="../../../0.7.0a9/index.html">0.7.0a9</a></dd>
+            <dd><a href="../../../0.6.9/index.html">0.6.9</a></dd>
+            <dd><a href="app.html">0.6.5</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../../master/index.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.7.0a3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
