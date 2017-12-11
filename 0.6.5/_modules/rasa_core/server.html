@@ -281,6 +281,14 @@
     <span class="k">return</span> <span class="n">deserialized</span></div>
 
 
+<span class="k">def</span> <span class="nf">_configure_logging</span><span class="p">(</span><span class="n">loglevel</span><span class="p">,</span> <span class="n">logfile</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">logfile</span><span class="p">:</span>
+        <span class="n">fh</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">FileHandler</span><span class="p">(</span><span class="n">logfile</span><span class="p">)</span>
+        <span class="n">fh</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">loglevel</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">fh</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">captureWarnings</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+
 <div class="viewcode-block" id="RasaCoreServer"><a class="viewcode-back" href="../../rasa_core.html#rasa_core.server.RasaCoreServer">[docs]</a><span class="k">class</span> <span class="nc">RasaCoreServer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Class representing a Rasa Core HTTP server.&quot;&quot;&quot;</span>
 
@@ -289,12 +297,12 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_directory</span><span class="p">,</span>
                  <span class="n">interpreter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">loglevel</span><span class="o">=</span><span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
-                 <span class="n">log_file</span><span class="o">=</span><span class="s2">&quot;rasa_core.log&quot;</span><span class="p">,</span>
+                 <span class="n">logfile</span><span class="o">=</span><span class="s2">&quot;rasa_core.log&quot;</span><span class="p">,</span>
                  <span class="n">cors_origins</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">action_factory</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">auth_token</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">log_file</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">loglevel</span><span class="p">)</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">captureWarnings</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">_configure_logging</span><span class="p">(</span><span class="n">loglevel</span><span class="p">,</span> <span class="n">logfile</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cors_origins&quot;</span><span class="p">:</span> <span class="n">cors_origins</span> <span class="k">if</span> <span class="n">cors_origins</span> <span class="k">else</span> <span class="p">[],</span>
                        <span class="s2">&quot;token&quot;</span><span class="p">:</span> <span class="n">auth_token</span><span class="p">}</span>
@@ -305,7 +313,7 @@
     <span class="k">def</span> <span class="nf">_create_agent</span><span class="p">(</span>
             <span class="n">model_directory</span><span class="p">,</span>  <span class="c1"># type: Text</span>
             <span class="n">interpreter</span><span class="p">,</span>  <span class="c1"># type: Union[Text, NaturalLanguageInterpreter]</span>
-            <span class="n">action_factory</span><span class="o">=</span><span class="kc">None</span> <span class="c1">#type: Optional[Text]</span>
+            <span class="n">action_factory</span><span class="o">=</span><span class="kc">None</span>  <span class="c1"># type: Optional[Text]</span>
     <span class="p">):</span>
         <span class="c1"># type: (...) -&gt; Agent</span>
         <span class="k">return</span> <span class="n">Agent</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_directory</span><span class="p">,</span> <span class="n">interpreter</span><span class="p">,</span>
