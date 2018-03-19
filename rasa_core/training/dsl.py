@@ -4,24 +4,19 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-import copy
 import io
 import json
 import logging
 import os
 import re
 import warnings
-from collections import deque
 
 from typing import Optional, List, Text, Any, Dict
 
 from rasa_core import utils
-from rasa_core.channels import UserMessage
-from rasa_core.domain import Domain
 from rasa_core.events import (
-    ActionExecuted, UserUttered, Event, ActionReverted)
+    ActionExecuted, UserUttered, Event)
 from rasa_core.interpreter import RegexInterpreter
-from rasa_core.trackers import DialogueStateTracker
 from rasa_core.training.structures import (
     Checkpoint, STORY_END, STORY_START, StoryStep)
 
@@ -54,19 +49,22 @@ class StoryStepBuilder(object):
                             "(checkpoint: {})".format(name))
             additional_steps = []
             for t in self.current_steps:
-                if t.end_checkpoint != STORY_END:
+                if t.end_checkpoints:
                     tcp = t.create_copy(use_new_id=True)
-                    tcp.end_checkpoint = Checkpoint(name)
+                    tcp.end_checkpoints = [Checkpoint(name)]
                     additional_steps.append(tcp)
                 else:
-                    t.end_checkpoint = Checkpoint(name)
+                    t.end_checkpoints = [Checkpoint(name)]
             self.current_steps.extend(additional_steps)
 
     def _prev_end_checkpoints(self):
         if not self.current_steps:
             return self.start_checkpoints
         else:
-            end_names = {s.end_checkpoint_name() for s in self.current_steps}
+            # makes sure we got each end name only once
+            end_names = {e.name
+                         for s in self.current_steps
+                         for e in s.end_checkpoints}
             return [Checkpoint(name) for name in end_names]
 
     def add_user_messages(self, messages):
@@ -87,7 +85,7 @@ class StoryStepBuilder(object):
                 for m in messages:
                     copied = t.create_copy(use_new_id=True)
                     copied.add_user_message(m)
-                    copied.end_checkpoint = Checkpoint(generated_checkpoint)
+                    copied.end_checkpoints = [Checkpoint(generated_checkpoint)]
                     updated_steps.append(copied)
             self.current_steps = updated_steps
 
@@ -99,10 +97,10 @@ class StoryStepBuilder(object):
     def ensure_current_steps(self):
         completed = [step
                      for step in self.current_steps
-                     if step.end_checkpoint != STORY_END]
+                     if step.end_checkpoints]
         unfinished = [step
                       for step in self.current_steps
-                      if step.end_checkpoint == STORY_END]
+                      if not step.end_checkpoints]
         self.story_steps.extend(completed)
         if unfinished:
             self.current_steps = unfinished
@@ -118,8 +116,8 @@ class StoryStepBuilder(object):
         start_checkpoints = self._prev_end_checkpoints()
         if not start_checkpoints:
             start_checkpoints = [Checkpoint(STORY_START)]
-        current_turns = [StoryStep(block_name=self.name, start_checkpoint=s)
-                         for s in start_checkpoints]
+        current_turns = [StoryStep(block_name=self.name,
+                                   start_checkpoints=start_checkpoints)]
         return current_turns
 
 
@@ -143,10 +141,14 @@ class StoryFileReader(object):
                 lines = f.readlines()
             reader = StoryFileReader(domain, interpreter, template_variables)
             return reader.process_lines(lines)
-        except Exception:
-            logger.exception("Failed to parse '{}'".format(
-                    os.path.abspath(filename)))
-            raise ValueError("Invalid story file format.")
+        except ValueError as err:
+            file_info = ("Invalid story file format. Failed to parse "
+                         "'{}'".format(os.path.abspath(filename)))
+            logger.exception(file_info)
+            if not err.args:
+                err.args = ('',)
+            err.args = err.args + (file_info,)
+            raise
 
     @staticmethod
     def _parameters_from_json_string(s, line):
@@ -219,7 +221,7 @@ class StoryFileReader(object):
             except Exception as e:
                 msg = "Error in line {}: {}".format(line_num, e.message)
                 logger.error(msg, exc_info=1)
-                raise Exception(msg)
+                raise ValueError(msg)
         self._add_current_stories_to_result()
         return self.story_steps
 
@@ -269,7 +271,11 @@ class StoryFileReader(object):
         parsed_messages = []
         for m in messages:
             parse_data = self.interpreter.parse(m)
-            utterance = UserUttered.from_parse_data(m, parse_data)
+            # a user uttered event's format is a bit different to the one of
+            # other events, so we need to take a shortcut here
+            parameters = {"text": m, "parse_data": parse_data}
+            utterance = Event.from_story_string(UserUttered.type_name,
+                                                parameters)
             if m.startswith("_"):
                 c = utterance.as_story_string()
                 logger.warn("Stating user intents with a leading '_' is "
@@ -285,7 +291,9 @@ class StoryFileReader(object):
         self.current_step_builder.add_user_messages(parsed_messages)
 
     def add_event(self, event_name, parameters):
-        parsed = Event.from_story_string(event_name, parameters, self.domain,
+        if "name" not in parameters:
+            parameters["name"] = event_name
+        parsed = Event.from_story_string(event_name, parameters,
                                          default=ActionExecuted)
         if parsed is None:
             raise StoryParseError("Unknown event '{}'. It is Neither an event "

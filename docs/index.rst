@@ -70,6 +70,7 @@ Welcome to the Rasa Documentation!
 
    api/agent
    api/events
+   api/tracker
 
 .. toctree::
    :maxdepth: 1
@@ -79,4 +80,5 @@ Welcome to the Rasa Documentation!
    interpreters
    policies
    state
+   migrations
    changelog

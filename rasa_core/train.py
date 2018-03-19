@@ -8,6 +8,7 @@ import logging
 
 from builtins import str
 
+from rasa_core import utils
 from rasa_core.agent import Agent
 from rasa_core.channels.console import ConsoleInputChannel
 from rasa_core.interpreter import RasaNLUInterpreter, RegexInterpreter
@@ -16,6 +17,8 @@ from rasa_core.policies.memoization import MemoizationPolicy
 
 
 def create_argument_parser():
+    """Parse all the command line arguments for the training script."""
+
     parser = argparse.ArgumentParser(
             description='trains a dialogue model')
     parser.add_argument(
@@ -49,6 +52,12 @@ def create_argument_parser():
             default=100,
             help="number of epochs to train the model")
     parser.add_argument(
+            '--validation_split',
+            type=float,
+            default=0.1,
+            help="Percentage of training samples used for validation, "
+                 "0.1 by default")
+    parser.add_argument(
             '--batch_size',
             type=int,
             default=20,
@@ -64,23 +73,7 @@ def create_argument_parser():
             default=50,
             help="how much data augmentation to use during training")
 
-    # arguments for logging configuration
-    parser.add_argument(
-            '--debug',
-            help="Print lots of debugging statements. "
-                 "Sets logging level to DEBUG",
-            action="store_const",
-            dest="loglevel",
-            const=logging.DEBUG,
-            default=logging.WARNING,
-    )
-    parser.add_argument(
-            '-v', '--verbose',
-            help="Be verbose. Sets logging level to INFO",
-            action="store_const",
-            dest="loglevel",
-            const=logging.INFO,
-    )
+    utils.add_logging_option_arguments(parser)
     return parser
 
 
@@ -100,12 +93,11 @@ def train_dialogue_model(domain_file, stories_file, output_path,
         agent.train_online(
                 stories_file,
                 input_channel=ConsoleInputChannel(),
-                epochs=10,
-                model_path=output_path)
+                model_path=output_path,
+                **kwargs)
     else:
         agent.train(
                 stories_file,
-                validation_split=0.1,
                 **kwargs
         )
 
@@ -118,12 +110,13 @@ if __name__ == '__main__':
     arg_parser = create_argument_parser()
     cmdline_args = arg_parser.parse_args()
 
-    logging.basicConfig(level=cmdline_args.loglevel)
+    utils.configure_colored_logging(cmdline_args.loglevel)
 
     additional_arguments = {
         "max_history": cmdline_args.history,
         "epochs": cmdline_args.epochs,
         "batch_size": cmdline_args.batch_size,
+        "validation_split": cmdline_args.validation_split,
         "augmentation_factor": cmdline_args.augmentation
     }
 

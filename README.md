@@ -57,7 +57,7 @@ In general the process is rather simple:
 2. write your code, tests and documentation
 3. create a pull request describing your changes
 
-You pull request will be reviewed by a maintainer, who might get back to you about any necessary changes or questions. You will also be asked to signa [Contributor License Agreement](https://cla-assistant.io/RasaHQ/rasa_core)
+You pull request will be reviewed by a maintainer, who might get back to you about any necessary changes or questions. You will also be asked to sign a [Contributor License Agreement](https://cla-assistant.io/RasaHQ/rasa_core)
 
 
 ## Development Internals
@@ -80,7 +80,7 @@ You can now change the docs locally and the web page will automatically reload
 and apply your changes.
 
 ## License
-Licensed under the Apache License, Version 2.0. Copyright 2017 Rasa Technologies GmbH. [Copy of the license](LICENSE.txt).
+Licensed under the Apache License, Version 2.0. Copyright 2018 Rasa Technologies GmbH. [Copy of the license](LICENSE.txt).
 
 As a reference, the following contains a listing of the licenses of the different dependencies as of this writing. 
 Licenses of the dependencies:
@@ -101,8 +101,6 @@ Licenses of the dependencies:
 | redis            | MIT                  |
 | tensorflow       | Apache Licence 2.0   |
 | networkx         | BSD                  |
-| pymessenger      | MIT                  |
+| fbmessenger      | Apache Licence 2.0   |
 | tqdm             | MIT                  |
 | ConfigArgParse   | MIT                  |
-
-

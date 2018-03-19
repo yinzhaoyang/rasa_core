@@ -9,11 +9,12 @@ import uuid
 from builtins import str
 
 import pytest
+from freezegun import freeze_time
 from treq.testing import StubTreq
 
 import rasa_core
 from rasa_core.agent import Agent
-from rasa_core.events import UserUttered, BotUttered, SlotSet, TopicSet
+from rasa_core.events import UserUttered, BotUttered, SlotSet, TopicSet, Event
 from rasa_core.interpreter import RegexInterpreter
 from rasa_core.policies.scoring_policy import ScoringPolicy
 from rasa_core.server import RasaCoreServer
@@ -21,9 +22,13 @@ from tests.conftest import DEFAULT_STORIES_FILE
 
 # a couple of event instances that we can use for testing
 test_events = [
-    UserUttered.from_parse_data("/goodbye", {
-        "intent": {"confidence": 1.0, "name": "greet"},
-        "entities": []}),
+    Event.from_parameters({"event": UserUttered.type_name,
+                           "text": "/goodbye",
+                           "parse_data": {
+                               "intent": {
+                                   "confidence": 1.0, "name": "greet"},
+                               "entities": []}
+                           }),
     BotUttered("Welcome!", {"test": True}),
     TopicSet("question"),
     SlotSet("cuisine", 34),
@@ -68,6 +73,7 @@ def test_version(app):
     assert content.get("version") == rasa_core.__version__
 
 
+@freeze_time("2018-01-01")
 @pytest.inlineCallbacks
 def test_requesting_non_existent_tracker(app):
     response = yield app.get("http://dummy/conversations/madeupid/tracker")
@@ -76,7 +82,9 @@ def test_requesting_non_existent_tracker(app):
     assert content["paused"] is False
     assert content["slots"] == {"location": None, "cuisine": None}
     assert content["sender_id"] == "madeupid"
-    assert content["events"] == [{"event": "action", "name": "action_listen"}]
+    assert content["events"] == [{"event": "action",
+                                  "name": "action_listen",
+                                  "timestamp": 1514764800}]
     assert content["latest_message"] == {"text": None,
                                          "intent": {},
                                          "entities": []}
